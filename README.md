@@ -81,3 +81,9 @@ you'll get helpful comments in the source like this:
 ```html
 <!-- START PARTIAL app/views/shared/_header.html.erb -->
 ```
+
+## Deploying to the Sandbox
+
+```bash
+bundle exec cap sandbox deploy
+```
