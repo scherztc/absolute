@@ -1,0 +1,33 @@
+<% if current_user && current_user.admin? %>
+  <div class="btn-group admin-menu">
+    <%= link_to "Admin", admin_menu_path, class: "btn btn-primary dropdown-toggle", data: { toggle: "dropdown"} %>
+  
+    <ul class="dropdown-menu" data-no-turbolink="true">
+      <li>
+        <strong class="menu-heading item-with-options"> View Unpublished Works </strong>
+        <ul class="item-options">
+          <li> 
+            <%= link_to("Submitted Works", catalog_index_path(approval_status: 'submitted'),
+                        class: "item-option contextual-quick-classify", role: 'menuitem') %>
+          </li>
+          <li> 
+            <%= link_to("Rejected Works", catalog_index_path(approval_status: 'rejected'),
+                        class: "item-option contextual-quick-classify", role: 'menuitem') %>
+          </li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+
+      <li>
+        <strong class="menu-heading item-with-options"> Manage Users </strong>
+        <ul class="item-options">
+          <li>
+            <%= link_to('Roles', role_management.roles_path,
+                        class: "item-option contextual-quick-classify", role: 'menuitem') %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+<% end %>

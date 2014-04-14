@@ -5,6 +5,7 @@ gem 'rails', '4.0.4'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'mysql2'  # used on sandbox
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -16,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,7 +42,10 @@ end
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+gem 'capistrano', group: :development
+gem 'capistrano-rails', group: :development
+gem 'capistrano-bundler', group: :development
+# don't use capistrano-ext, which only works with Capistrano 2
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
@@ -50,6 +54,10 @@ gem "unicode", platforms: [:mri_18, :mri_19]
 gem "bootstrap-sass"
 gem "devise"
 gem "devise-guests", "~> 0.3"
+gem 'hydra-role-management', '0.1.0'
+gem 'riiif', '0.0.6'
+gem 'hydra-admin-collections', github: 'bmaddy/hydra-admin-collections', branch: 'more_attrs'
+
 group :development, :test do
   gem "rspec-rails"
   gem "jettywrapper"
