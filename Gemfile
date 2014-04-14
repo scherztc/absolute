@@ -60,5 +60,8 @@ gem 'hydra-admin-collections', github: 'bmaddy/hydra-admin-collections', branch:
 
 group :development, :test do
   gem "rspec-rails"
+  gem 'factory_girl_rails'
+  gem 'equivalent-xml'
+  gem 'capybara'
   gem "jettywrapper"
 end
