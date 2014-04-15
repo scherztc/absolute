@@ -20,7 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  an_admin_collection: "an Institutional Collection"
+  admin_collection: "Institutional Collection"  
   sufia:
+    product_name:       "Digital Case"
+    institution_name:   "Case Western Reserve University"
+    institution_homepage_url:   "#"
+    division_name:      "Kelvin Smith Library"
+    division_homepage_url:   "#"
     field_label:
       based_near:        "Location"
       description:       "Abstract or Summary"
@@ -29,4 +36,8 @@ en:
       related_url:       "Related URL"
       rights:            "Content License"
       files:             "Upload Files"
-  
+    search:
+      form:
+        q:
+          label:        "Search Collections"
+          placeholder:  "Type search here..."

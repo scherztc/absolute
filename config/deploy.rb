@@ -1,21 +1,21 @@
-set :application, 'gerousia'
-set :repo_url, 'git@github.com:curationexperts/gerousia.git'
+set :application, 'absolute'
+set :repo_url, 'git@github.com:curationexperts/absolute.git'
 set :branch, 'master'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/opt/gerousia'
+set :deploy_to, '/opt/absolute'
 set :scm, :git
 
 # set :format, :pretty
 set :log_level, :debug
 # set :pty, true
 
-set :assets_prefix, '#{shared_path}/public'
+set :assets_prefix, "#{shared_path}/public/assets"
 
 set :linked_files, %w{config/database.yml config/devise.yml config/fedora.yml config/recipients_list.yml config/redis.yml config/resque_pool.yml config/solr.yml config/initializers/secret_token.rb log/resque-pool.stderr.log log/resque-pool.stdout.log}
 
-set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets}
+set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5

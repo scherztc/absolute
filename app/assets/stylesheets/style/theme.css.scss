@@ -1,0 +1,33 @@
+@import 'global-variables';
+#brand-bar-wrapper {
+  background-color: $blueDark;
+  background-image: none;
+  border-bottom:1px solid #001834;
+
+  h2 a, h3 a {
+    color:#FFF;
+  }
+
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  .search-form .q {
+    margin-left: 20px;
+  }
+
+  .btn {
+    border: 1px solid $gray;
+  }
+}
+
+
+#main {
+  h1,h2,h3,h4,h5,h6 {
+    color:$blue;
+  }
+}
+
+#footer {
+  color:#999;
+}
