@@ -23,7 +23,7 @@ set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public}
 namespace :deploy do
 
   desc 'Restart application'
-  task :restart do
+  after :publishing, :restart do
     on roles(:web), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       execute "touch #{release_path}/tmp/restart.txt"
