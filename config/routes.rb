@@ -6,7 +6,9 @@ Absolute::Application.routes.draw do
 
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations}
   mount Hydra::RoleManagement::Engine => '/'
-  mount Riiif::Engine => '/image-service'
+  # TODO secure resque admin interface - allow admin users only
+  mount Resque::Server => '/queues'
+   mount Riiif::Engine => '/image-service'
 
   resources :admin_collections, controller: 'hydra/admin/collections'
   resource :admin_menu, only: :show, controller: 'admin_menu'
