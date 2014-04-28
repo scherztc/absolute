@@ -19,6 +19,10 @@ brew install imagemagick --with-libtiff
 Or else you may get errors like this when you run the specs:  
 "Magick::ImageMagickError: no decode delegate for this image format (something.tif)"
 
+### Installing ffmpeg & fits
+
+See the instructions in the [Sufia README]() about [installing fits](https://github.com/projecthydra/sufia#install-fitssh) and [installing ffmpeg](https://github.com/projecthydra/sufia#if-you-want-to-enable-transcoding-of-video-install-ffmpeg-version-10)
+
 
 ## Installation
 
