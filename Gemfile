@@ -29,6 +29,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'curate', github:'ndlib/curate'
+gem 'poltergeist' # used by curate spec helpers
+gem 'vcr'
+gem 'webmock'
+gem 'rspec-html-matchers'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

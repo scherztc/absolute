@@ -1,4 +1,7 @@
 Absolute::Application.configure do
+  
+  config.application_root_url = "http://localhost"
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
