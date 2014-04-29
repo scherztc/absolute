@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Creating a generic work' do
+describe 'Creating a Case generic work' do
   let(:user) { FactoryGirl.create(:user) }
 
   describe 'with a related link' do
@@ -8,13 +8,13 @@ describe 'Creating a generic work' do
       login_as(user)
       visit root_path
       click_link "add-content"
-      classify_what_you_are_uploading 'Generic Work'
-      within '#new_generic_work' do
+      classify_what_you_are_uploading 'Case Generic Work'
+      within '#new_case_generic_work' do
         fill_in "Title", with: "My title"
         fill_in "External link", with: "http://www.youtube.com/watch?v=oHg5SJYRHA0"
         select(Sufia.config.cc_licenses.keys.first.dup, from: I18n.translate('sufia.field_label.rights'))
         check("I have read and accept the contributor license agreement")
-        click_button("Create Generic work")
+        click_button("Create Case generic work")
       end
 
       expect(page).to have_selector('h1', text: 'Generic Work')
@@ -27,12 +27,12 @@ end
 
 describe 'An existing generic work owned by the user' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:generic_work, user: user) }
+  let(:work) { FactoryGirl.create(:case_generic_work, user: user) }
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
 
   it 'should allow me to attach a linked resource' do
     login_as(user)
-    visit curation_concern_generic_work_path(work)
+    visit curation_concern_case_generic_work_path(work)
     click_link 'Add an External Link'
 
     within '#new_linked_resource' do
@@ -47,7 +47,7 @@ describe 'An existing generic work owned by the user' do
 
   it 'cancel takes me back to the dashboard' do
     login_as(user)
-    visit curation_concern_generic_work_path(work)
+    visit curation_concern_case_generic_work_path(work)
     click_link 'Add an External Link'
     page.should have_link('Cancel', href: catalog_index_path)
   end
@@ -55,13 +55,13 @@ end
 
 describe 'Viewing a generic work that is private' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:private_generic_work, title: "Sample work" ) }
+  let(:work) { FactoryGirl.create(:private_case_generic_work, title: "Sample work" ) }
 
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)
-    visit curation_concern_generic_work_path(work)
+    visit curation_concern_case_generic_work_path(work)
     page.should have_content('Unauthorized')
-    page.should have_content('The generic work you have tried to access is private')
+    page.should have_content('The case generic work you have tried to access is private')
     page.should have_content("ID: #{work.pid}")
     page.should_not have_content("Sample work")
   end

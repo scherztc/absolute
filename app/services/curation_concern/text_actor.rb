@@ -1,6 +1,6 @@
 # Generated via
 #  `rails generate curate:work Text`
 module CurationConcern
-  class TextActor < CurationConcern::GenericWorkActor
+  class TextActor < CurationConcern::CaseGenericWorkActor
   end
 end

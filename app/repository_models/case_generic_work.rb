@@ -1,7 +1,7 @@
 # Generated via
 #  `rails generate curate:work Text`
 require 'active_fedora/base'
-class Text < ActiveFedora::Base
+class CaseGenericWork < ActiveFedora::Base
   include CurationConcern::Work
   include CurationConcern::WithGenericFiles
   include CurationConcern::WithLinkedResources
@@ -11,14 +11,30 @@ class Text < ActiveFedora::Base
   include ActiveFedora::RegisteredAttributes
   include CurationConcern::WithDatastreamAttachments
   
-  self.accept_datastream_attachments ["TEI", "TEIP5"]
-  
   has_metadata "descMetadata", type: GenericWorkRdfDatastream
+  # has_file_datastream "TEI", type: FileContentDatastream
+  # attribute :TEI, multiple: false, form: {as: :file}
+  # has_file_datastream "TEIP5", type: FileContentDatastream
+  # attribute :TEIP5, multiple: false, form: {as: :file}
+  # has_file_datastream "MODS", type: FileContentDatastream
+  # attribute :MODS, multiple: false, form: {as: :file}
+  
+  self.accept_datastream_attachments ["TEI", "TEIP5", "MODS"]
+  
+  # 
+  # self.accepted_attachments.each do |attachment_dsid|
+  #   has_file_datastream attachment_dsid, type: FileContentDatastream
+  #   attribute attachment_dsid.to_sym, multiple: false, form: {as: :file}
+  # end
+  # 
+  # def attachments 
+  #   datastreams.select {|dsid, ds| self.class.accepted_attachments.include?(dsid.to_sym) }
+  # end
 
   include CurationConcern::RemotelyIdentifiedByDoi::Attributes
   
   class_attribute :human_readable_short_description
-  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."
+  self.human_readable_short_description = "Any type of work, with files associated and XML optionally attached."
   
   attribute :title, datastream: :descMetadata,
     multiple: false,
@@ -48,5 +64,6 @@ class Text < ActiveFedora::Base
 
   attribute :files, multiple: true, form: {as: :file},
     hint: "CTRL-Click (Windows) or CMD-Click (Mac) to select multiple files."
+  
 
 end

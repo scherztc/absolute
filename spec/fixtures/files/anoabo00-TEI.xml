@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="http://digitalcase.case.edu:9000/fedora/get/ksl:p5schema/tei_all.rng" type="xml"?>
+
+<?xml-stylesheet type="text/css" href="anoabo00style.css"?>
+<TEI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.tei-c.org/ns/1.0" xml:id="anoabo00">
+
+   <teiHeader xml:lang="en">
+      <fileDesc>
+         <titleStmt>
+            <title type="main">About Western Reserve University in the city of Cleveland</title>
+            <title type="sub">with views of the campus</title>
+            <title type="sub">An electronic version</title>
+            <author>
+               <persName>[unknown]</persName>
+
+            </author>
+            <respStmt>
+               <name xml:id="ksl">Kelvin Smith Library, Case Western Reserve University</name>
+               <resp>Publisher of TEI-conformant electronic version.</resp>
+            </respStmt>
+            <respStmt>
+               <name xml:id="rlw54">Richard Wisneski</name>
+               <!--  one resp per respStmt -->
+               <resp>TEI Header creator and encoder</resp>
+            </respStmt>
+
+         </titleStmt>
+         <extent>1.38 MB</extent>
+         <publicationStmt>
+            <publisher>Digital Case, Kelvin Smith Library, Case Western Reserve
+               University</publisher>
+            <pubPlace>Cleveland, Ohio</pubPlace>
+            <distributor n="collection">KSL Digital Book Collection</distributor>
+            <availability>
+               <p>This work is in the public domain and may be freely downloaded for personal or
+                  academic use.</p>
+            </availability>
+            <idno>anoabo00</idno>
+            <date when-iso="2010-02-21"/>
+         </publicationStmt>
+         <sourceDesc>
+            <biblStruct>
+               <monogr>
+                  <author>
+                     <persName>[unknown]</persName>
+
+                  </author>
+                  <title type="marc245a">About Western Reserve University in the city of
+                     Cleveland</title>
+                  <title type="marc245b">with views of the campus</title>
+                  <imprint>
+                     <pubPlace>[S.l.]</pubPlace>
+                     <publisher>[s.n.]</publisher>
+                     <date when="1919">1919</date>
+                  </imprint>
+                  <extent>24 p.:ill.</extent>
+                  <extent>23 cm.</extent>
+               </monogr>
+               <idno type="LC_call_number">LD5963.A36 1919</idno>
+               <idno type="OCLC">69933999</idno>
+            </biblStruct>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <p>Data in the sourceDesc of the header comes from a pre-AACR2 record. Other data follows
+            AACR2 when applicable.</p>
+         <appInfo>
+            <application ident="OxygenXMLEditor" version="11.0">
+               <label>Oxygen XML Editor</label>
+            </application>
+         </appInfo>
+         <projectDesc>
+            <p>Text collected as part of Cleveland History Project. Encoded in P5 level 3, beginning
+               Winter 2009. RTF version of text transferred to Open Office, then saved as P5. All
+               typographical and encoding errors fixed first, then structural encoding.</p>
+            <p>TEI header follows AACR2</p>
+         </projectDesc>
+         <editorialDecl n="3">
+            <hyphenation eol="none">
+               <p>Hyphenated words that appear at the end of a line have been removed</p>
+            </hyphenation>
+            <quotation>
+               <p>Quotation marks have been retained</p>
+            </quotation>
+            <segmentation>
+               <p>Segment broken into Preface, book, sections with headers, and concluding
+                  letter.</p>
+            </segmentation>
+            <normalization>
+               <p>sourceDesc created by exporting from catalog</p>
+               <p>This electronic text file was created by optical character recognition (OCR).
+                  Encoding has been done using the recommendations for P5 Level 3 of the TEI in
+                  Libraries Guidelines.</p>
+            </normalization>
+         </editorialDecl>
+         <tagsDecl>
+            <namespace name="http://www.tei-c.org/ns/1.0">
+               <tagUsage gi="div">Only un-numbered divisions are used.</tagUsage>
+            </namespace>
+         </tagsDecl>
+         <tagsDecl>
+            <!-- DEFINE ITALIC USING CSS -->
+            <rendition xml:id="IT" scheme="css">text-style:italic</rendition>
+            <!-- SET ITALIC STYLE AS DEFAULT FOR THE EMPH AND HI ELEMENTS -->
+            <namespace name="http://www.tei-c.org/ns/1.0">
+               <tagUsage gi="emph" render="#IT"/>
+               <tagUsage gi="hi" render="#IT"/>
+            </namespace>
+         </tagsDecl>
+         <classDecl>
+            <taxonomy xml:id="LCC">
+               <bibl>Library of Congress Classification</bibl>
+            </taxonomy>
+            <taxonomy xml:id="LCSH">
+               <bibl>Library of Congress Subject Headings</bibl>
+            </taxonomy>
+         </classDecl>
+      </encodingDesc>
+      <profileDesc>
+         <creation>
+            <rs type="city">Cleveland, OH</rs>
+            <date when="2010-02">February 2010</date>
+         </creation>
+         <langUsage>
+            <language ident="en">English</language>
+         </langUsage>
+         <textClass>
+            <classCode scheme="#LCC">Library of Congress Classification</classCode>
+            <keywords scheme="#LCSH">
+               <term>Western Reserve University</term>
+               <term>Western Reserve University--Pictorial works</term>
+            </keywords>
+         </textClass>
+      </profileDesc>
+   </teiHeader>
+   <text>
+
+      <front>
+
+         <pb n="[ ]" xml:id="anoabo00-00001.jp2" />
+         <titlePage>
+            <titlePart>ABOUT<lb/> Western Reserve University<lb/> IN THE<lb/> CITY OF CLEVELAND <figure>
+                  <figDesc>Western Reserve University logo</figDesc>
+               </figure> WITH VIEWS OF THE CAMPUS<lb/> 1919 </titlePart>
+         </titlePage>
+         <pb n="[ ]" xml:id="anoabo00-00002.jp2"/>
+         <div type="section">
+            <head>Western Reserve University <lb/> Cleveland </head>
+            <figure>
+               <figDesc>small picture of college</figDesc>
+            </figure>
+            <list type="simple">
+               <item>Adalbert College</item>
+               <item>College for Women</item>
+               <item>Graduate School</item>
+               <item>School of Medicine</item>
+               <item>Law School</item>
+               <item>Dental School</item>
+               <item>School of Pharmacy</item>
+               <item>School of Education</item>
+               <item/>
+               <item>School of Applied Social Sciences</item>
+            </list>
+            <p>1919</p>
+         </div>
+         <pb n="[ ]" xml:id="anoabo00-00003.jp2" rend="blank" />
+
+         <pb n="three" xml:id="anoabo00-00004.jp2"/>
+         <div type="index">
+            <figure>
+               <figDesc>Hatch Library, Adelbert College</figDesc>
+            </figure>
+            <list type="simple">
+               <head>INDEX</head>
+               <item>What About College -Western Reserve University <hi rend="right">5</hi><ptr
+                     target="#anoabo00-section1"/></item>
+               <item>Adelbert College<hi rend="right">7</hi><ptr target="#anoabo00-section2"
+                  /></item>
+               <item>College for Women<hi rend="right">8</hi><ptr target="#anoabo00-section3"
+                  /></item>
+               <item>Graduate School <hi rend="right">8</hi><ptr target="#anoabo00-section4"
+                  /></item>
+               <item>School of Medicine<hi rend="right">10</hi><ptr target="#anoabo00-section5"
+                  /></item>
+               <item> Law School<hi rend="right">12</hi><ptr target="#anoabo00-section6"/></item>
+               <item>Dental School <hi rend="right">14</hi><ptr target="#anoabo00-section7"/></item>
+               <item>Library School<hi rend="right">17</hi><ptr target="#anoabo00-section8"/></item>
+               <item>School of Pharmacy<hi rend="right">18</hi><ptr target="#anoabo00-section9"
+                  /></item>
+               <item>School of Applied Social Sciences<hi rend="right">18</hi><ptr
+                     target="#anoabo00-section10"/></item>
+               <item>School of Education: Summer Session<hi rend="right">18</hi><ptr
+                     target="#anoabo00-section11"/></item>
+               <item>Pre-professional Opportunities<hi rend="right">19</hi><ptr
+                     target="#anoabo00-section12"/></item>
+               <item>Expenses<hi rend="right">19</hi><ptr target="#anoabo00-section13"/></item>
+               <item> Student Activities<hi rend="right">19</hi><ptr target="#anoabo00-section14"
+                  /></item>
+               <item>Athletics<hi rend="right">21</hi><ptr target="#anoabo00-section15"/></item>
+               <item>Fraternities<hi rend="right">23</hi><ptr target="#anoabo00-section16"/></item>
+               <item> In General<hi rend="right">24</hi><ptr target="#anoabo00-section17"/></item>
+            </list>
+         </div>
+         <pb n="four" xml:id="anoabo00-00005.jp2"/>
+         <div>
+         <figure>
+            <head>Amasa Stone, Memorial Chapel, Adelbert College</head>
+            <figDesc>Amasa Stone, Memorial Chapel, Adelbert College</figDesc>
+         </figure>
+         </div>
+      </front>
+      <body>
+         <div type="section" n="1" xml:id="anoabo00-section1">
+            <pb n="five" xml:id="anoabo00-00006.jp2"/>
+            <head>What About College?</head>
+            <p> COLLEGE.-TRAINED leaders guided this country to victory in the recent war.
+               Government statistics show vividly how this nation turned, as did other nations, to
+               the product of its higher educational institutions for leadership, without which the
+               valor of its soldiers and sailors would have been unavailing.</p>
+            <p>But the war served only to emphasize a peace-time truth. The college trained men are
+               the leaders in peace no less than in war.</p>
+            <p>For years we have demanded special training for ministers, physicians. surgeons and
+               lawyers. Professional men are college men.</p>
+            <p>And now the business world is demanding college training for its men and women, that
+               they may strive better in the competition of present day industrialism. A college
+               education has become as essential for a successful career in business, politics and
+               social work, with their hundreds of ramifications, as it is in the professions and in
+               engineering.</p>
+            <p>This booklet is sent to you so that you may know about Western Reserve University as
+               you make your plans for a college education. Western Reserve can train you either in
+               the law, medical, dental and teaching professions, or for the business world.</p>
+            <p>A University offers opportunities which a college, whether it be large or small,
+               cannot offer. Not only docs it aid in specialization, but also it gives that rounded
+               development and general culture which are the marks of a well-educated man or
+               woman.</p>
+            <p>If the University is located in a city, the advantages are multiplied.as
+               opportunities for contacts and associations of the most varied character are offered.
+               The student is surrounded by a vast laboratory in which to study and to become
+               familiar with the vital elements in the organization of modern society. Moral
+               development is individual, and the city brings to the student no greater temptations
+               than the small town, while it gives him better and safer opportunities for utilizing
+               that energy which otherwise might be ill-directed.</p>
+            <p>Western Reserve wants you if it can meet your need. Tell us about that need. Address
+               the Executive Secretary of the University.</p>
+            <p>You should keep this booklet for future information.</p>
+         </div>
+
+         <div type="section" n="2" xml:id="anoabo00-section2">
+            <pb n="six" xml:id="anoabo00-00007.jp2"/>
+            <figure>
+               <figDesc>Portion of Adelbert College Campus, Showing Main Building and Amasa Stone
+               Chapel</figDesc>
+               <head>Portion of Adelbert College Campus, Showing Main Building and Amasa Stone
+                  Chapel</head>
+            </figure>
+            <pb n="seven" xml:id="anoabo00-00008.jp2"/>
+            <p>ADELBERT COLLEGE is the men's college of liberal arts and sciences of the University,
+               the four-year course leading to the degree of Bachelor of Arts. It is the department
+               for the man who wishes a general University training, with opportunity for
+               specialization in English. Foreign Languages. Political and Social Sciences,
+               Philosophy, History and the natural sciences. The graduate is prepared for teaching
+               or for business.</p>
+
+            <figure rend="right">
+               <figDesc>The Ivy-Covered Walls</figDesc>
+            </figure>
+            <p> The work of Adelbert College is preparatory to that of the School of Medicine and
+               the Law School of the University and to the combined course in Engineering offered by
+               Western Reserve and Case School of Applied Science. Pre medical and pre-law courses
+               are so arranged as to permit the student to devote the whole of his senior year at
+               Adelbert to work in the School of medicine or the Law School, thus shortening the
+               entire course by one year.</p>
+            <p>ThThe curriculum of Adelbert College offers the following general fields in which the
+               student may find his chief interest:</p>
+            <list type="ordered">
+               <item>A. Language and Literature; Biblical Literature, English, German. Latin,French.
+                  Spanish. Italian.</item>
+               <item>B. .Mathematics and Natural Science; Astronomy, Biology, Chemistry,Geology,
+                  .Mathematics, Physics</item>
+               <item>C. Philosophy, History and Social Sciences; Economics, History, Philosophy,
+                  Political Science. Sociology.</item>
+               <item/>
+            </list>
+            <p>In general, graduation from a first grade high school is necessary for admission. For
+               details prospective students should write to the Dean. Adelbert College. Western
+               Reserve University.</p>
+            <figure>
+               <figDesc>An Autumn View on the Adelbert College Campus</figDesc>
+               <head>An Autumn View on the Adelbert College Campus</head>
+            </figure>
+         </div>
+
+         <div type="section" n="3" xml:id="anoabo00-section3">
+            <pb n="eight" xml:id="anoabo00-00009.jp2"/>
+            <figure>
+               <figDesc>The Mather Quadrangle, College for Women</figDesc>
+               <head>The Mather Quadrangle, College for Women</head>
+            </figure>
+
+            <p>THE COLLEGE FOR WOMEN is the women's college of liberal arts and sciences, with four
+               year courses leading to the degrees of Bachelor of Arts or Bachelor of Science. The
+               courses of study leading to the degree of Bachelor of Arts are divided into three
+               groups: Language and Literature, Mathematics and Science, and History, Philosophy and
+               Social Science. It is designed for the woman who desires a liberal and less technical
+               education.</p>
+            <p>The course leading to the degree of Bachelor of Science, known as the Household
+               Administration course, is designed to train women for specialized lines of work.
+               Courses have been arranged preparatory to four distinct lines of endeavor: (1.)
+               Teaching the household arts, (2) Laboratory research, (3)Hospital work, (4) Social
+               service.</p>
+            <p>Combined courses are offered with the Library School, the Law School,and the School
+               of Medicine, of the University, and with the Cleveland School of Art. The course with
+               the School of Art covers six years and leads to the degree of Bachelor of
+               Science.</p>
+            <p>In general, graduation from a first-class high school is required for admission. For
+               details prospective students should write to the Dean, College for Women,Western
+               Reserve University.</p>
+            <figure>
+               <figDesc>The Painter Memorial Gateway,College for Women</figDesc>
+               <head>The Painter Memorial Gateway,College for Women</head>
+            </figure>
+         </div>
+
+         <div type="section" n="4" xml:id="anoabo00-section4">
+            <p>THE GRADUATE: SCHOOL is open to students who have received a bachelor's degree from
+               an approved institution. During the present reorganization of the School, students
+               interested in graduate work should consult with the deans of the undergraduate
+               departments.</p>
+            <pb n="nine" xml:id="anoabo00-00010.jp2"/>
+            <figure>
+               <figDesc>Flora Stone Mather Memorial Building, College for Women</figDesc>
+               <head>Flora Stone Mather Memorial Building, College for Women</head>
+            </figure>
+         </div>
+
+         <div type="section" n="5" xml:id="anoabo00-section5">
+            <pb n="ten" xml:id="anoabo00-00011.jp2"/>
+            <figure>
+               <figDesc>The Chemistry Lecture Room</figDesc>
+               <head>The Chemistry Lecture Room</head>
+            </figure>
+            <p>THE SCHOOL OF MEDICINE;, which oilers a four-year course, admits only college
+               graduates or seniors in absentia. Certain entrance; requirements demanded of all
+               prospective students are: One and one-half years college work in Chemistry, including
+               three semester hours of Organic Chemistry; One year of college work in Physics;One
+               year of college work in Biology. Zoology and Botany; eight semester hours of work in
+               French or</p>
+            <p>German, of which two semester hours may be credited from one unit of high school
+               work; A total of not less than six semester hours of work in English. For detailed
+               information prospective students should write to the Registrar,The School of
+               Medicine, Western Reserve University.</p>
+            <p>By taking the combined course offered by Adelbert College or the College for Women
+               and the School of Medicine of the University, students may complete their
+               undergraduate and medical training in seven years instead of the usual eight. Such
+               students spend their first three years in the undergraduate department, and the last
+               four years in the School of Medicine. They receive the A. B. degree at the end of the
+               fourth year, and the M. 1). degree at the end of the. seventh.</p>
+            <figure>
+               <figDesc>The Biology Building, Adelbert College</figDesc>
+               <head>The Biology Building, Adelbert College</head>
+            </figure>
+            <pb n="eleven" xml:id="anoabo00-00012.jp2"/>
+            <figure>
+               <figDesc>On the College for Women Campus (1) Mary Chisholm Painter Memorial, (2)
+               Clark Hall,(3) Looking toward Euclid Avenue-, (4) Haydn Hall.</figDesc>
+               <head>On the College for Women Campus (1) Mary Chisholm Painter Memorial, (2)
+                  Clark Hall,(3) Looking toward Euclid Avenue-, (4) Haydn Hall.</head>
+            </figure>
+            <pb n="twelve" xml:id="anoabo00-00013.jp2"/>
+            <figure>
+               <figDesc>The Law School</figDesc>
+               <head>The Law School</head>
+               </figure>
+            <p>The only medical school in a large city, the School of .Medicine has unlimited
+               clinical advantages. Four large Cleveland hospitals. with more than twelve hundred
+               beds and nineteen thousand patients, are controlled by the School. In four other
+               hospitals a certain amount of teaching is done by courtesy of the staff Graduates
+               have splendid opportunities for hospital appointments under these circumstances,</p>
+            <p>With the close of the war, plans postponed in HM7 are being pushed, and the early
+               completion of the new School of Medicine, Lakeside Hospital, Babies Dispensary and
+               Hospital and other buildings upon the University campus is promised.</p>
+            <p>The Western Reserve School of Medicine ranks by common consent high among the best
+               schools of the country. It is the only school in the country giving seniors eleven
+               months training instead of eight.</p>
+         </div>
+
+         <div type="section" n="6" xml:id="anoabo00-section6">
+            <p>THE LAW SCHOOL is one of the sever, law schools in the country admitting only n.cn
+               with college degrees. The course is three years. Students from thirty-six different
+               colleges are in attendance at present.</p>
+            <p>By special arrangement students at Adelbert College and the College for Women may
+               spend their entire senior year at the Law School, rims shortening tile complete
+               course from seven to six years. They receive their A. B degree at the end of the
+               fourth year, and their LL. B. degree at the end of the six years.</p>
+            <p>Emphasis is placed upon the development of the power of legal reasoning by each
+               student, and the case method of instruction is used. The municipal,county, and
+               federal courts in Cleveland present unusual and valuable opportunities for
+               observation. Certain upperclassmen each year deal with actual cases as assistants to
+               the Legal Aid Society of Cleveland.</p>
+            <p>The Law School as a part of the University offers additional advantages. Courses in
+               Medical Jurisprudence in the School of Medicine and Dental Jurisprudence <pb n="thirteen"
+                  xml:id="anoabo00-00014.jp2"/> in the Dental School are open to Law School students.
+               They may also take courses in Political Science, Sociology, History and such subjects
+               given at Adelbert College.</p>
+            <p>College men returning from service will be given credit for college work equivalent
+               to the lime spent in the service. They should communicate with Professor CM.
+               Finfrock, Secretary, The Law School,Western Reserve University.</p>
+            <figure>
+               <figDesc>Entrance of the Law School</figDesc>
+               <head>Entrance of the Law School</head>
+            </figure>
+         </div>
+
+         <div type="section" n="7" xml:id="anoabo00-section7">
+            <pb n="fourteen" xml:id="anoabo00-00015.jp2"/>
+            <figure rend="right">
+               <figDesc>The Museum of Art from the Campus</figDesc>
+               <head>The Museum of Art from the Campus</head>
+            </figure>
+            <p>THE DENTAL SCHOOL offers a four-year course in dentistry, leading to the degree of D.
+               D. S. <figure rend="right">
+                  <figDesc>The Museum of Art from the Campus</figDesc>
+                  <head>The Museum of Art from the Campus</head>
+               </figure>It is located on the main campus in the new three-story building which
+               contains the latest equipment and laboratory facilities.</p>
+            <p>Being the only dental school in a large city, the Western Reserve dental school
+               offers unique clinical opportunities. The Clinic is equipped with 90 modem dental
+               chairs, in which are performed 40.000 operations annually under expert
+               supervision.</p>
+            <p>Only graduates of first-class high schools can be admitted to the dental school. This
+               requirement, and the introduction of the four-year course, place the School among the
+               best in the country.</p>
+            <p>Students of the Dental School are eligible for University athletics, and participate
+               in football, basketball, baseball and track. With its new location on the campus,
+               Dental School participation in University undergraduate activities has increased
+               greatly. University library and museum facilities are all open to the Dental
+               students.</p>
+            <figure>
+               <figDesc>The Dental School Clinic</figDesc>
+            </figure>
+            <pb n="fifteen" xml:id="anoabo00-00016.jp2"/>
+            <figure>
+               <figDesc> Morley Laboratory of Chemistry and Geology, Adelbert College</figDesc>
+               <head>Morley Laboratory of Chemistry and Geology, Adelbert College</head>
+            </figure>
+
+            <pb n="sixteen" xml:id="anoabo00-00017.jp2"/>
+            <figure>
+               <figDesc>The Library School</figDesc>
+               <head>The Library School</head>
+            </figure>
+
+            <pb n="seventeen" xml:id="anoabo00-00018.jp2"/>
+            <figure rend="right">
+               <figDesc>The Dental School</figDesc>
+               <head>The Dental School</head>
+            </figure>
+            <p>Women are admitted to the Dental School.</p>
+            <p>Detailed information can be obtained from Doctor F. M. Casto, Dean, the Dental
+               School, Western Reserve University.</p>
+         </div>
+
+         <div type="section" n="8" xml:id="anoabo00-section8">
+            <p>THE LIBRARY SCHOOL offers a one-year course to both men and women. It is situated in
+               a separate building, on the Adelbert College campus.</p>
+            <p>Close connection with the Cleveland Public Library, the fourth largest in the
+               country, gives unequalled opportunity to Library School students. The University
+               libraries and other libraries in the city, with the Public Library, have overdone
+               million volumes.</p>
+            <p>By special arrangement. College for Women students may receive full credit of one
+               year for the Library School course.</p>
+            <p>For full information,prospective students should address The Director, the Library
+               School, Western Reserve University.</p>
+            <figure rend="right">
+               <figDesc>Some of the Rare Books, Hatch Library</figDesc>
+            </figure>
+         </div>
+
+         <div type="section" n="9" xml:id="anoabo00-section9">
+            <pb n="eighteen" xml:id="anoabo00-00019.jp2"/>
+            <figure>
+               <figDesc>Amasa Stone Memorial Hearth, Main Building, Adelbert College</figDesc>
+               <head>Amasa Stone Memorial Hearth, Main Building, Adelbert College</head>
+            </figure>
+            <p>THE SCHOOL OF PHARMACY offers two courses. The first is two years in length leading
+               to the degree of Graduate in Pharmacy (Ph. G.I, and prepares students to become
+               practical pharmacists. The second course extends over three years, and leads to the
+               degree of Pharmaceutical Chemist(Ph.G.I. Plans to offer a four-year course,leading to
+               baccalaureate and scientific decrees, are under consideration.</p>
+            <p>To pain admission, men and women must be graduates of first-class high schools, or
+               the equivalent, and must procure entrance certificates from the state board of
+               pharmacy.Columbus, Ohio.</p>
+            <p>The School of Pharmacy has the cooperation and support of Cleveland druggists,which
+               means unusual opportunities to students for their practical work and for
+               employment.</p>
+            <p>Catalogue and details may be obtained from Professor Edward Spease,,Dean, School of
+               Pharmacy, Western Reserve</p>
+         </div>
+
+         <div type="section" n="10" xml:id="anoabo00-section10">
+            <p>THE SCHOOL OF APPLIED SOCIAL SCIENCES is organized on a graduate basis, and offers a
+               two-year course, leading to the A. M. degree. By arrangement with the Dean courses
+               may be taken in the School without regard to the award of a degree.</p>
+            <p>The School offers instruction in subjects which bear directly on the common welfare
+               and on community organization by specialists in the fields of Political Science and
+               Administration, Sociology, Economics and Civic Organization. It is separated into:
+               (1) Division of Municipal Administration and public Service, (2) Division of Family
+               Welfare and Social Service, (3) Division of Health Administration. The latter
+               Division gives courses leading into Public Health nursing.</p>
+            <p>The courses in all Divisions arc kept flexible, in order to meet individual needs.
+               Practical training for professional, social and civic work is the aim throughout.
+               Fully one-half of the student's time is devoted to Field Work.'I he large city of
+               Cleveland affords the best opportunity for this in its civic and social
+               organizations.</p>
+            <p>Students of Adelbert College and the College for Women can so arrange their work as
+               to complete the course of the School of Applied Social Sciences in one year.</p>
+            <p>Interested persons should communicate with the Dean. School of Applied Social
+               Science, Western Reserve University.</p>
+         </div>
+
+         <div type="section" n="11" xml:id="anoabo00-section11">
+            <p>THE SCHOOL OF EDUCATION is a summer session, designed mainly for teachers, and
+               conducted in cooperation with the Cleveland School of Education. Complete information
+               may be obtained from the Dean. Cleveland School of Education.</p>
+         </div>
+
+         <div type="section" n="12" xml:id="anoabo00-section12">
+            <pb n="nineteen" xml:id="anoabo00-00020.jp2"/>
+            <p>PRE-PROFESSIONAL OPPORTUNITIES</p>
+            <p>It will be noted that distinct advantages come to the student electing the combined
+               courses of Adelbert College or the College for Women with the Law School, the School
+               of Medicine, the Library School and the School of Applied Social Sciences.</p>
+            <p>The University also oilers a five-year course in Engineering in combination with Case
+               School of Applied Sciences, Cleveland. It is designed for the man who recognizes the
+               demand for engineers with a broader training, a greater breadth of view, than the
+               strictly technical course can give. The first three years arc spent mainly at
+               Adelbert College, the last two years at Case School. Two degrees are earned. Bachelor
+               of Arts and Bachelor of Science.</p>
+         </div>
+
+         <div type="section" n="13" xml:id="anoabo00-section13">
+            <p>EXPENSES</p>
+            <p>Tuition fees of the various departments are: Adelbert College, College for Women,
+               School of Medicine, Law School, and School of Applied Social Sciences, $I50.00 per
+               year; School of Pharmacy. $125.00 per year; dental school, S200.00 per year; Library
+               School, $100.00 per year.</p>
+            <p>Other expenses, such as board and room, will vary according to the student. $400 is a
+               fair allowance for them.</p>
+            <p>The University cooperates with students through the Rooming Bureau and the Employment
+               Bureau, in the office of the Executive Secretary. Rooms and board are secured at
+               reasonable terms. The city offers unlimited employment opportunities for students
+               desiring to earn a part of their expenses. The employment Bureau cannot guarantee
+               positions, but has never experienced difficulty in placing applicants.</p>
+         </div>
+
+         <div type="section" n="14" xml:id="anoabo00-section14">
+            <p>STUDENT ACTIVITIES</p>
+            <p>There are at Western Reserve, in every department, student activities of literary,
+               oratorical, musical, dramatic and social natures, conducted with faculty-approval and
+               cooperation. These afford the student opportunity for profitable development along
+               lines of his own choosing, and furnish legitimate outlets for his surplus energy.</p>
+            <figure>
+               <figDesc>An Open-Air Play College for Women</figDesc>
+            </figure>
+
+            <pb n="twenty" xml:id="anoabo00-00021.jp2"/>
+            <figure>
+               <figDesc>The Western Reserve Musical Clubs</figDesc>
+            </figure>
+            <p>The College for Women and Adelbert College each have dramatic, musical and literary
+               clubs. The former has its Y. W. C. A. and the latter its Y. M. C. A,organization. At
+               Adelbert College intercollegiate debating and extempore and oratorical contests are
+               promoted. Dental School men are eligible for participation in many of these
+               activities, and have organizations of their own.</p>
+            <p>The Sketlioi is the Adelbert College annual, published by the Juniors. TheVaria
+               Historia is the College for Women annual, published by the Juniors. The Reserve
+               Weekly is the University undergraduate newspaper. The Sun Dial is a literary magazine
+               published bi-weekly by the College</p>
+            <p>tor Women students.</p>
+            <p>The strength of the student personnel is shown by the fact that all of these
+               activities arc self-governed. The Stu-dent Councils of Adelbert College, the Dental
+               School, the School of Medicine,and the College for Women, composed entirely of
+               students elected by their fellows, regulate all student affairs with general
+               cooperation of the faculty. The Honor System of examinations is maintained by these
+               organizations. Student activities are supported by the budget systems, each student
+               being assessed his share at the time of paying his tuition.</p>
+            <p>The University Student Council has supervision over activities affecting two or more
+               departments.</p>
+            <figure rend="right">
+               <figDesc>The Astronomical Tower</figDesc>
+            </figure>
+         </div>
+         <div type="section" n="15" xml:id="anoabo00-section15">
+            <pb n="twenty-one" xml:id="anoabo00-00022.jp2"/>
+            <head>ATHLETICS</head>
+            <figure rend="right">
+               <figDesc>Another Campus View, Adelbert College</figDesc>
+               <head>Another Campus View, Adelbert College</head>
+            </figure>
+            <p>The completion of Western Reserve's new $I75,000 gymnasium in the spring of 1909
+               brings to the University a new era in athletics. This building has one of the largest
+               floors of University gymnasiums, measuring 175 feet by 90 feet. The old gymnasium has
+               been remodeled for auxiliary purposes, and adequate showers, lockers and equipment
+               are provided. The swimming pool will be added in the near future.</p>
+            <p>Support and control of athletics is now centered in the department of Physical
+               Education, and continued prominence of Western Reserve varsity teams is assured. In
+               addition, the plan of universal training now being considerered will give every man
+               recreational gymnastics throughout his college course. Universal participation in
+               athletic events as well as specialization by a few will be the aim. Inter-class,
+               inter-fraternity and other teams will furnish the material from which the football,
+               basketball, baseball and track Varsities will be drawn.</p>
+            <p>The College for Women has its own gymnasium, which is open to Library School
+               students. Western Reserve has no inter-collegiate women's teams, but inter class and
+               individual competition is keen. Three hours a week gymnasium exercise is required of
+               all freshmen and sophomores, and special exercises are prescribed for individual
+               corrective work.</p>
+            <p>The annual classic events are the intra-mural basketball championship contest and the
+               spring outdoor track meet.</p>
+            <figure>
+               <figDesc>The New Gymnasium</figDesc>
+               <head>The New Gymnasium</head>
+            </figure>
+            <pb n="twenty-two" xml:id="anoabo00-00023.jp2"/>
+            <figure>
+               <figDesc>North Entrance, The Gymansium</figDesc>
+               <head>North Entrance, The Gymansium</head>
+            </figure>
+         </div>
+
+         <div type="section" n="16" xml:id="anoabo00-section16">
+            <pb n="twenty-three" xml:id="anoabo00-00024.jp2"/>
+            <head>FRATERNITIES</head>
+            <p>There are at Western Reserve undergraduate, professional, and honorary fraternities
+               as given below. The undergraduate chapters at Adelbert College are-united hv an Inter
+               fraternity Council, which determines "rushing" rules and cares for other matters of
+               common interest. There is close cooperation between the council and the college
+               faculty. The chapters compete for the Interfraternity Scholarship Trophy, awarded by
+               the Dean each semester.</p>
+            <p>
+               <table rows="6" cols="2">
+                  <head>Adelbert College</head>
+                  <row>
+                     <cell>Alpha Delta Phi, 2021 Cornell Road</cell>
+                     <cell>Lambda Chi Alpha; 2102 Adelbert Road</cell>
+                  </row>
+                  <row>
+                     <cell>Alpha Tan Omega, 11608 Euclid Ave.</cell>
+                     <cell>Phi Gamma Delta, 210; Adelbert Road</cell>
+                  </row>
+                  <row>
+                     <cell>Beta. Theta Pi, 2061 Cornell Road</cell>
+                     <cell>Pi Kappa Alpha, 2256 Cummington Rd.</cell>
+                  </row>
+                  <row>
+                     <cell>Delta Kappa Epsilon. 20 1 1 Cornell Road</cell>
+                     <cell>Sigma Chi, 2135 Adelbert Road</cell>
+                  </row>
+                  <row>
+                     <cell>Delta Tan Delta, 1 I H7 Euclid Avenue</cell>
+                     <cell>Sigma Nu. 11448 Euclid Ave.</cell>
+                  </row>
+                  <row>
+                     <cell>Delta Upsilon. 20S7 Adelbert Road</cell>
+                     <cell>Zeta Beta Tau, 2102 Adelbert Road</cell>
+                  </row>
+               </table>
+               <table cols="3" rows="2">
+                  <head>College for Women</head>
+                  <row>
+                     <cell>Delta Phi Upsilon</cell>
+                     <cell>Theta Phi Omegea</cell>
+                     <cell>Phi Kappa Zeta</cell>
+                  </row>
+                  <row>
+                     <cell>Gamma Delta Tau</cell>
+                     <cell>Sigma Psi</cell>
+                     <cell>Sigma Omega</cell>
+                  </row>
+               </table>
+               <table rows="2" cols="2">
+                  <head>Law School</head>
+                  <row>
+                     <cell>Phi Delta Phi</cell>
+                     <cell>Phi Alpha Delta</cell>
+                  </row>
+                  <row>
+                     <cell>Delta Theta Phi</cell>
+                     <cell>[blank]</cell>
+                  </row>
+               </table>
+               <table rows="2" cols="2">
+                  <head>Medical School</head>
+                  <row>
+                     <cell>Nu Sigma Nu</cell>
+                     <cell>Alpha Kappa</cell>
+                  </row>
+                  <row>
+                     <cell>Phi Rho Sigma</cell>
+                     <cell>Phi Chi</cell>
+                  </row>
+               </table>
+               <table rows="3" cols="2">
+                  <head>HONORARY FRATERNITIES</head>
+                  <row>
+                     <cell><emph>Phi Beta Kappa </emph>--Scholarship. Adelbert College and the
+                        College for Women</cell>
+                     <cell><emph>Sigma Delia Chi </emph>--Journalism. Adelbert College</cell>
+                  </row>
+                  <row>
+                     <cell><emph>Delta Sigma Rho </emph>--Debating. Adelbert College. Law
+                        School</cell>
+                     <cell><emph>Order of the Coif </emph>--Scholarship. The Law School</cell>
+                  </row>
+                  <row>
+                     <cell><emph>Alpha Omega Alpha </emph>--Scholarship. The School of
+                        Medicine</cell>
+                     <cell/>
+                  </row>
+               </table>
+               <figure>
+                  <figDesc>Plenty of Action Here</figDesc>
+                  <head>Plenty of Action Here</head>
+                  <figDesc>[picture of football game]</figDesc>
+                  <head>[picture of football game]</head>
+               </figure>
+</p>
+         </div>
+
+         <div type="section" n="17" xml:id="anoabo00-section17">
+            <pb n="twenty-four" xml:id="anoabo00-00025.jp2"/>
+            <head>IN GENERAL</head>
+            <p>The first department of Western Reserve University was established at Hudson, Ohio, in
+               1826, as Western Reserve College. Removed to Cleveland in 1882, it became Adelbert
+               College of Western Reserve University. Other departments were presently added.</p>
+            <p>The University campus lies in the midst of the great park system of Cleveland. At the
+               present time eighteen of the twenty-two buildings which house the University are here
+               situated. Additional buildings for the Schools of Medicine and of Pharmacy are soon to
+               be built, so that these departments may be transferred from their present locations in
+               the midst of the city to the University group. With the athletic field, about
+               thirty-seven acres are devoted to University purposes.</p>
+            <p>In close proximity are the Case School of Applied Science, the Cleveland Museum of
+               Art, the Cleveland Art School, the Cleveland Normal School, the Western Reserve
+               Historical Society, the East End Branch of the Young Men's Christian Association, and
+               other public institutions.</p>
+            <p>The University and the departmental libraries represent about 135,000volumes. The
+               Cleveland Public Library, of 700.000 volumes, has a branch in one of the University
+               buildings.</p>
+            <p>The University has 7500 alumni and 2000 alumnae and former students, a total of 9500,
+               of whom 7000 are living.</p>
+            <p>The normal annual enrollment of recent years has been about 1650, This does not
+               include the students in the extension divisions, who number about2350, making a total
+               of some 4000.</p>
+            <p>Further information will be gladly furnished through the office of the several
+               departments or the general office of the president.</p>
+            <figure>
+               <figDesc> On Commencement Day</figDesc>
+               <head>On Commencement Day</head>
+            </figure>
+         </div>
+
+      </body>
+   </text>
+</TEI>

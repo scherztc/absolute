@@ -9,9 +9,12 @@
 <%= render partial: 'representative_media', locals: {work: curation_concern} %>
 
 <%= render 'attributes', curation_concern: curation_concern %>
+
 <%= render 'doi', curation_concern: curation_concern %>
 
 <%= render 'related_files', curation_concern: curation_concern, with_actions: true %>
+<%= render 'attachments', curation_concern: curation_concern, with_actions: true %>
+
 <%= render 'related_resources', curation_concern: curation_concern, with_actions: true %>
 <%= render 'related_works', curation_concern: curation_concern, with_actions: true %>
 <%= render 'collections', curation_concern: curation_concern %>

@@ -1,0 +1,31 @@
+<table class="table table-striped <%= dom_class(curation_concern) %> related_files with-headroom">
+  <caption class="table-heading">
+    <h2>XML Metadata Attachments</h2>
+  </caption>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Date Uploaded</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% curation_concern.attachments.each do |dsid, datastream| %>
+      <% if datastream.dsCreateDate %>
+        <tr class="attachment attributes">
+          <td class="attribute title"><%= link_to dsid, download_path(curation_concern.noid, datastream_id:dsid),{title: "Download #{dsid.inspect}", :target => "_blank"}%></td>
+          <td><%= datastream.lastModifiedDate || datastream.dsCreateDate  %></td>        
+          <td>
+            <%= link_to 'Download', download_path(curation_concern.noid, datastream_id:dsid),{class: 'btn', title: "Download #{dsid.inspect}", :target => "_blank"}%>
+          </td>
+        </tr>
+      <% else %>
+        <tr class="attachment attributes">
+          <td class="attribute title"><%= dsid %></td>
+          <td></td>        
+          <td></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

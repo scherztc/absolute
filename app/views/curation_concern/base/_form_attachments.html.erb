@@ -1,0 +1,51 @@
+<% if curation_concern.class.accepted_attachments %>
+  <fieldset id="work-attachments">
+    <div class="row with-headroom">
+      <div class="span12">
+        <legend>
+          XML Metadata Attachments
+        </legend>
+
+        <p class="help-block">
+          Attach supplemental XML metadata here.
+        </p>
+      </div>
+    </div>
+    
+    <table class="table table-striped <%= dom_class(curation_concern) %> related_files with-headroom">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Date Uploaded</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% curation_concern.attachments.each do |dsid, datastream| %>
+          <% if datastream.dsCreateDate %>
+            <tr class="attachment attributes">
+              <td class="attribute title"><%= link_to dsid, download_path(curation_concern.noid, datastream_id:dsid),{title: "Download #{dsid.inspect}", :target => "_blank"}%></td>
+              <td><%= datastream.lastModifiedDate || datastream.dsCreateDate  %></td>        
+              <td>
+                <fieldset class="span5">
+                  <%= f.input dsid.to_sym, as: :file, label: "Choose a #{dsid} file" %>
+                </fieldset>
+              </td>
+            </tr>
+          <% else %>
+            <tr class="attachment attributes">
+              <td class="attribute title"><%= dsid %></td>
+              <td></td>        
+              <td>
+                <fieldset class="span5">
+                  <%= f.input dsid.to_sym, as: :file, label: "Choose a #{dsid} file" %>
+                </fieldset>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    
+  </fieldset>
+<% end %>

@@ -11,6 +11,7 @@ describe Text do
   it_behaves_like 'with_access_rights'
   it_behaves_like 'is_embargoable'
   it_behaves_like 'has_dc_metadata'
-  it_behaves_like 'remotely_identified', :doi
+  # TODO: This is the test you will use when we add handle support
+  # it_behaves_like 'remotely_identified', :handle
 
 end
