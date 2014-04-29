@@ -9,11 +9,14 @@ class Text < ActiveFedora::Base
   include CurationConcern::WithRelatedWorks
   include CurationConcern::Embargoable
   include ActiveFedora::RegisteredAttributes
-
+  
   has_metadata "descMetadata", type: GenericWorkRdfDatastream
 
   include CurationConcern::RemotelyIdentifiedByDoi::Attributes
-
+  
+  class_attribute :human_readable_short_description
+  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."
+  
   attribute :title, datastream: :descMetadata,
     multiple: false,
     validates: {presence: { message: 'Your work must have a title.' }}

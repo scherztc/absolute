@@ -3,7 +3,7 @@ Curate.configure do |config|
   config.register_curation_concern :text
   config.register_curation_concern :generic_work
   config.register_curation_concern :image
-  config.register_curation_concern :document
+  
   # # You can override curate's antivirus runner by configuring a lambda (or
   # # object that responds to call)
   # config.default_antivirus_instance = lambda {|filename| … }

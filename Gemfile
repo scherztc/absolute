@@ -29,10 +29,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'curate', github:'ndlib/curate'
-gem 'poltergeist' # used by curate spec helpers
-gem 'vcr'
-gem 'webmock'
-gem 'rspec-html-matchers'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -52,7 +48,7 @@ gem 'capistrano-bundler', group: :development
 # don't use capistrano-ext, which only works with Capistrano 2
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
 
 gem "unicode", platforms: [:mri_18, :mri_19]
 gem "bootstrap-sass"
@@ -63,9 +59,17 @@ gem 'riiif', '0.0.6'
 gem 'hydra-admin-collections', github: 'bmaddy/hydra-admin-collections', branch: 'more_attrs'
 
 group :development, :test do
+  gem "jettywrapper"
   gem "rspec-rails"
+end
+
+group :test do
   gem 'factory_girl_rails'
   gem 'equivalent-xml'
   gem 'capybara'
-  gem "jettywrapper"
+  gem 'poltergeist' # used by curate spec helpers
+  gem 'vcr'
+  gem 'webmock'
+  gem 'rspec-html-matchers'
 end
+
