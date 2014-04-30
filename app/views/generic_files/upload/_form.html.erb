@@ -1,0 +1,6 @@
+<%= form_for(GenericFile.new, :url => curation_concern_generic_files_path(parent_id:curation_concern.id), :html => {:multipart => true, :id => 'fileupload'}) do |f| %>
+  <div class="well">
+    <%= render partial: 'generic_files/upload/form_fields' %>
+  </div>
+<% end %>
+

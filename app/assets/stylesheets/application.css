@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require curate
+ *= require_directory ./fileupload
  *= require_tree .
  */
