@@ -1,7 +1,7 @@
 # Generated via
 #  `rails generate curate:work Text`
 require 'active_fedora/base'
-class Text < ActiveFedora::Base
+class Image < ActiveFedora::Base
   include CurationConcern::Work
   include CurationConcern::WithGenericFiles
   include CurationConcern::WithLinkedResources
@@ -11,7 +11,7 @@ class Text < ActiveFedora::Base
   include ActiveFedora::RegisteredAttributes
   include CurationConcern::WithDatastreamAttachments
   
-  self.accept_datastream_attachments ["TEI", "TEIP5", "MODS"]
+  self.accept_datastream_attachments ["VRA", "MODS"]
   
   has_metadata "descMetadata", type: GenericWorkRdfDatastream
 
