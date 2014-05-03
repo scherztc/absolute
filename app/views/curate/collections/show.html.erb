@@ -1,0 +1,29 @@
+<% content_for :page_title, curation_concern_page_title(@collection) %>
+<% content_for :page_header do %>
+  <h1> <%= @collection.title %> </h1>
+<% end %>
+<% if can? :edit, @collection %>
+  <% content_for :page_actions do %>
+    <%= link_to 'Edit', edit_collection_path(@collection), class: 'btn' %>
+  <% end %>
+<% end %>
+<div class="collection-description">
+  <%= @collection.description %>
+</div>
+<table class="table table-striped <%= dom_class(@collection) %> attributes">
+  <caption class="table-heading"><h2>Attributes</h2></caption>
+  <thead>
+    <tr><th>Attribute Name</th><th>Values</th></tr>
+  </thead>
+  <tbody>
+  <%= curation_concern_attribute_to_html(@collection, :subject, "Subject") %>
+  <%= curation_concern_attribute_to_html(@collection, :publisher, "Publisher") %>
+  <%= curation_concern_attribute_to_html(@collection, :language, "Language") %>
+  <%= curation_concern_attribute_to_html(@collection, :identifier, "Identifier") %>
+  </tbody>
+</table>
+
+<h2>Items in This Collection</h2>
+<div id="documents" class="clear">
+  <%= list_items_in_collection(@collection) %>
+</div>
