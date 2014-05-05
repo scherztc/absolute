@@ -31,7 +31,7 @@ en:
     upload_tooltip:   "Please accept Deposit Agreement before you can upload."
     field_label:
       based_near:        "Location"
-      description:       "Abstract or Summary"
+      description:       "Description"
       tag:               "Keyword"
       date_created:      "Date Created"
       related_url:       "Related URL"
