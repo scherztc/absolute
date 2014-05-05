@@ -73,5 +73,6 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'rspec-html-matchers'
+  gem 'launchy'
 end
 

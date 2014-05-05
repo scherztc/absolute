@@ -1,12 +1,13 @@
 module Features
   module FixtureFileUpload
     def fixture_file_upload(path, content_type = 'text/plain', binary = false)
-      normalized_path = File.join(Rails.root.to_s, 'spec/fixtures', path)
-      Rack::Test::UploadedFile.new(normalized_path, content_type, binary)
+      Rack::Test::UploadedFile.new(fixture_file_path(path), content_type, binary)
     end
     def fixture_file(path)
-      normalized_path = File.join(Rails.root.to_s, 'spec/fixtures', path)
-      File.open(normalized_path)
+      File.open(fixture_file_path(path))
+    end
+    def fixture_file_path(path)
+      File.join(Rails.root.to_s, 'spec/fixtures', path)
     end
   end
 end

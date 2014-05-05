@@ -10,7 +10,6 @@ class Image < ActiveFedora::Base
   include CurationConcern::Embargoable
   include ActiveFedora::RegisteredAttributes
   include CurationConcern::WithDatastreamAttachments
-  
   self.accept_datastream_attachments ["VRA", "MODS"]
   
   include CurationConcern::WithCaseBasicMetadata

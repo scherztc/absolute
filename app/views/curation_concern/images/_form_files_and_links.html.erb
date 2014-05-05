@@ -1,0 +1,30 @@
+<!-- THIS IS ONLY HERE TO PREVENT RENDERING OF THE DEFAULT IMAGE FORMS in CURATE -->
+<% unless curation_concern.persisted? %>
+  <fieldset id="work-contents">
+    <div class="row with-headroom">
+      <div class="span12">
+        <legend>
+          Add Your Content
+        </legend>
+
+        <p class="help-block">
+          The subject of your <%= curation_concern.human_readable_type.downcase %> can either be a file <em>or</em> a URL. <br/> <b>If you have multiple files to upload</b>, you can use the multi-file uploader on the next page after you fill out the information on this page and click the "Create <%= curation_concern.human_readable_type %>" button at the bottom of this page.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <fieldset class="span5">
+        <%= f.input :files, as: :file, label: 'Upload a file', hint: 'A PDF is preferred.'%>
+      </fieldset>
+
+      <strong class="span1 field-choice">OR</strong>
+
+      <fieldset class="span6">
+        <%= f.input :linked_resource_urls, label: "External link", input_html: {class: 'input-xlarge'} %>
+      </fieldset>
+
+    </div>
+  </fieldset>
+<% end %>

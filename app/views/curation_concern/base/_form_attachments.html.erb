@@ -23,7 +23,7 @@
       <tbody>
         <% curation_concern.attachments.each do |dsid, datastream| %>
           <% if datastream.dsCreateDate %>
-            <tr class="attachment attributes">
+            <tr class="attachment attributes <%=dsid.downcase%>">
               <td class="attribute title"><%= link_to dsid, download_path(curation_concern.noid, datastream_id:dsid),{title: "Download #{dsid.inspect}", :target => "_blank"}%></td>
               <td><%= datastream.lastModifiedDate || datastream.dsCreateDate  %></td>        
               <td>
@@ -33,7 +33,7 @@
               </td>
             </tr>
           <% else %>
-            <tr class="attachment attributes">
+            <tr class="attachment attributes <%=dsid.downcase%>">
               <td class="attribute title"><%= dsid %></td>
               <td></td>        
               <td>

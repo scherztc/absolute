@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vra xmlns="http://www.vraweb.org/vracore4.htm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.vraweb.org/vracore4.htm http://www.vraweb.org/projects/vracore4/vra-4.0-restricted.xsd">
+
+    <!-- Chen -->
+
+    <!-- NOTE: THIS FIRST SECTION, WORK, REFERS TO THE PHYSICAL ITEM -->
+
+    <work id="w_wrhsglePos-48" refid="wrhsglePos00" source="Western Reserve Historical Society">
+
+        <agentSet>
+            <display>Hall of Progress at The Great Lakes Exposition, Cleveland, Ohio</display>
+            <agent>
+                <name type="corporate">Copyrighted by the Great Lakes Exposition, The Sapirstein
+                    Greeting Card Co., Cleveland, Ohio, Official Exposition Post Card Distributors
+                    "C.T.Art-Colortone" Reg. U.S. Pat. Off"</name>
+                <!-- If a person created the item, use LAST NAME, FIRST NAME and change type to personal -->
+                <culture>American</culture>
+                <role>publisher</role>
+                <!-- have this line if there is a personal name. If publisher, have content for element be publisher, and delete the vocab and refid attributes -->
+            </agent>
+        </agentSet>
+
+        <dateSet>
+            <display>1937?</display>
+            <date type="creation">
+                <earliestDate>1937</earliestDate>
+                <latestDate>1937</latestDate>
+                <!-- These dates are arbitrary. Fill in with correct date -->
+            </date>
+        </dateSet>
+
+        <descriptionSet>
+            <description>The Hall of Progress at the Great Lakes Exposition exhibits the progress of
+                science and new inventions. The Building, 540 feet long and 180 feet wide, is
+                constructed entirely of wood, using a system of building known as "rigid frames,"
+                used for the first time in such a large structure. The two interior courts have
+                outdoor gardens</description>
+            <description>Message in handwritten ink on back to "My Dear Margaret" but not posted.
+                Preservation note: Penciled on back "Rossey 86-A". "6A-H604" imprinted bottom right
+                corner, front of card. Handwritten in ink: My Dear Margaret. Received your kind
+                letter, Thank you and glad to hear from you. Will write later. With much love,
+                (?)</description>
+        </descriptionSet>
+
+        <locationSet>
+            <display>Western Reserve Historical Society</display>
+            <location type="site">
+                <name type="geographic" vocab="TGN" refid="7013608">Cleveland</name>
+                <name type="geographic" vocab="TGN" refid="7007706">Ohio</name>
+                <name type="geographic" vocab="TGN" refid="7012149">United States (nation)</name>
+            </location>
+        </locationSet>
+
+        <materialSet>
+            <!-- This will have to be modified if you are dealing with a non-photographic material type, e.g. picture postcards, which is 300026819. Go to: http://www.getty.edu/research/conducting_research/vocabularies/aat/ -->
+            <display>photographic postcards</display>
+            <material vocab="AAT" refid="300192703">photographic postcards</material>
+        </materialSet>
+
+        <measurementsSet>
+            <display>3.5 x 5.5 </display>
+            <!-- Adjust measurements if needed -->
+            <measurements type="width" unit="in" extent="base">3.5</measurements>
+            <measurements type="length" unit="in" extent="base">5.5</measurements>
+        </measurementsSet>
+
+        <relationSet>
+            <display>Postcards -- Great Lakes Exposition of 1936</display>
+            <relation refid="wrhsglePos00" type="partOf">Postcards--Great Lakes Exposition of
+                1936</relation>
+        </relationSet>
+
+        <rightsSet>
+            <display>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio, provides the information contained in Digital Case, including reproductions of items from its collections, for non-commercial, personal, or research use only. All other use, including but not limited to commercial or scholarly reproductions, redistribution, publication or transmission, whether by electronic means or otherwise, without prior written permission is strictly prohibited. For more information contact Digital Case at digitalcase@case.edu.  This collection was curated in collaboration with the Western Reserve Historical Society, which is the organization that owns the physical objects from which these reproductions were made.  Additional permissions may need to be obtained from WRHS.</display>
+            <rights type="publicDomain">
+                <rightsHolder>Western Reserve Historical Society</rightsHolder>
+            </rights>
+        </rightsSet>
+
+        <stylePeriodSet>
+            <stylePeriod vocab="AAT" refid="300264736">Modern (styles and periods)</stylePeriod>
+        </stylePeriodSet>
+
+        <subjectSet>
+            <subject>
+                <term vocab="LCSH">Exhibitions--Ohio--Cleveland</term>
+                <term vocab="LCSH">Great Lakes Exposition (1936: Cleveland, Ohio)</term>
+                <term vocab="LCSH">Great Lakes Exposition -- Pictorial works</term>
+            </subject>
+        </subjectSet>
+
+        <titleSet>
+            <title type="generalView" pref="false">Hall of Progress at The Great Lakes Exposition,
+                Cleveland, Ohio</title>
+        </titleSet>
+
+        <worktypeSet>
+            <worktype vocab="DCMI">still image</worktype>
+        </worktypeSet>
+    </work>
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+    <!-- NOTE: THIS SECTION, IMAGE, REFERS TO THE DIGITAL MANIFESTATIONS OF THE PHYSICAL ITEM -->
+
+    <image id="i_wrhsglePos-48"
+        source="Digital Case, Kelvin Smith Library, Case Western Reserve University">
+
+        <agentSet>
+            <agent>
+                <name type="corporate">Kelvin Smith Library, Digital Case</name>
+            </agent>
+        </agentSet>
+
+        <dateSet>
+            <display>April 12, 2010</display>
+            <date type="publication">
+                <!-- DATE OF SCANNING in YYYY-MM-DD format -->
+                <earliestDate>2010-04-12</earliestDate>
+                <latestDate>2010-04-15</latestDate>
+            </date>
+        </dateSet>
+
+        <locationSet>
+            <display>Digital Case, Kelvin Smith Library, Case Western Reserve University</display>
+            <location type="repository">
+                <name type="corporate">Kelvin Smith Library</name>
+                <name type="geographic" vocab="TGN" refid="7013608">Cleveland</name>
+                <name type="geographic" vocab="TGN" refid="7007706">Ohio</name>
+                <name type="geographic" vocab="TGN" refid="7012149">United States (nation)</name>
+            </location>
+        </locationSet>
+
+        <materialSet>
+            <display>tiff</display>
+            <material vocab="AAT" refid="300266226">TIFF</material>
+        </materialSet>
+
+        <measurementsSet>
+            <!-- FILL IN THIS SECTION WITH DIGITAL TECH SPECS -->
+            <display>4766 x 2974</display>
+            <measurements type="width" unit="px">4766</measurements>
+            <measurements type="length" unit="px">2974</measurements>
+            <measurements type="resolution" unit="dpi">800</measurements>
+            <measurements type="bitDepth">24</measurements>
+            <measurements type="fileSize" source="front">42548492</measurements>
+            <!-- NOTE: Do NOT use px here; instead, use the full number -->
+            <measurements type="other">Epson Expression 10000XL</measurements>
+            <measurements type="other">Adobe Photoshop CS4</measurements>
+        </measurementsSet>
+
+        <relationSet>
+            <display>Digital reproduction of Hall of Progress at The Great Lakes Exposition,
+                Cleveland, Ohio</display>
+            <relation refid="w_wrhsglePos-48" type="imageOf">Digital reproduction of Hall of
+                Progress at The Great Lakes Exposition, Cleveland, Ohio</relation>
+            <!-- refid from work ID, located at the top of this record -->
+            <!-- include href attribute once image is in digital case -->
+        </relationSet>
+        <rightsSet>
+            <display>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio,
+                provides the information contained in Digital Case, including reproductions of items
+                from its collections, for non-commercial, personal, or research use only. All other
+                use, including but not limited to commercial or scholarly reproductions,
+                redistribution, publication or transmission, whether by electronic means or
+                otherwise, without prior written permission is strictly prohibited. For more
+                information contact Digital Case at digitalcase@case.edu</display>
+            <rights type="publicDomain">
+                <text>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio,
+                    provides the information contained in Digital Case, including reproductions of
+                    items from its collections, for non-commercial, personal, or research use only.
+                    All other use, including but not limited to commercial or scholarly
+                    reproductions, redistribution, publication or transmission, whether by
+                    electronic means or otherwise, without prior written permission is strictly
+                    prohibited. For more information contact Digital Case at
+                    digitalcase@case.edu</text>
+            </rights>
+        </rightsSet>
+
+        <worktypeSet>
+            <worktype vocab="AAT" refid="300215302">digital image</worktype>
+        </worktypeSet>
+    </image>
+
+
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+    <!-- USE THIS SECTION IF THERE IS A DERIVATIVE OF THE MASTER IMAGE FOR PUBLIC ACCESS -->
+
+    <image id="a_wrhsglePos-48"
+        source="Digital Case, Kelvin Smith Library, Case Western Reserve University">
+
+        <agentSet>
+            <agent>
+                <name type="corporate">Kelvin Smith Library, Digital Case</name>
+            </agent>
+        </agentSet>
+
+
+        <dateSet>
+            <display>April 4, 2010</display>
+            <date type="publication">
+                <!-- DATE OF SCANNING in YYYY-MM-DD format -->
+                <earliestDate>2010-04-12</earliestDate>
+                <latestDate>2010-04-12</latestDate>
+            </date>
+        </dateSet>
+
+        <locationSet>
+            <display>Digital Case, Kelvin Smith Library, Case Western Reserve University</display>
+            <location type="repository">
+                <name type="corporate">Kelvin Smith Library</name>
+                <name type="geographic" vocab="TGN" refid="7013608">Cleveland</name>
+                <name type="geographic" vocab="TGN" refid="7007706">Ohio</name>
+                <name type="geographic" vocab="TGN" refid="7012149">United States (nation)</name>
+            </location>
+        </locationSet>
+
+        <materialSet>
+            <display>JPEG 2000</display>
+            <material>JPEG2000</material>
+        </materialSet>
+
+
+        <measurementsSet>
+            <!-- FILL IN THIS SECTION WITH DIGITAL TECH SPECS -->
+            <display>4766 x 2974</display>
+            <measurements type="width" unit="px">4766</measurements>
+            <measurements type="length" unit="px">2974</measurements>
+            <measurements type="resolution" unit="dpi">800</measurements>
+            <measurements type="bitDepth">24</measurements>
+            <measurements type="fileSize" source="front">42548128</measurements>
+            <!-- NOTE: Do NOT use px here; instead, use the full number -->
+            <measurements type="other">Epson Expression 10000XL</measurements>
+            <measurements type="other">Adobe Photoshop CS4</measurements>
+        </measurementsSet>
+
+
+        <relationSet>
+            <display>Digital reproduction of Hall of Progress at The Great Lakes Exposition, Cleveland, Ohio</display>
+            <relation refid="i_wrhsglePos-48" type="imageOf">Derivative of Hall of Progress at The Great Lakes Exposition, Cleveland, Ohio</relation>
+            <!-- refid from TIFF IMAGE ID -->
+            <!-- include href attribute once image is in digital case -->
+        </relationSet>
+        <rightsSet>
+            <display>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio,
+                provides the information contained in Digital Case, including reproductions of items
+                from its collections, for non-commercial, personal, or research use only. All other
+                use, including but not limited to commercial or scholarly reproductions,
+                redistribution, publication or transmission, whether by electronic means or
+                otherwise, without prior written permission is strictly prohibited. For more
+                information contact Digital Case at digitalcase@case.edu</display>
+            <rights type="publicDomain">
+                <text>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio,
+                    provides the information contained in Digital Case, including reproductions of
+                    items from its collections, for non-commercial, personal, or research use only.
+                    All other use, including but not limited to commercial or scholarly
+                    reproductions, redistribution, publication or transmission, whether by
+                    electronic means or otherwise, without prior written permission is strictly
+                    prohibited. For more information contact Digital Case at
+                    digitalcase@case.edu</text>
+            </rights>
+        </rightsSet>
+
+        <worktypeSet>
+            <worktype vocab="AAT" refid="300215302">digital image</worktype>
+        </worktypeSet>
+    </image>
+</vra>
