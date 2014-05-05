@@ -17,8 +17,6 @@ class Text < ActiveFedora::Base
   include CurationConcern::WithDatastreamAttachments
   self.accept_datastream_attachments ["TEI", "TEIP5", "MODS"]
   
-
-
   class_attribute :human_readable_short_description
   self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."
 

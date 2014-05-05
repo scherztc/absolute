@@ -27,7 +27,6 @@ describe 'Creating a Image' do
   
   describe 'with attached XML' do
     it "should allow me to attach the XML on create page" do
-      pending
       login_as(user)
       visit root_path
       click_link "add-content"

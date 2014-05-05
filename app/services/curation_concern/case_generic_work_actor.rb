@@ -15,9 +15,9 @@ module CurationConcern
 
     def save_attachments
       dirty = false
-      [:TEI, :TEIP5, :MODS].each do |ds_key|
-        if attributes[ds_key]
-          curation_concern.datastreams[ds_key.to_s].content = attributes[ds_key]
+      curation_concern.attachments.each do |dsid,ds|
+        if attributes[dsid]
+          ds.content = attributes[dsid]
           dirty = true
         end
       end
