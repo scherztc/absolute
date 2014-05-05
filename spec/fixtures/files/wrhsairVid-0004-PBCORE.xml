@@ -1,0 +1,114 @@
+<PBCoreDescriptionDocument xmlns:xsi1="http://www.w3.org/2001/XMLSchema-instance"
+    xsi1:schemaLocation="http://www.pbcore.org/PBCore/PBCoreNamespace.html http://www.pbcore.org/PBCore/PBCoreXSD_Ver_1-2-1.xsd"
+    xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html"
+    xmlns:xsi="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+    <pbcoreIdentifier>
+        <identifier>wrhsairVid-0004</identifier>
+        <identifierSource>Kelvin Smith Library, Digital Case</identifierSource>
+    </pbcoreIdentifier>
+
+    <pbcoreTitle>
+        <title>WRHS Air Race Film Acc #131.1.2</title>
+    </pbcoreTitle>
+
+    <pbcoreSubject>
+        <subject>Aeronautics -- United States</subject>
+        <subjectAuthorityUsed>LCSH</subjectAuthorityUsed>
+    </pbcoreSubject>
+
+    <!-- REPEAT pbcoreSubject SEQUENCE BASED ON DESCRIPTION -->
+
+    <pbcoreDescription>
+        <description>B&#38;W silent; Appears to be newsreel footage of attempts at cross-Atlantic
+            flights; includes fiery crash and Lindbergh; rest of reel family home
+            movies</description>
+        <descriptionType>Abstract</descriptionType>
+    </pbcoreDescription>
+
+    <pbcoreDescription>
+        <description>&quot;POP-WALTER’S HORSES&quot; in marker on top of canister. On inner bottom canister,
+            much blue powdery oxidation. Strong odor of moth balls inside canister.</description>
+        <descriptionType>Preservation Note</descriptionType>
+    </pbcoreDescription>
+
+    <!-- if digitization note simply reads looks good delete this 3rd pbcoreDescription set -->
+    <pbcoreDescription>
+        <description>2 films - Lindbergh film first - yellow (but crisp) - rest of film B&#38;W looks good.</description>
+        <descriptionType>Digitization Note</descriptionType>
+    </pbcoreDescription>
+<pbcoreDescription>
+    <description>Round 1 - 16mm Digitizer - MTS Files, masked, converted to black and white, exported as H264 files</description>
+<descriptionType>Post-Production Note</descriptionType>
+</pbcoreDescription>
+    
+    <pbcoreGenre>
+        <genre>event</genre>
+        <genreAuthorityUsed>PBS-PODS</genreAuthorityUsed>
+    </pbcoreGenre>
+
+    <pbcoreCoverage>
+        <coverage>1926</coverage>
+        <coverageType>Temporal</coverageType>
+    </pbcoreCoverage>
+
+    <pbcoreCoverage>
+        <coverage>Cleveland (Ohio)</coverage>
+        <coverageType>Spatial</coverageType>
+    </pbcoreCoverage>
+
+    <pbcoreAudienceLevel>
+        <audienceLevel>General</audienceLevel>
+    </pbcoreAudienceLevel>
+
+    <pbcoreContributor>
+        <contributor>home movie footage created by father of Warren Weiant, donor of
+            films</contributor>
+        <contributorRole>Donor</contributorRole>
+    </pbcoreContributor>
+
+
+    <pbcoreRightsSummary>
+
+        <rightsSummary>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio,
+            provides the information contained in Digital Case, including reproductions of items
+            from its collections, for non-commercial, personal, or research use only. All other use,
+            including but not limited to commercial or scholarly reproductions, redistribution,
+            publication or transmission, whether by electronic means or otherwise, without prior
+            written permission is strictly prohibited. For more information contact Digital Case at
+            digitalcase@case.edu. This collection was curated in collaboration with the Western
+            Reserve Historical Society, which is the organization that owns the physical objects
+            from which these reproductions were made. Additional permissions may need to be obtained
+            from WRHS.</rightsSummary>
+    </pbcoreRightsSummary>
+
+
+    <pbcoreInstantiation>
+        <pbcoreFormatID>
+            <formatIdentifier>131.1.2</formatIdentifier>
+            <formatIdentifierSource>Western Reserve Historical Society</formatIdentifierSource>
+        </pbcoreFormatID>
+        <pbcoreFormatID>
+            <formatIdentifier>mts</formatIdentifier>
+            <formatIdentifierSource>Digital Case, Kelvin Smith Library, Case Western Reserve
+                University</formatIdentifierSource>
+        </pbcoreFormatID>
+
+        <dateCreated>1926</dateCreated>
+        <dateIssued>2011-12-29</dateIssued>
+        <formatPhysical>16mm</formatPhysical>
+        <formatDigital>video/mpeg</formatDigital>
+
+        <formatLocation>WRHS</formatLocation>
+
+        <formatMediaType>Moving Image</formatMediaType>
+        <formatGenerations>Moving Image/Viewing copy</formatGenerations>
+        <formatTimeStart>00:00</formatTimeStart>
+        <formatDuration>00:12:14</formatDuration>
+        <formatColors>B &amp; W</formatColors>
+
+        <language>eng</language>
+
+    </pbcoreInstantiation>
+
+
+</PBCoreDescriptionDocument>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="mods2dc-bks.xsl"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd">
+	<mods version="3.3">
+		<identifier>131.1.2</identifier>
+		<!-- Chen -->
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- TITLE -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<titleInfo xml:lang="en">
+			<title>WRHS Air Race Film Acc #131.1.2</title>
+		</titleInfo>
+
+		<name type="personal">
+			<namePart type="family">Wieant</namePart>
+			<namePart type="given">Warren S., II</namePart>
+			<role>
+				<roleTerm>Producer</roleTerm>
+			</role>
+		</name>
+		<name type="personal">
+			<namePart type="family">Wieant</namePart>
+			<namePart type="given">Warren Swift III</namePart>
+			<namePart type="date">1928 - 2012</namePart>
+			<role>
+				<roleTerm>Donor</roleTerm>
+			</role>
+			<description>The digitization of some of these films was done in memory of Warren Swift Weiant III (1928 -2012)  who donated his father's aviation films to the Western Reserve Historical Society</description>
+		</name>
+
+		<name type="corporate">
+			<namePart>Western Reserve Historical Society</namePart>
+			<affiliation>Archive</affiliation>
+			<role>
+				<roleTerm>Contributor</roleTerm>
+			</role>
+			<namePart>Kelvin Smith Library Digital Case</namePart>
+			<affiliation>University Library</affiliation>
+			<role>
+				<roleTerm>Digital Repository</roleTerm>
+			</role>
+		</name>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- TYPE OF RESOURCE -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<typeOfResource>moving image</typeOfResource>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- GENRE. See: http://lcweb2.loc.gov/pp/tgmiquery.html -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<genre authority="gmgpc000090">filmstrip</genre>
+		<!-- also see: http://www.loc.gov/marc/sourcecode/genre/genrelist.html -->
+		<!-- there would be a second entry following tgm -->
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- ORIGIN, INCLUDING DATE ITEM DIGITIZED -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<originInfo>
+			<place>
+				<placeTerm type="text">Ohio</placeTerm>
+				<placeTerm type="code" authority="marccountry">ohu</placeTerm>
+				<!-- See http://www.loc.gov/marc/countries/ -->
+			</place>
+			<place>
+				<placeTerm type="text">Cleveland</placeTerm>
+			</place>
+			<dateIssued keyDate="yes" encoding="w3cdtf">1926</dateIssued>
+			<dateCaptured qualifier="approximate">2011-12-29</dateCaptured>
+		</originInfo>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- PHYSICAL DESCRIPTION, INCLUDING DIGITIZED VERSION -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<physicalDescription>
+			<form authority="aat">black-and-white film</form>
+			<extent>reel (0:12:14): b &amp; w ; 16 mm. ref print.</extent>
+			
+		</physicalDescription>
+
+		<physicalDescription>
+			<digitalOrigin>reformatted digital</digitalOrigin>
+			<reformattingQuality>preservation</reformattingQuality>
+			<internetMediaType>video/mpeg</internetMediaType>
+			<internetMediaType>mp4</internetMediaType>
+		</physicalDescription>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- ABSTRACT -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<abstract>B&#38;W silent; Appears to be newsreel footage of attempts at cross-Atlantic flights;
+			includes fiery crash and Lindbergh; rest of reel family home movies</abstract>
+		<note>uses some commercial footage</note>
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- SUBJECT HEADINGS -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<subject authority="LCSH">
+			<topic>Aeronautics -- United States</topic>
+		</subject>
+		<subject authority="LCSH">
+			<topic>B-1 bomber</topic>
+		</subject>
+
+		<!-- ADD ADDITIONAL LCSH SUBJECT TERMS IF APPLICABLE -->
+
+		<subject>
+			<geographic>Ohio</geographic>
+			<geographic>Cleveland</geographic>
+		</subject>
+
+		<subject>
+			<temporal>1920-1940</temporal>
+		</subject>
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- RELATED ITEM -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<relatedItem type="host" displayLabel="Appears in">
+			<titleInfo>
+				<title>Cleveland Air Race Reels</title>
+			</titleInfo>
+		</relatedItem>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- IDENTIFIER -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<identifier type="hdl">wrhsgleVid-0004</identifier>
+		<!-- FIX -->
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- PHYSICAL LOCATION -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<location>
+			<physicalLocation>Western Reserve Historical Society</physicalLocation>
+		</location>
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- COPYRIGHT, AND ACCESS INFORMATION -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<accessCondition type="useAndReproduction">Kelvin Smith Library, Case Western Reserve
+			University, Cleveland, Ohio, provides the information contained in Digital Case,
+			including reproductions of items from its collections, for non-commercial, personal, or
+			research use only. All other use, including but not limited to commercial or scholarly
+			reproductions, redistribution, publication or transmission, whether by electronic means
+			or otherwise, without prior written permission is strictly prohibited. For more
+			information contact Digital Case at digitalcase@case.edu. This collection was curated in
+			collaboration with the Western Reserve Historical Society, which is the organization
+			that owns the physical objects from which these reproductions were made. Additional
+			permissions may need to be obtained from WRHS.</accessCondition>
+
+
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<!-- RECORD INFORMATION -->
+		<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+		<recordInfo>
+			<recordContentSource authority="marcorg">CLE</recordContentSource>
+			<recordCreationDate>2012-03-20</recordCreationDate>
+			<recordOrigin>MODS record created manually using oXygen software.</recordOrigin>
+			<languageOfCataloging>
+				<languageTerm type="code" authority="iso639-2b">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+
+	</mods>
+</modsCollection>
