@@ -1,7 +1,7 @@
 # Generated via
-#  `rails generate curate:work Video`
+#  `rails generate curate:work Audio`
 require 'active_fedora/base'
-class Video < ActiveFedora::Base
+class Audio < ActiveFedora::Base
   include CurationConcern::Work
   include CurationConcern::WithGenericFiles
   include CurationConcern::WithLinkedResources
@@ -16,10 +16,10 @@ class Video < ActiveFedora::Base
   self.accept_datastream_attachments ["PBCore", "MODS"]
 
   include CurationConcern::RemotelyIdentifiedByDoi::Attributes
-  
-  class_attribute :human_readable_short_description
-  self.human_readable_short_description = "Any Video work, preferably with PBCore xml attached."
 
+  class_attribute :human_readable_short_description
+  self.human_readable_short_description = "Any Audio work, possibly with PBCore xml attached."
+  
   attribute :files, multiple: true, form: {as: :file},
     hint: "CTRL-Click (Windows) or CMD-Click (Mac) to select multiple files."
 

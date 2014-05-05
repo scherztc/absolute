@@ -1,6 +1,8 @@
 Curate.configure do |config|
+  # Injected via `rails g curate:work Audio`
   config.register_curation_concern :text
   config.register_curation_concern :image
+  config.register_curation_concern :audio
   config.register_curation_concern :video
   config.register_curation_concern :case_generic_work
   
@@ -19,4 +21,4 @@ end
 #  This tells curate which types of works to show in the list of options in the "quick add" dropdown
 #  The relevant partial is app/views/shared/_add_content.html.erb, which calls
 #     QuickClassificationQuery.each_for_context(current_user)
-QuickClassificationQuery::CURATION_CONCERNS_TO_TRY = ['text', 'image', 'video']
+QuickClassificationQuery::CURATION_CONCERNS_TO_TRY = ['text', 'image', 'audio', 'video']
