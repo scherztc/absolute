@@ -42,7 +42,6 @@ module CurationConcern::WithCaseBasicMetadata
     attribute :coverage,                datastream: :descMetadata, multiple: true
     attribute :date,                    datastream: :descMetadata, multiple: true
     attribute :extent,                  datastream: :descMetadata, multiple: true
-    attribute :format,                  datastream: :descMetadata, multiple: true
     attribute :identifiers,             datastream: :descMetadata, multiple: true
     attribute :language,                datastream: :descMetadata, multiple: true
     attribute :publisher,               datastream: :descMetadata, multiple: true
