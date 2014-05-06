@@ -17,12 +17,6 @@
   
   
   <%= render partial: 'form_permission', locals: {f: f} %>
-  
-  <div class="row with-headroom">
-    <div class="span12">
-      <%= render "curation_concern/base/form_content_license", curation_concern: @collection, f: f %>
-    </div>
-  </div>
 
   <%= hidden_collection_members %>
 

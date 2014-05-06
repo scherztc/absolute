@@ -25,10 +25,8 @@ module CurationConcern::WithCaseBasicMetadata
       multiple: false,
       validates: {presence: { message: 'Your work must have a title.' }}
 
-    attribute :rights, datastream: :descMetadata,
-      multiple: false,
-      validates: {presence: { message: 'You must select a license for your work.' }}
-      
+    attribute :rights, datastream: :descMetadata, multiple: false
+            
     attribute :available,      datastream: :descMetadata, multiple: false
     attribute :created,        datastream: :descMetadata, multiple: false
     attribute :creator,        datastream: :descMetadata, multiple: false

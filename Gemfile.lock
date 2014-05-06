@@ -8,8 +8,9 @@ GIT
       hydra-head (~> 6.4.0)
 
 GIT
-  remote: git://github.com/ndlib/curate.git
-  revision: d17e75b7e862359a436e3c7c34c45de5362d2914
+  remote: git://github.com/curationexperts/curate.git
+  revision: ec097a1cd776309ed099deec3e5e8cfa00730e76
+  branch: ndlib_master
   specs:
     curate (0.6.3)
       active_attr
