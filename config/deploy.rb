@@ -40,7 +40,7 @@ namespace :deploy do
   after :kill_resque_pool, :start_resque_pool do
     on roles(:web), in: :sequence, wait: 5 do
       # Starts a new resque_pool master
-      execute "cd #{release_path} && bundle exec resque-pool -d -E production -c config/resque_pool.yml -p #{shared_path}/tmp/pids/resque-pool.pid -e #{shared_path}/log/resque-pool.stderr.log -o #{shared_path}/log/resque-pool.stdout.log"
+      execute "cd #{release_path} && bundle exec resque-pool -d -E production -c config/resque-pool.yml -p #{shared_path}/tmp/pids/resque-pool.pid -e #{shared_path}/log/resque-pool.stderr.log -o #{shared_path}/log/resque-pool.stdout.log"
     end
   end
   
