@@ -28,6 +28,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# IMPORTANT: This is a copy of the master branch of ndlib/curate with DCE fixes in it. 
 gem 'curate', github:'curationexperts/curate', branch:'ndlib_master'
 # gem 'curate', path:'../curate'
 
