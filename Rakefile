@@ -4,3 +4,12 @@
 require File.expand_path('../config/application', __FILE__)
 
 Absolute::Application.load_tasks
+
+# Get rid of the default task (was spec)
+task :default => []; Rake::Task[:default].clear
+
+task :default => [:ci]
+
+require 'resque/tasks'
+
+task "resque:setup" => :environment
