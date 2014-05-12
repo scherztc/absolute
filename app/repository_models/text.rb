@@ -3,26 +3,12 @@
 require 'active_fedora/base'
 class Text < ActiveFedora::Base
   include CurationConcern::Work
-  include CurationConcern::WithGenericFiles
-  include CurationConcern::WithLinkedResources
-  include CurationConcern::WithLinkedContributors
-  include CurationConcern::WithRelatedWorks
-  include CurationConcern::Embargoable
-  include ActiveFedora::RegisteredAttributes
-  include CurationConcern::RemotelyIdentifiedByDoi::Attributes
+  include CurationConcern::CaseWork
   
-  include CurationConcern::WithCaseBasicMetadata
-  has_metadata "descMetadata", type: GenericWorkRdfDatastream
-  
-  include CurationConcern::WithDatastreamAttachments
+  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."  
   self.accept_datastream_attachments ["TEI", "TEIP5", "MODS"]
   
-  class_attribute :human_readable_short_description
-  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."
-
   validates_presence_of :rights, message: 'You must select a license for your work.'
 
-  attribute :files, multiple: true, form: {as: :file},
-    hint: "CTRL-Click (Windows) or CMD-Click (Mac) to select multiple files."
-
+  has_metadata "descMetadata", type: GenericWorkRdfDatastream
 end

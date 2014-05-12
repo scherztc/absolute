@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   include Blacklight::User
   # Connects this user object to Sufia behaviors. 
   include Sufia::User
-  # Connects this user object to Curate User behaviors.
-  include Curate::UserBehavior
   # Connects this user object to Hydra behaviors. 
   include Hydra::User
   # Connects this user object to Role-management behaviors.

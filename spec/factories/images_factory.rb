@@ -1,10 +1,10 @@
 # Generated via
-#  `rails generate curate:work Audio`
+#  `rails generate curate:work Video`
 #
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :audio, class: Audio do
+  factory :image, class: Image do
     ignore do
       user { FactoryGirl.create(:user) }
     end
@@ -19,14 +19,14 @@ FactoryGirl.define do
       work.apply_depositor_metadata(evaluator.user.user_key)
     }
 
-    factory :private_audio do
+    factory :private_image do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
     end
-    factory :public_audio do
+    factory :public_image do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
     end
 
-    factory :audio_with_files do
+    factory :image_with_files do
       ignore do
         file_count 3
       end

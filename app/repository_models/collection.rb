@@ -2,7 +2,6 @@ class Collection < ActiveFedora::Base
   include Hydra::Collection
   include CurationConcern::CollectionModel
   include Hydra::Collections::Collectible
-  include ActiveFedora::RegisteredAttributes
 
   include CurationConcern::WithCaseBasicMetadata
   has_metadata "descMetadata", type: GenericWorkRdfDatastream

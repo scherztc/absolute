@@ -1,6 +1,6 @@
 Absolute::Application.routes.draw do
   root 'catalog#index'
-
+  mount Worthwhile::Engine, at: '/'
   Blacklight.add_routes(self)
   HydraHead.add_routes(self)
 
@@ -8,13 +8,8 @@ Absolute::Application.routes.draw do
   mount Hydra::RoleManagement::Engine => '/'
   # TODO secure resque admin interface - allow admin users only
   mount Resque::Server => '/queues'
-   mount Riiif::Engine => '/image-service'
-
-  resources :admin_collections, controller: 'hydra/admin/collections'
-  resource :admin_menu, only: :show, controller: 'admin_menu'
-
-  resources :tei, only: :show
-  
-  curate_for
-
+  mount Riiif::Engine => '/image-service'
+  worthwhile_collections
+  worthwhile_curation_concerns
+  # mount Worthwhile::Engine, at: '/'
 end

@@ -16,6 +16,6 @@
 //
 // Required by Blacklight
 //= require blacklight/blacklight
-//= require curate
+//= require worthwhile
 //= require sufia/fileupload
 //= require_tree .

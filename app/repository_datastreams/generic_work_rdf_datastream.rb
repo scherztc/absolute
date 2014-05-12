@@ -10,6 +10,8 @@ class GenericWorkRdfDatastream < ActiveFedora::NtriplesRDFDatastream
     map.contributor(in: RDF::DC) do |index|
       index.as :stored_searchable, :facetable
     end
+    map.contributors({in: RDF::DC, to: 'contributor'})
+    
     map.created(in: RDF::DC)
     # dc:creator
     map.creator(in: RDF::DC) do |index|
@@ -66,7 +68,7 @@ class GenericWorkRdfDatastream < ActiveFedora::NtriplesRDFDatastream
     map.identifier({in: RDF::DC})
     map.identifiers({in: RDF::DC, to: 'identifier'})
     # dc:relation
-    map.type({in: RDF::DC})
+    map.relation({in: RDF::DC})
     map.requires({in: RDF::DC})
     # dc:source
     map.source({in: RDF::DC})

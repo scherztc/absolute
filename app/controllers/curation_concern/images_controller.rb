@@ -1,7 +1,7 @@
 # Generated via
 #  `rails generate curate:work Video`
 
-class CurationConcern::VideosController < ApplicationController
+class CurationConcern::ImagesController < ApplicationController
   include Worthwhile::CurationConcernController
-  set_curation_concern_type Video
+  set_curation_concern_type Image
 end

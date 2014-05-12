@@ -13,10 +13,6 @@ describe CurationConcern::AudiosController do
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 
-  def path_to_curation_concern
-    public_send("curation_concern_#{curation_concern_type_underscore}_path", controller.curation_concern)
-  end
-
   render_views
   
   # The default test for #new in Curate basically just tests that DOI support is turned on.  We turned off DOI support.   
