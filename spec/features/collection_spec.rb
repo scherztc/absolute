@@ -15,7 +15,7 @@ describe "Showing and creating Collections" do
   it "should create them" do
     login_as(user)
     visit root_path
-    within 'nav' do
+    within(:css, ".nav") do
       click_link "Collections"
     end
     click_button "Create Collection"

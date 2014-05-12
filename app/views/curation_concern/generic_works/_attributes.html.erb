@@ -5,12 +5,13 @@
   </thead>
   <tbody>
   <%= curation_concern_attribute_to_html(curation_concern, :description, 'Description') %>
-  <%= render partial: 'contributors_attribute' %>
+  <%#= render partial: 'contributors_attribute' %>
+  <%= curation_concern_attribute_to_html(curation_concern, :contributor, "Subject") %>
   <%= curation_concern_attribute_to_html(curation_concern, :subject, "Subject") %>
   <%= curation_concern_attribute_to_html(curation_concern, :date, "Date") %>
   <%= curation_concern_attribute_to_html(curation_concern, :publisher, "Publisher") %>
   <%= curation_concern_attribute_to_html(curation_concern, :coverage, "Coverage") %>
-  <%= curation_concern_attribute_to_html(curation_concern, :bibliographic_citation, "Bibliographic Citation") %>
+  <%#= curation_concern_attribute_to_html(curation_concern, :bibliographic_citation, "Bibliographic Citation") %>
   <%= curation_concern_attribute_to_html(curation_concern, :source, "Source") %>
   <%= curation_concern_attribute_to_html(curation_concern, :language, "Language") %>
   <%= curation_concern_attribute_to_html(curation_concern, :type, "Type") %>

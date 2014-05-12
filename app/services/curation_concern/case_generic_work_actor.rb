@@ -1,8 +1,9 @@
 # Generated via
 #  `rails generate curate:work Text`
 module CurationConcern
-  class CaseGenericWorkActor < CurationConcern::GenericWorkActor
-    
+  class CaseGenericWorkActor 
+    include Worthwhile::CurationConcern::BaseActor
+    include Worthwhile::CurationConcern::GenericWorkActor
     def create
       super && save_attachments
     end

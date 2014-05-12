@@ -61,6 +61,7 @@ describe 'An existing Text owned by the user' do
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
 
   it 'should allow me to attach a linked resource' do
+    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_case_generic_work_path(work)
     click_link 'Add an External Link'
@@ -76,6 +77,7 @@ describe 'An existing Text owned by the user' do
   end
 
   it 'cancel takes me back to the dashboard' do
+    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_text_path(work)
     click_link 'Add an External Link'
@@ -85,7 +87,7 @@ end
 
 describe 'Viewing a Text that is private' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:private_case_generic_work, title: "Sample work" ) }
+  let(:work) { FactoryGirl.create(:text, title: "Sample work" ) }
 
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)

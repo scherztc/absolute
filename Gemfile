@@ -28,9 +28,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# IMPORTANT: This is a copy of the master branch of ndlib/curate with DCE fixes in it. 
-gem 'curate', github:'curationexperts/curate', branch:'ndlib_master'
-# gem 'curate', path:'../curate'
+
+# gem 'worthwhile', github:'curationexperts/worthwhile'
+gem 'worthwhile', path:'../worthwhile'
+gem 'sufia-models', github:'projecthydra/sufia', branch:'master'
+gem 'hydra-remote_identifier'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -58,7 +60,6 @@ gem "devise"
 gem "devise-guests", "~> 0.3"
 gem 'hydra-role-management', '0.1.0'
 gem 'riiif', '0.0.6'
-gem 'hydra-admin-collections', github: 'bmaddy/hydra-admin-collections', branch: 'more_attrs'
 
 group :development, :test do
   gem "jettywrapper"
@@ -71,7 +72,7 @@ group :test do
   gem 'capybara'
   gem 'poltergeist' # used by curate spec helpers
   gem 'vcr'
-  gem 'webmock'
+  # gem 'webmock'
   gem 'rspec-html-matchers'
   gem 'launchy'
 end

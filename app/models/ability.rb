@@ -1,7 +1,7 @@
 class Ability
   include Hydra::Ability
-  
-  include Curate::Ability
+  include Worthwhile::Ability
+  self.ability_logic += [:everyone_can_create_curation_concerns]
 
   # Define any customized permissions here.
   def custom_permissions

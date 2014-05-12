@@ -56,8 +56,10 @@ describe 'An existing Image owned by the user' do
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
 
   it 'should allow me to attach a linked resource' do
+    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_case_generic_work_path(work)
+    save_and_open_page
     click_link 'Add an External Link'
 
     within '#new_linked_resource' do
@@ -71,6 +73,7 @@ describe 'An existing Image owned by the user' do
   end
 
   it 'cancel takes me back to the dashboard' do
+    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_image_path(work)
     click_link 'Add an External Link'
