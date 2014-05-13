@@ -1,4 +1,18 @@
 GIT
+  remote: git://github.com/curationexperts/worthwhile.git
+  revision: d5c63171e74d18ee8f3beb97bec04933c5fb80bc
+  branch: reality
+  specs:
+    worthwhile (0.0.1.alpha)
+      active_attr
+      bootstrap-datepicker-rails
+      breadcrumbs_on_rails (~> 2.3.0)
+      hydra (= 7.0.0.rc1)
+      hydra-collections
+      simple_form
+      sufia-models (~> 4.0.0.beta1)
+
+GIT
   remote: git://github.com/projecthydra/sufia.git
   revision: 04dd0a18283e526a720eedb3e49b0865cac51a6d
   branch: master
@@ -19,18 +33,6 @@ GIT
       rails (~> 4.0, < 5.0.0)
       resque (~> 1.23)
       resque-pool (= 0.3.0)
-
-PATH
-  remote: ../worthwhile
-  specs:
-    worthwhile (0.0.1.alpha)
-      active_attr
-      bootstrap-datepicker-rails
-      breadcrumbs_on_rails (~> 2.3.0)
-      hydra (= 7.0.0.rc1)
-      hydra-collections
-      simple_form
-      sufia-models (~> 4.0.0.beta1)
 
 GEM
   remote: https://rubygems.org/
