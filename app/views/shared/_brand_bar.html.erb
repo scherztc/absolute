@@ -1,9 +1,9 @@
         <div class="container">
           <div id="brand-bar" class="row">
-            <div class="university span4" data-color="#1A2C50">
+            <div class="university col-md-4" data-color="#1A2C50">
               <a href="<%= t('sufia.division_homepage_url') %>"><%=image_tag 'ksl_logo.jpg', alt: t('sufia.division_name') %></a>
             </div>
-            <div id="site-search" class="span8">
+            <div id="site-search" class="col-md-8">
               <nav id="site-actions" class="row" role="menu">
                   <%= render 'shared/site_actions' if show_site_actions? %>
               </nav>

@@ -1,7 +1,7 @@
 <% if curation_concern.class.accepted_attachments %>
   <fieldset id="work-attachments">
     <div class="row with-headroom">
-      <div class="span12">
+      <div class="col-md-12">
         <legend>
           XML Metadata Attachments
         </legend>
@@ -27,7 +27,7 @@
               <td class="attribute title"><%= link_to dsid, download_path(curation_concern.noid, datastream_id:dsid),{title: "Download #{dsid.inspect}", :target => "_blank"}%></td>
               <td><%= datastream.lastModifiedDate || datastream.dsCreateDate  %></td>        
               <td>
-                <fieldset class="span5">
+                <fieldset class="col-md-5">
                   <%= f.input dsid.to_sym, as: :file, label: "Choose a #{dsid} file" %>
                 </fieldset>
               </td>
@@ -37,7 +37,7 @@
               <td class="attribute title"><%= dsid %></td>
               <td></td>        
               <td>
-                <fieldset class="span5">
+                <fieldset class="col-md-5">
                   <%= f.input dsid.to_sym, as: :file, label: "Choose a #{dsid} file" %>
                 </fieldset>
               </td>
