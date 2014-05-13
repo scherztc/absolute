@@ -6,25 +6,26 @@
 * [ImageMagick](http://www.imagemagick.org/)
 * [ffmpeg](http://www.ffmpeg.org/)
 * [fits](https://code.google.com/p/fits)
+* [ghostscript](http://ghostscript.com)
 
 
-### Install ImageMagick
+### Installing ImageMagick
 **Note:**
-If you install ImageMagick using homebrew, you may need to add a switch for libtiff:
+If you install ImageMagick using homebrew, and you see an error like this when you run the specs:
+"Magick::ImageMagickError: no decode delegate for this image format (something.tif)"
+
+Reinstall with a switch for libtiff:
 
 ```bash
 brew install imagemagick --with-libtiff
 ```
 
-Or else you may get errors like this when you run the specs:  
-"Magick::ImageMagickError: no decode delegate for this image format (something.tif)"
+### Installing ffmpeg & fits & ghostscript
 
-### Installing ffmpeg & fits
+See the instructions in the [Sufia README]() about [installing fits](https://github.com/projecthydra/sufia#install-fitssh) and [installing ffmpeg](https://github.com/projecthydra/sufia#if-you-want-to-enable-transcoding-of-video-install-ffmpeg-version-10). 
+Ghostscript maintains installation instructions [here](http://ghostscript.com/doc/current/Install.htm).
 
-See the instructions in the [Sufia README]() about [installing fits](https://github.com/projecthydra/sufia#install-fitssh) and [installing ffmpeg](https://github.com/projecthydra/sufia#if-you-want-to-enable-transcoding-of-video-install-ffmpeg-version-10)
-
-
-## Installation
+## Installing and Configuring Absolute
 
 ### Install dependencies with Bundler
 
