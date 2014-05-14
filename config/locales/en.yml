@@ -27,7 +27,7 @@ en:
     institution_name:   "Case Western Reserve University"
     institution_homepage_url:   "#"
     division_name:      "Kelvin Smith Library"
-    division_homepage_url:   "#"
+    division_homepage_url:   "/"
     upload_tooltip:   "Please accept Deposit Agreement before you can upload."
     field_label:
       based_near:        "Location"
