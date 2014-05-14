@@ -19,6 +19,7 @@ mockups
 # Ignore jetty directory
 /jetty
 
+.ruby-version
 .ruby-gemset
 
 config/initializers/secret_token.rb
