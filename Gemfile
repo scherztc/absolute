@@ -29,7 +29,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 
-gem 'worthwhile', github:'curationexperts/worthwhile', branch:'reality'
+gem 'worthwhile', github:'curationexperts/worthwhile'
 # gem 'worthwhile', path:'../worthwhile'
 gem 'sufia-models', github:'projecthydra/sufia', branch:'master'
 gem 'hydra-remote_identifier'
