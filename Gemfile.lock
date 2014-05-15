@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: d5c63171e74d18ee8f3beb97bec04933c5fb80bc
-  branch: reality
+  revision: d2971a5bf615d557f18ec7b6765581657bf82cf7
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -14,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/sufia.git
-  revision: 04dd0a18283e526a720eedb3e49b0865cac51a6d
+  revision: e3ff7171bb72e996ae514bececb095480cbaa506
   branch: master
   specs:
     sufia-models (4.0.0.beta2)
@@ -23,7 +22,7 @@ GIT
       acts_as_follower (>= 0.1.1, < 0.3)
       carrierwave (~> 0.9.0)
       google-api-client (~> 0.7.1)
-      hydra-derivatives (~> 0.0.5)
+      hydra-derivatives (~> 0.1)
       hydra-head (~> 7.0.1)
       legato (~> 0.3.0)
       mailboxer (~> 0.12.0.rc1)
@@ -46,7 +45,7 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    active-fedora (7.0.2)
+    active-fedora (7.0.3)
       activesupport (>= 3.0.0)
       deprecation
       linkeddata
@@ -106,7 +105,7 @@ GEM
     breadcrumbs_on_rails (2.3.0)
     builder (3.1.4)
     cancan (1.6.10)
-    cancancan (1.7.1)
+    cancancan (1.8.0)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -144,7 +143,7 @@ GEM
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.3.2)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.2)
+    debugger-ruby_core_source (1.3.4)
     deprecation (0.1.0)
       activesupport
     devise (3.2.4)
@@ -205,7 +204,7 @@ GEM
       rsolr (~> 1.0.10)
       rubydora (~> 1.7.4)
       solrizer (~> 3.1.1)
-    hydra-access-controls (7.0.1)
+    hydra-access-controls (7.0.2)
       active-fedora (~> 7.0.0)
       activesupport
       blacklight (~> 5.3)
@@ -215,21 +214,21 @@ GEM
     hydra-collections (2.0.2)
       blacklight
       hydra-head (~> 7.0.1)
-    hydra-core (7.0.1)
+    hydra-core (7.0.2)
       block_helpers
-      hydra-access-controls (= 7.0.1)
+      hydra-access-controls (= 7.0.2)
       jettywrapper (>= 1.4.1)
       rails (>= 3.2.3, < 5)
-    hydra-derivatives (0.0.8)
+    hydra-derivatives (0.1.0)
       active-fedora
       activesupport (>= 3.2.13, < 5.0)
       hydra-file_characterization
       mini_magick
     hydra-file_characterization (0.3.1)
       activesupport (>= 3.0.0)
-    hydra-head (7.0.1)
-      hydra-access-controls (= 7.0.1)
-      hydra-core (= 7.0.1)
+    hydra-head (7.0.2)
+      hydra-access-controls (= 7.0.2)
+      hydra-core (= 7.0.2)
       rails (>= 3.2.6)
     hydra-remote_identifier (0.6.3)
       activesupport (>= 3.2.13, < 5.0)
@@ -251,9 +250,10 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
-    json-ld (1.1.3.1)
+    json-ld (1.1.4)
       rdf (~> 1.1)
-    jwt (0.1.12)
+    jwt (0.1.13)
+      multi_json (>= 1.5)
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -291,23 +291,23 @@ GEM
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
-    mini_portile (0.5.3)
+    mini_portile (0.6.0)
     minitest (4.7.5)
     mono_logger (1.1.0)
-    multi_json (1.9.3)
+    multi_json (1.10.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.15)
+    mysql2 (0.3.16)
     nest (1.1.2)
       redis
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.0)
+    net-ssh (2.9.1)
     noid (0.6.6)
       backports
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     nom-xml (0.5.1)
       activesupport
       i18n
@@ -505,7 +505,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.3)
     tilt (1.4.1)
-    tins (1.1.0)
+    tins (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -513,7 +513,7 @@ GEM
     turbolinks (2.2.2)
       coffee-rails
     tzinfo (0.3.39)
-    uber (0.0.4)
+    uber (0.0.6)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
