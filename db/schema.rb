@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414181825) do
+ActiveRecord::Schema.define(version: 20140516134539) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id",     null: false
@@ -34,12 +34,6 @@ ActiveRecord::Schema.define(version: 20140414181825) do
   end
 
   add_index "checksum_audit_logs", ["pid", "dsid"], name: "by_pid_and_dsid"
-
-  create_table "conversations", force: true do |t|
-    t.string   "subject",    default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
 
   create_table "domain_terms", force: true do |t|
     t.string "model"
@@ -98,7 +92,13 @@ ActiveRecord::Schema.define(version: 20140414181825) do
   add_index "local_authority_entries", ["local_authority_id", "label"], name: "entries_by_term_and_label"
   add_index "local_authority_entries", ["local_authority_id", "uri"], name: "entries_by_term_and_uri"
 
-  create_table "notifications", force: true do |t|
+  create_table "mailboxer_conversations", force: true do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "mailboxer_notifications", force: true do |t|
     t.string   "type"
     t.text     "body"
     t.string   "subject",              default: ""
@@ -116,19 +116,9 @@ ActiveRecord::Schema.define(version: 20140414181825) do
     t.datetime "expires"
   end
 
-  add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id"
+  add_index "mailboxer_notifications", ["conversation_id"], name: "index_mailboxer_notifications_on_conversation_id"
 
-  create_table "proxy_deposit_rights", force: true do |t|
-    t.integer  "grantor_id"
-    t.integer  "grantee_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "proxy_deposit_rights", ["grantee_id"], name: "index_proxy_deposit_rights_on_grantee_id"
-  add_index "proxy_deposit_rights", ["grantor_id"], name: "index_proxy_deposit_rights_on_grantor_id"
-
-  create_table "receipts", force: true do |t|
+  create_table "mailboxer_receipts", force: true do |t|
     t.integer  "receiver_id"
     t.string   "receiver_type"
     t.integer  "notification_id",                            null: false
@@ -140,7 +130,17 @@ ActiveRecord::Schema.define(version: 20140414181825) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id"
+  add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
+
+  create_table "proxy_deposit_rights", force: true do |t|
+    t.integer  "grantor_id"
+    t.integer  "grantee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "proxy_deposit_rights", ["grantee_id"], name: "index_proxy_deposit_rights_on_grantee_id"
+  add_index "proxy_deposit_rights", ["grantor_id"], name: "index_proxy_deposit_rights_on_grantor_id"
 
   create_table "roles", force: true do |t|
     t.string "name"
