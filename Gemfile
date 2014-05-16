@@ -30,7 +30,6 @@ gem 'jbuilder', '~> 1.2'
 
 
 gem 'worthwhile', github:'curationexperts/worthwhile'
-gem 'sufia-models', github:'projecthydra/sufia', branch:'master'
 gem 'hydra-remote_identifier'
 
 group :doc do
