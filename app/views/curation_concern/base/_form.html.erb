@@ -1,7 +1,3 @@
-<% if curation_concern.persisted? %>
-    <%= render 'related_files', curation_concern: curation_concern, with_actions: true %>
-<% end %>
-
 <%= simple_form_for [:curation_concern, curation_concern] do |f| %>
   <% if f.error_notification -%>
     <div class="alert alert-error fade in">
