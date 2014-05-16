@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: de5004d87e3afd07d08041c4629f5b08061536d9
+  revision: b99a8ce79fbb89d1c0623cd2c1552419a3488ff4
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/sufia.git
-  revision: 6913149401f89bb96bf2d7fbfb565f419aa9c343
+  revision: 0451b414dac4820974182ddc2a0011415cdffe55
   branch: master
   specs:
     sufia-models (4.0.0.beta3)
