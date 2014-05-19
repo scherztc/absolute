@@ -1,6 +1,8 @@
 # Returns an array containing the vhost 'CoSign service' value and URL
 Sufia.config do |config|
 
+  config.application_name = "Digital Case"
+
   config.fits_to_desc_mapping= {
     :file_title => :title,
     :file_author => :creator
