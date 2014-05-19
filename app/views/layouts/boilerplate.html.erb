@@ -11,15 +11,13 @@
     <%= csrf_meta_tag %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag 'application' %>
-    <%= javascript_include_tag 'modernizr' %>
     <%= javascript_include_tag 'application' %>
-    <%= render :partial => 'shared/ga', :formats => [:html] -%>
+    <%= render partial: 'shared/ga', formats: [:html] %>
   </head>
   <body>
 
     <%= content_for?(:body) ? yield(:body) : yield %>
 
-
-    <div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
+    <%= render 'shared/ajax_modal' %>
   </body>
 </html>
