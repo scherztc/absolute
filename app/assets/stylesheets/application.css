@@ -11,5 +11,6 @@
  *= require_self
  *= require worthwhile
  *= require_directory ./fileupload
+ *= require pretty-xml
  *= require_tree .
  */
