@@ -35,6 +35,7 @@ describe 'Creating a Text' do
         fill_in "Title", with: "My title"
         attach_file "Choose a TEI file", fixture_file_path('files/anoabo00-TEI.xml')
         attach_file "Choose a MODS file", fixture_file_path('files/anoabo00-MODS.xml')
+        attach_file "Choose a METS file", fixture_file_path('files/wrhsms05145-METS.xml')
         select(Sufia.config.cc_licenses.keys.first.dup, from: I18n.translate('sufia.field_label.rights'))
         check("I have read and accept the contributor license agreement")
         click_button("Create Text")
@@ -51,6 +52,9 @@ describe 'Creating a Text' do
       within ('.attachment.attributes.mods') do
         expect(page).to have_link('MODS')
       end
+      within ('.attachment.attributes.mets') do
+        expect(page).to have_link('METS')
+      end
     end
   end
 end
@@ -61,7 +65,6 @@ describe 'An existing Text owned by the user' do
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
 
   it 'should allow me to attach a linked resource' do
-    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_case_generic_work_path(work)
     click_link 'Add an External Link'
@@ -77,7 +80,6 @@ describe 'An existing Text owned by the user' do
   end
 
   it 'cancel takes me back to the dashboard' do
-    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_text_path(work)
     click_link 'Add an External Link'

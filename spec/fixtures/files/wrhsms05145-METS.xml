@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!--  Description about Cleveland's weather and commercial development in 1809 ( Book ) -->
+<METS:mets OBJID="wrhsms05145"
+  xmlns:METS="http://www.loc.gov/METS/"
+  xmlns:mods="http://www.loc.gov/mods/v3"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.loc.gov/METS/
+    http://www.loc.gov/standards/mets/mets.xsd 
+    http://www.loc.gov/mods/v3
+    http://www.loc.gov/mods/v3/mods-3-4.xsd
+">
+<METS:metsHdr CREATEDATE="2011-06-30T09:50:25Z" ID="wrhsms05145" LASTMODDATE="2011-06-30T09:50:38Z" RECORDSTATUS="COMPLETE">
+<METS:agent ROLE="CREATOR" TYPE="ORGANIZATION"> 
+  <METS:name>Digital Case, Kelvin Smith Library</METS:name>
+</METS:agent>
+<METS:agent OTHERTYPE="SOFTWARE" ROLE="CREATOR" TYPE="OTHER"> 
+<METS:name>SobekCM Metadata Template</METS:name>
+</METS:agent>
+<METS:agent ROLE="CREATOR" TYPE="INDIVIDUAL"> 
+<METS:name>sxc536</METS:name>
+</METS:agent>
+</METS:metsHdr>
+<METS:dmdSec ID="DMD1">
+<METS:mdWrap MDTYPE="MODS"  MIMETYPE="text/xml" LABEL="MODS Metadata">
+<METS:xmlData>
+<mods:mods>
+<mods:abstract lang="English">Description, celebratory account by Elias Murray regarding Cleveland's weather and commercial development after his arrival in 1809, April 28, 1852</mods:abstract>
+<mods:accessCondition>This work is in the public domain and may be freely downloaded for personal or academic use</mods:accessCondition>
+<mods:genre authority="marcgt">letter</mods:genre>
+<mods:language>
+<mods:languageTerm type="code" authority="iso639-2b">en</mods:languageTerm>
+</mods:language>
+<mods:location>
+<mods:physicalLocation>Kelvin Smith Library, Case Western Reserve University</mods:physicalLocation>
+<mods:physicalLocation type="code">ksl</mods:physicalLocation>
+</mods:location>
+<mods:name type="personal" ID="USER001_NAM1">
+<mods:namePart>Murray, Elias</mods:namePart>
+</mods:name>
+<mods:name type="corporate" ID="USER002">
+<mods:namePart>Western Reserve Historical Society</mods:namePart>
+<mods:description>Cleveland (Ohio)</mods:description>
+<mods:role>
+<mods:roleTerm type="text">endowment</mods:roleTerm>
+</mods:role>
+</mods:name>
+<mods:originInfo>
+<mods:publisher>Digital Case, Kelvin Smith Library, Case Western Reserve University</mods:publisher>
+<mods:place>
+<mods:placeTerm type="code" authority="marccountry">ohu</mods:placeTerm>
+</mods:place>
+<mods:dateIssued encoding="marc" point="start">2011</mods:dateIssued>
+  <mods:dateCreated encoding="marc" point="start">1852-04-28</mods:dateCreated>
+</mods:originInfo>
+<mods:recordInfo>
+<mods:recordIdentifier source="ufdc">wrhsms05145</mods:recordIdentifier>
+<mods:recordContentSource>Western Reserve Historical Society</mods:recordContentSource>
+<mods:descriptionStandard>RDA</mods:descriptionStandard>
+</mods:recordInfo>
+<mods:relatedItem type="original">
+<mods:physicalDescription>
+<mods:extent>2 pages</mods:extent>
+</mods:physicalDescription>
+</mods:relatedItem>
+<mods:subject ID="USER003" lang="English" authority="lcsh">
+<mods:geographic>Western Reserve (Ohio)</mods:geographic>
+</mods:subject>
+<mods:subject ID="USER004_SUBJ662" authority="tgn">
+<mods:hierarchicalGeographic>
+<mods:continent>North America</mods:continent>
+<mods:country>United States</mods:country>
+<mods:state>Ohio</mods:state>
+<mods:territory>Western Reserve</mods:territory>
+<mods:city>Cleveland</mods:city>
+</mods:hierarchicalGeographic>
+</mods:subject>
+<mods:targetAudience authority="marctarget">specialized</mods:targetAudience>
+<mods:titleInfo lang="English">
+<mods:title>Description about Cleveland's weather and commercial development in 1809</mods:title>
+</mods:titleInfo>
+<mods:typeOfResource>text</mods:typeOfResource>
+</mods:mods>
+</METS:xmlData>
+</METS:mdWrap>
+</METS:dmdSec>
+<METS:fileSec> 
+<METS:fileGrp USE="reference" > 
+<METS:file GROUPID="G1" ID="JP21" MIMETYPE="image/jp2" CHECKSUM="8d5ca729057c4537b14e02f4c5ed5e42" CHECKSUMTYPE="MD5" SIZE="1669260"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00000.jp2" /> 
+</METS:file> 
+<METS:file GROUPID="G2" ID="JP22" MIMETYPE="image/jp2" CHECKSUM="8900a225c008ad0a5f9b06c1947edec8" CHECKSUMTYPE="MD5" SIZE="9253624"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00001.jp2" /> 
+</METS:file> 
+<METS:file GROUPID="G3" ID="JP23" MIMETYPE="image/jp2" CHECKSUM="763f759a964b256fe344de6fa1df2559" CHECKSUMTYPE="MD5" SIZE="9316967"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00002.jp2" /> 
+</METS:file> 
+</METS:fileGrp> 
+<METS:fileGrp USE="archive" > 
+<METS:file GROUPID="G1" ID="TIF1" MIMETYPE="image/tiff" CHECKSUM="1c74e010287efc3675831739c330e001" CHECKSUMTYPE="MD5" SIZE="29711794"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00000.tif" /> 
+</METS:file> 
+<METS:file GROUPID="G2" ID="TIF2" MIMETYPE="image/tiff" CHECKSUM="15c4d0d742910f9fe1b63c475bbde4f1" CHECKSUMTYPE="MD5" SIZE="25301554"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00001.tif" /> 
+</METS:file> 
+<METS:file GROUPID="G3" ID="TIF3" MIMETYPE="image/tiff" CHECKSUM="a0da33fc29bf2fc563fbbd6c69cd3f3d" CHECKSUMTYPE="MD5" SIZE="25301554"> 
+<METS:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="SYSTEM" xlink:href="wrhsms05145-00002.tif" /> 
+</METS:file> 
+</METS:fileGrp> 
+</METS:fileSec> 
+<METS:structMap ID="STRUCT1" TYPE="physical"> 
+<METS:div DMDID="DMD1" LABEL="Description about Cleveland's weather and commercial development in 1809" ORDER="0" TYPE="main"> 
+<METS:div ID="PDIV1" ORDER="1" TYPE="Main"> 
+<METS:div ID="PAGE1" ORDER="1" TYPE="Page"> 
+<METS:fptr FILEID="JP21" /> 
+<METS:fptr FILEID="TIF1" /> 
+</METS:div> 
+<METS:div ID="PAGE2" ORDER="2" TYPE="Page"> 
+<METS:fptr FILEID="JP22" /> 
+<METS:fptr FILEID="TIF2" /> 
+</METS:div> 
+<METS:div ID="PAGE3" ORDER="3" TYPE="Page"> 
+<METS:fptr FILEID="TIF3" /> 
+<METS:fptr FILEID="JP23" /> 
+</METS:div> 
+</METS:div> 
+</METS:div>
+</METS:structMap>
+</METS:mets>
