@@ -6,7 +6,7 @@ class Audio < ActiveFedora::Base
   include CurationConcern::CaseWork
     
   self.human_readable_short_description = "Any Audio work, possibly with PBCore xml attached."
-  self.accept_datastream_attachments ["PBCore", "MODS"]
+  self.accept_datastream_attachments ["PBCore","MODS","QDC"]
   
   validates_presence_of :rights, message: 'You must select a license for your work.'
 
