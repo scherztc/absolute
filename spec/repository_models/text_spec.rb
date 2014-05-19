@@ -13,5 +13,6 @@ describe Text do
   it_behaves_like 'has_dc_metadata'
   # TODO: This is the test you will use when we add handle support
   # it_behaves_like 'remotely_identified', :handle
+  #
 
 end
