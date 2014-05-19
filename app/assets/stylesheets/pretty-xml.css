@@ -1,0 +1,6 @@
+.pretty-xml li {
+    list-style-type: none;
+}
+.pretty-xml label {
+    margin-right: 0.75em;
+}

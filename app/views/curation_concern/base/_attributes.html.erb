@@ -1,5 +1,6 @@
+<%= render_full_record(curation_concern) %>
 <table class="table table-striped <%= dom_class(curation_concern) %> attributes">
-  <caption class="table-heading"><h2>Attributes</h2></caption>
+  <caption class="table-heading"><h2>Attributes</h2><%=full_record_link(curation_concern)%></caption>
   <thead>
     <tr><th>Attribute Name</th><th>Values</th></tr>
   </thead>
