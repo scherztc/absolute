@@ -18,4 +18,5 @@
 //= require blacklight/blacklight
 //= require worthwhile/application
 //= require sufia/fileupload
+//= require openseadragon/rails
 //= require_tree .

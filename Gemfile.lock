@@ -305,6 +305,8 @@ GEM
       mediashelf-loggable
       nokogiri (>= 1.4.2)
       solrizer (~> 3.1.0)
+    openseadragon (0.0.5)
+      rails (> 3.2.0)
     orm_adapter (0.5.0)
     parslet (1.6.0)
       blankslate (~> 2.0)
@@ -388,7 +390,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     retriable (1.4.1)
-    riiif (0.0.6)
+    riiif (0.0.7)
       rails (> 3.2.0)
     rsolr (1.0.10)
       builder (>= 2.1.2)
@@ -549,9 +551,10 @@ DEPENDENCIES
   jquery-rails
   launchy
   mysql2
+  openseadragon
   poltergeist
   rails (= 4.0.4)
-  riiif (= 0.0.6)
+  riiif (= 0.0.7)
   rspec-html-matchers
   rspec-rails
   sass-rails (~> 4.0.2)

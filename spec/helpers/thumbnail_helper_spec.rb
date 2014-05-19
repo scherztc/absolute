@@ -7,7 +7,7 @@ describe ThumbnailHelper do
     it "should display a thumbnail from the representative_image_url when available" do
       path = "/foo/thumbnail.png"
       helper.should_receive(:image_tag).with(path, html_params )
-      helper.document_thumbnail_tag(stub(representative_image_url:path))
+      helper.document_thumbnail_tag(double(representative_image_url:path))
     end
     it "should return a default icon appropriate for the type of document" do
       # Known Types with Icons
