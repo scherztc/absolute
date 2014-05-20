@@ -20,3 +20,4 @@
 //= require sufia/fileupload
 //= require openseadragon/rails
 //= require_tree .
+

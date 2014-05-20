@@ -1,0 +1,5 @@
+<% if work.tei? %>
+  <%= work.tei_to_html %>
+<% else %>
+  <%= render partial: 'curation_concern/base/representative_media', locals: { work: work } %>
+<% end %>
