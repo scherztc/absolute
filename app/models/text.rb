@@ -24,7 +24,7 @@ class Text < ActiveFedora::Base
     # second parsing will put the text between each break into divs
     doc2 = Nokogiri::HTML(intermediate)
     root = doc2.css('#tei-content').first
-    return "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>" if root.nil?
+    return "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>".html_safe if root.nil?
     out = "<div id=\"tei-content\" data-object=\"#{root.attr('data-object') }\">"
     in_row = false
     page = 1

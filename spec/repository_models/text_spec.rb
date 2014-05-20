@@ -32,6 +32,7 @@ describe Text do
       end
 
       it "has 25 rows" do
+        expect(html).to be_html_safe
         expect(subject.css('.row').size).to eq 25
         expect(subject.css('.row[data-page="1"] img').first.attr('src')).to eq '/image-service/sufia:0001/full/,600/0/native.jpg'
       end
@@ -42,6 +43,7 @@ describe Text do
         end
         it "draws an error" do
           expect(html).to eq "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>"
+          expect(html).to be_html_safe
         end
       end
     end
