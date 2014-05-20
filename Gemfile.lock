@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 28c7a0c7c08ac59e3bf675671174051f3a664b21
+  revision: 58ed05821d533ee84d2181d8398948991fd1eff5
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -274,7 +274,7 @@ GEM
     mini_portile (0.6.0)
     minitest (4.7.5)
     mono_logger (1.1.0)
-    multi_json (1.10.0)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.15)
