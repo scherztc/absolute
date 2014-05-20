@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+puts "Seeding Roles:"
+roles = ["admin"]
+
+roles.each do | name |
+  puts "  #{name}"
+  Role.first_or_create(name: name)
+end
