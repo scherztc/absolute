@@ -35,6 +35,15 @@ describe Text do
         expect(subject.css('.row').size).to eq 25
         expect(subject.css('.row[data-page="1"] img').first.attr('src')).to eq '/image-service/sufia:0001/full/,600/0/native.jpg'
       end
+
+      context "with errors" do
+        before do
+          allow_any_instance_of(Nokogiri::HTML::Document).to receive(:css).with('#tei-content').and_return([])
+        end
+        it "draws an error" do
+          expect(html).to eq "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>"
+        end
+      end
     end
 
     describe 'id_for_filename' do
