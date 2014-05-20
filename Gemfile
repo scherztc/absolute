@@ -57,7 +57,7 @@ gem "bootstrap-sass"
 gem "devise"
 gem "devise-guests", "~> 0.3"
 gem 'hydra-role-management', '0.1.0'
-gem 'riiif', '0.0.7' 
+gem 'riiif', '0.0.8'
 gem 'openseadragon'
 
 group :development, :test do

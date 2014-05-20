@@ -5,4 +5,9 @@ module CurationConcern::CaseWork
     include CurationConcern::WithDatastreamAttachments
     include CurationConcern::WithCaseBasicMetadata
   end
+
+  # override sufia
+  def to_param
+    pid
+  end
 end
