@@ -220,19 +220,29 @@
             },
             // Callback for upload progress events:
             progress: function (e, data) {
+                var progress = Math.floor(data.loaded / data.total * 100);
                 if (data.context) {
-                    data.context.find('.progress .bar').css(
-                        'width',
-                        parseInt(data.loaded / data.total * 100, 10) + '%'
-                    );
+                    data.context.find('.progress')
+                      .attr('aria-valuenow', progress)
+                            .children().first().css(
+                                'width',
+                                progress + '%'
+                            );
                 }
             },
             // Callback for global upload progress events:
             progressall: function (e, data) {
-                $(this).find('.fileupload-buttonbar .progress .bar').css(
-                    'width',
-                    parseInt(data.loaded / data.total * 100, 10) + '%'
-                );
+                var $this = $(this),
+                  progress = Math.floor(data.loaded / data.total * 100),
+                  globalProgressNode = $this.find('.fileupload-progress');
+
+                globalProgressNode
+                    .find('.progress')
+                    .attr('aria-valuenow', progress)
+                    .children().first().css(
+                        'width',
+                        progress + '%'
+                    );
             },
             // Callback for uploads start, equivalent to the global ajaxStart event:
             start: function (e) {
