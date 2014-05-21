@@ -1,23 +1,21 @@
+var app = angular.module('myApp', []);
+
 function TeiViewer($scope) {
   $scope.currentPage = 1;
-
   $scope.formNumber = 1;
+  $scope.maxPage = "1"
 
   $scope.previousPage = function (){
     if($scope.currentPage > 1) {
       $scope.currentPage--;
       $scope.formNumber = $scope.currentPage;
-      $scope.scrollToPage();
     }
   }
 
-  var max = parseInt(document.getElementById('tei-content').getAttribute('data-max-pages'));
-
   $scope.nextPage = function (){
-    if($scope.currentPage < max) {
+    if($scope.currentPage < $scope.maxPage) {
       $scope.currentPage++;
       $scope.formNumber = $scope.currentPage;
-      $scope.scrollToPage();
     }
   }
 
@@ -27,20 +25,38 @@ function TeiViewer($scope) {
       $scope.formNumber = $scope.currentPage;
     } else {
       var newVal = parseInt($scope.formNumber);
-      if (newVal <= max) {
+      if (newVal <= $scope.maxPage) {
         // Looks good, update currentPage
         $scope.currentPage = newVal;
-        $scope.scrollToPage();
       } else {
         // Larger than the allowed value
         $scope.formNumber = $scope.currentPage;
       }
     }
   }
-
-  $scope.scrollToPage = function (){
-    var el = document.getElementById('page-' + $scope.currentPage);
-    var container = document.getElementById('tei-container');
-    container.scrollTop = el.offsetTop;
-  };
 }
+
+app.controller('TeiViewer', TeiViewer)
+
+function TeiViewerDirective() {
+    function link(scope, element, attrs) {
+        scope.maxPage = parseInt(document.getElementById('tei-content').getAttribute('data-max-pages'));
+
+        function scrollToPage() {
+            var el = document.getElementById('page-' + scope.currentPage);
+            var container = document.getElementById('tei-container');
+            container.scrollTop = el.offsetTop;
+        };
+
+        scope.$watch("currentPage", function(value) {
+            scrollToPage();
+        });
+    }
+    return {
+        restrict: 'E',
+        transclude: true,
+        templateUrl: '/assets/tei_viewer/templates/tei_viewer.html',
+        link: link
+    };
+}
+app.directive('teiViewer', TeiViewerDirective)
