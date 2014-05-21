@@ -28,10 +28,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-
-gem 'worthwhile', github:'curationexperts/worthwhile'
-gem 'hydra-remote_identifier'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -52,11 +48,13 @@ gem 'capistrano-bundler', group: :development
 # Use debugger
 gem 'debugger', group: [:development, :test]
 
+gem 'worthwhile', github:'curationexperts/worthwhile'
 gem "unicode", platforms: [:mri_18, :mri_19]
 gem "bootstrap-sass"
 gem "devise"
 gem "devise-guests", "~> 0.3"
 gem 'hydra-role-management', '0.1.0'
+gem 'hydra-remote_identifier'
 gem 'riiif', '0.0.8'
 gem 'openseadragon', '0.0.6'
 
