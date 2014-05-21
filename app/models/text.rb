@@ -25,10 +25,10 @@ class Text < ActiveFedora::Base
     doc2 = Nokogiri::HTML(intermediate)
     root = doc2.css('#tei-content').first
     return "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>".html_safe if root.nil?
-    out = "<div id=\"tei-content\" data-object=\"#{root.attr('data-object') }\">"
+    out = ''
     in_row = false
     page = 1
-    doc2.css('#tei-content').first.children.each do |e|
+    root.children.each do |e|
       case e
       when Nokogiri::XML::Text
         next if e.to_s.strip == ''
@@ -38,7 +38,7 @@ class Text < ActiveFedora::Base
         next if e.name == 'br'
         if e.attr('class') == "pageheader"
           out << "</div><!-- /col-md-6 -->\n</div><!-- /row -->" if page > 1
-          out << "<div class=\"row\" data-page=\"#{page}\">"
+          out << "<div class=\"row\" id=\"page-#{page}\">"
           page += 1
           out << "<div class=\"col-md-6\">"
           file_id = id_for_filename(e.attr('data-image'))
@@ -49,8 +49,8 @@ class Text < ActiveFedora::Base
       end
     end
     out << "</div><!-- /col-md-6 -->\n</div><!-- /row -->\n" if page > 1
-    out << "</div><!-- /tei-content -->\n"
-    out.html_safe
+    ("<div id=\"tei-content\" data-object=\"#{root.attr('data-object')}\" data-max-pages=\"#{page - 1}\">" +
+      out + "</div><!-- /tei-content -->\n").html_safe
   end
 
   def id_for_filename(filename)

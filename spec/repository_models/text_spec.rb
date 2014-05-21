@@ -33,8 +33,9 @@ describe Text do
 
       it "has 25 rows" do
         expect(html).to be_html_safe
+        expect(subject.css('#tei-content').attr('data-max-pages').value).to eq '25'
         expect(subject.css('.row').size).to eq 25
-        expect(subject.css('.row[data-page="1"] img').first.attr('src')).to eq '/image-service/sufia:0001/full/,600/0/native.jpg'
+        expect(subject.css('#page-1.row img').first.attr('src')).to eq '/image-service/sufia:0001/full/,600/0/native.jpg'
       end
 
       context "with errors" do

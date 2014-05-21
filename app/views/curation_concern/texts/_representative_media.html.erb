@@ -1,5 +1,19 @@
 <% if work.tei? %>
-  <%= work.tei_to_html %>
+  <div ng-controller="TeiViewer">
+    <form role="form" class="form-inline">
+      <div class="row">
+        <label for="page-number">Page: </label>
+        <input type="text" size="3" ng-model="formNumber" id="page-number" ng-model="currentPage" class="form-control" ng-blur="textUpdated()">
+        <button class="btn btn-default" ng-click="previousPage()"><i class="glyphicon glyphicon-step-backward"></i><span class="sr-only">Previous Page</span></button>
+        <button class="btn btn-default" ng-click="nextPage()"><i class="glyphicon glyphicon-step-forward"></i><span class="sr-only">Next Page</span></button>
+      </div>
+    </form>
+    <div id="tei-container" class="row">
+      <div class="col-md-12">
+        <%= work.tei_to_html %>
+      </div>
+    </div>
+  </div>
 <% else %>
   <%= render partial: 'curation_concern/base/representative_media', locals: { work: work } %>
 <% end %>
