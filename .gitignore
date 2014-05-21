@@ -30,3 +30,6 @@ config/redis.yml
 config/devise.yml
 
 tags
+
+# We will compile the assets on the prod server, so don't put them in souce control
+public/assets

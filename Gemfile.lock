@@ -305,7 +305,7 @@ GEM
       mediashelf-loggable
       nokogiri (>= 1.4.2)
       solrizer (~> 3.1.0)
-    openseadragon (0.0.5)
+    openseadragon (0.0.6)
       rails (> 3.2.0)
     orm_adapter (0.5.0)
     parslet (1.6.0)
@@ -551,7 +551,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mysql2
-  openseadragon
+  openseadragon (= 0.0.6)
   poltergeist
   rails (= 4.0.4)
   riiif (= 0.0.8)
