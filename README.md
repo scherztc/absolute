@@ -89,6 +89,22 @@ you'll get helpful comments in the source like this:
 
 ## Deploying to the Sandbox
 
-```bash
+During the May/June 2014 SOW:
+
+First, set up an ssh config entry:
+
+```
+Host casedeploy
+Hostname 54.204.33.124
+User deploy
+IdentityFile /path/to/my/private/key
+```
+
+Next, connect to casedeploy via ssh to test the config. (If this fails, your public keys are missing or outdated on the sandbox server - let the team know.)
+
+Finally, deploy code and update the server with the command 
+
+```
 bundle exec cap sandbox deploy
 ```
+
