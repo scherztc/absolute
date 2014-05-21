@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: a0cf0739db3dd32d97951bfca19b2bb645e6125a
+  revision: 0897fe89bd30443166a38fef3922ee0eff356482
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -263,7 +263,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailboxer (0.12.0.rc1)
+    mailboxer (0.12.0.rc2)
       carrierwave (>= 0.5.8)
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
