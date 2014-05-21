@@ -5,6 +5,7 @@ class Collection < ActiveFedora::Base
 
   include CurationConcern::WithCaseBasicMetadata
   has_metadata "descMetadata", type: GenericWorkRdfDatastream
+  has_metadata "properties", type: PropertiesDatastream # this PropertiesDatastream is defined by sufia-models
   
   def can_be_member_of_collection?(collection)
     collection == self ? false : true
