@@ -87,6 +87,18 @@ you'll get helpful comments in the source like this:
 <!-- START PARTIAL app/views/shared/_header.html.erb -->
 ```
 
+### Importing fedora objects from Case Western's fedora
+
+* Add an entry called 'case' to your config/fedora.yml file.
+
+* Run the ```rake import:pids``` command.
+  * 1st argument : The name of the fedora.yml entry
+  * Remaining arguments : A list of PIDs to import from the remote fedora
+
+```bash
+rake import:pids["case, pid:1, pid:2, pid:3"]
+```
+
 ## Deploying to the Sandbox
 
 During the May/June 2014 SOW:
