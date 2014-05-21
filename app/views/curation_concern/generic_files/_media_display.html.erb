@@ -1,6 +1,7 @@
 <!-- direct copy of sufia's app/views/generic_files/_media_display.html.erb  -->
 <% if generic_file.image? %>
   <%= openseadragon_picture_tag riiif.info_path(generic_file.id), data: { openseadragon: { prefixUrl: (image_url('openseadragon') + "/") } } %>
+  <%= link_to "Download 640-pixel-wide jpg", riiif.image_path(generic_file.id, size: '640,'), { target:"_new", title:"Download 640-pixel-wide jpg"}%><br>
   <%= link_to "Download the full-sized image", download_path(generic_file), { target:"_new", title:"Download the full-sized image"}%>
 <% elsif generic_file.video? %>
   <video controls="controls" class="video-js vjs-default-skin" data-setup="{}" preload="auto">
