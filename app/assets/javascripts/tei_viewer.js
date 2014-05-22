@@ -1,4 +1,10 @@
-var app = angular.module('myApp', []);
+Blacklight.onLoad(function() {
+  // This takes care of loading the angular app with Turbolinks
+  var app = angular.module('myApp', []);
+  app.controller('TeiViewer', ['$scope', TeiViewer])
+  app.directive('teiViewer', TeiViewerDirective)
+  angular.bootstrap('body', ['myApp']);
+})
 
 function TeiViewer($scope) {
   $scope.currentPage = 1;
@@ -36,7 +42,6 @@ function TeiViewer($scope) {
   }
 }
 
-app.controller('TeiViewer', ['$scope', TeiViewer])
 
 function TeiViewerDirective() {
     function link(scope, element, attrs) {
@@ -59,4 +64,3 @@ function TeiViewerDirective() {
         link: link
     };
 }
-app.directive('teiViewer', TeiViewerDirective)
