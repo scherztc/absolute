@@ -55,7 +55,7 @@ function TeiViewerDirective() {
     return {
         restrict: 'E',
         transclude: true,
-        templateUrl: '/assets/tei_viewer/templates/tei_viewer.html',
+        templateUrl: 'tei_viewer.html',
         link: link
     };
 }

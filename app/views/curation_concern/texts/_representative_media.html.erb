@@ -1,6 +1,8 @@
 <% if work.tei? %>
+  <%= render 'tei_viewer' %>
+
   <tei-viewer ng-controller="TeiViewer">
-      <%= work.tei_to_html %>
+    <%= work.tei_to_html %>
   </tei-viewer>
 <% else %>
   <%= render partial: 'curation_concern/base/representative_media', locals: { work: work } %>
