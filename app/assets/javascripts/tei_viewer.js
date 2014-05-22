@@ -36,7 +36,7 @@ function TeiViewer($scope) {
   }
 }
 
-app.controller('TeiViewer', TeiViewer)
+app.controller('TeiViewer', ['$scope', TeiViewer])
 
 function TeiViewerDirective() {
     function link(scope, element, attrs) {
