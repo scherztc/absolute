@@ -19,5 +19,6 @@
 //= require worthwhile/application
 //= require sufia/fileupload
 //= require openseadragon/rails
+//= require angular
 //= require_tree .
 

@@ -57,6 +57,7 @@ gem 'hydra-role-management', '0.1.0'
 gem 'hydra-remote_identifier'
 gem 'riiif', '0.0.8'
 gem 'openseadragon', '0.0.6'
+gem 'angularjs-rails'
 
 group :development, :test do
   gem "jettywrapper"
