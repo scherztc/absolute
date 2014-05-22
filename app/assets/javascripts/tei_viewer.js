@@ -44,23 +44,19 @@ function TeiViewer($scope) {
 
 
 function TeiViewerDirective() {
-    function link(scope, element, attrs) {
+    function linkingFunction(scope, element, attrs) {
         scope.maxPage = parseInt(document.getElementById('tei-content').getAttribute('data-max-pages'));
-
-        function scrollToPage() {
-            var el = document.getElementById('page-' + scope.currentPage);
-            var container = document.getElementById('tei-container');
-            container.scrollTop = el.offsetTop;
-        };
-
-        scope.$watch("currentPage", function(value) {
-            scrollToPage();
-        });
+        scope.$watch("currentPage", scrollToPage);
     }
+    function scrollToPage(pageNumber) {
+        var el = document.getElementById('page-' + pageNumber);
+        var container = document.getElementById('tei-container');
+        container.scrollTop = el.offsetTop;
+    };
     return {
         restrict: 'E',
         transclude: true,
         templateUrl: 'tei_viewer.html',
-        link: link
+        link: linkingFunction
     };
 }
