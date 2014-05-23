@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Creating a Video' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:admin) }
   # let(:tei_file_path) { fixture_path('files/anoabo00-TEI.xml') }
 
   describe 'with a related link' do

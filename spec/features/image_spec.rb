@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe 'Creating a Image' do
-  let(:user) { FactoryGirl.create(:user) }
-  # let(:tei_file_path) { fixture_path('files/anoabo00-TEI.xml') }
+  let(:user) { FactoryGirl.create(:admin) }
 
   describe 'with a related link' do
     it "should allow me to attach the link on the create page" do
