@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 9b2d758e421fecb722c4839734c5ccaaf0ab2071
+  revision: d9f615cf2b8927bf908582ca444f04ede7516619
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
       blacklight_advanced_search (~> 5.0)
       breadcrumbs_on_rails (~> 2.3.0)
-      hydra (= 7.0.0.rc1)
+      hydra (= 7.0.0)
       hydra-collections
       simple_form
       sufia-models (~> 4.0.0.beta3)
@@ -67,7 +67,7 @@ GEM
       multi_json (>= 1.0.0)
     backports (3.6.0)
     bcrypt (3.1.7)
-    blacklight (5.3.0)
+    blacklight (5.4.0)
       bootstrap-sass (~> 3.0)
       deprecation
       kaminari (~> 0.13)
@@ -119,10 +119,10 @@ GEM
     coffee-script-source (1.7.0)
     columnize (0.8.9)
     daemons (1.1.9)
-    debugger (1.6.6)
+    debugger (1.6.8)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.2)
+      debugger-ruby_core_source (~> 1.3.5)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.3.5)
     deprecation (0.1.0)
@@ -173,9 +173,9 @@ GEM
     hooks (0.3.6)
       uber (~> 0.0.4)
     htmlentities (4.3.1)
-    hydra (7.0.0.rc1)
+    hydra (7.0.0)
       active-fedora (~> 7.0.2)
-      blacklight (~> 5.3.0)
+      blacklight (~> 5.4.0)
       hydra-head (~> 7.0.1)
       jettywrapper (~> 1.7.0)
       nokogiri (~> 1.6.0)
@@ -233,8 +233,7 @@ GEM
     json (1.8.1)
     json-ld (1.1.4)
       rdf (~> 1.1)
-    jwt (0.1.13)
-      multi_json (>= 1.5)
+    jwt (1.0.0)
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -293,9 +292,9 @@ GEM
       activesupport
       i18n
       nokogiri
-    oauth2 (0.9.3)
+    oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
-      jwt (~> 0.1.8)
+      jwt (~> 1.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
@@ -481,7 +480,7 @@ GEM
       term-ansicolor
     stomp (1.3.2)
     subexec (0.2.3)
-    sufia-models (4.0.0.beta3)
+    sufia-models (4.0.0.beta4)
       activerecord-import
       activeresource (~> 4.0.0)
       acts_as_follower (>= 0.1.1, < 0.3)
@@ -490,7 +489,7 @@ GEM
       hydra-derivatives (~> 0.1)
       hydra-head (~> 7.0.1)
       legato (~> 0.3.0)
-      mailboxer (~> 0.12.0.rc1)
+      mailboxer (~> 0.12.0.rc2)
       nest (~> 1.1.1)
       noid (~> 0.6.6)
       oauth2 (~> 0.9.3)
@@ -520,7 +519,7 @@ GEM
       json (>= 1.8.0)
     unicode (0.4.4.1)
     uuidtools (2.1.4)
-    vcr (2.9.0)
+    vcr (2.9.1)
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.2.3)

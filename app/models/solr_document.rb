@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class SolrDocument 
   # Adds Sufia behaviors to the SolrDocument.
-  include Sufia::SolrDocumentBehavior
+  include Worthwhile::SolrDocumentBehavior
 
   include Blacklight::Solr::Document    
       # The following shows how to setup this blacklight document to display marc documents

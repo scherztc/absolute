@@ -2,26 +2,61 @@ require 'spec_helper'
 
 describe ThumbnailHelper do
   
-  describe 'document_thumbnail_tag' do
-    let(:html_params) { return {width: 36, class: "canonical-image"} }
-    it "should display a thumbnail from the representative_image_url when available" do
-      path = "/foo/thumbnail.png"
-      helper.should_receive(:image_tag).with(path, html_params )
-      helper.document_thumbnail_tag(double(representative_image_url:path))
+  describe 'thumbnail_tag' do
+    let(:work) { GenericWork.new }
+    let(:document) { SolrDocument.new work.to_solr }
+
+    it "should display a thumbnail from the representative when available" do
+      path = "ksl:test123"
+      expect(helper).to receive(:image_tag).with("/downloads/ksl:test123?datastream_id=thumbnail", {:alt=>"Thumbnail", :class=>"canonical-image"})
+      helper.thumbnail_tag(double(representative: path), {})
     end
-    it "should return a default icon appropriate for the type of document" do
-      # Known Types with Icons
-      [Image, Audio, Video, Text].each do |klass|
-        helper.should_receive(:image_tag).with("#{klass.to_s}.png", html_params )
-        helper.document_thumbnail_tag(klass.new)
+    
+    context "for an Image" do
+      let(:work) { Image.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Image.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
       end
-      # Other
-      [Collection, CaseGenericWork].each do |klass|
-        helper.should_receive(:image_tag).with("Other.png", html_params )
-        helper.document_thumbnail_tag(klass.new)
+    end
+
+    context "for an Audio" do
+      let(:work) { Audio.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Audio.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
+      end
+    end
+    context "for an Video" do
+      let(:work) { Video.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Video.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
+      end
+    end
+    context "for an Text" do
+      let(:work) { Text.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Text.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
+      end
+    end
+    context "for an Collection" do
+      let(:work) { Collection.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Other.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
+      end
+    end
+    context "for an CaseGenericWork" do
+      let(:work) { CaseGenericWork.new }
+      it "returns a default icon" do
+        expect(helper).to receive(:image_tag).with("Other.png", class: "canonical-image" )
+        helper.thumbnail_tag(document, {} )
       end
     end
   end
+
   describe 'generic_file_thumbnail_tag' do
     let(:html_params) { return {width: 36, class: "thumbnail"} }
     let(:generic_file) { GenericFile.new() }
