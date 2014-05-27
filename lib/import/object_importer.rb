@@ -1,4 +1,5 @@
 require 'import/dc_parser'
+require 'import/dsid_map'
 
 class ObjectImporter
 
@@ -66,7 +67,8 @@ class ObjectImporter
     xml_datastreams.each do |dsid|
       print_output "    Copying datastream: #{dsid}"
       source_datastream = source_object.datastreams[dsid]
-      options = { dsid: dsid, mimeType: source_datastream.mimeType }
+      target_dsid = DsidMap.target_dsid(dsid)
+      options = { dsid: target_dsid, mimeType: source_datastream.mimeType }
       new_object.add_file_datastream(source_datastream.content, options)
     end
   end
