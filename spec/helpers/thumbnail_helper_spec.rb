@@ -6,10 +6,24 @@ describe ThumbnailHelper do
     let(:work) { GenericWork.new }
     let(:document) { SolrDocument.new work.to_solr }
 
-    it "should display a thumbnail from the representative when available" do
-      path = "ksl:test123"
-      expect(helper).to receive(:image_tag).with("/downloads/ksl:test123?datastream_id=thumbnail", {:alt=>"Thumbnail", :class=>"canonical-image"})
-      helper.thumbnail_tag(double(representative: path), {})
+    context "when the representative is set" do
+      let(:path) { "ksl:test123" }
+      before do
+        allow(document).to receive(:representative).and_return(path)
+      end
+
+      it "displays a thumbnail" do
+        expect(helper).to receive(:image_tag).with("/downloads/ksl:test123?datastream_id=thumbnail", {:alt=>"Thumbnail", :class=>"canonical-image"})
+        helper.thumbnail_tag(document, {})
+      end
+
+      context "for an Audio" do
+        let(:work) { Audio.new }
+        it "returns a default icon" do
+          expect(helper).to receive(:image_tag).with("Audio.png", class: "canonical-image" )
+          helper.thumbnail_tag(document, {} )
+        end
+      end
     end
     
     context "for an Image" do

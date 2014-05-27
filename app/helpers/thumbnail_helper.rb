@@ -2,11 +2,13 @@ module ThumbnailHelper
   
   # @parameter document SolrDocument that you want to display a thumbnail for
   def thumbnail_tag(document, image_options)
-    if document.representative.present?
+    if document.hydra_model == 'Audio'
+      image_tag "Audio.png", class: "canonical-image"
+    elsif document.representative.present?
       super
     else 
       path = case document.hydra_model
-      when 'Image', 'Text', 'Audio', 'Video'
+      when 'Image', 'Text', 'Video'
         "#{document.hydra_model}.png"
       else
         "Other.png" 
