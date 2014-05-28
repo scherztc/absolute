@@ -58,6 +58,7 @@ gem 'hydra-remote_identifier'
 gem 'riiif', '0.0.8'
 gem 'openseadragon', '0.0.8'
 gem 'angularjs-rails'
+gem 'devise_cas_authenticatable', '~> 1.3.6'
 
 group :development, :test do
   gem "jettywrapper"
