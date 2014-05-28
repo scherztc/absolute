@@ -1,5 +1,4 @@
 class Text < ActiveFedora::Base
-  include CurationConcern::Work
   include CurationConcern::CaseWork
   include ActionView::Helpers::AssetTagHelper
   

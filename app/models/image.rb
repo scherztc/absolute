@@ -1,8 +1,4 @@
-# Generated via
-#  `rails generate curate:work Text`
-require 'active_fedora/base'
 class Image < ActiveFedora::Base
-  include CurationConcern::Work
   include CurationConcern::CaseWork
   
   self.human_readable_short_description = "Any Image work, preferably with VRA xml attached."

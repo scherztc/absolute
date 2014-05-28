@@ -1,5 +1,6 @@
 module CurationConcern::CaseWork
   extend ActiveSupport::Concern
+  include CurationConcern::Work
 
   included do
     include CurationConcern::WithDatastreamAttachments
