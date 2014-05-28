@@ -1,5 +1,5 @@
-require 'import/dc_parser'
 require 'import/dsid_map'
+require 'import/work_factory'
 
 class ObjectImporter
 
@@ -31,28 +31,16 @@ class ObjectImporter
 
   def import_object(pid, fedora)
     source_object = fedora.find(pid)
-    dc_attrs = DcParser.from_xml(source_object.datastreams['DC'].content).to_attrs_hash
-    new_object = work_class(source_object).new(dc_attrs)
+    new_object = WorkFactory.new(source_object).build_work
     copy_datastreams(source_object, new_object)
     new_object.rights = license
     new_object.save!
+    print_output "    Created #{new_object.class} object: #{new_object.pid}"
     attach_files(source_object, new_object)
   rescue => e
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
-  end
-
-  def work_class(source_object)
-    # TODO: Choose an approprate type of work to create based
-    # on xml attachment data streams.
-    #   TEI  => Text
-    #   PBCore => Video
-    #   VRA => Image
-    #   Otherwise make it a CaseGenericWork
-    # Or possibly look at the value of dc:type to decide.
-
-    CaseGenericWork
   end
 
   def license
