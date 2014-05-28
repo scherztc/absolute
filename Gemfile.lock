@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: d2b3c6bbb5d1413e4bf1de29669556ad8ee4ef71
+  revision: 1ae1655778be6391b85268a16e1c5083347dacf4
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -9,7 +9,7 @@ GIT
       hydra (= 7.0.0)
       hydra-collections
       simple_form
-      sufia-models (~> 4.0.0.beta3)
+      sufia-models (~> 4.0.0.beta4)
 
 GEM
   remote: https://rubygems.org/
@@ -86,7 +86,7 @@ GEM
     breadcrumbs_on_rails (2.3.0)
     builder (3.1.4)
     cancan (1.6.10)
-    cancancan (1.8.0)
+    cancancan (1.8.1)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
