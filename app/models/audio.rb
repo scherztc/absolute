@@ -3,8 +3,4 @@ class Audio < ActiveFedora::Base
     
   self.human_readable_short_description = "Any Audio work, possibly with PBCore xml attached."
   self.accept_datastream_attachments ["PBCore","MODS","QDC"]
-  
-  validates_presence_of :rights, message: 'You must select a license for your work.'
-
-  has_metadata "descMetadata", type: GenericWorkRdfDatastream
 end

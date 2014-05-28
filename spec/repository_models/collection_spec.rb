@@ -8,7 +8,6 @@ describe Collection do
     expect(subject.can_be_member_of_collection?(double)).to be_true
   end
 
-
   it 'can contain another collection' do
     another_collection = FactoryGirl.create(:collection)
     subject.members << another_collection
@@ -25,7 +24,7 @@ describe Collection do
   it 'cannot contain itself' do
     subject.members << subject
     subject.save
-    reloaded_subject.members.should == []
+    subject.reload.members.should == []
   end
 
   describe "when visibility is private" do

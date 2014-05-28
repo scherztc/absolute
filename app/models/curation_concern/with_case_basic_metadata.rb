@@ -21,18 +21,18 @@ module CurationConcern::WithCaseBasicMetadata
   extend ActiveSupport::Concern
 
   included do   
+    has_metadata "descMetadata", type: GenericWorkRdfDatastream
     # Validations that apply to all types of Work AND Collections
-    # Any other validations (ie. presence of dc:rights info) should be declared on the specific Work models.
-    validates_presence_of :title, message: 'Your work must have a title.' 
+    validates_presence_of :title,  message: 'Your work must have a title.' 
+
       
     # Single-value fields
-    has_attributes :available,:created,:date_modified,
-                   :date_uploaded,:description,:rights,:title,
+    has_attributes :created, :date_modified, :date_uploaded, :description, :rights, :title,
                 datastream: :descMetadata, multiple: false
                 
     # Multi-value fields
-    has_attributes :contributor, :creator, :contributors,:coverage,:date,:extent,:content_format,:identifier,:language,
-                   :publisher,:relation,:requires,:rights,:source,:subject,:type,
+    has_attributes :contributor, :creator, :coverage, :date, :content_format, :identifier, :language,
+                   :publisher, :relation, :rights, :source, :subject, :type,
                 datastream: :descMetadata, multiple: true
   end
   
