@@ -1,14 +1,12 @@
 module CurationConcern::CaseWork
   extend ActiveSupport::Concern
   include CurationConcern::Work
-
-  included do
-    include CurationConcern::WithDatastreamAttachments
-    include CurationConcern::WithCaseBasicMetadata
-  end
+  include CurationConcern::WithDatastreamAttachments
+  include CurationConcern::WithCaseBasicMetadata
 
   # override sufia
   def to_param
     pid
   end
+
 end

@@ -64,6 +64,10 @@ describe Text do
         expect(document.id_for_filename('anoabo00-00001.jp2')).to eq file.pid
       end
     end
-  end
 
+    describe 'to_solr' do
+      subject { document.to_solr }
+      its(['datastreams_ssim']) { should eq ['TEIP5'] }
+    end
+  end
 end

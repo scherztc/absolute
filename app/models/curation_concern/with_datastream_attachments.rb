@@ -23,5 +23,17 @@ module CurationConcern::WithDatastreamAttachments
   def attachments 
     datastreams.select {|dsid, ds| self.class.accepted_attachments.include?(dsid) }
   end
+
+  def to_solr(solr_doc={})
+    super.tap do |solr_doc|
+      solr_doc[Solrizer.solr_name('datastreams', :symbol)] = attachment_datastreams
+    end
+  end
+
+  private
+
+  def attachment_datastreams
+    datastreams.except('RELS-EXT', 'DC', 'properties', 'rightsMetadata', 'descMetadata').select { |key, value| value.has_content? }.keys
+  end
   
 end

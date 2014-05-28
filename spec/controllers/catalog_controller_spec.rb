@@ -18,4 +18,10 @@ describe CatalogController do
       end
     end
   end
+
+  describe "facets" do
+    it "should have datastreams_ssim" do
+      expect(CatalogController.blacklight_config.facet_fields.keys).to include 'datastreams_ssim'
+    end
+  end
 end
