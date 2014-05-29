@@ -4,6 +4,6 @@ module ApplicationHelper
   include FullRecordXmlHelper
 
   def admin?
-    current_user.admin?
+    current_user && current_user.admin?
   end
 end
