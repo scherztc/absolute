@@ -17,3 +17,5 @@ Riiif::HTTPFileResolver.id_to_uri = lambda do |id|
   host + '/' + path
 end
 
+
+Riiif::Engine.config.cache_duration_in_days = 30

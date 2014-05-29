@@ -393,7 +393,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     retriable (1.4.1)
-    riiif (0.0.8)
+    riiif (0.0.9)
       rails (> 3.2.0)
     rsolr (1.0.10)
       builder (>= 2.1.2)
@@ -561,7 +561,7 @@ DEPENDENCIES
   openseadragon (= 0.0.8)
   poltergeist
   rails (= 4.0.5)
-  riiif (= 0.0.8)
+  riiif (= 0.0.9)
   rspec-html-matchers
   rspec-rails
   sass-rails (~> 4.0.2)

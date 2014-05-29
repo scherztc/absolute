@@ -55,7 +55,7 @@ gem "devise"
 gem "devise-guests", "~> 0.3"
 gem 'hydra-role-management', '0.1.0'
 gem 'hydra-remote_identifier'
-gem 'riiif', '0.0.8'
+gem 'riiif', '0.0.9'
 gem 'openseadragon', '0.0.8'
 gem 'angularjs-rails'
 gem 'devise_cas_authenticatable', '~> 1.3.6'
