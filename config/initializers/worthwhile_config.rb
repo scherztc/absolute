@@ -1,5 +1,4 @@
 Worthwhile.configure do |config|
-  # Injected via `rails g curate:work Audio`
   config.register_curation_concern :text
   config.register_curation_concern :image
   config.register_curation_concern :audio

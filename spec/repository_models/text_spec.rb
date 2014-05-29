@@ -9,7 +9,6 @@ describe Text do
   # TODO: This is the test you will use when we add handle support
   # it_behaves_like 'remotely_identified', :handle
 
-
   its(:tei?) { should be_false }
 
   context "with TEI" do
