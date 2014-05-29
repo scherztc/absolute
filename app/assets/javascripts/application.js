@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //
-// Required by Blacklight
-//= require blacklight/blacklight
 //= require worthwhile/application
 //= require sufia/fileupload
 //= require openseadragon/rails
