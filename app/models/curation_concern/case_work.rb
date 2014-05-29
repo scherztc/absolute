@@ -2,7 +2,7 @@ module CurationConcern::CaseWork
   extend ActiveSupport::Concern
   include CurationConcern::Work
   include CurationConcern::WithDatastreamAttachments
-  include CurationConcern::WithCaseBasicMetadata
+  include CurationConcern::WithBasicMetadata
   include CurationConcern::WithLicense
 
   # override sufia

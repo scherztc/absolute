@@ -3,7 +3,7 @@ class Collection < ActiveFedora::Base
   include CurationConcern::CollectionModel
   include Hydra::Collections::Collectible
 
-  include CurationConcern::WithCaseBasicMetadata
+  include CurationConcern::WithBasicMetadata
   has_metadata "properties", type: PropertiesDatastream # this PropertiesDatastream is defined by sufia-models
   
   def can_be_member_of_collection?(collection)
