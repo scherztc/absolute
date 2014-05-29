@@ -28,7 +28,7 @@ describe 'Viewing a Case generic work I don\'t own' do
       login_as(user)
       visit curation_concern_case_generic_work_path(work)
       page.should have_content('Unauthorized')
-      page.should have_content('The case generic work you have tried to access is private')
+      page.should have_content('The other you have tried to access is private')
       page.should have_content("ID: #{work.pid}")
       page.should_not have_content("Sample work")
     end

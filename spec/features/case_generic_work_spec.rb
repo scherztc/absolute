@@ -17,7 +17,7 @@ describe 'Creating a Case generic work' do
         click_button("Create Case generic work")
       end
 
-      expect(page).to have_selector('h1', text: 'Generic Work')
+      expect(page).to have_selector('h1', text: 'Other')
       within ('.linked_resource.attributes') do
         expect(page).to have_link('http://www.youtube.com/watch?v=oHg5SJYRHA0', href: 'http://www.youtube.com/watch?v=oHg5SJYRHA0')
       end
@@ -63,7 +63,7 @@ describe 'Viewing a generic work that is private' do
     login_as(user)
     visit curation_concern_case_generic_work_path(work)
     page.should have_content('Unauthorized')
-    page.should have_content('The case generic work you have tried to access is private')
+    page.should have_content('The other you have tried to access is private')
     page.should have_content("ID: #{work.pid}")
     page.should_not have_content("Sample work")
   end
