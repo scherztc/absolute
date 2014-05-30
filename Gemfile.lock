@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 22c74cabae8967624e213a96c81f2bd4e90f822a
+  revision: 2739bf4e44afa35c5c80d468d0e3ea8071ccfdc2
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -175,7 +175,7 @@ GEM
     hike (1.2.3)
     hooks (0.3.6)
       uber (~> 0.0.4)
-    htmlentities (4.3.1)
+    htmlentities (4.3.2)
     hydra (7.0.0)
       active-fedora (~> 7.0.2)
       blacklight (~> 5.4.0)
