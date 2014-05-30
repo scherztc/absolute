@@ -6,11 +6,12 @@ class DsidMap
   # source fedora might be called 'MODS.xml', but when we
   # import it into the target fedora, it will be called 'MODS'.
 
-
-  # ["MODS", "TEI", "TEIP5", "VRA", "PBCore", "METS", "QDC"]
-  DSID_MAP = { 'MODS' => ['mods.xml'],
+  DSID_MAP = { 'MODS' => ['mods.xml', 'modss.xml'],
                'PBCore' => ['pbcore.xml'],
                'METS' => ['mets.xml'],
+               'TEI' => ['tei.xml'],
+               'TEIP5' => ['teip5.xml'],
+               'VRA' => ['vra.xml']
   }
 
   def self.target_dsid(source_dsid)

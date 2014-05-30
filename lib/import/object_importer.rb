@@ -79,6 +79,8 @@ class ObjectImporter
   # and attach it to the new object (has to be done after the PID has
   # been assigned to the new object).
   def dsid_hash(source_object)
+    # Exclude DC datastream because that is already being handled when
+    # the object gets built.
     # TODO: Decide if we should import RELS-EXT
     exclude_datastreams = ['RELS-EXT', 'DC', 'descMetadata']
     datastreams_to_import = source_object.datastreams.keys - exclude_datastreams
