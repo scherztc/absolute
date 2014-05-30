@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: b8d21fb45da01f50b16bad71fc9ca281d5ec138a
+  revision: dd3c1fcdb8fbbf02b0e535cbb8d54dbd7b0c01ea
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -318,7 +318,7 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
