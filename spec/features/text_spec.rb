@@ -83,7 +83,7 @@ describe 'An existing Text owned by the user' do
     login_as(user)
     visit curation_concern_text_path(work)
     click_link 'Add an External Link'
-    page.should have_link('Cancel', href: catalog_index_path)
+    expect(page).to have_link('Cancel', href: catalog_index_path)
   end
 end
 
@@ -94,9 +94,9 @@ describe 'Viewing a Text that is private' do
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)
     visit curation_concern_text_path(work)
-    page.should have_content('Unauthorized')
-    page.should have_content('The text you have tried to access is private')
-    page.should have_content("ID: #{work.pid}")
-    page.should_not have_content("Sample work")
+    expect(page).to have_content('Unauthorized')
+    expect(page).to have_content('The text you have tried to access is private')
+    expect(page).to have_content("ID: #{work.pid}")
+    expect(page).to_not have_content("Sample work")
   end
 end

@@ -25,7 +25,7 @@ describe 'Creating a Case generic work' do
   end
 end
 
-describe 'An existing generic work owned by the user' do
+describe 'Editing a generic work owned by the user' do
   let(:user) { FactoryGirl.create(:user) }
   let(:work) { FactoryGirl.create(:case_generic_work, user: user) }
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
@@ -46,17 +46,38 @@ describe 'An existing generic work owned by the user' do
   end
 end
 
-describe 'Viewing a generic work that is private' do
+describe 'Viewing a Case generic work I don\'t own' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:private_case_generic_work, title: "Sample work" ) }
 
-  it 'should show a stub indicating we have the work, but it is private' do
-    login_as(user)
-    visit curation_concern_case_generic_work_path(work)
-    page.should have_content('Unauthorized')
-    page.should have_content('The other you have tried to access is private')
-    page.should have_content("ID: #{work.pid}")
-    page.should_not have_content("Sample work")
+  context 'and I don\'t have permission to see' do
+    let(:work) { FactoryGirl.create(:private_case_generic_work, title: "Sample work", description:"My favorite thing." ) }
+    it 'should show a stub indicating we have the work, but it is private' do
+      login_as(user)
+      visit curation_concern_case_generic_work_path(work)
+      expect(page).to have_content('Unauthorized')
+      expect(page).to have_content('The other you have tried to access is private')
+      expect(page).to have_content("ID: #{work.pid}")
+      expect(page).to_not have_content("Sample work")
+    end
+  end
+
+  context 'but I do have permission to see' do
+    let(:work) { FactoryGirl.create(:public_case_generic_work, title: "Sample work", description:"My favorite thing." ) }
+    before do
+      login_as(user)
+    end
+    it 'should show me the work' do
+      visit curation_concern_case_generic_work_path(work)
+      expect(page).to_not have_content('Unauthorized')
+      expect(page).to have_content("Sample work")
+      expect(page).to have_content("My favorite thing")
+      expect(page).to have_content("XML Metadata Attachments")
+
+    end
+    it 'should not show me the file uploader' do
+      visit curation_concern_case_generic_work_path(work)
+      expect(page).to_not have_content("upload")
+      expect(page).to_not have_content("Select files")
+    end
   end
 end
-

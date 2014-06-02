@@ -75,30 +75,30 @@ describe ThumbnailHelper do
     let(:html_params) { return {width: 36, class: "thumbnail"} }
     let(:generic_file) { GenericFile.new() }
     let(:download_path) { "thumbnail/path.png" }
-    before { helper.stub(:download_path).with(generic_file, {datastream_id: 'thumbnail'}) {download_path} }
+    before { allow(helper).to receive(:download_path).with(generic_file, {datastream_id: 'thumbnail'}) {download_path} }
     it "should show the thumbnail for pdfs" do
-      generic_file.stub(:mime_type) {'application/pdf'}      
-      helper.should_receive(:image_tag).with(download_path, html_params )
+      allow(generic_file).to receive(:mime_type) {'application/pdf'}      
+      expect(helper).to receive(:image_tag).with(download_path, html_params )
       helper.generic_file_thumbnail_tag(generic_file)
     end
     it "should show the thumbnail for images" do
-      generic_file.stub(:image?) {true}
-      helper.should_receive(:image_tag).with(download_path, html_params )
+      allow(generic_file).to receive(:image?) {true}
+      expect(helper).to receive(:image_tag).with(download_path, html_params )
       helper.generic_file_thumbnail_tag(generic_file)
     end
     it "should show the icon for audio" do
-      generic_file.stub(:audio?) {true}
-      helper.should_receive(:image_tag).with("Audio.png", html_params )
+      allow(generic_file).to receive(:audio?) {true}
+      expect(helper).to receive(:image_tag).with("Audio.png", html_params )
       helper.generic_file_thumbnail_tag(generic_file)
     end
     it "should show the icon for video" do
-      generic_file.stub(:video?) {true}
-      helper.should_receive(:image_tag).with("Video.png", html_params )
+      allow(generic_file).to receive(:video?) {true}
+      expect(helper).to receive(:image_tag).with("Video.png", html_params )
       helper.generic_file_thumbnail_tag(generic_file)
     end
     it "should show default icon for file types that dont have icons" do
       # Default
-      helper.should_receive(:image_tag).with("Other.png", html_params )
+      expect(helper).to receive(:image_tag).with("Other.png", html_params )
       helper.generic_file_thumbnail_tag(generic_file)
     end
 

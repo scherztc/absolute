@@ -47,15 +47,13 @@ gem 'devise_cas_authenticatable', '~> 1.3.6'
 group :development, :test do
   gem 'debugger'
   gem "jettywrapper"
-  gem "rspec-rails", '~> 2.99'
+  gem "rspec-rails", '~> 3.0'
   gem "rspec-its"
-  # gem 'rspec-its'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
-  #gem 'rspec-html-matchers'
 end
 

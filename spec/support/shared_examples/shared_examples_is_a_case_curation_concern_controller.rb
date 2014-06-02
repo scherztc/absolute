@@ -39,7 +39,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         it "should show 401 Unauthorized" do
           get :show, id: a_work
           expect(response.status).to eq 401
-          response.should render_template(:unauthorized)
+          expect(response).to render_template(:unauthorized)
         end
       end
       context "someone elses public work" do
@@ -86,7 +86,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
           curation_concern_class.stub(:new).and_return(fake_curation_concern)
           controller.actor = double(:create => true)
           post :create, accept_contributor_agreement: "accept"
-          response.should redirect_to path_to_curation_concern
+          expect(response).to redirect_to path_to_curation_concern
         end
         describe "failure" do
           before { sign_in admin }
@@ -125,7 +125,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         it "should show 401 Unauthorized" do
           get :edit, id: a_work
           expect(response.status).to eq 401
-          response.should render_template(:unauthorized)
+          expect(response).to render_template(:unauthorized)
         end
       end
       context "someone elses public work" do
@@ -133,7 +133,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         it "should show me the page" do
           get :edit, id: a_work
           expect(response.status).to eq 401
-          response.should render_template(:unauthorized)
+          expect(response).to render_template(:unauthorized)
         end
       end
     end
@@ -145,13 +145,13 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
       it "should update the work " do
         controller.actor = double(:update => true, :visibility_changed? => false)
         patch :update, id: a_work
-        response.should redirect_to path_to_curation_concern
+        expect(response).to redirect_to path_to_curation_concern
       end
       describe "changing rights" do
         it "should prompt to change the files access" do
           controller.actor = double(:update => true, :visibility_changed? => true)
           patch :update, id: a_work
-          response.should redirect_to confirm_curation_concern_permission_path(controller.curation_concern)
+          expect(response).to redirect_to confirm_curation_concern_permission_path(controller.curation_concern)
         end
       end
       describe "failure" do

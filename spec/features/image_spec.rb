@@ -77,9 +77,9 @@ describe 'Viewing a Image that is private' do
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)
     visit curation_concern_image_path(work)
-    page.should have_content('Unauthorized')
-    page.should have_content('The image you have tried to access is private')
-    page.should have_content("ID: #{work.pid}")
-    page.should_not have_content("Sample work")
+    expect(page).to have_content('Unauthorized')
+    expect(page).to have_content('The image you have tried to access is private')
+    expect(page).to have_content("ID: #{work.pid}")
+    expect(page).to_not have_content("Sample work")
   end
 end

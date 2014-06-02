@@ -37,7 +37,7 @@ describe ObjectImporter do
   it 'keeps track of failed imports' do
     importer = ObjectImporter.new(fedora_name, [source_text.pid])
     importer.import!  # Should fail because there is no title in DC datastream, so new object will be invalid.
-    importer.failed_imports.should == [source_text.pid]
+    expect(importer.failed_imports).to eq [source_text.pid]
   end
 
   context 'with files' do
