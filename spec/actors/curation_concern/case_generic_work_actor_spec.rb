@@ -1,12 +1,10 @@
-# Generated via
-#  `rails generate curate:work Text`
 require 'spec_helper'
 
 describe CurationConcern::CaseGenericWorkActor do
   # it_behaves_like 'is_a_curation_concern_actor', CaseGenericWork
   
   describe "attachments" do
-    pending
+    #pending
     let(:curation_concern) { CaseGenericWork.new(pid: Worthwhile::CurationConcern.mint_a_pid )}
     let(:visibility) { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED }
     let(:user) { FactoryGirl.create(:user) }
@@ -28,9 +26,9 @@ describe CurationConcern::CaseGenericWorkActor do
     it 'should save accepted attachment types to corresponding datastreams' do
       subject.create.should be true
       expect(curation_concern).to be_persisted
-      curation_concern.datastreams["TEI"].read.should == fixture_file('files/anoabo00-TEI.xml').read
-      curation_concern.datastreams["TEIP5"].read.should == fixture_file('files/anoabo00-TEIP5.xml').read
-      curation_concern.datastreams["MODS"].read.should == fixture_file('files/anoabo00-MODS.xml').read
+      expect(curation_concern.datastreams["TEI"].read).to eq fixture_file('files/anoabo00-TEI.xml').read
+      expect(curation_concern.datastreams["TEIP5"].read).to eq fixture_file('files/anoabo00-TEIP5.xml').read
+      expect(curation_concern.datastreams["MODS"].read).to eq fixture_file('files/anoabo00-MODS.xml').read
     end
   end
   

@@ -56,7 +56,6 @@ describe 'An existing Video owned by the user' do
   let(:you_tube_link) { 'http://www.youtube.com/watch?v=oHg5SJYRHA0' }
 
   it 'should allow me to attach a linked resource' do
-    pending "[linked_resource] until we decide what the UX is for adding linked resources."
     login_as(user)
     visit curation_concern_case_generic_work_path(work)
     click_link 'Add an External Link'
@@ -69,14 +68,6 @@ describe 'An existing Video owned by the user' do
     within ('.linked_resource.attributes') do
       expect(page).to have_link(you_tube_link, href: you_tube_link)
     end
-  end
-
-  it 'cancel takes me back to the dashboard' do
-    pending "[linked_resource] until we decide what the UX is for adding linked resources."
-    login_as(user)
-    visit curation_concern_video_path(work)
-    click_link 'Add an External Link'
-    page.should have_link('Cancel', href: catalog_index_path)
   end
 end
 
