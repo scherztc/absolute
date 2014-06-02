@@ -68,6 +68,7 @@ class ObjectImporter
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
         file.save!
+        Sufia.queue.push(CharacterizeJob.new(file.pid))
         print_output("    Handling datastream #{dsid}: Created GenericFile #{file.pid}")
       end
     end
