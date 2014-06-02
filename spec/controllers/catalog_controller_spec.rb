@@ -20,8 +20,7 @@ describe CatalogController do
   end
 
   describe "facets" do
-    it "should have datastreams_ssim" do
-      expect(CatalogController.blacklight_config.facet_fields.keys).to include 'datastreams_ssim'
-    end
+    subject { CatalogController.blacklight_config.facet_fields.keys }
+    it { should include('datastreams_ssim', 'collection_sim') }
   end
 end

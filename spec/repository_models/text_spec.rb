@@ -67,6 +67,15 @@ describe Text do
     describe 'to_solr' do
       subject { document.to_solr }
       its(['datastreams_ssim']) { should eq ['TEIP5'] }
+
+      context "when a member of several collections" do
+        before do 
+          Collection.destroy_all
+          document.attributes = FactoryGirl.attributes_for(:text)
+        end
+        let(:collection) { FactoryGirl.create(:collection, members: [document]) }
+        its (['collection_sim']) { should eq [collection.pid] }
+      end
     end
   end
 end
