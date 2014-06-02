@@ -25,8 +25,6 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
     public_send("curation_concern_#{curation_concern_type_underscore}_path", controller.curation_concern.pid)
   end
 
-  render_views
-
   if optionally_include_specs(actions, :show)
     describe "#show" do
       context "my own private work" do
@@ -127,7 +125,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         it "should show 401 Unauthorized" do
           get :edit, id: a_work
           expect(response.status).to eq 401
-          expect(response.body).to include("Unauthorized")
+          response.should render_template(:unauthorized)
         end
       end
       context "someone elses public work" do
@@ -135,7 +133,7 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         it "should show me the page" do
           get :edit, id: a_work
           expect(response.status).to eq 401
-          expect(response.body).to include("Unauthorized")
+          response.should render_template(:unauthorized)
         end
       end
     end

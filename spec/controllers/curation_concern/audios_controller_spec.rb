@@ -1,5 +1,3 @@
-# Generated via
-#  `rails generate curate:work Text`
 require 'spec_helper'
 
 describe CurationConcern::AudiosController do
