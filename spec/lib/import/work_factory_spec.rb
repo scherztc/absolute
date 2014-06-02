@@ -26,7 +26,7 @@ describe WorkFactory do
 
       it 'returns a Video work' do
         new_object = WorkFactory.new(video).build_work
-        expect(new_object.new_record?).to be_true
+        expect(new_object).to be_new_record
         expect(new_object.class).to eq Video
       end
     end

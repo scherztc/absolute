@@ -5,7 +5,7 @@ describe Collection do
   let(:reloaded_subject) { Collection.find(subject.pid) }
 
   it 'can be part of a collection' do
-    expect(subject.can_be_member_of_collection?(double)).to be_true
+    expect(subject.can_be_member_of_collection?(double)).to be true
   end
 
   it 'can contain another collection' do

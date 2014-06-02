@@ -26,7 +26,7 @@ describe CurationConcern::CaseGenericWorkActor do
     }
   
     it 'should save accepted attachment types to corresponding datastreams' do
-      subject.create.should be_true
+      subject.create.should be true
       expect(curation_concern).to be_persisted
       curation_concern.datastreams["TEI"].read.should == fixture_file('files/anoabo00-TEI.xml').read
       curation_concern.datastreams["TEIP5"].read.should == fixture_file('files/anoabo00-TEIP5.xml').read

@@ -9,7 +9,7 @@ describe Text do
   # TODO: This is the test you will use when we add handle support
   # it_behaves_like 'remotely_identified', :handle
 
-  its(:tei?) { should be_false }
+  its(:tei?) { should_not be_present }
 
   context "with TEI" do
     before do
@@ -20,7 +20,7 @@ describe Text do
 
     subject { document } 
 
-    its(:tei?) { should be_true }
+    its(:tei?) { should be_present }
 
     describe 'tei_to_html' do
       let(:html) { document.tei_to_html }

@@ -47,7 +47,8 @@ gem 'devise_cas_authenticatable', '~> 1.3.6'
 group :development, :test do
   gem 'debugger'
   gem "jettywrapper"
-  gem "rspec-rails", '~> 2.14'
+  gem "rspec-rails", '~> 2.99'
+  gem "rspec-its"
   # gem 'rspec-its'
 end
 

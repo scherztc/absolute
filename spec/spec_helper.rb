@@ -35,6 +35,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Devise::TestHelpers, :type => :controller
+
+  config.infer_spec_type_from_file_location!
 end
 
 
