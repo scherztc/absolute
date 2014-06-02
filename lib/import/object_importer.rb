@@ -34,6 +34,7 @@ class ObjectImporter
     new_object = WorkFactory.new(source_object).build_work
     copy_datastreams(source_object, new_object)
     new_object.rights = license
+    new_object.visibility = visibility
     new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     attach_files(source_object, new_object)
@@ -48,6 +49,10 @@ class ObjectImporter
     #       probably shouldn't clobber it.
     # TODO: What should the default license be?
     Sufia.config.cc_licenses['All rights reserved']
+  end
+
+  def visibility
+    Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
   def copy_datastreams(source_object, new_object)
@@ -67,6 +72,7 @@ class ObjectImporter
       source_datastream = source_object.datastreams[dsid]
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
+        file.visibility = visibility
         file.save!
         Sufia.queue.push(CharacterizeJob.new(file.pid))
         print_output("    Handling datastream #{dsid}: Created GenericFile #{file.pid}")

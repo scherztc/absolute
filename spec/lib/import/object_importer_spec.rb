@@ -7,7 +7,6 @@ describe ObjectImporter do
   let(:fedora_name) { 'test' }
 
   let(:properties) { source_text.datastreams['properties'].content }
-  let(:rights_meta) { source_text.datastreams['rightsMetadata'].content }
 
   before do
     ActiveFedora::Base.delete_all
@@ -32,7 +31,7 @@ describe ObjectImporter do
 
     new_object = ActiveFedora::Base.all.select{|obj| obj.pid != source_text.pid }.first
     expect(new_object.datastreams['properties'].content).to eq properties
-    expect(new_object.datastreams['rightsMetadata'].content).to eq rights_meta
+    expect(new_object.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
   it 'keeps track of failed imports' do
@@ -67,6 +66,7 @@ describe ObjectImporter do
       Worthwhile::GenericFile.all.each do |file|
         file_content = file.datastreams['content'].content
         expect(file_content).to eq content
+        expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
       end
     end
   end
