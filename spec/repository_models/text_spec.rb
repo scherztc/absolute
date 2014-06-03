@@ -41,6 +41,9 @@ describe Text do
         it "should have embeded figures" do
           expect(subject['pages'][12]['html']).to match /<img data-image="pict1\.jp2" src="\/image-service\/pict1\.jp2\/full\/full\/0\/native\.jpg">/
           expect(subject['pages'][12]['html']).to match /<figcaption>owl next to umbrella<\/figcaption>/
+
+          expect(subject['pages'][17]['html']).to match /<figcaption>Egyptian wheelbarrow<\/figcaption>/
+          expect(subject['pages'][17]['html']).to match /<img data-image="pict2\.jp2" src="\/image-service\/pict2\.jp2\/full\/full\/0\/native\.jpg">/
         end
       end
 

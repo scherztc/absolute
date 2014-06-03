@@ -48,7 +48,7 @@ class Text < ActiveFedora::Base
 
   # For any inlined figure translate data-image attributes into iiif urls in the src attribute
   def resolve_image_paths!(e)
-    e.css('figure > img').each do |image|
+    e.css('img[data-image]').each do |image|
       file_id = id_for_filename(image.attr('data-image'))
       image.set_attribute('src', Riiif::Engine.routes.url_helpers.image_path(file_id, size: 'full')) if file_id
     end

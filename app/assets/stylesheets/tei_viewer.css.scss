@@ -52,6 +52,13 @@
         margin-top: 10px;
         margin-bottom: 10px;
       }
+
+      figure {
+        text-align: center;
+        figcaption {
+          font-style: italic;
+        }
+      }
     }
   }
 }
