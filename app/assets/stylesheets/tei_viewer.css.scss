@@ -18,10 +18,6 @@
     li:nth-child(even) {
       border-bottom: none;
     }
-    li:nth-child(1) div {
-      // This forces the odd pages to the right.
-      @include make-sm-column-offset(6);
-    }
   }
 
   li.page {
