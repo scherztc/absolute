@@ -15,7 +15,7 @@ set :assets_prefix, "#{shared_path}/public/assets"
 
 set :linked_files, %w{config/database.yml config/devise.yml config/fedora.yml config/recipients_list.yml config/redis.yml config/resque-pool.yml config/solr.yml config/initializers/secret_token.rb log/resque-pool.stderr.log log/resque-pool.stdout.log}
 
-set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public/assets}
+set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public/assets log/imports}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
