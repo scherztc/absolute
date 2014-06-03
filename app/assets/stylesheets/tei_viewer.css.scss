@@ -59,6 +59,16 @@
           font-style: italic;
         }
       }
+
+      aside {
+        font-style: italic;
+        &:before {
+          content: '(';
+        }
+        &:after {
+          content: ')';
+        }
+      }
     }
   }
 }

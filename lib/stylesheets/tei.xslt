@@ -60,9 +60,10 @@
     </xsl:template>
 
     <xsl:template match="tei:note">
-      <div class="note">
+      <aside>
+        <xsl:value-of select="@n" />
         <xsl:apply-templates/>
-      </div>
+      </aside>
     </xsl:template>
 
     <xsl:template match="tei:figure[tei:graphic]">
