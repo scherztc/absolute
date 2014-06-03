@@ -14,26 +14,41 @@ describe Text do
   context "with TEI" do
     before do
       Text.destroy_all
-      document.add_file(File.open(fixture_path + '/files/anoabo00-TEI.xml').read, 'TEIP5', 'A TEI file')
     end
     let(:document) { Text.new(pid: 'sufia:anoabo00') }
 
-    subject { document } 
-
     its(:tei?) { should be_present }
+
+    subject { document } 
+    let(:file) { '/files/anoabo00-TEI.xml' }
+
+    before do
+      document.add_file(File.open(fixture_path + file).read, 'TEIP5', 'A TEI file')
+    end
 
     describe 'tei_as_json' do
       subject { document.tei_as_json }
 
-      before do
-        allow(document).to receive(:id_for_filename).and_return("sufia:0001")
+      context "when the file has a titlePage with an image" do
+        let(:file) { '/files/sanumb00-TEIP5.xml' }
+
+        it "should have the title page" do
+          allow(document).to receive(:id_for_filename) { |fn| fn }
+
+          expect(subject['pages'][3]['image']).to match /sanumb00-00003\.jp2/
+        end
       end
 
-      it "has 25 rows" do
-        expect(subject).to be_kind_of Hash
-        expect(subject['pages'].size).to eq 25
-        expect(subject['pages'].first['html']).to be_html_safe
-        expect(subject['pages'].first['image']).to eq '<img alt="Native" src="/image-service/sufia:0001/full/,600/0/native.jpg" />'
+      context "without a titlePage with an image" do
+        before do
+          allow(document).to receive(:id_for_filename).and_return("sufia:0001")
+        end
+        it "has 25 rows" do
+          expect(subject).to be_kind_of Hash
+          expect(subject['pages'].size).to eq 25
+          expect(subject['pages'].first['html']).to be_html_safe
+          expect(subject['pages'].first['image']).to eq '<img alt="Native" src="/image-service/sufia:0001/full/,600/0/native.jpg" />'
+        end
       end
 
       context "with errors" do
@@ -50,7 +65,7 @@ describe Text do
       before do
         document.save(validate: false)
       end
-      let!(:file) do
+      let!(:generic_file) do
         Worthwhile::GenericFile.new(batch_id: document.id).tap do |file|
           file.add_file(File.open(fixture_path + '/files/anoabo00-00001.jp2', 'rb').read, 'content', 'anoabo00-00001.jp2')
           file.apply_depositor_metadata('jmc')
@@ -58,7 +73,7 @@ describe Text do
         end
       end
       it "returns the path of the file" do
-        expect(document.id_for_filename('anoabo00-00001.jp2')).to eq file.pid
+        expect(document.id_for_filename('anoabo00-00001.jp2')).to eq generic_file.pid
       end
     end
 

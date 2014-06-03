@@ -72,6 +72,14 @@
       </div>
     </xsl:template>
 
+    <xsl:template match="tei:titlePage[@facs]">
+      <div class="pageheader">
+        <xsl:attribute name="id">BOOKPAGE_<xsl:value-of select="@n"/></xsl:attribute>
+        <xsl:attribute name="data-image"><xsl:value-of select="@facs"/><xsl:value-of select="@xml:id"/></xsl:attribute>
+        Page <xsl:value-of select="@n"/>
+      </div>
+    </xsl:template>
+
     <xsl:template match="tei:date">
       <span class="date">
         <xsl:apply-templates/>
