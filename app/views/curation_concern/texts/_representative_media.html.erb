@@ -1,8 +1,11 @@
 <% if work.tei? %>
   <%= render 'tei_viewer' %>
 
+  <script>
+    var tei = <%= raw(JSON.generate work.tei_as_json) %>
+  </script>
+
   <tei-viewer ng-controller="TeiViewer">
-    <%= work.tei_to_html %>
   </tei-viewer>
 <% else %>
   <%= render partial: 'curation_concern/base/representative_media', locals: { work: work } %>

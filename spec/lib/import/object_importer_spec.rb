@@ -22,7 +22,7 @@ describe ObjectImporter do
     # an object created by absolute, the parser won't find a
     # title in dc:title.  A valid object requires a title, so
     # we need to stub that value.
-    DcParser.any_instance.stub(:title) { 'Fake Title' }
+    allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
 
     importer = ObjectImporter.new(fedora_name, [source_text.pid])
     old_count = ActiveFedora::Base.count
@@ -46,7 +46,7 @@ describe ObjectImporter do
       Worthwhile::GenericFile.delete_all
       source_text.add_file_datastream(content, { dsid: 'weaedm186.pdf', mimeType: 'application/pdf' })
       source_text.save!
-      DcParser.any_instance.stub(:title) { 'Fake Title' }
+      allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
     end
 
     it 'knows which datastreams should be attached as generic files' do

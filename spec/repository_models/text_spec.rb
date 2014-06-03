@@ -22,19 +22,18 @@ describe Text do
 
     its(:tei?) { should be_present }
 
-    describe 'tei_to_html' do
-      let(:html) { document.tei_to_html }
-      subject { Nokogiri::HTML(html) }
+    describe 'tei_as_json' do
+      subject { document.tei_as_json }
 
       before do
         allow(document).to receive(:id_for_filename).and_return("sufia:0001")
       end
 
       it "has 25 rows" do
-        expect(html).to be_html_safe
-        expect(subject.css('#tei-content').attr('data-max-pages').value).to eq '25'
-        expect(subject.css('.row').size).to eq 25
-        expect(subject.css('#page-1.row img').first.attr('src')).to eq '/image-service/sufia:0001/full/,600/0/native.jpg'
+        expect(subject).to be_kind_of Hash
+        expect(subject['pages'].size).to eq 25
+        expect(subject['pages'].first['html']).to be_html_safe
+        expect(subject['pages'].first['image']).to eq '<img alt="Native" src="/image-service/sufia:0001/full/,600/0/native.jpg" />'
       end
 
       context "with errors" do
@@ -42,8 +41,7 @@ describe Text do
           allow_any_instance_of(Nokogiri::HTML::Document).to receive(:css).with('#tei-content').and_return([])
         end
         it "draws an error" do
-          expect(html).to eq "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>"
-          expect(html).to be_html_safe
+          expect(subject).to eq(error: "Unable to parse TEI datastream for this object.")
         end
       end
     end

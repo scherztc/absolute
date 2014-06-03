@@ -80,10 +80,10 @@ shared_examples 'is_a_case_curation_concern_controller' do |curation_concern_cla
         before { sign_in admin }
         it "should create a work" do
           fake_curation_concern = curation_concern_class.new
-          fake_curation_concern.stub(:persisted?).and_return(true)
-          fake_curation_concern.stub(:pid).and_return("fake:pid")
+          allow(fake_curation_concern).to receive(:persisted?).and_return(true)
+          allow(fake_curation_concern).to receive(:pid).and_return("fake:pid")
           # load_and_authorize_resource calls this and sets controller.curation_concern:
-          curation_concern_class.stub(:new).and_return(fake_curation_concern)
+          allow(curation_concern_class).to receive(:new).and_return(fake_curation_concern)
           controller.actor = double(:create => true)
           post :create, accept_contributor_agreement: "accept"
           expect(response).to redirect_to path_to_curation_concern

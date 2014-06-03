@@ -9,7 +9,7 @@ class Text < ActiveFedora::Base
     datastreams['TEIP5'].has_content?
   end
 
-  def tei_to_html
+  def tei_as_json
     # First parsing will just mark up page breaks
     doc = Nokogiri::XML(datastreams['TEIP5'].content)
     xslt = Nokogiri::XSLT(File.read('lib/stylesheets/tei.xslt'))
@@ -19,33 +19,32 @@ class Text < ActiveFedora::Base
     # second parsing will put the text between each break into divs
     doc2 = Nokogiri::HTML(intermediate)
     root = doc2.css('#tei-content').first
-    return "<div id=\"tei-content\"><div class=\"alert alert-danger\">Unable to parse TEI datastream for this object.</div></div>".html_safe if root.nil?
-    out = ''
-    in_row = false
+    return {error: "Unable to parse TEI datastream for this object."} if root.nil?
+    pages = [ ]
+    current_element = {html: '' }
     page = 1
     root.children.each do |e|
       case e
       when Nokogiri::XML::Text
         next if e.to_s.strip == ''
-        out << "<div>#{e.to_s}</div>"
+        current_element[:html] << "<div>#{e.to_s}</div>".html_safe
       when Nokogiri::XML::Element
         # if the element is a page break. Add an image and a text blurb.
         next if e.name == 'br'
         if e.attr('class') == "pageheader"
-          out << "</div><!-- /col-md-6 -->\n</div><!-- /row -->" if page > 1
-          out << "<div class=\"row\" id=\"page-#{page}\">"
+          pages << current_element if page > 1
+          current_element = {page: page, html: ''.html_safe}
           page += 1
-          out << "<div class=\"col-md-6\">"
           file_id = id_for_filename(e.attr('data-image'))
-          out << image_tag(Riiif::Engine.routes.url_helpers.image_path(file_id, size: ',600')) if file_id
-          out << "</div><div class=\"col-md-6\">"
+          current_element[:image] = image_tag(Riiif::Engine.routes.url_helpers.image_path(file_id, size: ',600')) if file_id
         end
-        out << e.to_s
+        current_element[:html] << e.to_s.html_safe
       end
     end
-    out << "</div><!-- /col-md-6 -->\n</div><!-- /row -->\n" if page > 1
-    ("<div id=\"tei-content\" data-object=\"#{root.attr('data-object')}\" data-max-pages=\"#{page - 1}\">" +
-      out + "</div><!-- /tei-content -->\n").html_safe
+    pages << current_element# if page > 1
+    # ("<div id=\"tei-content\" data-object=\"#{root.attr('data-object')}\" data-max-pages=\"#{page - 1}\">" +
+    #   out + "</div><!-- /tei-content -->\n").html_safe
+    {pages: pages, object: root.attr('data-object')}.with_indifferent_access
   end
 
   def id_for_filename(filename)
