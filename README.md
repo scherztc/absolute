@@ -120,3 +120,31 @@ Finally, deploy code and update the server with the command
 bundle exec cap sandbox deploy
 ```
 
+## Deploying to the Case vm with Oracle
+
+During the May/June 2014 SOW:
+
+First, set up an ssh config entry:
+
+```
+Host casehydradev
+  Hostname hydra-dev.case.edu
+  User deploy
+  IdentityFile /path/to/my/private/key
+  ForwardAgent no
+```
+
+Next, connect to casehydradev via ssh to test the config. (If this fails, your public keys are missing or outdated on the hydradev server - let the team know.)
+
+Next, check out the oracle branch with the command 
+
+```
+git checkout oracle
+```
+
+Finally, deploy code and update the server with the command
+
+```
+bundle exec cap casehydradev deploy
+```
+

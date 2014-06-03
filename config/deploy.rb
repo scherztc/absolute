@@ -32,8 +32,12 @@ namespace :deploy do
 
   after :restart, :kill_resque_pool do
     on roles(:web), in: :sequence, wait: 5 do
-      # Shuts down resque_pool master
-      execute "export master_pid=$(cat #{shared_path}/tmp/pids/resque-pool.pid) && kill -QUIT $master_pid"
+      # Shuts down resque_pool master if pid exists
+      if test("[ -f #{shared_path}/tmp/pids/resque-pool.pid ]")
+        execute "export master_pid=$(cat #{shared_path}/tmp/pids/resque-pool.pid) && kill -QUIT $master_pid"
+      else
+        echo "No resque-pool pid found"
+      end
     end
   end
 
