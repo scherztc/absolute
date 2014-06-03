@@ -31,11 +31,16 @@ describe Text do
 
       context "when the file has a titlePage with an image" do
         let(:file) { '/files/sanumb00-TEIP5.xml' }
+        before { allow(document).to receive(:id_for_filename) { |fn| fn } }
 
         it "should have the title page" do
-          allow(document).to receive(:id_for_filename) { |fn| fn }
-
           expect(subject['pages'][3]['image']).to match /sanumb00-00003\.jp2/
+          expect(subject['pages'][3]['html']).to match /"Munimen ad imbres\."/
+        end
+
+        it "should have embeded figures" do
+          expect(subject['pages'][12]['html']).to match /<img data-image="pict1\.jp2" src="\/image-service\/pict1\.jp2\/full\/full\/0\/native\.jpg">/
+          expect(subject['pages'][12]['html']).to match /<figcaption>owl next to umbrella<\/figcaption>/
         end
       end
 

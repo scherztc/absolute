@@ -35,14 +35,23 @@
       padding-top: 20px;
     }
 
-    .pageheader {
-      color: gray;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .tei-head {
-      font-weight: bold;
-      text-align: center;
+    .text {
+      .pageheader {
+        color: gray;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .title-page {
+        text-align: center;
+      }
+
+      .tei-head {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
