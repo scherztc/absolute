@@ -58,10 +58,29 @@
         <xsl:apply-templates/>
       </div>
     </xsl:template>
+
     <xsl:template match="tei:note">
       <div class="note">
         <xsl:apply-templates/>
       </div>
+    </xsl:template>
+
+    <xsl:template match="tei:figure[tei:graphic]">
+      <figure>
+        <xsl:apply-templates/>
+      </figure>
+    </xsl:template>
+
+    <xsl:template match="tei:figDesc">
+      <figcaption>
+        <xsl:apply-templates/>
+      </figcaption>
+    </xsl:template>
+
+    <xsl:template match="tei:graphic">
+      <img>
+        <xsl:attribute name="data-image"><xsl:value-of select="@url" /></xsl:attribute>
+      </img>
     </xsl:template>
 
     <xsl:template match="tei:pb">
@@ -78,6 +97,13 @@
         <xsl:attribute name="data-image"><xsl:value-of select="@facs"/><xsl:value-of select="@xml:id"/></xsl:attribute>
         Page <xsl:value-of select="@n"/>
       </div>
+      <div class="title-page">
+        <xsl:apply-templates/>
+      </div>
+    </xsl:template>
+
+    <xsl:template match="tei:hi[@rend='italic']">
+      <em><xsl:apply-templates/></em>
     </xsl:template>
 
     <xsl:template match="tei:date">
@@ -85,11 +111,13 @@
         <xsl:apply-templates/>
       </span>
     </xsl:template>
+
     <xsl:template match="tei:p">
       <p>
         <xsl:apply-templates/>
       </p>
     </xsl:template>
+
     <xsl:template match="tei:del">
       <del>
         <xsl:apply-templates/>
