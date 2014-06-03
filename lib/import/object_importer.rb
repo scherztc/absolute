@@ -18,6 +18,7 @@ class ObjectImporter
       print_output "Importing record #{i + 1} of #{@pids.count} : #{pid}"
       import_object(pid, fedora)
     end
+    print_output("Log file printed to #{log_file}")
     print_output(final_import_status)
   end
 
@@ -103,7 +104,18 @@ class ObjectImporter
   end
 
   def print_output(message)
+    File.open(log_file, 'a') { |io| io.puts message }
     puts message if @verbose
+  end
+
+  def log_file
+    return @log_file if @log_file
+
+    log_dir = File.join(Rails.root, 'log', 'imports')
+    FileUtils.mkdir_p(log_dir)
+
+    timestamp = Time.now.strftime("%Y_%m_%d_%H%M%S")
+    @log_file = File.join(log_dir, "object_import_#{timestamp}.log")
   end
 
   def final_import_status

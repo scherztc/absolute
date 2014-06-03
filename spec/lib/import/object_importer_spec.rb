@@ -16,6 +16,21 @@ describe ObjectImporter do
     ActiveFedora::Base.delete_all
   end
 
+  it 'has a log file' do
+    now = Time.now
+    allow(Time).to receive(:now) { now }
+
+    timestamp = now.strftime("%Y_%m_%d_%H%M%S")
+    dir = File.join(Rails.root, 'log', 'imports')
+    file = File.join(dir, "object_import_#{timestamp}.log")
+
+    importer = ObjectImporter.new(fedora_name, ['pid:1'])
+    expect(importer.log_file).to eq file
+
+    importer.import!
+    expect(File.exist?(file)).to eq true
+  end
+
   it 'creates new objects based on the source objects' do
     # In Case Western's fedora, the title is stored in dc:title
     # instead of in descMetadata.  Since the source_object is
@@ -35,9 +50,10 @@ describe ObjectImporter do
   end
 
   it 'keeps track of failed imports' do
-    importer = ObjectImporter.new(fedora_name, [source_text.pid])
+    pid = 'pid:123'
+    importer = ObjectImporter.new(fedora_name, [pid])
     importer.import!  # Should fail because there is no title in DC datastream, so new object will be invalid.
-    expect(importer.failed_imports).to eq [source_text.pid]
+    expect(importer.failed_imports).to eq [pid]
   end
 
   context 'with files' do
