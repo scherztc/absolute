@@ -1,6 +1,9 @@
 require 'import/dsid_map'
 require 'import/work_factory'
 
+class UnableToCreateLinkedResourceError < StandardError; end
+
+
 class ObjectImporter
 
   attr_reader :failed_imports
@@ -33,12 +36,14 @@ class ObjectImporter
   def import_object(pid, fedora)
     source_object = fedora.find(pid)
     new_object = WorkFactory.new(source_object).build_work
-    copy_datastreams(source_object, new_object)
+    dsids = characterize_datastreams(source_object)
+    copy_datastreams(dsids[:xml], source_object, new_object)
     new_object.rights = license
     new_object.visibility = visibility
     new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
-    attach_files(source_object, new_object)
+    attach_files(dsids[:attached_files], source_object, new_object)
+    attach_links(dsids[:links], source_object, new_object)
   rescue => e
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
@@ -56,9 +61,8 @@ class ObjectImporter
     Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
-  def copy_datastreams(source_object, new_object)
-    xml_datastreams = dsid_hash(source_object)[:xml]
-    xml_datastreams.each do |dsid|
+  def copy_datastreams(dsids, source_object, new_object)
+    dsids.each do |dsid|
       print_output "    Copying datastream: #{dsid}"
       source_datastream = source_object.datastreams[dsid]
       target_dsid = DsidMap.target_dsid(dsid)
@@ -67,9 +71,8 @@ class ObjectImporter
     end
   end
 
-  def attach_files(source_object, new_object)
-    files_to_attach = dsid_hash(source_object)[:attached_files]
-    files_to_attach.each do |dsid|
+  def attach_files(dsids, source_object, new_object)
+    dsids.each do |dsid|
       source_datastream = source_object.datastreams[dsid]
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
@@ -81,23 +84,48 @@ class ObjectImporter
     end
   end
 
-  # Sort the source object's datastreams based on how we want to handle them.
+  def attach_links(dsids, source_object, new_object)
+    dsids.each do |dsid|
+      print_output("    Handling datastream #{dsid}:")
+      source_datastream = source_object.datastreams[dsid]
+      attrs = { title: source_object.datastreams[dsid].label,
+                url: source_object.datastreams[dsid].dsLocation,
+                batch: new_object
+      }
+      link = Worthwhile::LinkedResource.new(attrs)
+      actor = Worthwhile::CurationConcern.actor(link, User.batchuser, attrs)
+      unless actor.create
+        raise UnableToCreateLinkedResourceError.new
+      end
+      print_output("      Created Linked Resource: #{actor.curation_concern.pid}")
+    end
+  end
+
+  # Sort the source object's datastreams based on how we want to handle them during import.
+  # For external or redirect datastreams, we'll create a linked resource for the object.
   # XML datastreams can just be copied straight from the source object.
   # For other types of datastreams, we will create a new generic file
   # and attach it to the new object (has to be done after the PID has
   # been assigned to the new object).
-  def dsid_hash(source_object)
-    # Exclude DC datastream because that is already being handled when
-    # the object gets built.
-    # TODO: Decide if we should import RELS-EXT
+  def characterize_datastreams(source_object)
+    # Exclude DC datastream because that is already being
+    # handled when the new object gets initialized.
     exclude_datastreams = ['RELS-EXT', 'DC', 'descMetadata']
     datastreams_to_import = source_object.datastreams.keys - exclude_datastreams
 
-    dsids = { xml: [], attached_files: [] }
+    xml_types = ['text/xml', 'application/xml']
+
+    dsids = { xml: [], attached_files: [], links: [] }
     datastreams_to_import.each do |dsid|
-      source_datastream = source_object.datastreams[dsid]
-      xml_datastream = ['text/xml', 'application/xml'].include?(source_datastream.mimeType)
-      key = xml_datastream ? :xml : :attached_files
+      source_ds = source_object.datastreams[dsid]
+
+      key = if source_ds.external? || source_ds.redirect?
+              :links
+            elsif xml_types.include?(source_ds.mimeType)
+              :xml
+            else
+              :attached_files
+            end
       dsids[key] << dsid
     end
     dsids
@@ -110,10 +138,8 @@ class ObjectImporter
 
   def log_file
     return @log_file if @log_file
-
     log_dir = File.join(Rails.root, 'log', 'imports')
     FileUtils.mkdir_p(log_dir)
-
     timestamp = Time.now.strftime("%Y_%m_%d_%H%M%S")
     @log_file = File.join(log_dir, "object_import_#{timestamp}.log")
   end

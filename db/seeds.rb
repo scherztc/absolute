@@ -12,3 +12,7 @@ roles.each do | name |
   puts "  #{name}"
   Role.first_or_create(name: name)
 end
+
+puts "Seeding Batch User:"
+User.first_or_create(username: User.batchuser_key)
+

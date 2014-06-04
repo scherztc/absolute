@@ -10,6 +10,10 @@ describe WorkFactory do
   let(:tei) {{ dsid: 'TEI.XML',   mimeType: 'text/xml' }}
   let(:gif) {{ dsid: 'HELLO.GIF', mimeType: 'image/gif' }}
 
+  # Datastreams that are External or Redirect control group:
+  let(:video)   {{ dsid: 'VIDEO', mimeType: 'text/xml', controlGroup: 'R' }}
+  let(:article) {{ dsid: 'ARTICLE', mimeType: 'text/xml', controlGroup: 'E' }}
+
   before do
     stub_out_dc_parser
   end
@@ -126,6 +130,32 @@ describe WorkFactory do
       let(:object) {
         obj = FactoryGirl.build(:audio)
         obj.add_file_datastream('pdf content', pdf)
+        obj
+      }
+
+      it 'returns a Text work' do
+        expect(WorkFactory.new(object).build_work.class).to eq Text
+      end
+    end
+
+    context 'the source object has a link called "VIDEO"' do
+      let(:object) {
+        obj = FactoryGirl.build(:audio)
+        ds = obj.create_datastream(ActiveFedora::Datastream, 'VIDEO', video)
+        obj.add_datastream(ds)
+        obj
+      }
+
+      it 'returns a Video work' do
+        expect(WorkFactory.new(object).build_work.class). to eq Video
+      end
+    end
+
+    context 'the source object has a link called "ARTICLE"' do
+      let(:object) {
+        obj = FactoryGirl.build(:audio)
+        ds = obj.create_datastream(ActiveFedora::Datastream, 'ARTICLE', article)
+        obj.add_datastream(ds)
         obj
       }
 

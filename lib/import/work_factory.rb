@@ -5,13 +5,24 @@ class WorkFactory
   # Used by the ObjectImporter to select the right class for
   # importing a fedora object.
 
+  # This code relies on assumptions about how the fedora data
+  # looks in Digital Case 1.0 (the source fedora that we will
+  # import objects from).
+  # For example, in Digital Case 1.0 there are some objects
+  # with a datastream that has a dsid called "VIDEO" and has
+  # a controlGroup of "R" or "E".  When we import that object,
+  # we are assuming that the object's class should be Video
+  # and that the dsLocation of the "VIDEO" datastream should
+  # become the url for a LinkedResource that is associated with
+  # that new Video object.
+
   def initialize(source_object)
     @source_object = source_object
   end
 
   # Initialize a new work with attributes from the source
   # object's DC datastream.  The type of work that will be
-  # returned will be decided by examining the source_object.
+  # returned will be decided by examining the @source_object.
   def build_work
     dc_attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_attrs_hash
     work_class.new(dc_attrs)
@@ -27,6 +38,10 @@ class WorkFactory
     elsif image?
       return Image
     elsif has_pdf?
+      return Text
+    elsif has_external_video_link?
+      return Video
+    elsif has_external_article_link?
       return Text
     else
       return CaseGenericWork
@@ -72,6 +87,24 @@ class WorkFactory
   def has_pdf?
     pdf_types = ['application/pdf']
     mime_types.any?{|mime_type| pdf_types.include?(mime_type) }
+  end
+
+  def has_external_video_link?
+    dsids_for_videos = ['video']
+    has_external_link_for?(dsids_for_videos)
+  end
+
+  def has_external_article_link?
+    dsids_for_texts = ['article']
+    has_external_link_for?(dsids_for_texts)
+  end
+
+  def has_external_link_for?(special_dsids)
+    @source_object.datastreams.keys.any?{ |dsid|
+      has_matching_dsid = special_dsids.map(&:downcase).include?(dsid.downcase)
+      ds = @source_object.datastreams[dsid]
+      has_matching_dsid && (ds.external? || ds.redirect?)
+    }
   end
 
 end

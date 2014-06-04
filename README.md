@@ -89,14 +89,20 @@ you'll get helpful comments in the source like this:
 
 ### Importing fedora objects from Case Western's fedora
 
+* Make sure the batch user exists.  It can be created by running rake db:seed or in the rails console:
+
+```ruby
+User.first_or_create(username: User.batchuser_key)
+```
+
 * Add an entry called 'case' to your config/fedora.yml file.
 
 * Run the ```rake import:pids``` command.
-  * 1st argument : The name of the fedora.yml entry
+  * 1st argument : The name of the fedora.yml entry for the remote fedora
   * Remaining arguments : A list of PIDs to import from the remote fedora
 
 ```bash
-rake import:pids["case, pid:1, pid:2, pid:3"]
+RAILS_ENV=development rake import:pids["case, pid:1, pid:2, pid:3"]
 ```
 
 ## Deploying to the Sandbox

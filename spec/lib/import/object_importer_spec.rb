@@ -56,23 +56,41 @@ describe ObjectImporter do
     expect(importer.failed_imports).to eq [pid]
   end
 
-  context 'with files' do
-    let (:content) { 'contents of a file' }
+
+  context 'with files and external links' do
+    let(:content) { 'contents of a file' }
+
+    # Try to simulate what external link datastreams look like
+    # in Digital Case 1.0
+    let(:link1) {{ controlGroup: 'R',
+                   dsLocation: 'http://example.com/1',
+                   label: 'Link to Part 1',
+                   mimeType: 'text/xml' }}
+    let(:link2) {{ controlGroup: 'E',
+                   dsLocation: 'http://example.com/2',
+                   label: 'Link to Part 2',
+                   mimeType: 'text/xml' }}
+
     before do
-      Worthwhile::GenericFile.delete_all
+      User.first_or_create(username: User.batchuser_key)
       source_text.add_file_datastream(content, { dsid: 'weaedm186.pdf', mimeType: 'application/pdf' })
+      ds1 = source_text.create_datastream(ActiveFedora::Datastream, 'link1', link1)
+      ds2 = source_text.create_datastream(ActiveFedora::Datastream, 'link2', link2)
+      source_text.add_datastream(ds1)
+      source_text.add_datastream(ds2)
       source_text.save!
       allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
     end
 
-    it 'knows which datastreams should be attached as generic files' do
+    it 'characterizes the datastreams' do
       importer = ObjectImporter.new(fedora_name, [source_text.pid])
       fedora = importer.connect_to_remote_fedora
       source_object = fedora.find(source_text.pid)
-      dsids = importer.dsid_hash(source_object)
+      dsids = importer.characterize_datastreams(source_object)
 
       expect(dsids[:attached_files]).to eq ['weaedm186.pdf']
       expect(dsids[:xml].sort).to eq ['properties', 'rightsMetadata']
+      expect(dsids[:links].sort).to eq ['link1', 'link2']
     end
 
     it 'attaches the file to the new object' do
@@ -83,6 +101,33 @@ describe ObjectImporter do
         file_content = file.datastreams['content'].content
         expect(file_content).to eq content
         expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      end
+    end
+
+    it 'creates linked resources for the external links' do
+      importer = ObjectImporter.new(fedora_name, [source_text.pid])
+      importer.import!
+
+      urls = Worthwhile::LinkedResource.all.map(&:url).sort
+      expect(urls).to eq [link1[:dsLocation], link2[:dsLocation]].sort
+      new_text_pid = (Text.all.map(&:pid) - [source_text.pid]).first
+      parent_pids = Worthwhile::LinkedResource.all.map(&:batch).map(&:pid).uniq
+      expect(parent_pids).to eq [new_text_pid]
+    end
+
+    context 'when it fails to create the linked resource' do
+      before do
+        attrs = { url: link1[:dsLocation], title: link1[:label] }
+        failed_link = Worthwhile::LinkedResource.new(attrs)
+        failed_actor = CurationConcern::LinkedResourceActor.new(failed_link, User.batchuser, link1)
+        allow(failed_actor).to receive(:create) { false }
+        allow(Worthwhile::CurationConcern).to receive(:actor) { failed_actor }
+      end
+
+      it 'logs the pid as a failed import' do
+        importer = ObjectImporter.new(fedora_name, [source_text.pid])
+        importer.import!
+        expect(importer.failed_imports).to eq [source_text.pid]
       end
     end
   end
