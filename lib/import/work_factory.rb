@@ -54,7 +54,7 @@ class WorkFactory
     elsif has_external_article_link?
       return Text
     else
-      return CaseGenericWork
+      return Text
     end
   end
 

@@ -182,7 +182,7 @@ describe WorkFactory do
       let(:object) { FactoryGirl.build(:audio) }
 
       it 'returns a generic work' do
-        expect(WorkFactory.new(object).build_work.class).to eq CaseGenericWork
+        expect(WorkFactory.new(object).build_work.class).to eq Text
       end
     end
 
