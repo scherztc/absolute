@@ -1,7 +1,9 @@
 require 'spec_helper'
+require 'support/import_helper'
 require 'import/object_importer'
 
 describe ObjectImporter do
+  include ImportHelper
 
   let(:source_text)  { FactoryGirl.create(:text) }
   let(:fedora_name) { 'test' }
@@ -10,6 +12,7 @@ describe ObjectImporter do
 
   before do
     ActiveFedora::Base.delete_all
+    stub_out_set_pid
   end
 
   after :all do

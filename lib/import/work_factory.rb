@@ -1,5 +1,7 @@
 require 'import/dc_parser'
 
+class PidAlreadyInUseError < StandardError; end
+
 class WorkFactory
 
   # Used by the ObjectImporter to select the right class for
@@ -25,7 +27,15 @@ class WorkFactory
   # returned will be decided by examining the @source_object.
   def build_work
     dc_attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_attrs_hash
+    dc_attrs = dc_attrs.merge(pid: set_pid)
     work_class.new(dc_attrs)
+  end
+
+  def set_pid
+    if ActiveFedora::Base.exists?(@source_object.pid)
+      raise PidAlreadyInUseError.new
+    end
+    @source_object.pid
   end
 
   def work_class

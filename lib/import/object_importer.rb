@@ -3,7 +3,6 @@ require 'import/work_factory'
 
 class UnableToCreateLinkedResourceError < StandardError; end
 
-
 class ObjectImporter
 
   attr_reader :failed_imports

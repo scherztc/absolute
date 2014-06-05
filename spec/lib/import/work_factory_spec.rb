@@ -1,7 +1,9 @@
 require 'spec_helper'
+require 'support/import_helper'
 require 'import/work_factory'
 
 describe WorkFactory do
+  include ImportHelper
 
   let(:mpg) {{ dsid: 'HELLO.MPG', mimeType: 'video/mpeg' }}
   let(:wav) {{ dsid: 'HELLO.WAV', mimeType: 'audio/x-wav' }}
@@ -14,11 +16,23 @@ describe WorkFactory do
   let(:video)   {{ dsid: 'VIDEO', mimeType: 'text/xml', controlGroup: 'R' }}
   let(:article) {{ dsid: 'ARTICLE', mimeType: 'text/xml', controlGroup: 'E' }}
 
-  before do
-    stub_out_dc_parser
+  before { stub_out_dc_parser }
+
+
+  describe 'importing an object with a PID that already exists' do
+    let(:text) { FactoryGirl.build(:text) }
+
+    it 'raises an error' do
+      expect(ActiveFedora::Base).to receive(:exists?).and_return(true) 
+      expect {
+        WorkFactory.new(text).build_work
+      }.to raise_error(PidAlreadyInUseError)
+    end
   end
 
+
   describe 'build_work:' do
+    before { stub_out_set_pid }
 
     context 'the source object contains an MPG datastream' do
       let(:video) {
