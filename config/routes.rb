@@ -13,6 +13,7 @@ Absolute::Application.routes.draw do
   mount Hydra::Collections::Engine => '/'
   worthwhile_curation_concerns
   worthwhile_collections
+  worthwhile_embargo_management
 
   resource :admin_menu, only: :show, controller: 'admin_menu'
 end
