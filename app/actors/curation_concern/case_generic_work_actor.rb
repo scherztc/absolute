@@ -1,5 +1,3 @@
-# Generated via
-#  `rails generate curate:work Text`
 module CurationConcern
   class CaseGenericWorkActor < CurationConcern::GenericWorkActor
 
