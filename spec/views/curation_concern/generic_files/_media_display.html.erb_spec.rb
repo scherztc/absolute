@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "curation_concern/generic_files/_media_display.html.erb" do
   before do
-    view.stub(:generic_file).and_return(generic_file)
+    allow(view).to receive(:generic_file).and_return(generic_file)
   end
   context "for an image" do
     let(:generic_file) { double(id: 'abc123', image?: true) }
