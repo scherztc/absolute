@@ -12,15 +12,6 @@ GIT
       sufia-models (~> 4.0.0.beta4)
 
 GIT
-  remote: git://github.com/projecthydra-labs/hydra-collections.git
-  revision: ef30236c717931c079b361e5591348b1791416ef
-  branch: allow_hydra_head-7-1
-  specs:
-    hydra-collections (2.0.2)
-      blacklight
-      hydra-head (~> 7.0)
-
-GIT
   remote: git://github.com/projecthydra/sufia.git
   revision: fec4e455e4a97cb5bb87ed19599f5c3917b139ea
   ref: fec4e45
@@ -216,6 +207,9 @@ GEM
       cancancan
       deprecation
       sass-rails
+    hydra-collections (2.0.3)
+      blacklight
+      hydra-head (~> 7.0)
     hydra-core (7.1.0.rc1)
       block_helpers
       hydra-access-controls (= 7.1.0.rc1)
@@ -519,7 +513,6 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicode (0.4.4.1)
     uuidtools (2.1.4)
     vegas (0.1.11)
       rack (>= 1.0.0)
@@ -545,7 +538,6 @@ DEPENDENCIES
   devise-guests (~> 0.3)
   devise_cas_authenticatable (~> 1.3.6)
   factory_girl_rails
-  hydra-collections!
   hydra-head (= 7.1.0.rc1)
   hydra-remote_identifier
   hydra-role-management (= 0.1.0)
@@ -567,5 +559,4 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
-  unicode
   worthwhile!

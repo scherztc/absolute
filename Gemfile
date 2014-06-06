@@ -33,10 +33,8 @@ gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'worthwhile', github:'curationexperts/worthwhile'
 gem 'sufia-models', github:'projecthydra/sufia', ref: 'fec4e45'
-gem 'hydra-collections', github:'projecthydra-labs/hydra-collections', branch: 'allow_hydra_head-7-1'
 gem 'hydra-head', '7.1.0.rc1'
 
-gem "unicode", platforms: [:mri_18, :mri_19]
 gem "bootstrap-sass"
 gem 'hydra-role-management', '0.1.0'
 gem 'hydra-remote_identifier'
