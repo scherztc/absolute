@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.datetime "updated_at"
   end
 
-  add_index "help_requests", ["created_at"], name: "i_help_requests_created_at"
+  add_index "help_requests", ["created_at"], name: "index_help_requests_on_created_at"
   add_index "help_requests", ["user_id"], name: "index_help_requests_on_user_id"
 
   create_table "local_authorities", force: true do |t|
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.datetime "expires"
   end
 
-  add_index "mailboxer_notifications", ["conversation_id"], name: "i_mai_not_con_id"
+  add_index "mailboxer_notifications", ["conversation_id"], name: "index_mailboxer_notifications_on_conversation_id"
 
   create_table "mailboxer_receipts", force: true do |t|
     t.integer  "receiver_id"
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "mailboxer_receipts", ["notification_id"], name: "i_mai_rec_not_id"
+  add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
 
   create_table "proxy_deposit_rights", force: true do |t|
     t.integer  "grantor_id"
@@ -139,8 +139,8 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.datetime "updated_at"
   end
 
-  add_index "proxy_deposit_rights", ["grantee_id"], name: "i_pro_dep_rig_grantee_id"
-  add_index "proxy_deposit_rights", ["grantor_id"], name: "i_pro_dep_rig_grantor_id"
+  add_index "proxy_deposit_rights", ["grantee_id"], name: "index_proxy_deposit_rights_on_grantee_id"
+  add_index "proxy_deposit_rights", ["grantor_id"], name: "index_proxy_deposit_rights_on_grantor_id"
 
   create_table "roles", force: true do |t|
     t.string "name"
@@ -151,8 +151,8 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.integer "user_id"
   end
 
-  add_index "roles_users", ["role_id", "user_id"], name: "i_roles_users_role_id_user_id"
-  add_index "roles_users", ["user_id", "role_id"], name: "i_roles_users_user_id_role_id"
+  add_index "roles_users", ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id"
+  add_index "roles_users", ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
 
   create_table "searches", force: true do |t|
     t.text     "query_params"
@@ -173,13 +173,13 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.datetime "updated_at"
   end
 
-  create_table "subject_local_auth_entries", force: true do |t|
+  create_table "subject_local_authority_entries", force: true do |t|
     t.string "label"
     t.string "lowerLabel"
     t.string "url"
   end
 
-  add_index "subject_local_auth_entries", ["lowerLabel"], name: "entries_by_lower_label"
+  add_index "subject_local_authority_entries", ["lowerLabel"], name: "entries_by_lower_label"
 
   create_table "trophies", force: true do |t|
     t.integer  "user_id"
@@ -189,18 +189,18 @@ ActiveRecord::Schema.define(version: 20140606142020) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "username",                   default: "",    null: false
+    t.string   "username",                             default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",              default: 0,     null: false
+    t.integer  "sign_in_count",                        default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "guest",                      default: false
+    t.boolean  "guest",                                default: false
     t.string   "facebook_handle"
     t.string   "twitter_handle"
     t.string   "googleplus_handle"
@@ -221,13 +221,13 @@ ActiveRecord::Schema.define(version: 20140606142020) do
     t.text     "group_list"
     t.datetime "groups_last_update"
     t.boolean  "agreed_to_terms_of_service"
-    t.boolean  "user_no_profile_update",     default: false
+    t.boolean  "user_does_not_require_profile_update", default: false
     t.string   "repository_id"
   end
 
   add_index "users", ["name"], name: "index_users_on_name"
   add_index "users", ["repository_id"], name: "index_users_on_repository_id", unique: true
-  add_index "users", ["reset_password_token"], name: "i_users_reset_password_token", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
   create_table "version_committers", force: true do |t|
