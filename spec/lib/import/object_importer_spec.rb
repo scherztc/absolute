@@ -96,15 +96,20 @@ describe ObjectImporter do
       expect(dsids[:links].sort).to eq ['link1', 'link2']
     end
 
-    it 'attaches the file to the new object' do
+    it 'attaches the file to the new object and sets representative' do
       importer = ObjectImporter.new(fedora_name, [source_text.pid])
       importer.import!
+
       expect(Worthwhile::GenericFile.count).to eq 1
-      Worthwhile::GenericFile.all.each do |file|
-        file_content = file.datastreams['content'].content
-        expect(file_content).to eq content
-        expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
-      end
+      file = Worthwhile::GenericFile.first
+      file_content = file.datastreams['content'].content
+      expect(file_content).to eq content
+      expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+
+      expect(Text.count).to eq 2
+      new_pid = (Text.all.map(&:pid) - [source_text.pid]).first
+      new_object = Text.find(new_pid)
+      expect(new_object.representative).to eq file.pid
     end
 
     it 'creates linked resources for the external links' do

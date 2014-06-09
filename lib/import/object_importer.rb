@@ -35,14 +35,19 @@ class ObjectImporter
   def import_object(pid, fedora)
     source_object = fedora.find(pid)
     new_object = WorkFactory.new(source_object).build_work
+
     dsids = characterize_datastreams(source_object)
     copy_datastreams(dsids[:xml], source_object, new_object)
     new_object.rights = license
     new_object.visibility = visibility
     new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
+
     attach_files(dsids[:attached_files], source_object, new_object)
     attach_links(dsids[:links], source_object, new_object)
+
+    select_representative(new_object)
+    save_again_if_needed(new_object)
   rescue => e
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
@@ -128,6 +133,20 @@ class ObjectImporter
       dsids[key] << dsid
     end
     dsids
+  end
+
+  def select_representative(new_object)
+    if new_object.generic_file_ids.count == 1
+      new_object.representative = new_object.generic_file_ids.first
+    end
+  end
+
+  # If the object has been modified since it was created, save
+  # it again.
+  def save_again_if_needed(new_object)
+    if new_object.representative
+      new_object.save!
+    end
   end
 
   def print_output(message)
