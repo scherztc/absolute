@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: dc334d8d53eb4b6e283cc288a31095eaf8bba86f
+  revision: 311399ea15f71eed5132eddd9345a538b08156ed
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -27,7 +27,7 @@ GEM
       activesupport (= 4.1.2.rc1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    active-fedora (7.0.3)
+    active-fedora (7.0.4)
       activesupport (>= 3.0.0)
       deprecation
       linkeddata
