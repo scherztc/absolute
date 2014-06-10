@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 3ea14f44f2190f396865a756aa488da2b9000dc9
+  revision: dc334d8d53eb4b6e283cc288a31095eaf8bba86f
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -148,7 +148,7 @@ GEM
     equivalent-xml (0.4.2)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    execjs (2.1.0)
+    execjs (2.2.0)
     extlib (0.9.16)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -211,7 +211,7 @@ GEM
       bootstrap_forms
       cancan
     i18n (0.6.9)
-    jbuilder (2.0.7)
+    jbuilder (2.1.0)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jettywrapper (1.7.0)
@@ -227,7 +227,7 @@ GEM
     json-ld (1.1.5)
       rdf (~> 1.1, >= 1.1.4)
     jwt (1.0.0)
-    kaminari (0.15.1)
+    kaminari (0.16.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     launchy (2.4.2)
@@ -392,7 +392,7 @@ GEM
     rspec-its (1.0.1)
       rspec-core (>= 2.99.0.beta1)
       rspec-expectations (>= 2.99.0.beta1)
-    rspec-mocks (3.0.0)
+    rspec-mocks (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-rails (3.0.1)
       actionpack (>= 3.0)
@@ -424,7 +424,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    signet (0.5.0)
+    signet (0.5.1)
       addressable (>= 2.2.3)
       faraday (>= 0.9.0.rc5)
       jwt (>= 0.1.5)
