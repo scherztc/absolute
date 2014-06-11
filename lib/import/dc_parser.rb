@@ -1,3 +1,11 @@
+class MultipleValuesError < StandardError
+  def initialize(field_name=nil)
+    message = "Multiple values were found for single-value field: #{field_name}"
+    super(message)
+  end
+end
+
+
 class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
 
   # Warning: This is a kludge!
@@ -44,6 +52,11 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
     attrs_hash = {}
     all_fields.each do |field|
       value = Array(self.send(field))
+
+      if single_value_fields.include?(field) && value.count > 1
+        raise MultipleValuesError.new(field)
+      end
+
       unless value.blank?
         value = value.map{|v| v.gsub(new_lines, " ") }
         attrs_hash[field] = value
