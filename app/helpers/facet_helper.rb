@@ -7,6 +7,7 @@ module FacetHelper
 
   # Convert a 2 or 3 letter (ISO-639-1 or ISO-639-3) code to language name
   def display_language(val)
-    LanguageList::LanguageInfo.find(val).name
+    lang = LanguageList::LanguageInfo.find(val)
+    lang ? lang.name : val
   end
 end
