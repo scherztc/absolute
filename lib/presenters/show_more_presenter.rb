@@ -20,16 +20,14 @@ class ShowMorePresenter < Blacklight::DocumentPresenter
   end
 
   def truncate_field?(field, value)
-    # Description field is a single-value field, so just check
-    # the length of the first value.
-    length = Array(value).first.length
+    length = Array(value).inject(0) {|sum, v| sum = sum + v.length }
     field == 'desc_metadata__description_tesim' && length > max_length
   end
 
   def render_truncated_field_value(value=nil, field_config=nil)
     safe_values = Array(value).collect { |x| x.respond_to?(:force_encoding) ? x.force_encoding("UTF-8") : x }
 
-    long_value = safe_values.first
+    long_value = safe_values.join(', ')
     short_value = long_value.truncate(max_length - 30)
 
     long_field = content_tag(:div, long_value, class: 'show-less')

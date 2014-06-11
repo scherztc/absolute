@@ -46,6 +46,17 @@ describe ShowMorePresenter do
       end
     end
 
+    context 'if there are multiple descriptions that become too long' do
+      let(:desc1) { "Biographies of scholars without exhibit images " }
+      let(:desc2) { "Dr. Leroy Bundy, Class of 1903. Dr. Bundy graduated from the Western Reserve University Dental School but did not open an office. Instead, he worked for the Woodcliff Dentists, an advertising dental office. He later made several unsuccessful attempts to establish offices in Detroit and Chicago and finally settled in St. Louis. Eventually, Dr. Bundy returned to Cleveland and established a practice. In 1930, he entered politics and was elected to the City Council, a position he held for ten years." }
+      let(:long_desc) { [desc1, desc2] }
+
+      it 'truncates the field' do
+        expect(subject).to receive(:render_truncated_field_value)
+        subject.render_index_field_value(desc_field, { value: long_desc })
+      end
+
+    end
   end
 
 end
