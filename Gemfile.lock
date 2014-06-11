@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: c39c7fbf255ed5e4d57e45bebb210372c8d78fac
+  revision: 384af884983201523cf74df2f5722db799f798ee
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -227,7 +227,7 @@ GEM
     json-ld (1.1.5)
       rdf (~> 1.1, >= 1.1.4)
     jwt (1.0.0)
-    kaminari (0.16.0)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     launchy (2.4.2)
