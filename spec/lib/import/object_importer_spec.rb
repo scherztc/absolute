@@ -77,10 +77,12 @@ describe ObjectImporter do
     before do
       User.first_or_create(username: User.batchuser_key)
       source_text.add_file_datastream(content, { dsid: 'weaedm186.pdf', mimeType: 'application/pdf' })
+      source_text.datastreams['weaedm186.pdf'].dsState = 'D'
       ds1 = source_text.create_datastream(ActiveFedora::Datastream, 'link1', link1)
       ds2 = source_text.create_datastream(ActiveFedora::Datastream, 'link2', link2)
       source_text.add_datastream(ds1)
       source_text.add_datastream(ds2)
+      source_text.datastreams['link1'].dsState = 'D'
       source_text.save!
       allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
     end
@@ -136,6 +138,33 @@ describe ObjectImporter do
         importer = ObjectImporter.new(fedora_name, [source_text.pid])
         importer.import!
         expect(importer.failed_imports).to eq [source_text.pid]
+      end
+    end
+
+    context 'when it has a non-active state' do
+      before do
+        source_text.state = 'I'
+        source_text.save!
+      end
+
+      it 'sets the correct state for parent object, attached files, and external links' do
+        importer = ObjectImporter.new(fedora_name, [source_text.pid])
+        importer.import!
+
+        expect(Text.count).to eq 2
+        new_pid = (Text.all.map(&:pid) - [source_text.pid]).first
+        new_object = Text.find(new_pid)
+        expect(new_object.state).to eq 'I'
+
+        expect(Worthwhile::GenericFile.count).to eq 1
+        file = Worthwhile::GenericFile.first
+        expect(file.state).to eq 'D'
+        expect(file.datastreams['content'].state).to eq 'D'
+
+        link_states = Worthwhile::LinkedResource.all.map(&:state).sort
+        expect(link_states).to eq ['A', 'D']
+        link_content_states = Worthwhile::LinkedResource.all.map {|link| link.datastreams['content'].state }.sort
+        expect(link_content_states).to eq ['A', 'D']
       end
     end
   end

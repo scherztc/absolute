@@ -40,14 +40,14 @@ class ObjectImporter
     copy_datastreams(dsids[:xml], source_object, new_object)
     new_object.rights = license
     new_object.visibility = visibility
+
+    new_object.generic_file_ids = attach_files(dsids[:attached_files], source_object, new_object)
+    attach_links(dsids[:links], source_object, new_object)
+    select_representative(new_object)
+
     new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
-
-    attach_files(dsids[:attached_files], source_object, new_object)
-    attach_links(dsids[:links], source_object, new_object)
-
-    select_representative(new_object)
-    save_again_if_needed(new_object)
+    set_state(new_object, source_object.state)
   rescue => e
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
@@ -76,16 +76,22 @@ class ObjectImporter
   end
 
   def attach_files(dsids, source_object, new_object)
+    file_ids = []
     dsids.each do |dsid|
       source_datastream = source_object.datastreams[dsid]
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
         file.visibility = visibility
+        file.datastreams['content'].dsState = source_datastream.state
         file.save!
-        Sufia.queue.push(CharacterizeJob.new(file.pid))
         print_output("    Handling datastream #{dsid}: Created GenericFile #{file.pid}")
+
+        set_state(file, source_datastream.state)
+        file_ids << file.pid
+        Sufia.queue.push(CharacterizeJob.new(file.pid))
       end
     end
+    file_ids
   end
 
   def attach_links(dsids, source_object, new_object)
@@ -97,11 +103,13 @@ class ObjectImporter
                 batch: new_object
       }
       link = Worthwhile::LinkedResource.new(attrs)
+      link.datastreams['content'].dsState = source_datastream.state
       actor = Worthwhile::CurationConcern.actor(link, User.batchuser, attrs)
       unless actor.create
         raise UnableToCreateLinkedResourceError.new
       end
       print_output("      Created Linked Resource: #{actor.curation_concern.pid}")
+      set_state(link, source_datastream.state)
     end
   end
 
@@ -141,11 +149,13 @@ class ObjectImporter
     end
   end
 
-  # If the object has been modified since it was created, save
-  # it again.
-  def save_again_if_needed(new_object)
-    if new_object.representative
-      new_object.save!
+  # Setting state to anything but 'A' requires you to save
+  # the object a second time.
+  # https://jira.duraspace.org/browse/FCREPO-1212
+  def set_state(object, new_state)
+    if object.state != new_state
+      object.state = new_state
+      object.save!
     end
   end
 
