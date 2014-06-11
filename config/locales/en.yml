@@ -20,8 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  an_admin_collection: "an Institutional Collection"
-  admin_collection: "Institutional Collection"  
   sufia:
     product_name:       "Digital Case"
     institution_name:   "Case Western Reserve University"
@@ -42,3 +40,6 @@ en:
         q:
           label:        "Search Collections"
           placeholder:  "Type search here..."
+  worthwhile:
+    facet:
+      creator: People

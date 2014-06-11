@@ -14,7 +14,7 @@ describe CatalogController do
       it "shows public collections" do
         get :index
         expect(response).to be_successful
-        expect(assigns(:document_list).map(&:id)).to match_array([collection.id])
+        expect(assigns(:document_list).map(&:id)).to match_array [collection.id]
       end
     end
   end
@@ -27,5 +27,10 @@ describe CatalogController do
   describe "language facet" do
     subject { CatalogController.blacklight_config.facet_fields['desc_metadata__language_sim'] }
     its(:helper_method) { should eq :display_language }
+  end
+
+  describe "creator facet" do
+    subject { CatalogController.blacklight_config.facet_fields['desc_metadata__creator_sim'] }
+    its(:label) { should eq 'People' }
   end
 end

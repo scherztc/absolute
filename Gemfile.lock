@@ -1,10 +1,9 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 384af884983201523cf74df2f5722db799f798ee
+  revision: b8f0a837e2ae95bb77e6770b82152ceb8efc61bd
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
-      blacklight_advanced_search (~> 5.0)
       breadcrumbs_on_rails (~> 2.3.0)
       hydra-collections
       hydra-head (= 7.1.0.rc1)
@@ -76,10 +75,6 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.6)
-    blacklight_advanced_search (5.1.0)
-      blacklight (>= 5.2, < 6.0)
-      parslet
-    blankslate (2.1.2.4)
     block_helpers (0.3.3)
       activesupport (>= 2.0)
     bootstrap-sass (3.1.1.1)
@@ -302,8 +297,6 @@ GEM
     openseadragon (0.0.8)
       rails (> 3.2.0)
     orm_adapter (0.5.0)
-    parslet (1.6.1)
-      blankslate (~> 2.0)
     polyglot (0.3.5)
     rack (1.5.2)
     rack-protection (1.5.3)
