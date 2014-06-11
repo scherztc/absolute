@@ -59,4 +59,22 @@ describe FacetHelper do
       expect(subject).to have_selector 'li:nth-child(2) a.facet_select', text: 'Musical Score' 
     end
   end
+
+  describe "should_render_facet?" do
+
+    let(:facet) { Blacklight::SolrResponse::Facets::FacetField.new field, [item] }
+    let(:field) { 'human_readable_type_sim' }
+    let(:item) { Blacklight::SolrResponse::Facets::FacetItem.new value: item_value, hits: 1 }
+    subject { helper.should_render_facet?(facet) }
+    context 'when field is Type of Work and item is Collection' do
+      let(:item_value) { 'Collection' }
+      it { should be false }
+    end
+
+    context 'when field is Type of Work and item is not Collection' do
+      let(:item_value) { 'Text' }
+
+      it { should be true }
+    end
+  end
 end

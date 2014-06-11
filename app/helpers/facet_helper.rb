@@ -39,4 +39,10 @@ module FacetHelper
       render_facet_value(solr_field, item)
     end
   end
+
+  ## Override blacklight so we don't display the "Type of Work" when the only item is "Collections" which is hidden.
+  def should_render_facet?(display_facet)
+    return false if display_facet.name == 'human_readable_type_sim' && display_facet.items.reject { |item| item.value == 'Collection'}.empty?
+    super
+  end
 end
