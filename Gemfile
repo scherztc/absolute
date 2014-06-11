@@ -32,7 +32,7 @@ gem 'capistrano-rails', '~> 1.1',     group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'worthwhile', github: 'curationexperts/worthwhile'
-# gem 'worthwhile', path: '../worthwhile'
+#gem 'worthwhile', path: '../worthwhile'
 gem 'hydra-head', '7.1.0.rc1'
 
 gem "bootstrap-sass"

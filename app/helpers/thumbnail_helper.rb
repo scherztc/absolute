@@ -1,8 +1,9 @@
 module ThumbnailHelper
-  
   # @parameter document SolrDocument that you want to display a thumbnail for
   def thumbnail_tag(document, image_options)
-    if document.hydra_model == 'Audio'
+    if document.is_a? Worthwhile::GenericFile
+      generic_file_thumbnail_tag(document)
+    elsif document.hydra_model == 'Audio'
       image_tag "Audio.png", class: "canonical-image"
     elsif document.representative.present?
       super
@@ -17,7 +18,7 @@ module ThumbnailHelper
     end 
   end
   
-  def generic_file_thumbnail_tag(generic_file, width=36)
+  def generic_file_thumbnail_tag(generic_file, width=90)
     path = if generic_file.image? || generic_file.pdf? 
       download_path(generic_file, {datastream_id: 'thumbnail'})
     elsif generic_file.audio? 
@@ -29,9 +30,5 @@ module ThumbnailHelper
     end
     image_tag(path, width: width, class: 'thumbnail')   
   end  
-  
-  def generic_file_thumbnail_link_tag(generic_file, width=36)
-    link_to generic_file_thumbnail_tag(generic_file, width), curation_concern_generic_file_path(generic_file.noid), class: 'canonical-image'    
-  end
   
 end
