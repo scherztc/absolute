@@ -42,6 +42,8 @@ gem 'riiif', '0.0.9'
 gem 'openseadragon', '0.0.8'
 gem 'angularjs-rails'
 
+gem 'language_list'
+
 gem "devise"
 gem "devise-guests", "~> 0.3"
 gem 'devise_cas_authenticatable', '~> 1.3.6'

@@ -23,4 +23,9 @@ describe CatalogController do
     subject { CatalogController.blacklight_config.facet_fields.keys }
     it { should include('datastreams_ssim', 'collection_sim') }
   end
+
+  describe "language facet" do
+    subject { CatalogController.blacklight_config.facet_fields['desc_metadata__language_sim'] }
+    its(:helper_method) { should eq :display_language }
+  end
 end

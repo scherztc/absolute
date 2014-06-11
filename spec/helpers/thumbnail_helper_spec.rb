@@ -72,7 +72,7 @@ describe ThumbnailHelper do
   end
 
   describe 'generic_file_thumbnail_tag' do
-    let(:html_params) { return {width: 36, class: "thumbnail"} }
+    let(:html_params) { return {width: 90, class: "thumbnail"} }
     let(:generic_file) { GenericFile.new() }
     let(:download_path) { "thumbnail/path.png" }
     before { allow(helper).to receive(:download_path).with(generic_file, {datastream_id: 'thumbnail'}) {download_path} }

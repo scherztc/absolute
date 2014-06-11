@@ -5,6 +5,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     config.add_facet_field solr_name("datastreams", :symbol), label: "Datastreams", if: :admin?
     config.add_facet_field solr_name("collection", :facetable), label: "Collection", helper_method: :display_collection
+    config.facet_fields[solr_name("desc_metadata__language", :facetable)].helper_method = :display_language
   end
 
   protected

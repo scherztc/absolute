@@ -230,6 +230,7 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    language_list (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     legato (0.3.0)
@@ -538,6 +539,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails
+  language_list
   launchy
   mysql2
   openseadragon (= 0.0.8)
