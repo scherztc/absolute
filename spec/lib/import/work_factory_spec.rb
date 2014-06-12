@@ -33,157 +33,110 @@ describe WorkFactory do
 
   describe 'build_work:' do
     before { stub_out_set_pid }
+    let(:object) { ActiveFedora::Base.create }
+    subject { WorkFactory.new(object).build_work }
 
     context 'the source object contains an MPG datastream' do
-      let(:video) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('pdf content', pdf)
-        obj.add_file_datastream('mpg content', mpg)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
+        object.add_file_datastream('mpg content', mpg)
       }
 
-      it 'returns a Video work' do
-        new_object = WorkFactory.new(video).build_work
-        expect(new_object).to be_new_record
-        expect(new_object.class).to eq Video
-      end
+      it { should be_new_record }
+      it { should be_kind_of Video }
     end
 
     context 'the source object contains a WAV datastream' do
-      let(:audio) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('wav content', wav)
-        obj
+      before {
+        object.add_file_datastream('wav content', wav)
       }
 
-      it 'returns an Audio work' do
-        expect(WorkFactory.new(audio).build_work.class).to eq Audio
-      end
+      it { should be_kind_of Audio }
     end
 
     context 'the source object contains a MP3 datastream' do
-      let(:audio) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('mp3 content', mp3)
-        obj
+      before {
+        object.add_file_datastream('mp3 content', mp3)
       }
 
-      it 'returns an Audio work' do
-        expect(WorkFactory.new(audio).build_work.class).to eq Audio
-      end
+      it { should be_kind_of Audio }
     end
 
     context 'the source object contains both audio and video datastreams' do
-      let(:object) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('pdf content', pdf)
-        obj.add_file_datastream('mpg content', mpg)
-        obj.add_file_datastream('mp3 content', mp3)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
+        object.add_file_datastream('mpg content', mpg)
+        object.add_file_datastream('mp3 content', mp3)
       }
 
-      it 'returns a Video work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Video
-      end
+      it { should be_kind_of Video }
     end
 
     context 'the source object contains TEI datastreams' do
-      let(:object) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('pdf content', pdf)
-        obj.add_file_datastream('tei content', tei)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
+        object.add_file_datastream('tei content', tei)
       }
 
-      it 'returns a Text work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Text
-      end
+      it { should be_kind_of Text }
     end
 
     context 'the source object contains both TEI and MP3 datastreams' do
-      let(:object) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('pdf content', pdf)
-        obj.add_file_datastream('tei content', tei)
-        obj.add_file_datastream('mp3 content', mp3)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
+        object.add_file_datastream('tei content', tei)
+        object.add_file_datastream('mp3 content', mp3)
       }
 
-      it 'returns an Audio work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Audio
-      end
+      it { should be_kind_of Audio }
     end
 
     context 'the source object contains GIF datastream' do
-      let(:object) {
-        obj = FactoryGirl.build(:image)
-        obj.add_file_datastream('pdf content', pdf)
-        obj.add_file_datastream('gif content', gif)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
+        object.add_file_datastream('gif content', gif)
       }
 
-      it 'returns an Image work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Image
-      end
+      it { should be_kind_of Image }
     end
 
     context 'the source object contains both image and TEI' do
-      let(:object) {
-        obj = FactoryGirl.build(:text)
-        obj.add_file_datastream('gif content', gif)
-        obj.add_file_datastream('tei content', tei)
-        obj
+      before {
+        object.add_file_datastream('gif content', gif)
+        object.add_file_datastream('tei content', tei)
       }
 
-      it 'returns a Text work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Text
-      end
+      it { should be_kind_of Text }
     end
 
     context 'the source object contains a PDF datastream' do
-      let(:object) {
-        obj = FactoryGirl.build(:audio)
-        obj.add_file_datastream('pdf content', pdf)
-        obj
+      before {
+        object.add_file_datastream('pdf content', pdf)
       }
 
-      it 'returns a Text work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Text
-      end
+      it { should be_kind_of Text }
     end
 
     context 'the source object has a link called "VIDEO"' do
-      let(:object) {
-        obj = FactoryGirl.build(:audio)
-        ds = obj.create_datastream(ActiveFedora::Datastream, 'VIDEO', video)
-        obj.add_datastream(ds)
-        obj
+      before {
+        ds = object.create_datastream(ActiveFedora::Datastream, 'VIDEO', video)
+        object.add_datastream(ds)
       }
 
-      it 'returns a Video work' do
-        expect(WorkFactory.new(object).build_work.class). to eq Video
-      end
+      it { should be_kind_of Video }
     end
 
     context 'the source object has a link called "ARTICLE"' do
-      let(:object) {
-        obj = FactoryGirl.build(:audio)
-        ds = obj.create_datastream(ActiveFedora::Datastream, 'ARTICLE', article)
-        obj.add_datastream(ds)
-        obj
+      before {
+        ds = object.create_datastream(ActiveFedora::Datastream, 'ARTICLE', article)
+        object.add_datastream(ds)
       }
 
-      it 'returns a Text work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Text
-      end
+      it { should be_kind_of Text }
     end
 
     context "when it can't determine the type of object" do
-      let(:object) { FactoryGirl.build(:audio) }
-
-      it 'returns a generic work' do
-        expect(WorkFactory.new(object).build_work.class).to eq Text
-      end
+      it { should be_kind_of Text }
     end
 
   end  # build_work
