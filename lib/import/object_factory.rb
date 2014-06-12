@@ -3,7 +3,7 @@ require 'import/legacy_object'
 
 class PidAlreadyInUseError < StandardError; end
 
-class WorkFactory
+class ObjectFactory
 
   # Used by the ObjectImporter to select the right class for
   # importing a fedora object.
@@ -23,14 +23,14 @@ class WorkFactory
     @source_object = source_object
   end
 
-  # Initialize a new work with attributes from the source
+  # Initialize a new object with attributes from the source
   # object's DC datastream.  The type of work that will be
   # returned will be decided by examining the @source_object.
-  def build_work
+  def build_object
     obj = LegacyObject.new(DcParser.from_xml(@source_object.datastreams['DC'].content).to_h)
     obj.pid = set_pid
     obj.validate!
-    work_class.new(obj)
+    object_class.new(obj)
   end
 
   def set_pid
@@ -40,7 +40,7 @@ class WorkFactory
     @source_object.pid
   end
 
-  def work_class
+  def object_class
     if video?
       Video
     elsif audio?

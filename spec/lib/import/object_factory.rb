@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'support/import_helper'
-require 'import/work_factory'
+require 'import/object_factory'
 
-describe WorkFactory do
+describe ObjectFactory do
   include ImportHelper
 
   let(:mpg) {{ dsid: 'HELLO.MPG', mimeType: 'video/mpeg' }}
@@ -19,19 +19,19 @@ describe WorkFactory do
 
   describe 'importing an object with a PID that already exists' do
     let!(:object) { ActiveFedora::Base.create }
-    subject { WorkFactory.new(object) }
+    subject { ObjectFactory.new(object) }
 
     it 'raises an error' do
       expect(ActiveFedora::Base).to receive(:exists?).and_return(true) 
-      expect { subject.build_work }.to raise_error(PidAlreadyInUseError)
+      expect { subject.build_object }.to raise_error(PidAlreadyInUseError)
     end
   end
 
 
-  describe '#build_work' do
+  describe '#build_object' do
     before { stub_out_set_pid 'testme:1' }
     let(:object) { ActiveFedora::Base.create }
-    subject { WorkFactory.new(object).build_work }
+    subject { ObjectFactory.new(object).build_object }
 
     describe 'copying values' do
       let (:rights_statement) { Sufia.config.cc_licenses.first }
@@ -62,9 +62,9 @@ describe WorkFactory do
     end
   end
 
-  describe '#work_class' do
+  describe '#object_class' do
     let(:object) { ActiveFedora::Base.create }
-    subject { WorkFactory.new(object).work_class }
+    subject { ObjectFactory.new(object).object_class }
     context 'the source object contains an MPG datastream' do
       before {
         object.add_file_datastream('pdf content', pdf)

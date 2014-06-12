@@ -1,5 +1,5 @@
 require 'import/dsid_map'
-require 'import/work_factory'
+require 'import/object_factory'
 
 class UnableToCreateLinkedResourceError < StandardError; end
 
@@ -34,7 +34,7 @@ class ObjectImporter
 
   def import_object(pid, fedora)
     source_object = fedora.find(pid)
-    new_object = WorkFactory.new(source_object).build_work
+    new_object = ObjectFactory.new(source_object).build_object
 
     dsids = characterize_datastreams(source_object)
     copy_datastreams(dsids[:xml], source_object, new_object)
