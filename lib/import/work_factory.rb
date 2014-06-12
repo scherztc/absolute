@@ -1,4 +1,5 @@
 require 'import/dc_parser'
+require 'import/legacy_object'
 
 class PidAlreadyInUseError < StandardError; end
 
@@ -26,17 +27,10 @@ class WorkFactory
   # object's DC datastream.  The type of work that will be
   # returned will be decided by examining the @source_object.
   def build_work
-    dc_attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_attrs_hash
-    dc_attrs = transform_attributes(dc_attrs)
-    dc_attrs = dc_attrs.merge(pid: set_pid)
-    work_class.new(dc_attrs)
-  end
-
-  # If the attributes contains an entry with a key of language and a value of 'en' recode it as 'eng'
-  def transform_attributes(attrs)
-    attrs.dup.tap do |h|
-      h[:language] = h[:language].map { |v| v == 'en' ? 'eng' : v  } if h.has_key? :language
-    end
+    obj = LegacyObject.new(DcParser.from_xml(@source_object.datastreams['DC'].content).to_h)
+    obj.pid = set_pid
+    obj.validate!
+    work_class.new(obj)
   end
 
   def set_pid

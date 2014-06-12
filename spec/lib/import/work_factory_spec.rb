@@ -28,28 +28,50 @@ describe WorkFactory do
   end
 
 
-  describe 'build_work:' do
-    before { stub_out_set_pid }
+  describe '#build_work' do
+    before { stub_out_set_pid 'testme:1' }
     let(:object) { ActiveFedora::Base.create }
     subject { WorkFactory.new(object).build_work }
 
-    describe 'transforming' do
+    describe 'copying values' do
+      let (:rights_statement) { Sufia.config.cc_licenses.first }
+      let (:content) {
+        "<oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">
+           <dc:language>en</dc:language>
+           <dc:rights>#{rights_statement}</dc:rights>
+         </oai_dc:dc>"
+      }
       before do
-        object.datastreams['DC'].content = '<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <dc:language>en</dc:language>
-</oai_dc:dc>'
+        object.datastreams['DC'].content = content
       end
-      its (:language) { should eq ['eng'] }
-    end
 
+      it "should recode language to ISO 639-3" do
+        expect(subject.language).to eq ['eng']
+      end
+
+      context "with an allowed rights value" do
+        its (:rights) { should eq [rights_statement] }
+      end
+
+      context "with an unknown rights value" do
+        let (:rights_statement) { 'WHat?' }
+        it "should raise an error" do
+          expect { subject }.to raise_error LegacyObject::ValidationError, 'Rights assertion for testme:1: "["WHat?"]" was not in the allowed list.'
+        end
+      end
+    end
+  end
+
+  describe '#work_class' do
+    let(:object) { ActiveFedora::Base.create }
+    subject { WorkFactory.new(object).work_class }
     context 'the source object contains an MPG datastream' do
       before {
         object.add_file_datastream('pdf content', pdf)
         object.add_file_datastream('mpg content', mpg)
       }
 
-      it { should be_new_record }
-      it { should be_kind_of Video }
+      it { should eq Video }
     end
 
     context 'the source object contains a WAV datastream' do
@@ -57,7 +79,7 @@ describe WorkFactory do
         object.add_file_datastream('wav content', wav)
       }
 
-      it { should be_kind_of Audio }
+      it { should eq Audio }
     end
 
     context 'the source object contains a MP3 datastream' do
@@ -65,7 +87,7 @@ describe WorkFactory do
         object.add_file_datastream('mp3 content', mp3)
       }
 
-      it { should be_kind_of Audio }
+      it { should eq Audio }
     end
 
     context 'the source object contains both audio and video datastreams' do
@@ -75,7 +97,7 @@ describe WorkFactory do
         object.add_file_datastream('mp3 content', mp3)
       }
 
-      it { should be_kind_of Video }
+      it { should eq Video }
     end
 
     context 'the source object contains TEI datastreams' do
@@ -84,7 +106,7 @@ describe WorkFactory do
         object.add_file_datastream('tei content', tei)
       }
 
-      it { should be_kind_of Text }
+      it { should eq Text }
     end
 
     context 'the source object contains both TEI and MP3 datastreams' do
@@ -94,7 +116,7 @@ describe WorkFactory do
         object.add_file_datastream('mp3 content', mp3)
       }
 
-      it { should be_kind_of Audio }
+      it { should eq Audio }
     end
 
     context 'the source object contains GIF datastream' do
@@ -103,7 +125,7 @@ describe WorkFactory do
         object.add_file_datastream('gif content', gif)
       }
 
-      it { should be_kind_of Image }
+      it { should eq Image }
     end
 
     context 'the source object contains both image and TEI' do
@@ -112,7 +134,7 @@ describe WorkFactory do
         object.add_file_datastream('tei content', tei)
       }
 
-      it { should be_kind_of Text }
+      it { should eq Text }
     end
 
     context 'the source object contains a PDF datastream' do
@@ -120,7 +142,7 @@ describe WorkFactory do
         object.add_file_datastream('pdf content', pdf)
       }
 
-      it { should be_kind_of Text }
+      it { should eq Text }
     end
 
     context 'the source object has a link called "VIDEO"' do
@@ -129,7 +151,7 @@ describe WorkFactory do
         object.add_datastream(ds)
       }
 
-      it { should be_kind_of Video }
+      it { should eq Video }
     end
 
     context 'the source object has a link called "ARTICLE"' do
@@ -138,12 +160,11 @@ describe WorkFactory do
         object.add_datastream(ds)
       }
 
-      it { should be_kind_of Text }
+      it { should eq Text }
     end
 
     context "when it can't determine the type of object" do
-      it { should be_kind_of Text }
+      it { should eq Text }
     end
-
-  end  # build_work
+  end
 end

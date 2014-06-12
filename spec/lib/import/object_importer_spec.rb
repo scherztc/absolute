@@ -35,17 +35,17 @@ describe ObjectImporter do
   end
 
   it 'creates new objects based on the source objects' do
-    # In Case Western's fedora, the title is stored in dc:title
-    # instead of in descMetadata.  Since the source_object is
-    # an object created by absolute, the parser won't find a
-    # title in dc:title.  A valid object requires a title, so
-    # we need to stub that value.
+    # In Case Western's fedora, the title and rights are stored in the DC datastream
+    # instead of in descMetadata.  Since the source_object is an object created by absolute,
+    # the parser won't find a title or rights in the DC datastream.  A valid object requires
+    # a title and rights, so we need to stub those values.
     allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
+    allow_any_instance_of(DcParser).to receive(:rights) { Sufia.config.cc_licenses.first }
 
     importer = ObjectImporter.new(fedora_name, [source_text.pid])
-    old_count = ActiveFedora::Base.count
-    importer.import!
-    expect(ActiveFedora::Base.count).to eq old_count + 1
+    expect {
+      importer.import!
+    }.to change { ActiveFedora::Base.count }.by(1)
 
     new_object = ActiveFedora::Base.all.select{|obj| obj.pid != source_text.pid }.first
     expect(new_object.datastreams['properties'].content).to eq properties
@@ -85,6 +85,7 @@ describe ObjectImporter do
       source_text.datastreams['link1'].dsState = 'D'
       source_text.save!
       allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
+      allow_any_instance_of(DcParser).to receive(:rights) { Sufia.config.cc_licenses.first }
     end
 
     it 'characterizes the datastreams' do

@@ -43,7 +43,7 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
     end
   end
 
-  def to_attrs_hash
+  def to_h
     single_value_fields = [:description, :rights, :title]
     multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type]
     all_fields = single_value_fields + multi_value_fields

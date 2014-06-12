@@ -38,7 +38,6 @@ class ObjectImporter
 
     dsids = characterize_datastreams(source_object)
     copy_datastreams(dsids[:xml], source_object, new_object)
-    new_object.rights = license
     new_object.visibility = visibility
 
     new_object.generic_file_ids = attach_files(dsids[:attached_files], source_object, new_object)
@@ -52,12 +51,6 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
-  end
-
-  def license
-    # TODO: If they already have something in this field, we
-    #       probably shouldn't clobber it.
-    Sufia.config.cc_licenses.first
   end
 
   def visibility
