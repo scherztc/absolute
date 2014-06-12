@@ -27,8 +27,16 @@ class WorkFactory
   # returned will be decided by examining the @source_object.
   def build_work
     dc_attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_attrs_hash
+    dc_attrs = transform_attributes(dc_attrs)
     dc_attrs = dc_attrs.merge(pid: set_pid)
     work_class.new(dc_attrs)
+  end
+
+  # If the attributes contains an entry with a key of language and a value of 'en' recode it as 'eng'
+  def transform_attributes(attrs)
+    attrs.dup.tap do |h|
+      h[:language] = h[:language].map { |v| v == 'en' ? 'eng' : v  } if h.has_key? :language
+    end
   end
 
   def set_pid
@@ -40,21 +48,21 @@ class WorkFactory
 
   def work_class
     if video?
-      return Video
+      Video
     elsif audio?
-      return Audio
+      Audio
     elsif has_tei?
-      return Text
+      Text
     elsif image?
-      return Image
+      Image
     elsif has_pdf?
-      return Text
+      Text
     elsif has_external_video_link?
-      return Video
+      Video
     elsif has_external_article_link?
-      return Text
+      Text
     else
-      return Text
+      Text
     end
   end
 

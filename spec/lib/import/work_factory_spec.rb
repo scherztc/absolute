@@ -16,17 +16,14 @@ describe WorkFactory do
   let(:video)   {{ dsid: 'VIDEO', mimeType: 'text/xml', controlGroup: 'R' }}
   let(:article) {{ dsid: 'ARTICLE', mimeType: 'text/xml', controlGroup: 'E' }}
 
-  before { stub_out_dc_parser }
-
 
   describe 'importing an object with a PID that already exists' do
-    let(:text) { FactoryGirl.build(:text) }
+    let!(:object) { ActiveFedora::Base.create }
+    subject { WorkFactory.new(object) }
 
     it 'raises an error' do
       expect(ActiveFedora::Base).to receive(:exists?).and_return(true) 
-      expect {
-        WorkFactory.new(text).build_work
-      }.to raise_error(PidAlreadyInUseError)
+      expect { subject.build_work }.to raise_error(PidAlreadyInUseError)
     end
   end
 
@@ -35,6 +32,15 @@ describe WorkFactory do
     before { stub_out_set_pid }
     let(:object) { ActiveFedora::Base.create }
     subject { WorkFactory.new(object).build_work }
+
+    describe 'transforming' do
+      before do
+        object.datastreams['DC'].content = '<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:language>en</dc:language>
+</oai_dc:dc>'
+      end
+      its (:language) { should eq ['eng'] }
+    end
 
     context 'the source object contains an MPG datastream' do
       before {
@@ -140,14 +146,4 @@ describe WorkFactory do
     end
 
   end  # build_work
-
-
-  # Don't try to parse the DC datastream for these tests
-  def stub_out_dc_parser
-    allow_any_instance_of(DcParser).to receive(:from_xml) { '' }
-    allow_any_instance_of(DcParser).to receive(:to_attrs_hash) {
-      { title: 'Stubbed Title', rights: 'Stubbed Rights' }
-    }
-  end
-
 end
