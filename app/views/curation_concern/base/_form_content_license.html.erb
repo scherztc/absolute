@@ -1,0 +1,9 @@
+<fieldset id="set-license">
+  <legend>Choose a License for your Content</legend>
+  <%= f.input :rights,
+    as: :select,
+    collection: Sufia.config.cc_licenses,
+    input_html: { class: 'form-control' },
+    label: 'Content License'
+  %>
+</fieldset>

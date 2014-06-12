@@ -13,7 +13,7 @@ describe 'Creating a Text' do
       within '#new_text' do
         fill_in "Title", with: "My title"
         fill_in "External link", with: "http://www.youtube.com/watch?v=oHg5SJYRHA0"
-        select(Sufia.config.cc_licenses.keys.first.dup, from: I18n.translate('sufia.field_label.rights'))
+        select(Sufia.config.cc_licenses.first.dup, from: I18n.translate('sufia.field_label.rights'))
         check("I have read and accept the contributor license agreement")
         click_button("Create Text")
       end
@@ -36,7 +36,7 @@ describe 'Creating a Text' do
         attach_file "Choose a TEI file", fixture_file_path('files/anoabo00-TEI.xml')
         attach_file "Choose a MODS file", fixture_file_path('files/anoabo00-MODS.xml')
         attach_file "Choose a METS file", fixture_file_path('files/wrhsms05145-METS.xml')
-        select(Sufia.config.cc_licenses.keys.first.dup, from: I18n.translate('sufia.field_label.rights'))
+        select(Sufia.config.cc_licenses.first.dup, from: I18n.translate('sufia.field_label.rights'))
         check("I have read and accept the contributor license agreement")
         click_button("Create Text")
       end

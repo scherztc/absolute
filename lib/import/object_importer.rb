@@ -57,8 +57,7 @@ class ObjectImporter
   def license
     # TODO: If they already have something in this field, we
     #       probably shouldn't clobber it.
-    # TODO: What should the default license be?
-    Sufia.config.cc_licenses['All rights reserved']
+    Sufia.config.cc_licenses.first
   end
 
   def visibility

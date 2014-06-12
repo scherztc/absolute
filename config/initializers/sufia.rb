@@ -13,17 +13,11 @@ Sufia.config do |config|
 
   config.max_days_between_audits = 7
 
-  config.cc_licenses = {
-    'Attribution 3.0 United States' => 'http://creativecommons.org/licenses/by/3.0/us/',
-    'Attribution-ShareAlike 3.0 United States' => 'http://creativecommons.org/licenses/by-sa/3.0/us/',
-    'Attribution-NonCommercial 3.0 United States' => 'http://creativecommons.org/licenses/by-nc/3.0/us/',
-    'Attribution-NoDerivs 3.0 United States' => 'http://creativecommons.org/licenses/by-nd/3.0/us/',
-    'Attribution-NonCommercial-NoDerivs 3.0 United States' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/us/',
-    'Attribution-NonCommercial-ShareAlike 3.0 United States' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/us/',
-    'Public Domain Mark 1.0' => 'http://creativecommons.org/publicdomain/mark/1.0/',
-    'CC0 1.0 Universal' => 'http://creativecommons.org/publicdomain/zero/1.0/',
-    'All rights reserved' => 'All rights reserved'
-  }
+  config.cc_licenses = [
+    'Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio, provides the information contained in digital case for non-commercial, personal, or research use only. All other use, including but not limited to commercial or scholarly reproductions, redistribution, publication or transmission, whether by electronic means or otherwise, without prior written permission of the copyright holder is strictly prohibited. For more information contact digital case at digitalcase@case.edu.',
+    'This collection is owned by Special Collections, Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio. For permission to reproduce and/or publish, contact Special Collections at 216-368-2993.'
+
+  ]
 
   config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]
 
