@@ -33,7 +33,7 @@ gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'worthwhile', github: 'curationexperts/worthwhile'
 #gem 'worthwhile', path: '../worthwhile'
-gem 'hydra-head'
+gem 'hydra-head', github: 'projecthydra/hydra-head', ref: '3d7cc18' #4.1.0.rc3  
 
 gem "bootstrap-sass"
 gem 'hydra-role-management', '0.1.0'
