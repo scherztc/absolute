@@ -36,14 +36,11 @@ class ObjectImporter
     source_object = fedora.find(pid)
     new_object = ObjectFactory.new(source_object).build_object
 
-    dsids = characterize_datastreams(source_object)
-    copy_datastreams(dsids[:xml], source_object, new_object)
+    unless new_object.is_a? Collection
+      import_work(source_object, new_object)
+    end
+
     new_object.visibility = visibility
-
-    new_object.generic_file_ids = attach_files(dsids[:attached_files], source_object, new_object)
-    attach_links(dsids[:links], source_object, new_object)
-    select_representative(new_object)
-
     new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     set_state(new_object, source_object.state)
@@ -51,6 +48,14 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
+  end
+
+  def import_work(source_object, new_object)
+    dsids = characterize_datastreams(source_object)
+    copy_datastreams(dsids[:xml], source_object, new_object)
+    new_object.generic_file_ids = attach_files(dsids[:attached_files], source_object, new_object)
+    attach_links(dsids[:links], source_object, new_object)
+    select_representative(new_object)
   end
 
   def visibility

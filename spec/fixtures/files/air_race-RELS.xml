@@ -1,0 +1,7 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rel="info:fedora/fedora-system:def/relations-external#">
+  <rdf:Description rdf:about="info:fedora/ksl:airRace">
+    <rel:hasCollectionMember rdf:resource="info:fedora/ksl:wrhsairVid-0001"></rel:hasCollectionMember>
+    <rel:hasCollectionMember rdf:resource="info:fedora/ksl:wrhsairVid-0002"></rel:hasCollectionMember>
+    <rel:hasCollectionMember rdf:resource="info:fedora/ksl:wrhsairVid-0003"></rel:hasCollectionMember>
+  </rdf:Description>
+</rdf:RDF>

@@ -6,13 +6,21 @@ describe ObjectImporter do
   include ImportHelper
 
   let(:source_text)  { FactoryGirl.create(:text) }
+  let(:new_pid) { 'new:123' }
   let(:fedora_name) { 'test' }
 
   let(:properties) { source_text.datastreams['properties'].content }
 
   before do
     ActiveFedora::Base.delete_all
-    stub_out_set_pid
+    stub_out_set_pid(new_pid)
+
+    # In Case Western's fedora, the title and rights are stored in the DC datastream
+    # instead of in descMetadata.  Since the source_object is an object created by absolute,
+    # the parser won't find a title or rights in the DC datastream.  A valid object requires
+    # a title and rights, so we need to stub those values.
+    allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
+    allow_any_instance_of(DcParser).to receive(:rights) { Sufia.config.cc_licenses.first }
   end
 
   after :all do
@@ -35,27 +43,21 @@ describe ObjectImporter do
   end
 
   it 'creates new objects based on the source objects' do
-    # In Case Western's fedora, the title and rights are stored in the DC datastream
-    # instead of in descMetadata.  Since the source_object is an object created by absolute,
-    # the parser won't find a title or rights in the DC datastream.  A valid object requires
-    # a title and rights, so we need to stub those values.
-    allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
-    allow_any_instance_of(DcParser).to receive(:rights) { Sufia.config.cc_licenses.first }
-
     importer = ObjectImporter.new(fedora_name, [source_text.pid])
     expect {
       importer.import!
     }.to change { ActiveFedora::Base.count }.by(1)
 
-    new_object = ActiveFedora::Base.all.select{|obj| obj.pid != source_text.pid }.first
+    new_object = ActiveFedora::Base.find(new_pid)
     expect(new_object.datastreams['properties'].content).to eq properties
     expect(new_object.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
   it 'keeps track of failed imports' do
+    allow_any_instance_of(LegacyObject).to receive(:validate!).and_raise(LegacyObject::ValidationError)
     pid = 'pid:123'
     importer = ObjectImporter.new(fedora_name, [pid])
-    importer.import!  # Should fail because there is no title in DC datastream, so new object will be invalid.
+    importer.import!
     expect(importer.failed_imports).to eq [pid]
   end
 
@@ -84,8 +86,6 @@ describe ObjectImporter do
       source_text.add_datastream(ds2)
       source_text.datastreams['link1'].dsState = 'D'
       source_text.save!
-      allow_any_instance_of(DcParser).to receive(:title) { 'Fake Title' }
-      allow_any_instance_of(DcParser).to receive(:rights) { Sufia.config.cc_licenses.first }
     end
 
     it 'characterizes the datastreams' do
@@ -109,8 +109,6 @@ describe ObjectImporter do
       expect(file_content).to eq content
       expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
 
-      expect(Text.count).to eq 2
-      new_pid = (Text.all.map(&:pid) - [source_text.pid]).first
       new_object = Text.find(new_pid)
       expect(new_object.representative).to eq file.pid
     end
@@ -121,9 +119,8 @@ describe ObjectImporter do
 
       urls = Worthwhile::LinkedResource.all.map(&:url).sort
       expect(urls).to eq [link1[:dsLocation], link2[:dsLocation]].sort
-      new_text_pid = (Text.all.map(&:pid) - [source_text.pid]).first
       parent_pids = Worthwhile::LinkedResource.all.map(&:batch).map(&:pid).uniq
-      expect(parent_pids).to eq [new_text_pid]
+      expect(parent_pids).to eq [new_pid]
     end
 
     context 'when it fails to create the linked resource' do
@@ -153,7 +150,6 @@ describe ObjectImporter do
         importer.import!
 
         expect(Text.count).to eq 2
-        new_pid = (Text.all.map(&:pid) - [source_text.pid]).first
         new_object = Text.find(new_pid)
         expect(new_object.state).to eq 'I'
 
@@ -168,7 +164,25 @@ describe ObjectImporter do
         expect(link_content_states).to eq ['A', 'D']
       end
     end
+  end  # context 'with files and external links'
+
+
+  describe 'importing a collection' do
+    let(:collection) { FactoryGirl.build(:collection) }
+    before do
+      collection.members << source_text
+      collection.save!
+    end
+
+    it 'sets the members of the collection' do
+      importer = ObjectImporter.new(fedora_name, [collection.pid])
+      importer.import!
+
+      new_collection = Collection.find(new_pid)
+      expect(new_collection.members).to eq [source_text]
+      expect(new_collection.member_ids).to eq [source_text.pid]
+      expect(source_text.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
+    end
   end
 
 end
-

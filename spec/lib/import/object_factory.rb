@@ -27,20 +27,58 @@ describe ObjectFactory do
     end
   end
 
-
   describe '#build_object' do
     before { stub_out_set_pid 'testme:1' }
     let(:object) { ActiveFedora::Base.create }
     subject { ObjectFactory.new(object).build_object }
 
+    let (:rights_statement) { Sufia.config.cc_licenses.first }
+    let (:content) {
+      "<oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">
+         <dc:language>en</dc:language>
+         <dc:rights>#{rights_statement}</dc:rights>
+       </oai_dc:dc>"
+    }
+
+    let (:rels_content) {
+      "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:rel=\"info:fedora/fedora-system:def/relations-external#\">
+        <rdf:Description rdf:about=\"info:fedora/#{object.pid}\">
+          <rel:hasCollectionMember rdf:resource=\"info:fedora/testme:2\"></rel:hasCollectionMember>
+        </rdf:Description>
+      </rdf:RDF>"
+    }
+
+    describe 'building a collection' do
+      let!(:object) { FactoryGirl.create(:collection) }
+
+      before do
+        object.datastreams['DC'].content = content
+      end
+
+      context 'when collection members exist' do
+        let!(:member) { FactoryGirl.create(:text) }
+
+        before do
+          object.members << member
+          object.save!
+        end
+
+        its (:member_ids) { should eq [member.pid] }
+      end
+
+      context 'when collection members do not exist' do
+        before do
+          ActiveFedora::Base.find('testme:2').delete if ActiveFedora::Base.exists?('testme:2')
+          object.datastreams['RELS-EXT'].content = rels_content
+        end
+
+        it 'raises an error' do
+          expect { subject }.to raise_error LegacyObject::ValidationError, "Unable to create collection testme:1 because the following collection members do not exist: [\"testme:2\"]"
+        end
+      end
+    end
+
     describe 'copying values' do
-      let (:rights_statement) { Sufia.config.cc_licenses.first }
-      let (:content) {
-        "<oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">
-           <dc:language>en</dc:language>
-           <dc:rights>#{rights_statement}</dc:rights>
-         </oai_dc:dc>"
-      }
       before do
         object.datastreams['DC'].content = content
       end
@@ -65,6 +103,19 @@ describe ObjectFactory do
   describe '#object_class' do
     let(:object) { ActiveFedora::Base.create }
     subject { ObjectFactory.new(object).object_class }
+
+    context 'the source object has collection members' do
+      let(:object) { FactoryGirl.create(:collection) }
+      let(:member) { FactoryGirl.create(:text) }
+
+      before do
+        object.members << member
+        object.save!
+      end
+
+      it { should eq Collection }
+    end
+
     context 'the source object contains an MPG datastream' do
       before {
         object.add_file_datastream('pdf content', pdf)

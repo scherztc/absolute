@@ -1,4 +1,5 @@
 require 'import/dc_parser'
+require 'import/rels_ext_parser'
 require 'import/legacy_object'
 
 class PidAlreadyInUseError < StandardError; end
@@ -27,7 +28,11 @@ class ObjectFactory
   # object's DC datastream.  The type of work that will be
   # returned will be decided by examining the @source_object.
   def build_object
-    obj = LegacyObject.new(DcParser.from_xml(@source_object.datastreams['DC'].content).to_h)
+    attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_h
+    unless member_ids.empty?
+      attrs = attrs.merge({ member_ids: member_ids })
+    end
+    obj = LegacyObject.new(attrs)
     obj.pid = set_pid
     obj.validate!
     object_class.new(obj)
@@ -41,7 +46,9 @@ class ObjectFactory
   end
 
   def object_class
-    if video?
+    if collection?
+      Collection
+    elsif video?
       Video
     elsif audio?
       Audio
@@ -67,6 +74,19 @@ class ObjectFactory
       @mime_types << @source_object.datastreams[dsid].mimeType
     end
     @mime_types = @mime_types.compact.uniq
+  end
+
+  def member_ids
+    return @member_ids if @member_ids
+    @member_ids = []
+    if @source_object.datastreams['RELS-EXT']
+      rels = @source_object.datastreams['RELS-EXT'].content
+      @member_ids = RelsExtParser.new(rels).collection_member_ids
+    end
+  end
+
+  def collection?
+    !member_ids.empty?
   end
 
   def video?
