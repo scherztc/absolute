@@ -37,9 +37,6 @@ describe ObjectImporter do
 
     importer = ObjectImporter.new(fedora_name, ['pid:1'])
     expect(importer.log_file).to eq file
-
-    importer.import!
-    expect(File.exist?(file)).to eq true
   end
 
   it 'creates new objects based on the source objects' do
@@ -90,7 +87,7 @@ describe ObjectImporter do
 
     it 'characterizes the datastreams' do
       importer = ObjectImporter.new(fedora_name, [source_text.pid])
-      fedora = importer.connect_to_remote_fedora
+      fedora = importer.remote_fedora
       source_object = fedora.find(source_text.pid)
       dsids = importer.characterize_datastreams(source_object)
 
@@ -169,19 +166,40 @@ describe ObjectImporter do
 
   describe 'importing a collection' do
     let(:collection) { FactoryGirl.build(:collection) }
+
     before do
       collection.members << source_text
       collection.save!
     end
 
-    it 'sets the members of the collection' do
-      importer = ObjectImporter.new(fedora_name, [collection.pid])
-      importer.import!
+    context "when members of the collection have already been imported" do
 
-      new_collection = Collection.find(new_pid)
-      expect(new_collection.members).to eq [source_text]
-      expect(new_collection.member_ids).to eq [source_text.pid]
-      expect(source_text.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
+      it 'sets the members of the collection' do
+        importer = ObjectImporter.new(fedora_name, [collection.pid])
+        importer.import!
+
+        new_collection = Collection.find(new_pid)
+        expect(new_collection.members).to eq [source_text]
+        expect(new_collection.member_ids).to eq [source_text.pid]
+        expect(source_text.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
+      end
+    end
+
+    context "when members of the collection haven't been imported yet" do
+      before do
+        # Since we are using the same fedora for both source
+        # and target, the object that the importer will create
+        # already exists, so we'll stub it to pretend that PID
+        # doesn't exist yet.
+        allow(ActiveFedora::Base).to receive(:exists?).with(source_text.pid).and_return(false)
+      end
+
+      it 'imports missing collection members before importing collection' do
+        importer = ObjectImporter.new(fedora_name, [collection.pid])
+        expect(importer).to receive(:import_object).with(source_text.pid)
+        new_collection = FactoryGirl.build(:collection, member_ids: [source_text.pid])
+        importer.import_collection(collection, new_collection)
+      end
     end
   end
 

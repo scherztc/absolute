@@ -1,5 +1,6 @@
 require 'import/dsid_map'
 require 'import/object_factory'
+require 'import/rels_ext_parser'
 
 class UnableToCreateLinkedResourceError < StandardError; end
 
@@ -7,36 +8,38 @@ class ObjectImporter
 
   attr_reader :failed_imports
 
-  def initialize(remote_fedora, pids, verbose = false)
-    @remote_fedora_name = remote_fedora
+  def initialize(remote_fedora_name, pids, verbose = false)
+    @remote_fedora_name = remote_fedora_name
     @pids = pids
     @verbose = verbose
   end
 
   def import!
     @failed_imports = []
-    fedora = connect_to_remote_fedora
     @pids.each_with_index do |pid, i|
       print_output "Importing record #{i + 1} of #{@pids.count} : #{pid}"
-      import_object(pid, fedora)
+      import_object(pid)
     end
     print_output("Log file printed to #{log_file}")
     print_output(final_import_status)
   end
 
-  def connect_to_remote_fedora
+  def remote_fedora
+    return @remote_fedora if @remote_fedora
     fedora_config_file = Rails.root.join('config', 'fedora.yml')
     config_erb = ERB.new(IO.read(fedora_config_file)).result(binding)
     credentials = Psych.load(config_erb)[@remote_fedora_name]
     print_output "Connecting to #{credentials['url']}"
-    Rubydora.connect credentials
+    @remote_fedora = Rubydora.connect credentials
   end
 
-  def import_object(pid, fedora)
-    source_object = fedora.find(pid)
+  def import_object(pid)
+    source_object = remote_fedora.find(pid)
     new_object = ObjectFactory.new(source_object).build_object
 
-    unless new_object.is_a? Collection
+    if new_object.is_a? Collection
+      import_collection(source_object, new_object)
+    else
       import_work(source_object, new_object)
     end
 
@@ -156,9 +159,26 @@ class ObjectImporter
     end
   end
 
+  def import_collection(source_object, new_object)
+    rels = source_object.datastreams['RELS-EXT'].content
+    member_ids = RelsExtParser.new(rels).collection_member_ids
+
+    existing_members, missing_members = member_ids.partition { |pid| ActiveFedora::Base.exists?(pid) }
+
+    print_output("    Collection #{new_object.pid}: Found #{existing_members.count} members that have already been imported, and #{missing_members.count} members that have not been imported yet.")
+
+    missing_members.each_with_index do |pid, i|
+      print_output "    Importing collection member #{i + 1} of #{missing_members.count} : #{pid}"
+      import_object(pid)
+    end
+
+    new_object.member_ids = member_ids
+  end
+
   def print_output(message)
+    return unless @verbose
     File.open(log_file, 'a') { |io| io.puts message }
-    puts message if @verbose
+    puts message
   end
 
   def log_file

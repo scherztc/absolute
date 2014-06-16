@@ -1,5 +1,4 @@
 require 'import/dc_parser'
-require 'import/rels_ext_parser'
 require 'import/legacy_object'
 
 class PidAlreadyInUseError < StandardError; end
@@ -29,9 +28,6 @@ class ObjectFactory
   # returned will be decided by examining the @source_object.
   def build_object
     attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_h
-    unless member_ids.empty?
-      attrs = attrs.merge({ member_ids: member_ids })
-    end
     obj = LegacyObject.new(attrs)
     obj.pid = set_pid
     obj.validate!
