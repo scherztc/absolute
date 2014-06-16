@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: ce59db033c68edacfabfb9c216888c7d370cd741
+  revision: 0b87a49e8a51dadd01688d0c376d6bdc999179b4
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -12,8 +12,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
-  revision: 3d7cc18fddde53ec132f15e28f1c89e2ee631054
-  ref: 3d7cc18
+  revision: cf479a51865664f3ab2028ecce2a8f05b3db78bc
+  ref: cf479a5
   specs:
     hydra-access-controls (7.1.0.rc2)
       active-fedora (~> 7.0.0)
@@ -328,7 +328,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
-    rdf (1.1.4)
+    rdf (1.1.4.1)
     rdf-aggregate-repo (1.1.0)
       rdf (>= 1.1)
     rdf-isomorphic (1.1.0)
