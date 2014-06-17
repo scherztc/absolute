@@ -64,36 +64,6 @@ describe ObjectFactory do
       </rdf:RDF>"
     }
 
-    describe 'building a collection' do
-      let!(:object) { FactoryGirl.create(:collection) }
-
-      before do
-        object.datastreams['DC'].content = content
-      end
-
-      context 'when collection members exist' do
-        let!(:member) { FactoryGirl.create(:text) }
-
-        before do
-          object.members << member
-          object.save!
-        end
-
-        its (:member_ids) { should eq [member.pid] }
-      end
-
-      context 'when collection members do not exist' do
-        before do
-          ActiveFedora::Base.find('testme:2').delete if ActiveFedora::Base.exists?('testme:2')
-          object.datastreams['RELS-EXT'].content = rels_content
-        end
-
-        it 'raises an error' do
-          expect { subject }.to raise_error LegacyObject::ValidationError, "Unable to create collection testme:1 because the following collection members do not exist: [\"testme:2\"]"
-        end
-      end
-    end
-
     describe 'copying values' do
       before do
         object.datastreams['DC'].content = content
