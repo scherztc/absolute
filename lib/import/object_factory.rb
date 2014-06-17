@@ -3,6 +3,7 @@ require 'import/legacy_object'
 
 class PidAlreadyInUseError < StandardError; end
 
+require 'import/rels_ext_parser'
 class ObjectFactory
 
   # Used by the ObjectImporter to select the right class for
