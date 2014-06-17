@@ -18,7 +18,7 @@ set :branch, 'master'
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server '54.204.33.124', user: 'deploy', roles: %w{web app}, my_property: :my_value
+server '54.204.33.124', user: 'deploy', roles: %w{web app resque_worker resque_scheduler}, my_property: :my_value
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options

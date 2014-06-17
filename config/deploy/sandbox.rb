@@ -1,6 +1,6 @@
 set :stage, :sandbox
 set :rails_env, 'production'
-server 'casedeploy', roles: [:web, :app, :db]
+server 'casedeploy', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
 
 # Simple Role Syntax
 # ==================

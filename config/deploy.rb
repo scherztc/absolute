@@ -20,34 +20,23 @@ set :linked_dirs, %w{tmp/pids tmp/cache tmp/sockets public/assets log/imports}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'deploy')
+
+require "resque"
 namespace :deploy do
 
   desc 'Restart application'
-  after :publishing, :restart do
+  after :publishing, :restart
+  
+  task :restart do
     on roles(:web), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       execute "touch #{release_path}/tmp/restart.txt"
     end
   end
 
-  after :restart, :kill_resque_pool do
-    on roles(:web), in: :sequence, wait: 5 do
-      # Shuts down resque_pool master if pid exists
-      if test("[ -f #{shared_path}/tmp/pids/resque-pool.pid ]")
-        execute "export master_pid=$(cat #{shared_path}/tmp/pids/resque-pool.pid) && kill -QUIT $master_pid"
-      else
-        echo "No resque-pool pid found"
-      end
-    end
-  end
+  after :restart, 'resque:pool:restart'
 
-  after :kill_resque_pool, :start_resque_pool do
-    on roles(:web), in: :sequence, wait: 5 do
-      # Starts a new resque_pool master
-      execute "cd #{release_path} && bundle exec resque-pool -d -E production -c config/resque-pool.yml -p #{shared_path}/tmp/pids/resque-pool.pid -e #{shared_path}/log/resque-pool.stderr.log -o #{shared_path}/log/resque-pool.stdout.log"
-    end
-  end
-  
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
