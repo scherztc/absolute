@@ -36,6 +36,7 @@ namespace :deploy do
   end
 
   after :restart, 'resque:pool:restart'
+  after :restart, 'resque:scheduler:restart'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

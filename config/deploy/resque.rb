@@ -8,7 +8,6 @@ namespace :load do
 end
 
 namespace :resque do
-  puts "Defiing pool"
   namespace :pool do
     desc "Stop resque pool"
     task :stop do
