@@ -48,6 +48,8 @@ describe ObjectFactory do
     let(:object) { ActiveFedora::Base.create }
     subject { ObjectFactory.new(object).build_object }
 
+    let(:attributes) { subject.last }
+
     let (:rights_statement) { Sufia.config.cc_licenses.first }
     let (:content) {
       "<oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">
@@ -70,11 +72,13 @@ describe ObjectFactory do
       end
 
       it "should recode language to ISO 639-3" do
-        expect(subject.language).to eq ['eng']
+        expect(attributes[:language]).to eq ['eng']
       end
 
       context "with an allowed rights value" do
-        its (:rights) { should eq [rights_statement] }
+        it 'should have a rights attribute' do
+          expect(attributes[:rights]).to eq [rights_statement]
+        end
       end
 
       context "with an unknown rights value" do

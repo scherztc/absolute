@@ -35,16 +35,16 @@ class ObjectImporter
 
   def import_object(pid)
     source_object = remote_fedora.find(pid)
-    new_object = ObjectFactory.new(source_object).build_object
+    klass, attributes = ObjectFactory.new(source_object).build_object
 
-    if new_object.is_a? Collection
+    if klass == Collection
+      new_object = klass.new(attributes)
       import_collection(source_object, new_object)
+      new_object.save!
     else
-      import_work(source_object, new_object)
+      new_object = import_work(source_object, klass, attributes)
     end
 
-    new_object.visibility = visibility
-    new_object.save!
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     set_state(new_object, source_object.state)
   rescue => e
@@ -53,32 +53,30 @@ class ObjectImporter
     print_output "    " + e.message
   end
 
-  def import_work(source_object, new_object)
-    dsids = characterize_datastreams(source_object)
-    copy_datastreams(dsids[:xml], source_object, new_object)
-    new_object.generic_file_ids = attach_files(dsids[:attached_files], source_object, new_object)
-    attach_links(dsids[:links], source_object, new_object)
-    select_representative(new_object)
+  def import_work(source_object, klass, attributes)
+    curation_concern = klass.new(pid: attributes.delete(:pid))
+    dsids = classify_datastreams(source_object)
+    curation_concern.generic_file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, curation_concern, attributes[:visibility])
+    select_representative(curation_concern)
+    copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, curation_concern)
+    actor = Worthwhile::CurationConcern.actor(curation_concern, User.batchuser, attributes)
+    val = actor.create
+    attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, curation_concern)
+    curation_concern
   end
 
-  def visibility
-    Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
-  end
-
-  def copy_datastreams(dsids, source_object, new_object)
-    dsids.each do |dsid|
+  def copy_datastreams(source_datastreams, new_object)
+    source_datastreams.each do |dsid, source_datastream|
       print_output "    Copying datastream: #{dsid}"
-      source_datastream = source_object.datastreams[dsid]
       target_dsid = DsidMap.target_dsid(dsid)
       options = { dsid: target_dsid, mimeType: source_datastream.mimeType }
       new_object.add_file_datastream(source_datastream.content, options)
     end
   end
 
-  def attach_files(dsids, source_object, new_object)
+  def attach_files(source_datastreams, new_object, visibility)
     file_ids = []
-    dsids.each do |dsid|
-      source_datastream = source_object.datastreams[dsid]
+    source_datastreams.each do |dsid, source_datastream|
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
         file.visibility = visibility
@@ -94,12 +92,11 @@ class ObjectImporter
     file_ids
   end
 
-  def attach_links(dsids, source_object, new_object)
-    dsids.each do |dsid|
+  def attach_links(source_datastreams, new_object)
+    source_datastreams.each do |dsid, source_datastream|
       print_output("    Handling datastream #{dsid}:")
-      source_datastream = source_object.datastreams[dsid]
-      attrs = { title: source_object.datastreams[dsid].label,
-                url: source_object.datastreams[dsid].dsLocation,
+      attrs = { title: source_datastream.label,
+                url: source_datastream.dsLocation,
                 batch: new_object
       }
       link = Worthwhile::LinkedResource.new(attrs)
@@ -119,7 +116,7 @@ class ObjectImporter
   # For other types of datastreams, we will create a new generic file
   # and attach it to the new object (has to be done after the PID has
   # been assigned to the new object).
-  def characterize_datastreams(source_object)
+  def classify_datastreams(source_object)
     # Exclude DC datastream because that is already being
     # handled when the new object gets initialized.
     exclude_datastreams = ['RELS-EXT', 'DC', 'descMetadata']

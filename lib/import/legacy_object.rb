@@ -11,6 +11,10 @@ class LegacyObject < Hash
     self[:pid] = pid
   end
 
+  def visibility= visibility
+    self[:visibility] = visibility
+  end
+
   def pid
     self[:pid]
   end

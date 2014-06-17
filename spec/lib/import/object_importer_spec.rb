@@ -46,7 +46,8 @@ describe ObjectImporter do
     }.to change { ActiveFedora::Base.count }.by(1)
 
     new_object = ActiveFedora::Base.find(new_pid)
-    expect(new_object.datastreams['properties'].content).to eq properties
+    expect(new_object.date_uploaded).to eq Date.today
+    expect(new_object.depositor).to eq 'batchuser@example.com'
     expect(new_object.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
@@ -61,6 +62,7 @@ describe ObjectImporter do
 
   context 'with files and external links' do
     let(:content) { 'contents of a file' }
+    let(:xml_content) { 'xml content' }
 
     # Try to simulate what external link datastreams look like
     # in Digital Case 1.0
@@ -77,6 +79,7 @@ describe ObjectImporter do
       User.first_or_create(username: User.batchuser_key)
       source_text.add_file_datastream(content, { dsid: 'weaedm186.pdf', mimeType: 'application/pdf' })
       source_text.datastreams['weaedm186.pdf'].dsState = 'D'
+      source_text.add_file_datastream(xml_content, { dsid: 'mods.xml', mimeType: 'application/xml' })
       ds1 = source_text.create_datastream(ActiveFedora::Datastream, 'link1', link1)
       ds2 = source_text.create_datastream(ActiveFedora::Datastream, 'link2', link2)
       source_text.add_datastream(ds1)
@@ -85,18 +88,18 @@ describe ObjectImporter do
       source_text.save!
     end
 
-    it 'characterizes the datastreams' do
+    it 'classifies the datastreams' do
       importer = ObjectImporter.new(fedora_name, [source_text.pid])
       fedora = importer.remote_fedora
       source_object = fedora.find(source_text.pid)
-      dsids = importer.characterize_datastreams(source_object)
+      dsids = importer.classify_datastreams(source_object)
 
       expect(dsids[:attached_files]).to eq ['weaedm186.pdf']
-      expect(dsids[:xml].sort).to eq ['properties', 'rightsMetadata']
+      expect(dsids[:xml].sort).to eq ['mods.xml', 'properties', 'rightsMetadata']
       expect(dsids[:links].sort).to eq ['link1', 'link2']
     end
 
-    it 'attaches the file to the new object and sets representative' do
+    it 'attaches the file and xml files to the new object and sets representative' do
       importer = ObjectImporter.new(fedora_name, [source_text.pid])
       importer.import!
 
@@ -108,6 +111,7 @@ describe ObjectImporter do
 
       new_object = Text.find(new_pid)
       expect(new_object.representative).to eq file.pid
+      expect(new_object.datastreams['MODS'].content).to eq xml_content
     end
 
     it 'creates linked resources for the external links' do

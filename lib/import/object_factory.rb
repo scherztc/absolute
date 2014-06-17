@@ -1,9 +1,9 @@
 require 'import/dc_parser'
 require 'import/legacy_object'
+require 'import/rels_ext_parser'
 
 class PidAlreadyInUseError < StandardError; end
 
-require 'import/rels_ext_parser'
 class ObjectFactory
 
   # Used by the ObjectImporter to select the right class for
@@ -32,8 +32,13 @@ class ObjectFactory
     attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_h
     obj = LegacyObject.new(attrs)
     obj.pid = set_pid
+    obj.visibility = visibility
     obj.validate!
-    object_class.new(obj)
+    return object_class, obj
+  end
+
+  def visibility
+    Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
   end
 
   def validate_datastreams!
