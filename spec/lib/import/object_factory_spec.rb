@@ -27,6 +27,22 @@ describe ObjectFactory do
     end
   end
 
+  describe 'validate_datastreams!' do
+    let(:object) { ActiveFedora::Base.new(pid: 'test:123') }
+    subject { ObjectFactory.new(object) }
+
+    before do
+      allow(object).to receive(:datastreams).and_return({ 'mods.xml' => double, 'MODS' => double } )
+    end
+
+    it 'should raise errors if there are duplicates' do
+      expect {
+        subject.validate_datastreams!
+      }.to raise_error 'Datastreams are not unique for test:123'
+
+    end
+  end
+
   describe '#build_object' do
     before { stub_out_set_pid 'testme:1' }
     let(:object) { ActiveFedora::Base.create }

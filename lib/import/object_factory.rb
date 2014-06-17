@@ -28,11 +28,18 @@ class ObjectFactory
   # object's DC datastream.  The type of work that will be
   # returned will be decided by examining the @source_object.
   def build_object
+    validate_datastreams!
     attrs = DcParser.from_xml(@source_object.datastreams['DC'].content).to_h
     obj = LegacyObject.new(attrs)
     obj.pid = set_pid
     obj.validate!
     object_class.new(obj)
+  end
+
+  def validate_datastreams!
+    datastreams = @source_object.datastreams
+    uniq_datastreams = datastreams.keys.map(&:upcase).map { |f| f.sub(/\.XML/, '')}.uniq
+    raise "Datastreams are not unique for #{@source_object.pid}" unless uniq_datastreams.size == datastreams.size
   end
 
   def set_pid
