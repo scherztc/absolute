@@ -36,13 +36,25 @@ class ObjectImporter
   def import_object(pid)
     source_object = remote_fedora.find(pid)
     klass, attributes = ObjectFactory.new(source_object).build_object
+    new_object = if klass == Collection
+      klass.new(attributes)
+    else
+      klass.new(pid: attributes.delete(:pid))
+    end
+
+    dsids = classify_datastreams(source_object)
+    copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, new_object)
+    file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
+    select_representative(new_object, file_ids)
 
     if klass == Collection
-      new_object = klass.new(attributes)
       import_collection(source_object, new_object)
       new_object.save!
     else
-      new_object = import_work(source_object, klass, attributes)
+      new_object.generic_file_ids = file_ids
+      attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, new_object)
+      actor = Worthwhile::CurationConcern.actor(new_object, User.batchuser, attributes)
+      actor.create
     end
 
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
@@ -51,18 +63,6 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
-  end
-
-  def import_work(source_object, klass, attributes)
-    curation_concern = klass.new(pid: attributes.delete(:pid))
-    dsids = classify_datastreams(source_object)
-    curation_concern.generic_file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, curation_concern, attributes[:visibility])
-    select_representative(curation_concern)
-    copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, curation_concern)
-    actor = Worthwhile::CurationConcern.actor(curation_concern, User.batchuser, attributes)
-    val = actor.create
-    attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, curation_concern)
-    curation_concern
   end
 
   def copy_datastreams(source_datastreams, new_object)
@@ -140,9 +140,13 @@ class ObjectImporter
     dsids
   end
 
-  def select_representative(new_object)
-    if new_object.generic_file_ids.count == 1
-      new_object.representative = new_object.generic_file_ids.first
+  def select_representative(new_object, file_ids=nil)
+    if new_object.respond_to?(:generic_file_ids)
+      if new_object.generic_file_ids.count == 1
+        new_object.representative = new_object.generic_file_ids.first
+      end
+    elsif !file_ids.blank?
+      new_object.representative = file_ids.first
     end
   end
 

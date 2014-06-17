@@ -8,6 +8,9 @@ describe ObjectImporter do
   let(:source_text)  { FactoryGirl.create(:text) }
   let(:new_pid) { 'new:123' }
   let(:fedora_name) { 'test' }
+  let(:collection) { FactoryGirl.build(:collection) }
+  let(:content) { 'contents of a file' }
+  let(:xml_content) { 'xml content' }
 
   let(:properties) { source_text.datastreams['properties'].content }
 
@@ -61,9 +64,6 @@ describe ObjectImporter do
 
 
   context 'with files and external links' do
-    let(:content) { 'contents of a file' }
-    let(:xml_content) { 'xml content' }
-
     # Try to simulate what external link datastreams look like
     # in Digital Case 1.0
     let(:link1) {{ controlGroup: 'R',
@@ -169,8 +169,6 @@ describe ObjectImporter do
 
 
   describe 'importing a collection' do
-    let(:collection) { FactoryGirl.build(:collection) }
-
     before do
       collection.members << source_text
       collection.save!
@@ -203,6 +201,54 @@ describe ObjectImporter do
         expect(importer).to receive(:import_object).with(source_text.pid)
         new_collection = FactoryGirl.build(:collection, member_ids: [source_text.pid])
         importer.import_collection(collection, new_collection)
+      end
+    end
+
+    context 'with file datastreams' do
+      before do
+        collection.add_file_datastream(content, { dsid: 'thumbnail.jpg', mimeType: 'image/jpeg' })
+        collection.save!
+      end
+
+      it 'imports the file and sets it as the representative' do
+        importer = ObjectImporter.new(fedora_name, [collection.pid])
+        expect {
+          importer.import!
+        }.to change { ActiveFedora::Base.count }.by(2)
+
+        expect(Worthwhile::GenericFile.count).to eq 1
+        new_file = Worthwhile::GenericFile.first
+        new_collection = Collection.find(new_pid)
+
+        expect(new_collection.representative).to eq new_file.pid
+      end
+    end
+  end
+
+  describe '#select_representative' do
+    let!(:gf) {
+      file = Worthwhile::GenericFile.new
+      file.save!
+      file
+    }
+
+    context 'when there is only 1 file associated with a work' do
+      before do
+        source_text.generic_file_ids = [gf.pid]
+      end
+
+      it 'that file should be the representative' do
+        importer = ObjectImporter.new(fedora_name, [source_text.pid])
+        importer.select_representative(source_text)
+        expect(source_text.representative).to eq gf.pid
+      end
+    end
+
+    context 'when there is a file given' do
+      it 'that file should be the representative' do
+        importer = ObjectImporter.new(fedora_name, [collection.pid])
+        importer.select_representative(collection, [gf.pid])
+        expect(collection.representative).to eq gf.pid
       end
     end
   end
