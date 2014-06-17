@@ -69,6 +69,9 @@ rake jetty:start
 
 ```bash
 RAILS_ENV=development QUEUE=* VERBOSE=1 rake resque:work
+
+# run the schedule workers
+RAILS_ENV=development bundle exec resque-scheduler
 ```
 
 ## Developer notes

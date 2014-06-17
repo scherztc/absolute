@@ -1,0 +1,2 @@
+ExpireLeaseJob:
+  cron: "38 * * * *" # at 38 min past every hour
