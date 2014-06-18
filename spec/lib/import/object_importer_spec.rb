@@ -244,10 +244,20 @@ describe ObjectImporter do
       end
     end
 
-    context 'when there is a file given' do
-      it 'that file should be the representative' do
+    context 'when the source object is a collection' do
+      let!(:gf2) {
+        file = Worthwhile::GenericFile.new
+        file.save!
+        file
+      }
+
+      before do
+        collection.generic_file_ids = [gf.pid, gf2.pid]
+      end
+
+      it 'choose the first file as the representative' do
         importer = ObjectImporter.new(fedora_name, [collection.pid])
-        importer.select_representative(collection, [gf.pid])
+        importer.select_representative(collection)
         expect(collection.representative).to eq gf.pid
       end
     end

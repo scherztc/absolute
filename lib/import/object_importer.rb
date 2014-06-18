@@ -60,11 +60,8 @@ class ObjectImporter
   def handle_datastreams(source_object, new_object, attributes)
     dsids = classify_datastreams(source_object)
     copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, new_object)
-    file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
-    select_representative(new_object, file_ids)
-    if new_object.respond_to?(:generic_file_ids=)
-      new_object.generic_file_ids = file_ids
-    end
+    new_object.generic_file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
+    select_representative(new_object)
     if new_object.respond_to?(:linked_resource_ids=)
       attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, new_object)
     end
@@ -146,13 +143,9 @@ class ObjectImporter
     dsids
   end
 
-  def select_representative(new_object, file_ids=nil)
-    if new_object.respond_to?(:generic_file_ids)
-      if new_object.generic_file_ids.count == 1
-        new_object.representative = new_object.generic_file_ids.first
-      end
-    elsif !file_ids.blank?
-      new_object.representative = file_ids.first
+  def select_representative(new_object)
+    if new_object.generic_file_ids.count == 1 || new_object.class == Collection
+      new_object.representative = new_object.generic_file_ids.first
     end
   end
 
