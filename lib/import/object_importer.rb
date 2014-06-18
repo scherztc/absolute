@@ -36,23 +36,15 @@ class ObjectImporter
   def import_object(pid)
     source_object = remote_fedora.find(pid)
     klass, attributes = ObjectFactory.new(source_object).build_object
-    new_object = if klass == Collection
-      klass.new(attributes)
-    else
-      klass.new(pid: attributes.delete(:pid))
-    end
-
-    dsids = classify_datastreams(source_object)
-    copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, new_object)
-    file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
-    select_representative(new_object, file_ids)
 
     if klass == Collection
+      new_object = klass.new(attributes)
+      handle_datastreams(source_object, new_object, attributes)
       import_collection(source_object, new_object)
       new_object.save!
     else
-      new_object.generic_file_ids = file_ids
-      attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, new_object)
+      new_object = klass.new(pid: attributes.delete(:pid))
+      handle_datastreams(source_object, new_object, attributes)
       actor = Worthwhile::CurationConcern.actor(new_object, User.batchuser, attributes)
       actor.create
     end
@@ -63,6 +55,19 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
+  end
+
+  def handle_datastreams(source_object, new_object, attributes)
+    dsids = classify_datastreams(source_object)
+    copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, new_object)
+    file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
+    select_representative(new_object, file_ids)
+    if new_object.respond_to?(:generic_file_ids=)
+      new_object.generic_file_ids = file_ids
+    end
+    if new_object.respond_to?(:linked_resource_ids=)
+      attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, new_object)
+    end
   end
 
   def copy_datastreams(source_datastreams, new_object)
@@ -77,12 +82,13 @@ class ObjectImporter
   def attach_files(source_datastreams, new_object, visibility)
     file_ids = []
     source_datastreams.each do |dsid, source_datastream|
+      print_output("    Handling datastream #{dsid}:")
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
         file.visibility = visibility
         file.datastreams['content'].dsState = source_datastream.state
         file.save!
-        print_output("    Handling datastream #{dsid}: Created GenericFile #{file.pid}")
+        print_output("      Created GenericFile #{file.pid}")
 
         set_state(file, source_datastream.state)
         file_ids << file.pid
