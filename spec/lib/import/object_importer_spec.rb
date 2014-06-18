@@ -62,6 +62,34 @@ describe ObjectImporter do
     expect(importer.failed_imports).to eq [pid]
   end
 
+  describe '#clean_up_after_failed_import' do
+    let(:object)  { FactoryGirl.create(:text) }
+    let!(:gf) {
+      file = Worthwhile::GenericFile.new(batch_id: object.pid)
+      file.save!
+      file
+    }
+    let(:link_attrs) {
+      { url: 'http://example.com',
+        title: 'A Link',
+        batch: object }
+    }
+    let!(:link1) {
+      l1 = Worthwhile::LinkedResource.new(link_attrs)
+      l1.save!
+      l1
+    }
+
+    it 'deletes GenericFile and LinkedResource objects that were created as attachments to the new object' do
+      importer = ObjectImporter.new(fedora_name, [object.pid])
+      file_count = Worthwhile::GenericFile.count - object.generic_files.count
+      link_count = Worthwhile::LinkedResource.count - object.linked_resources.count
+
+      importer.clean_up_after_failed_import(object)
+      expect(Worthwhile::GenericFile.count).to eq file_count
+      expect(Worthwhile::LinkedResource.count).to eq link_count
+    end
+  end
 
   context 'with files and external links' do
     # Try to simulate what external link datastreams look like
@@ -165,6 +193,7 @@ describe ObjectImporter do
         expect(link_content_states).to eq ['A', 'D']
       end
     end
+
   end  # context 'with files and external links'
 
 

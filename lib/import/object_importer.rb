@@ -55,6 +55,7 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
+    clean_up_after_failed_import(new_object) if new_object
   end
 
   def handle_datastreams(source_object, new_object, attributes)
@@ -173,6 +174,19 @@ class ObjectImporter
     end
 
     new_object.member_ids = member_ids
+  end
+
+  def clean_up_after_failed_import(new_object)
+    objects_to_delete = new_object.generic_files
+    if new_object.respond_to?(:linked_resources)
+      objects_to_delete = objects_to_delete + new_object.linked_resources
+    end
+    print_output "Deleting the following attached objects after failing to import #{new_object.pid} : #{objects_to_delete.map(&:pid)}"
+    objects_to_delete.each do |obj|
+      if obj.pid && ActiveFedora::Base.exists?(obj.pid)
+        obj.destroy
+      end
+    end
   end
 
   def print_output(message)
