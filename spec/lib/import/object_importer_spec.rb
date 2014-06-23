@@ -52,11 +52,12 @@ describe ObjectImporter do
     expect(new_object.date_uploaded).to eq Date.today
     expect(new_object.depositor).to eq 'batchuser@example.com'
     expect(new_object.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+    expect(new_object.rights).to eq [Sufia.config.cc_licenses.first]
   end
 
   it 'keeps track of failed imports' do
-    allow_any_instance_of(LegacyObject).to receive(:validate!).and_raise(LegacyObject::ValidationError)
     pid = 'pid:123'
+    ActiveFedora::Base.find(pid).destroy if ActiveFedora::Base.exists?(pid)
     importer = ObjectImporter.new(fedora_name, [pid])
     importer.import!
     expect(importer.failed_imports).to eq [pid]
@@ -288,6 +289,35 @@ describe ObjectImporter do
         importer = ObjectImporter.new(fedora_name, [collection.pid])
         importer.select_representative(collection)
         expect(collection.representative).to eq gf.pid
+      end
+    end
+  end
+
+  describe '#set_rights' do
+    context 'when the rights conform to allowed values' do
+      let(:rights) { Sufia.config.cc_licenses }
+
+      it 'keeps the source rights' do
+        importer = ObjectImporter.new(fedora_name, ['pid:1'])
+        expect(importer.set_rights(rights, 'pid:1')).to eq rights
+      end
+    end
+
+    context 'when the rights do not conform to allowed values' do
+      let(:rights) { 'Some other rights statement' }
+
+      it 'keeps the source rights' do
+        importer = ObjectImporter.new(fedora_name, ['pid:1'])
+        expect(importer.set_rights(rights, 'pid:1')).to eq rights
+      end
+    end
+
+    context 'when there is no rights statement' do
+      let(:rights) { nil }
+
+      it 'selects one of the acceptable rights statements' do
+        importer = ObjectImporter.new(fedora_name, ['pid:1'])
+        expect(importer.set_rights(rights, 'pid:1')).to eq Sufia.config.cc_licenses.first
       end
     end
   end

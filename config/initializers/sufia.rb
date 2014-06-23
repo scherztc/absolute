@@ -16,7 +16,6 @@ Sufia.config do |config|
   config.cc_licenses = [
     'Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio, provides the information contained in digital case for non-commercial, personal, or research use only. All other use, including but not limited to commercial or scholarly reproductions, redistribution, publication or transmission, whether by electronic means or otherwise, without prior written permission of the copyright holder is strictly prohibited. For more information contact digital case at digitalcase@case.edu.',
     'This collection is owned by Special Collections, Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio. For permission to reproduce and/or publish, contact Special Collections at 216-368-2993.'
-
   ]
 
   config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]

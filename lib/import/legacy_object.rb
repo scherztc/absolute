@@ -1,5 +1,4 @@
 class LegacyObject < Hash
-  class ValidationError < StandardError; end
 
   def initialize(other_hash = {})
     other_hash.each_pair do |key, value|
@@ -19,11 +18,6 @@ class LegacyObject < Hash
     self[:pid]
   end
   
-  def validate!
-    raise ValidationError, "Rights assertion blank for #{pid}." if self[:rights].blank?
-    true
-  end
-
   # If the attributes contains an entry with a key of language and a value of 'en' recode it as 'eng'
   def []= (key, val)
     if key == :language

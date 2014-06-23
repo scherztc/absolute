@@ -36,6 +36,7 @@ class ObjectImporter
   def import_object(pid)
     source_object = remote_fedora.find(pid)
     klass, attributes = ObjectFactory.new(source_object).build_object
+    attributes[:rights] = set_rights(attributes[:rights], pid)
 
     if klass == Collection
       new_object = klass.new(attributes)
@@ -49,7 +50,6 @@ class ObjectImporter
       actor.create
     end
 
-    print_rights_warning(new_object)
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     set_state(new_object, source_object.state)
   rescue => e
@@ -57,6 +57,18 @@ class ObjectImporter
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
     clean_up_after_failed_import(new_object) if new_object
+  end
+
+  def set_rights(rights, pid)
+    if rights.blank?
+      rights = Sufia.config.cc_licenses.first
+      print_output "    WARNING: No dc:rights assertion found for #{pid}.  Setting rights statement for this object."
+    else
+      unless Array(rights).all? { |right| Sufia.config.cc_licenses.include?(right) }
+        print_output "    WARNING: Rights assertion for #{pid} was not in the expected list."
+      end
+    end
+    rights
   end
 
   def handle_datastreams(source_object, new_object, attributes)
@@ -182,7 +194,11 @@ class ObjectImporter
     if new_object.respond_to?(:linked_resources)
       objects_to_delete = objects_to_delete + new_object.linked_resources
     end
-    print_output "Deleting the following attached objects after failing to import #{new_object.pid} : #{objects_to_delete.map(&:pid)}"
+
+    unless objects_to_delete.blank?
+      print_output "Deleting the following attached objects after failing to import #{new_object.pid} : #{objects_to_delete.map(&:pid)}"
+    end
+
     objects_to_delete.each do |obj|
       if obj.pid && ActiveFedora::Base.exists?(obj.pid)
         obj.destroy
@@ -194,12 +210,6 @@ class ObjectImporter
     return unless @verbose
     File.open(log_file, 'a') { |io| io.puts message }
     puts message
-  end
-
-  def print_rights_warning(object)
-    unless object.rights.all? { |right| Sufia.config.cc_licenses.include?(right) }
-      print_output "    WARNING: Rights assertion for #{object.pid} was not in the expected list."
-    end
   end
 
   def log_file

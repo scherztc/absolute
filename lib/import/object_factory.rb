@@ -33,7 +33,6 @@ class ObjectFactory
     obj = LegacyObject.new(attrs)
     obj.pid = set_pid
     obj.visibility = visibility
-    obj.validate!
     return object_class, obj
   end
 

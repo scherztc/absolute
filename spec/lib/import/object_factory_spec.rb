@@ -75,18 +75,8 @@ describe ObjectFactory do
         expect(attributes[:language]).to eq ['eng']
       end
 
-      context "with an allowed rights value" do
-        it 'should have a rights attribute' do
-          expect(attributes[:rights]).to eq [rights_statement]
-        end
-      end
-
-      context "with an unknown rights value" do
-        let (:rights_statement) { 'WHat?' }
-        it "should still import" do
-          expect { subject }.to_not raise_error
-          expect(attributes[:rights]).to eq [rights_statement]
-        end
+      it 'should have a rights attribute' do
+        expect(attributes[:rights]).to eq [rights_statement]
       end
     end
   end
