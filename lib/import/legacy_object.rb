@@ -21,9 +21,6 @@ class LegacyObject < Hash
   
   def validate!
     raise ValidationError, "Rights assertion blank for #{pid}." if self[:rights].blank?
-    unless self[:rights].all? { |right| Sufia.config.cc_licenses.include?(right) }
-      raise ValidationError, "Rights assertion for #{pid}: \"#{self[:rights]}\" was not in the allowed list."
-    end
     true
   end
 

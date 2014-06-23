@@ -83,8 +83,9 @@ describe ObjectFactory do
 
       context "with an unknown rights value" do
         let (:rights_statement) { 'WHat?' }
-        it "should raise an error" do
-          expect { subject }.to raise_error LegacyObject::ValidationError, 'Rights assertion for testme:1: "["WHat?"]" was not in the allowed list.'
+        it "should still import" do
+          expect { subject }.to_not raise_error
+          expect(attributes[:rights]).to eq [rights_statement]
         end
       end
     end

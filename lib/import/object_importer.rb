@@ -49,6 +49,7 @@ class ObjectImporter
       actor.create
     end
 
+    print_rights_warning(new_object)
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     set_state(new_object, source_object.state)
   rescue => e
@@ -193,6 +194,12 @@ class ObjectImporter
     return unless @verbose
     File.open(log_file, 'a') { |io| io.puts message }
     puts message
+  end
+
+  def print_rights_warning(object)
+    unless object.rights.all? { |right| Sufia.config.cc_licenses.include?(right) }
+      print_output "    WARNING: Rights assertion for #{object.pid} was not in the expected list."
+    end
   end
 
   def log_file
