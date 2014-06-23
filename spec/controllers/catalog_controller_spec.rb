@@ -29,8 +29,4 @@ describe CatalogController do
     its(:helper_method) { should eq :display_language }
   end
 
-  describe "creator facet" do
-    subject { CatalogController.blacklight_config.facet_fields['desc_metadata__creator_sim'] }
-    its(:label) { should eq 'People' }
-  end
 end

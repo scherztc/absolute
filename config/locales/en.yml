@@ -40,6 +40,13 @@ en:
         q:
           label:        "Search Collections"
           placeholder:  "Type search here..."
+  blacklight:
+    search:
+      fields:
+        facet:
+          desc_metadata__creator_sim: People
   worthwhile:
-    facet:
-      creator: People
+    catalog:
+      index:
+        type_tabs:
+          all: Home
