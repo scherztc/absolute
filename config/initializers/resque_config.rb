@@ -3,3 +3,7 @@ Resque.redis = Redis.new(host: config[:host], port: config[:port], thread_safe: 
 
 Resque.inline = Rails.env.test?
 # Resque.redis.namespace = "#{Sufia.config.id_namespace}:#{Rails.env}"
+
+# Make the resque-scheduler tabs show up.
+require 'resque-scheduler'
+require 'resque/scheduler/server'
