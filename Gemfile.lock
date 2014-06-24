@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: f5f7d966303c6b418398d10a9a29621503c33a03
+  revision: 5ff786b8ab9dfbeec25e72f17caaf4325cb8a79e
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -83,7 +83,7 @@ GEM
     breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     cancan (1.6.10)
-    cancancan (1.8.2)
+    cancancan (1.8.3)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -358,9 +358,9 @@ GEM
       rdf (~> 1.1)
     rdoc (4.1.1)
       json (~> 1.4)
-    redis (3.0.7)
-    redis-namespace (1.4.1)
-      redis (~> 3.0.4)
+    redis (3.1.0)
+    redis-namespace (1.5.0)
+      redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     resque (1.25.2)
       mono_logger (~> 1.0)
