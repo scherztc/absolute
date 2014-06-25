@@ -35,6 +35,9 @@ gem 'worthwhile', github: 'curationexperts/worthwhile'
 # gem 'worthwhile', path: '../worthwhile'
 #
 gem 'hydra-head', github: 'projecthydra/hydra-head', ref: '43b50eb'
+gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'solr_page_option'
+
+gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'use_facet_field_label'
 
 
 gem "bootstrap-sass"

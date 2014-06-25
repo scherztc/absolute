@@ -11,6 +11,35 @@ GIT
       sufia-models (~> 4.0.0.rc1)
 
 GIT
+  remote: git://github.com/projectblacklight/blacklight.git
+  revision: ed1ba8aa26d784fbbe74b3135d91619731ccd1fd
+  branch: use_facet_field_label
+  specs:
+    blacklight (5.4.0)
+      bootstrap-sass (~> 3.0)
+      deprecation
+      kaminari (~> 0.13)
+      nokogiri (~> 1.6)
+      rails (>= 3.2.6, < 5)
+      rsolr (~> 1.0.6)
+
+GIT
+  remote: git://github.com/projecthydra/active_fedora.git
+  revision: 0bdfe1635d28f3cf98b3a741fa1d162818a2a87d
+  branch: solr_page_option
+  specs:
+    active-fedora (7.0.4)
+      activesupport (>= 3.0.0)
+      deprecation
+      linkeddata
+      mediashelf-loggable
+      nom-xml (>= 0.5.1)
+      om (~> 3.0.0)
+      rdf-rdfxml (~> 1.1.0)
+      rsolr (~> 1.0.10.pre1)
+      rubydora (~> 1.7.4)
+
+GIT
   remote: git://github.com/projecthydra/hydra-head.git
   revision: 43b50eb27cec152e5cddf7618ff3f36792ef9386
   ref: 43b50eb
@@ -49,16 +78,6 @@ GEM
       activesupport (= 4.1.2.rc2)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    active-fedora (7.0.4)
-      activesupport (>= 3.0.0)
-      deprecation
-      linkeddata
-      mediashelf-loggable
-      nom-xml (>= 0.5.1)
-      om (~> 3.0.0)
-      rdf-rdfxml (~> 1.1.0)
-      rsolr (~> 1.0.10.pre1)
-      rubydora (~> 1.7.4)
     active_attr (0.8.3)
       activemodel (>= 3.0.2, < 4.2)
       activesupport (>= 3.0.2, < 4.2)
@@ -91,13 +110,6 @@ GEM
       multi_json (>= 1.0.0)
     backports (3.6.0)
     bcrypt (3.1.7)
-    blacklight (5.4.0)
-      bootstrap-sass (~> 3.0)
-      deprecation
-      kaminari (~> 0.13)
-      nokogiri (~> 1.6)
-      rails (>= 3.2.6, < 5)
-      rsolr (~> 1.0.6)
     block_helpers (0.3.3)
       activesupport (>= 2.0)
     bootstrap-sass (3.1.1.1)
@@ -528,7 +540,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active-fedora!
   angularjs-rails
+  blacklight!
   bootstrap-sass
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1.2)
