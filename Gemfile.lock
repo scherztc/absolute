@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 5ff786b8ab9dfbeec25e72f17caaf4325cb8a79e
+  revision: d1fe8fb7f947d0cf4767c188fb67b320ee915007
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
@@ -106,7 +106,7 @@ GEM
     breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     cancan (1.6.10)
-    cancancan (1.8.3)
+    cancancan (1.8.4)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
