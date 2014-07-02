@@ -41,8 +41,8 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
-  revision: 43b50eb27cec152e5cddf7618ff3f36792ef9386
-  ref: 43b50eb
+  revision: 12363b837c9b0646e42e859d18119b585001e3c7
+  ref: 12363b8
   specs:
     hydra-access-controls (7.1.0)
       active-fedora (~> 7.0.0)
