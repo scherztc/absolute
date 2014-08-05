@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2.rc2'
+gem 'rails', '4.1.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2'  # used on sandbox
@@ -37,7 +37,7 @@ gem 'worthwhile', github: 'curationexperts/worthwhile'
 gem 'hydra-head', github: 'projecthydra/hydra-head', ref: '12363b8'
 gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'solr_page_option'
 
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'use_facet_field_label'
+gem 'blacklight', github: 'projectblacklight/blacklight', ref: '7ee2f79' # pre 5.4.1
 
 
 gem "bootstrap-sass"
