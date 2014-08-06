@@ -9,6 +9,12 @@ def blacklight_config
   CatalogController.blacklight_config
 end
 
+### ActiveSupport::Benchmarkable (used in Blacklight::SolrHelper) depends on a logger method
+
+def logger
+  Rails.logger
+end
+
 Riiif::HTTPFileResolver.id_to_uri = lambda do |id| 
   pid = Sufia::Noid.namespaceize(id)
   connection = ActiveFedora::Base.connection_for_pid(pid)
