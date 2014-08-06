@@ -21,9 +21,20 @@ class LegacyObject < Hash
   # If the attributes contains an entry with a key of language and a value of 'en' recode it as 'eng'
   def []= (key, val)
     if key == :language
-      super(:language, val.map { |v| v == 'en' ? 'eng' : v  })
+      super(:language, recode_language(val))
     else
       super
+    end
+  end
+
+  def recode_language(val)
+    val.map do |v|
+      case v
+      when 'en', 'English'
+        'eng'
+      else
+        v 
+      end
     end
   end
 end

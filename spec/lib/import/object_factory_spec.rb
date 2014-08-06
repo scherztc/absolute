@@ -51,9 +51,10 @@ describe ObjectFactory do
     let(:attributes) { subject.last }
 
     let (:rights_statement) { Sufia.config.cc_licenses.first }
+    let (:language) { 'fra' }
     let (:content) {
       "<oai_dc:dc xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">
-         <dc:language>en</dc:language>
+         <dc:language>#{language}</dc:language>
          <dc:rights>#{rights_statement}</dc:rights>
        </oai_dc:dc>"
     }
@@ -71,8 +72,24 @@ describe ObjectFactory do
         object.datastreams['DC'].content = content
       end
 
-      it "should recode language to ISO 639-3" do
-        expect(attributes[:language]).to eq ['eng']
+      context "when source language is 'en'" do
+        let (:language) { 'en' }
+        it "should recode language to ISO 639-3" do
+          expect(attributes[:language]).to eq ['eng']
+        end
+      end
+
+      context "when source language is 'English'" do
+        let (:language) { 'English' }
+        it "should recode language to ISO 639-3" do
+          expect(attributes[:language]).to eq ['eng']
+        end
+      end
+
+      context "when source language is something else" do
+        it "shouldn't record" do
+          expect(attributes[:language]).to eq ['fra']
+        end
       end
 
       it 'should have a rights attribute' do
