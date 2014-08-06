@@ -9,7 +9,6 @@ Absolute::Application.routes.draw do
   # TODO secure resque admin interface - allow admin users only
   mount Resque::Server => '/queues'
   mount Riiif::Engine => '/image-service'
-  #mount Worthwhile::Engine, at: '/'
   mount Hydra::Collections::Engine => '/'
   worthwhile_curation_concerns
   worthwhile_collections

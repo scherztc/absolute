@@ -94,6 +94,16 @@ you'll get helpful comments in the source like this:
 
 Information about importing object is now on [the wiki](https://github.com/curationexperts/absolute/wiki/Migration-Script)
 
+### Exporting the new object URLs to a Handle.net batch file:
+
+```
+rake export:handle_batch
+
+Exported 223 records to handles-2014-08-06T11:48:51.txt
+```
+
+Then take this file and import it using the handle.net batch tool.
+
 ## Deploying to the Sandbox
 
 During the May/June 2014 SOW:

@@ -33,6 +33,8 @@ Absolute::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  config.relative_url_root = "/digitalcase"
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 end
