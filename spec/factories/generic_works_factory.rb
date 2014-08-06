@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :case_generic_work, class: CaseGenericWork do
     ignore do
-      user {FactoryGirl.create(:user)}
+      user { FactoryGirl.create(:user) }
     end
-    sequence(:title) {|n| "Title #{n}"}
-    rights { Sufia.config.cc_licenses.first.dup }
+    sequence(:title) {|n| ["Title #{n}"] }
+    rights { [Sufia.config.cc_licenses.first.dup] }
     date_uploaded { Date.today }
     date_modified { Date.today }
     visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED

@@ -213,6 +213,7 @@ describe ObjectImporter do
         new_collection = Collection.find(new_pid)
         expect(new_collection.members).to eq [source_text]
         expect(new_collection.member_ids).to eq [source_text.pid]
+        source_text.collections(true) # this refreshes the cache
         expect(source_text.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
       end
     end

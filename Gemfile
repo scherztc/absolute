@@ -31,13 +31,11 @@ gem 'capistrano', '~> 3.1',           group: :development
 gem 'capistrano-rails', '~> 1.1',     group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
+gem 'sufia-models', github: 'projecthydra/sufia', branch: 'disentangle_characterization' # > '4.0.0.rc2'
 gem 'worthwhile', github: 'curationexperts/worthwhile'
 # gem 'worthwhile', path: '../worthwhile'
 #
-gem 'hydra-head', github: 'projecthydra/hydra-head', ref: '12363b8'
-gem 'active-fedora', github: 'projecthydra/active_fedora', branch: 'solr_page_option'
-
-gem 'blacklight', github: 'projectblacklight/blacklight', ref: '7ee2f79' # pre 5.4.1
+gem 'hydra', '7.1.0'
 
 
 gem "bootstrap-sass"

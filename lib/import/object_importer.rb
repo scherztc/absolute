@@ -39,6 +39,7 @@ class ObjectImporter
     attributes[:rights] = set_rights(attributes[:rights], pid)
 
     if klass == Collection
+      attributes[:title] = attributes[:title].first if attributes.key? :title
       new_object = klass.new(attributes)
       handle_datastreams(source_object, new_object, attributes)
       import_collection(source_object, new_object)
@@ -56,6 +57,7 @@ class ObjectImporter
     @failed_imports << pid
     print_output "    ERROR: Failed to import object: #{pid}"
     print_output "    " + e.message
+    print_output "    " + e.backtrace.join("\n\t")
     clean_up_after_failed_import(new_object) if new_object
   end
 
