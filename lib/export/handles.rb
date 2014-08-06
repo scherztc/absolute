@@ -1,11 +1,14 @@
 module Export
   class Handles
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TextHelper
     
 
-    def initialize(namespace, host)
+    def initialize(verb, namespace, host, pids=nil)
+      @verb = verb
       @namespace = namespace
       @host = host 
+      @pids = pids
     end
 
     def export!
@@ -16,12 +19,14 @@ module Export
           f.puts modify(* model_and_id(doc))
         end
       end
-      puts "Exported #{counter} records to #{file_name}"
+      puts "Exported #{pluralize(counter, "#{@verb} record")} to #{file_name}"
     end
 
     private
       def query
-        "has_model_ssim:(#{query_classes.join(' ')})"
+        q = "has_model_ssim:(#{query_classes.join(' ')})"
+        q += " AND (#{ActiveFedora::SolrService.construct_query_for_pids(@pids)})" if @pids
+        q
       end
 
       def classes
@@ -33,7 +38,7 @@ module Export
       end
 
       def modify(model, id)
-        "MODIFY #{@namespace}/#{id}\n" +
+        "#{@verb} #{@namespace}/#{id}\n" +
         "2 URL 86400 1110 UTF8 #{route_for(model, id)}\n\n"
       end
 
@@ -55,7 +60,7 @@ module Export
       end
 
       def file_name
-        @file_name ||= "handles-#{Time.now.to_formatted_s(:iso8601).first(19)}.txt"
+        @file_name ||= "#{@verb.downcase}-handles-#{Time.now.to_formatted_s(:iso8601).first(19)}.txt"
       end
   end
 end
