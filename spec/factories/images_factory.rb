@@ -1,16 +1,11 @@
-# Generated via
-#  `rails generate curate:work Video`
-#
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :image, class: Image do
     ignore do
       user { FactoryGirl.create(:user) }
     end
 
-    sequence(:title) {|n| "Title #{n}"}
-    rights { Sufia.config.cc_licenses.first.dup }
+    sequence(:title) {|n| ["Title #{n}"] }
+    rights { [Sufia.config.cc_licenses.first.dup] }
     date_uploaded { Date.today }
     date_modified { Date.today }
     visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED

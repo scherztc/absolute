@@ -73,7 +73,7 @@ end
 
 describe 'Viewing a Audio that is private' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:private_case_generic_work, title: "Sample work" ) }
+  let(:work) { FactoryGirl.create(:private_case_generic_work, title: ["Sample work"] ) }
 
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)

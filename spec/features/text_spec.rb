@@ -89,7 +89,7 @@ end
 
 describe 'Viewing a Text that is private' do
   let(:user) { FactoryGirl.create(:user) }
-  let(:work) { FactoryGirl.create(:private_text, title: "Sample work" ) }
+  let(:work) { FactoryGirl.create(:private_text, title: ["Sample work"] ) }
 
   it 'should show a stub indicating we have the work, but it is private' do
     login_as(user)
