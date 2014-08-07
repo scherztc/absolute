@@ -177,7 +177,14 @@ describe ObjectImporter do
         source_text.save!
       end
 
+      let(:queue) { importer.modified_queue }
+
       it 'sets the correct state for parent object, attached files, and external links' do
+        expect(queue).to receive(:push).with(hash_including(id: 'ksl:weaedm186/weaedm186.pdf'))
+        expect(queue).to receive(:push).with(hash_including(id: 'ksl:weaedm186/mods.xml'))
+        expect(queue).to receive(:push).with(hash_including(id: 'ksl:weaedm186/link1'))
+        expect(queue).to receive(:push).with(hash_including(id: 'ksl:weaedm186/link2'))
+        expect(queue).to receive(:push).with(hash_including(id: 'ksl:weaedm186'))
         expect {
           importer.import!
         }.to change { Text.count }.by(1)
@@ -194,6 +201,7 @@ describe ObjectImporter do
         expect(link_states).to eq ['A', 'D']
         link_content_states = Worthwhile::LinkedResource.all.map {|link| link.datastreams['content'].state }.sort
         expect(link_content_states).to eq ['A', 'D']
+
       end
     end
 

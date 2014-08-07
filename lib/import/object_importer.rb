@@ -124,7 +124,7 @@ class ObjectImporter
         set_state(file, source_datastream.state)
         file_ids << file.pid
         Sufia.queue.push(CharacterizeJob.new(file.pid))
-        @modified_queue.push(id: file.identifier,
+        @modified_queue.push(id: file.identifier.first,
                              url: curation_concern_generic_file_url(file.pid, url_params))
       end
     end
