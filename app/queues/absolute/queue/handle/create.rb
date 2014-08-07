@@ -1,13 +1,14 @@
 module Absolute
   module Queue
     module Handle
-      class Modify < Base
+      class Create < Base
         def verb
-          'MODIFY'.freeze
+          'CREATE'.freeze
         end
       end
     end
   end
 end
+
 
 

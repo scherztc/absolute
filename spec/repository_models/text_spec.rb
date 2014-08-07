@@ -6,9 +6,6 @@ describe Text do
   it_behaves_like 'is_embargoable'
   it_behaves_like 'has_dc_metadata'
 
-  # TODO: This is the test you will use when we add handle support
-  # it_behaves_like 'remotely_identified', :handle
-
   its(:tei?) { should_not be_present }
 
   context "with TEI" do
@@ -19,7 +16,7 @@ describe Text do
 
     its(:tei?) { should be_present }
 
-    subject { document } 
+    subject { document }
     let(:file) { '/files/anoabo00-TEI.xml' }
 
     before do
@@ -90,7 +87,7 @@ describe Text do
       its(['datastreams_ssim']) { should eq ['TEIP5'] }
 
       context "when a member of several collections" do
-        before do 
+        before do
           Collection.destroy_all
           document.attributes = FactoryGirl.attributes_for(:text)
         end

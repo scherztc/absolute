@@ -1,10 +1,10 @@
 class Text < ActiveFedora::Base
   include CurationConcern::CaseWork
   include ActionView::Helpers::AssetTagHelper
-  
-  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."  
+
+  self.human_readable_short_description = "Any Text work, preferably with TEI xml attached."
   self.accept_datastream_attachments ["TEI", "TEIP5", "MODS", "METS", "QDC"]
-  
+
   def tei?
     datastreams['TEIP5'].has_content?
   end
