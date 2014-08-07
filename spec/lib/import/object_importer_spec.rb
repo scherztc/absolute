@@ -116,10 +116,12 @@ describe ObjectImporter do
       source_text.add_datastream(ds2)
       source_text.datastreams['link1'].dsState = 'D'
       source_text.save!
+      importer.modified_queue.clear
     end
 
+    let(:importer) { ObjectImporter.new(fedora_name, [source_text.pid]) }
+
     it 'classifies the datastreams' do
-      importer = ObjectImporter.new(fedora_name, [source_text.pid])
       fedora = importer.remote_fedora
       source_object = fedora.find(source_text.pid)
       dsids = importer.classify_datastreams(source_object)
@@ -130,7 +132,6 @@ describe ObjectImporter do
     end
 
     it 'attaches the file and xml files to the new object and sets representative' do
-      importer = ObjectImporter.new(fedora_name, [source_text.pid])
       importer.import!
 
       expect(Worthwhile::GenericFile.count).to eq 1
@@ -142,10 +143,11 @@ describe ObjectImporter do
       new_object = Text.find(new_pid)
       expect(new_object.representative).to eq file.pid
       expect(new_object.datastreams['MODS'].content).to eq xml_content
+
+      expect(importer.modified_queue.size).to eq 5 # one object, one datastream, one xml, two links
     end
 
     it 'creates linked resources for the external links' do
-      importer = ObjectImporter.new(fedora_name, [source_text.pid])
       importer.import!
 
       urls = Worthwhile::LinkedResource.all.map(&:url).sort
@@ -164,7 +166,6 @@ describe ObjectImporter do
       end
 
       it 'logs the pid as a failed import' do
-        importer = ObjectImporter.new(fedora_name, [source_text.pid])
         importer.import!
         expect(importer.failed_imports).to eq [source_text.pid]
       end
@@ -177,7 +178,6 @@ describe ObjectImporter do
       end
 
       it 'sets the correct state for parent object, attached files, and external links' do
-        importer = ObjectImporter.new(fedora_name, [source_text.pid])
         expect {
           importer.import!
         }.to change { Text.count }.by(1)
@@ -233,7 +233,7 @@ describe ObjectImporter do
         importer = ObjectImporter.new(fedora_name, [collection.pid])
         expect(importer).to receive(:import_object).with(created_file.pid)
         new_collection = FactoryGirl.build(:collection, member_ids: [created_file.pid])
-        importer.import_collection(collection, new_collection)
+        importer.import_collection_members(collection, new_collection)
       end
     end
 

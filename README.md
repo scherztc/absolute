@@ -97,21 +97,12 @@ Information about importing object is now on [the wiki](https://github.com/curat
 ### Exporting the imported URLs to a Handle.net batch file:
 
 ```
-rake export:modify_batch
+rake export:handles
 
-Exported 223 MODIFY records to modify-handles-2014-08-06T11:48:51.txt
+Exported 223 records to handles-2014-08-06T11:48:51.txt
 ```
 
-When creating new handles, you can specify the pids to export. It's important not to
-include any spaces between the pids.
-
-```
-rake export:create_batch[ksl:t435jq758,ksl:t435jq76j]
-
-Exported 2 CREATE records to create-handles-2014-08-06T11:48:51.txt
-```
-
-Then take these files and import them using the handle.net batch tool.
+Then take this file and import them using the handle.net batch tool.
 
 ## Deploying to the Sandbox
 

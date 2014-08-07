@@ -6,9 +6,11 @@ class UnableToCreateLinkedResourceError < StandardError; end
 
 class ObjectImporter
 
-  attr_reader :failed_imports
+  include Rails.application.routes.url_helpers
+  attr_reader :failed_imports, :modified_queue
 
   def initialize(remote_fedora_name, pids, verbose = false)
+    @modified_queue = Absolute::Queue::Handle::Modify.new(Resque.redis, JSON)
     @remote_fedora_name = remote_fedora_name
     @pids = pids
     @verbose = verbose
@@ -38,18 +40,11 @@ class ObjectImporter
     klass, attributes = ObjectFactory.new(source_object).build_object
     attributes[:rights] = set_rights(attributes[:rights], pid)
 
-    if klass == Collection
-      attributes[:title] = attributes[:title].first if attributes.key? :title
-      new_object = klass.new(attributes)
-      handle_datastreams(source_object, new_object, attributes)
-      import_collection(source_object, new_object)
-      new_object.save!
-    else
-      new_object = klass.new(pid: attributes.delete(:pid))
-      handle_datastreams(source_object, new_object, attributes)
-      actor = Worthwhile::CurationConcern.actor(new_object, User.batchuser, attributes)
-      actor.create
-    end
+    new_object = if klass == Collection
+                    import_collection(source_object, klass, attributes)
+                  else
+                    import_work(source_object, klass, attributes)
+                  end
 
     print_output "    Created #{new_object.class} object: #{new_object.pid}"
     set_state(new_object, source_object.state)
@@ -59,6 +54,26 @@ class ObjectImporter
     print_output "    " + e.message
     print_output "    " + e.backtrace.join("\n\t")
     clean_up_after_failed_import(new_object) if new_object
+  end
+
+  def import_collection(source_object, klass, attributes)
+    attributes[:title] = attributes[:title].first if attributes.key? :title
+    klass.new(attributes).tap do |new_object|
+      handle_datastreams(source_object, new_object, attributes)
+      import_collection_members(source_object, new_object)
+      new_object.save!
+      @modified_queue.push(id: attributes[:identifier].first,
+                           url: collection_url(new_object.id, url_params))
+    end
+  end
+
+  def import_work(source_object, klass, attributes)
+    klass.new(pid: attributes.delete(:pid)).tap do |new_object|
+      handle_datastreams(source_object, new_object, attributes)
+      actor = Worthwhile::CurationConcern.actor(new_object, User.batchuser, attributes)
+      actor.create
+      @modified_queue.push(id: attributes[:identifier].first, url: send(:"curation_concern_#{klass.to_s.underscore}_url", new_object.id, url_params))
+    end
   end
 
   def set_rights(rights, pid)
@@ -89,6 +104,8 @@ class ObjectImporter
       target_dsid = DsidMap.target_dsid(dsid)
       options = { dsid: target_dsid, mimeType: source_datastream.mimeType }
       new_object.add_file_datastream(source_datastream.content, options)
+      @modified_queue.push(id: "#{source_datastream.pid}/#{dsid}",
+                           url: download_url(new_object.id, url_params.merge(datastream_id: target_dsid)))
     end
   end
 
@@ -107,6 +124,8 @@ class ObjectImporter
         set_state(file, source_datastream.state)
         file_ids << file.pid
         Sufia.queue.push(CharacterizeJob.new(file.pid))
+        @modified_queue.push(id: file.identifier,
+                             url: curation_concern_generic_file_url(file.pid, url_params))
       end
     end
     file_ids
@@ -125,6 +144,8 @@ class ObjectImporter
       unless actor.create
         raise UnableToCreateLinkedResourceError.new
       end
+      @modified_queue.push(id: "#{source_datastream.pid}/#{dsid}",
+                           url: curation_concern_linked_resource_url(link.id, url_params))
       print_output("      Created Linked Resource: #{actor.curation_concern.pid}")
       set_state(link, source_datastream.state)
     end
@@ -176,7 +197,7 @@ class ObjectImporter
     end
   end
 
-  def import_collection(source_object, new_object)
+  def import_collection_members(source_object, new_object)
     rels = source_object.datastreams['RELS-EXT'].content
     member_ids = RelsExtParser.new(rels).collection_member_ids
 
@@ -234,4 +255,7 @@ class ObjectImporter
     import_status
   end
 
+  def url_params
+    { host: 'library.case.edu', script_name: Rails.application.config.relative_url_root }
+  end
 end
