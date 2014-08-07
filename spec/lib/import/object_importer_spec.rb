@@ -5,7 +5,7 @@ require 'import/object_importer'
 describe ObjectImporter do
   include ImportHelper
 
-  let(:source_text)  { FactoryGirl.create(:text) }
+  let(:source_text)  { ActiveFedora::Base.create!(pid: 'ksl:weaedm186') }
   let(:new_pid) { 'new:123' }
   let(:fedora_name) { 'test' }
   let(:collection) { FactoryGirl.build(:collection) }
@@ -107,6 +107,7 @@ describe ObjectImporter do
     before do
       User.first_or_create(username: User.batchuser_key)
       source_text.add_file_datastream(content, { dsid: 'weaedm186.pdf', mimeType: 'application/pdf' })
+      allow(source_text.datastreams['DC']).to receive(:content).and_return File.open('spec/fixtures/files/weaedm186-DC.xml').read
       source_text.datastreams['weaedm186.pdf'].dsState = 'D'
       source_text.add_file_datastream(xml_content, { dsid: 'mods.xml', mimeType: 'application/xml' })
       ds1 = source_text.create_datastream(ActiveFedora::Datastream, 'link1', link1)
@@ -124,7 +125,7 @@ describe ObjectImporter do
       dsids = importer.classify_datastreams(source_object)
 
       expect(dsids[:attached_files]).to eq ['weaedm186.pdf']
-      expect(dsids[:xml].sort).to eq ['mods.xml', 'properties', 'rightsMetadata']
+      expect(dsids[:xml]).to eq ['mods.xml']
       expect(dsids[:links].sort).to eq ['link1', 'link2']
     end
 
@@ -134,8 +135,8 @@ describe ObjectImporter do
 
       expect(Worthwhile::GenericFile.count).to eq 1
       file = Worthwhile::GenericFile.first
-      file_content = file.datastreams['content'].content
-      expect(file_content).to eq content
+      expect(file.datastreams['content'].content).to eq content
+      expect(file.identifier).to eq ["ksl:weaedm186/weaedm186.pdf"]
       expect(file.visibility).to eq Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
 
       new_object = Text.find(new_pid)
@@ -177,9 +178,10 @@ describe ObjectImporter do
 
       it 'sets the correct state for parent object, attached files, and external links' do
         importer = ObjectImporter.new(fedora_name, [source_text.pid])
-        importer.import!
+        expect {
+          importer.import!
+        }.to change { Text.count }.by(1)
 
-        expect(Text.count).to eq 2
         new_object = Text.find(new_pid)
         expect(new_object.state).to eq 'I'
 
@@ -199,11 +201,11 @@ describe ObjectImporter do
 
 
   describe 'importing a collection' do
+    let(:created_file) { FactoryGirl.build(:text) }
     before do
-      collection.members << source_text
+      collection.members << created_file
       collection.save!
     end
-
     context "when members of the collection have already been imported" do
 
       it 'sets the members of the collection' do
@@ -211,10 +213,10 @@ describe ObjectImporter do
         importer.import!
 
         new_collection = Collection.find(new_pid)
-        expect(new_collection.members).to eq [source_text]
-        expect(new_collection.member_ids).to eq [source_text.pid]
-        source_text.collections(true) # this refreshes the cache
-        expect(source_text.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
+        expect(new_collection.members).to eq [created_file]
+        expect(new_collection.member_ids).to eq [created_file.pid]
+        created_file.collections(true) # this refreshes the cache
+        expect(created_file.collection_ids.sort).to eq [collection.pid, new_collection.pid].sort
       end
     end
 
@@ -224,13 +226,13 @@ describe ObjectImporter do
         # and target, the object that the importer will create
         # already exists, so we'll stub it to pretend that PID
         # doesn't exist yet.
-        allow(ActiveFedora::Base).to receive(:exists?).with(source_text.pid).and_return(false)
+        allow(ActiveFedora::Base).to receive(:exists?).with(created_file.pid).and_return(false)
       end
 
       it 'imports missing collection members before importing collection' do
         importer = ObjectImporter.new(fedora_name, [collection.pid])
-        expect(importer).to receive(:import_object).with(source_text.pid)
-        new_collection = FactoryGirl.build(:collection, member_ids: [source_text.pid])
+        expect(importer).to receive(:import_object).with(created_file.pid)
+        new_collection = FactoryGirl.build(:collection, member_ids: [created_file.pid])
         importer.import_collection(collection, new_collection)
       end
     end
@@ -264,14 +266,15 @@ describe ObjectImporter do
     }
 
     context 'when there is only 1 file associated with a work' do
+      let(:created_file) { FactoryGirl.build(:text) }
       before do
-        source_text.generic_file_ids = [gf.pid]
+        created_file.generic_file_ids = [gf.pid]
       end
 
       it 'that file should be the representative' do
-        importer = ObjectImporter.new(fedora_name, [source_text.pid])
-        importer.select_representative(source_text)
-        expect(source_text.representative).to eq gf.pid
+        importer = ObjectImporter.new(fedora_name, [created_file.pid])
+        importer.select_representative(created_file)
+        expect(created_file.representative).to eq gf.pid
       end
     end
 

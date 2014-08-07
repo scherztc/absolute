@@ -76,7 +76,7 @@ class ObjectImporter
   def handle_datastreams(source_object, new_object, attributes)
     dsids = classify_datastreams(source_object)
     copy_datastreams(source_object.datastreams.select { |k,_| dsids[:xml].include?(k) }, new_object)
-    new_object.generic_file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility])
+    new_object.generic_file_ids = attach_files(source_object.datastreams.select { |k,_| dsids[:attached_files].include?(k) }, new_object, attributes[:visibility], attributes[:identifier].first)
     select_representative(new_object)
     if new_object.respond_to?(:linked_resource_ids=)
       attach_links(source_object.datastreams.select { |k,_| dsids[:links].include?(k) }, new_object)
@@ -92,13 +92,14 @@ class ObjectImporter
     end
   end
 
-  def attach_files(source_datastreams, new_object, visibility)
+  def attach_files(source_datastreams, new_object, visibility, parent_identifier)
     file_ids = []
     source_datastreams.each do |dsid, source_datastream|
       print_output("    Handling datastream #{dsid}:")
       Worthwhile::GenericFile.new(batch_id: new_object.pid).tap do |file|
         file.add_file(source_datastream.content, 'content', dsid)
         file.visibility = visibility
+        file.identifier = ["#{parent_identifier}/#{source_datastream.dsid}" ]
         file.datastreams['content'].dsState = source_datastream.state
         file.save!
         print_output("      Created GenericFile #{file.pid}")
