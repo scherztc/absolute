@@ -50,7 +50,8 @@ describe 'Viewing a Case generic work I don\'t own' do
   let(:user) { FactoryGirl.create(:user) }
 
   context 'and I don\'t have permission to see' do
-    let(:work) { FactoryGirl.create(:private_case_generic_work, title: ["Sample work"], description:"My favorite thing." ) }
+    let(:work) { FactoryGirl.create(:private_case_generic_work, title: ["Sample work"],
+                                    description: ["My favorite thing."] ) }
     it 'should show a stub indicating we have the work, but it is private' do
       login_as(user)
       visit curation_concern_case_generic_work_path(work)
@@ -62,7 +63,8 @@ describe 'Viewing a Case generic work I don\'t own' do
   end
 
   context 'but I do have permission to see' do
-    let(:work) { FactoryGirl.create(:public_case_generic_work, title: ["Sample work"], description:"My favorite thing." ) }
+    let(:work) { FactoryGirl.create(:public_case_generic_work, title: ["Sample work"],
+                                    description: ["My favorite thing."] ) }
     before do
       login_as(user)
     end
