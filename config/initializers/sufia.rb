@@ -15,10 +15,11 @@ Sufia.config do |config|
 
   config.cc_licenses = [
     'Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio, provides the information contained in digital case for non-commercial, personal, or research use only. All other use, including but not limited to commercial or scholarly reproductions, redistribution, publication or transmission, whether by electronic means or otherwise, without prior written permission of the copyright holder is strictly prohibited. For more information contact digital case at digitalcase@case.edu.',
-    'This collection is owned by Special Collections, Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio. For permission to reproduce and/or publish, contact Special Collections at 216-368-2993.'
+    'This work may be protected by copyright law under U.S. Code Title 17. Digital Case makes this reproduction available for personal research purposes only. For more information, please contact Digital Case at digitalcase@case.edu.',
+    'This work is in the public domain. For more information contact University Archives at archives@case.edu or by calling 216-368-3320.'
   ]
 
-  config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]
+  #config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]
 
   config.resource_types = {
     "Article" => "Article",
