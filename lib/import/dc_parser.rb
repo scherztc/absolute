@@ -44,8 +44,8 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
   end
 
   def to_h
-    single_value_fields = [:description, :rights, :title]
-    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type]
+    single_value_fields = [:description, :rights]
+    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type, :title]
     all_fields = single_value_fields + multi_value_fields
 
     new_lines = /\s*\n\s*/

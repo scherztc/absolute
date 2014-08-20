@@ -1,0 +1,12 @@
+#catalog_search {
+  margin-left: auto;
+  maring-right: auto;
+}
+
+#brand-bar div a img {
+  max-width: 100%;
+}
+
+#brand-bar-wrapper .search-form .q {
+  margin-left: 0 !important;
+}
