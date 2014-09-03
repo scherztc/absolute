@@ -54,7 +54,6 @@ gem 'devise_cas_authenticatable', '~> 1.3.6'
 gem 'resque-scheduler'
 
 group :development, :test do
-  gem 'debugger'
   gem "jettywrapper"
   gem "rspec-rails", '~> 3.0'
   gem "rspec-its"
