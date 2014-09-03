@@ -55,8 +55,8 @@ module Worthwhile::CatalogController
       config.add_index_field solr_name("desc_metadata__description", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__tag", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__subject", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__creator", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__contributor", :stored_searchable)
+      config.add_index_field solr_name("desc_metadata__creator", :stored_searchable), separator: ';'
+      config.add_index_field solr_name("desc_metadata__contributor", :stored_searchable), separator: '; '
       config.add_index_field solr_name("desc_metadata__publisher", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__based_near", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__language", :stored_searchable)
