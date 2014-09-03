@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: b2623237e322198d2ee3d6e6e1ba5e21d5cc55b9
+  revision: 9dc8942d207b909e41c3114338a41d1a34ff4c3a
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
       breadcrumbs_on_rails (~> 2.3.0)
       hydra-collections (~> 2.0.5)
-      hydra-head (= 7.2.0)
+      hydra-head (~> 7.2.0)
       simple_form (~> 3.1.0.rc2)
       sufia-models (~> 4.0.0)
 
@@ -183,7 +183,7 @@ GEM
       rsolr (~> 1.0.10)
       rubydora (~> 1.8.0)
       solrizer (~> 3.3.0)
-    hydra-access-controls (7.2.0)
+    hydra-access-controls (7.2.1)
       active-fedora (~> 7.0)
       activesupport
       blacklight (~> 5.3)
@@ -194,9 +194,9 @@ GEM
     hydra-collections (2.0.5)
       blacklight
       hydra-head (~> 7.0)
-    hydra-core (7.2.0)
+    hydra-core (7.2.1)
       block_helpers
-      hydra-access-controls (= 7.2.0)
+      hydra-access-controls (= 7.2.1)
       jettywrapper (>= 1.4.1)
       rails (>= 3.2.3, < 5)
     hydra-derivatives (0.1.1)
@@ -206,9 +206,9 @@ GEM
       mini_magick
     hydra-file_characterization (0.3.1)
       activesupport (>= 3.0.0)
-    hydra-head (7.2.0)
-      hydra-access-controls (= 7.2.0)
-      hydra-core (= 7.2.0)
+    hydra-head (7.2.1)
+      hydra-access-controls (= 7.2.1)
+      hydra-core (= 7.2.1)
       rails (>= 3.2.6)
     hydra-remote_identifier (0.6.7)
       activesupport (>= 3.2.13, < 5.0)
