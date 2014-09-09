@@ -4,7 +4,7 @@ rvm:
 
 notifications:
   email:
-    - alicia@curationexperts.com
+    - pgf8@case.edu
 
 script:
   - bundle exec rake db:reset
