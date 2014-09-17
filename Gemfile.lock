@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/curationexperts/worthwhile.git
-  revision: 9a893ce3f77b5010e0e914e69d44eb88bf527949
+  revision: 449e37e23ddc1e3f9b86d69329415fcabfbebbaa
   specs:
     worthwhile (0.0.1.alpha)
       active_attr
