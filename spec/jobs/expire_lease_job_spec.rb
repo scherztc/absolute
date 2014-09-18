@@ -3,11 +3,15 @@ require 'spec_helper'
 describe ExpireLeaseJob do
 
   let(:past_date) { Date.today - 2 }
-  let(:lease1) { FactoryGirl.build(:text, lease_expiration_date: past_date.to_s,
+  let(:lease1) { build(:text, lease_expiration_date: past_date.to_s,
                         visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC,
                         visibility_during_lease: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC,
                         visibility_after_lease: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE) }
+  let(:a_file) { build(:generic_file, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) }
+
+
   before do
+    lease1.generic_files << a_file
     lease1.save(validate: false)
   end
 
@@ -15,7 +19,8 @@ describe ExpireLeaseJob do
     expect(Hydra::LeaseService).to receive(:assets_with_expired_leases).and_return [lease1]
     expect {
       ExpireLeaseJob.perform
-    }.to change { lease1.visibility }.from('open').to('restricted')
+    }.to change { lease1.visibility }.from('open').to('restricted').and change {
+      a_file.reload.visibility }.from('open').to('restricted')
 
   end
 end

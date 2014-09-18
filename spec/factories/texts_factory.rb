@@ -4,7 +4,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :text, class: Text do
+  factory :text do
     ignore do
       user { FactoryGirl.create(:user) }
     end
@@ -26,14 +26,5 @@ FactoryGirl.define do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
     end
 
-    factory :text_with_files do
-      ignore do
-        file_count 3
-      end
-
-      after(:create) do |work, evaluator|
-        FactoryGirl.create_list(:generic_file, evaluator.file_count, batch: work, user: evaluator.user)
-      end
-    end
   end
 end
