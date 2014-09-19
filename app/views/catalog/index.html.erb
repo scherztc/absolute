@@ -1,9 +1,9 @@
-<% content_for :page_title, "#{application_name} Search Results" %>
-<% content_for :page_class, 'search' %>
-<% content_for :page_header do %>
+<% provide :page_title, "#{application_name} Search Results" %>
+<% provide :page_class, 'search' %>
+<% provide :page_header do %>
   <%= render 'navbar' %>
 <% end %>
-<% content_for :sidebar do %>
+<% provide :sidebar do %>
   <%= render 'search_sidebar' %>
 <% end %>
 

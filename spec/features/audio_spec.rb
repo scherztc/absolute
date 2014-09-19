@@ -24,7 +24,7 @@ describe 'Creating a Audio' do
       end
     end
   end
-  
+
   describe 'with attached XML' do
     it "should allow me to attach the XML on create page" do
       login_as(user)
