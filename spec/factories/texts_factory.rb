@@ -1,8 +1,3 @@
-# Generated via
-#  `rails generate curate:work Text`
-#
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :text do
     ignore do
@@ -22,9 +17,9 @@ FactoryGirl.define do
     factory :private_text do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
     end
+
     factory :public_text do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
     end
-
   end
 end
