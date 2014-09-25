@@ -4,7 +4,7 @@ module CurationConcern::WithDatastreamAttachments
   included do
     class_attribute :accepted_attachments
     self.accepted_attachments = []
-    
+
     # Register datastreams to accept attachments on
     # @example
     #   class Text < ActiveFedora::Base
@@ -19,8 +19,8 @@ module CurationConcern::WithDatastreamAttachments
       end
     end
   end
-  
-  def attachments 
+
+  def attachments
     datastreams.select {|dsid, ds| self.class.accepted_attachments.include?(dsid) }
   end
 
@@ -32,8 +32,7 @@ module CurationConcern::WithDatastreamAttachments
 
   private
 
-  def attachment_datastreams
-    datastreams.except('RELS-EXT', 'DC', 'properties', 'rightsMetadata', 'descMetadata').select { |key, value| value.has_content? }.keys
-  end
-  
+    def attachment_datastreams
+      datastreams.except('RELS-EXT', 'DC', 'properties', 'rightsMetadata', 'descMetadata').select { |key, value| value.has_content? }.keys
+    end
 end
