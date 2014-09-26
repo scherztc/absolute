@@ -21,7 +21,7 @@ describe CatalogController do
 
   describe "facets" do
     subject { CatalogController.blacklight_config.facet_fields.keys }
-    it { should include('datastreams_ssim', 'collection_sim') }
+    it { should include('datastreams_ssim', 'collection_sim', 'generic_type_sim') }
   end
 
   describe "language facet" do

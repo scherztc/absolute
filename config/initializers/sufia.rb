@@ -62,7 +62,7 @@ Sufia.config do |config|
   config.queue = Sufia::Resque::Queue
 
   # Map hostnames onto Google Analytics tracking IDs
-  # config.google_analytics_id = 'UA-99999999-1'
+  config.google_analytics_id = 'UA-2228420-10'
 
 
   # Where to store tempfiles, leave blank for the system temp directory (e.g. /tmp)

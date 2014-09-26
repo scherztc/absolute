@@ -5,6 +5,7 @@ rvm:
 notifications:
   email:
     - pgf8@case.edu
+    - mma29@case.edu
 
 script:
   - bundle exec rake db:reset

@@ -6,8 +6,14 @@ Absolute::Application.routes.draw do
 
   mount Hydra::RoleManagement::Engine => '/'
 
-  # TODO secure resque admin interface - allow admin users only
-  mount Resque::Server => '/queues'
+  # Checks to see if the user has access to the page. Currently, this is defined in admin_permission
+  constraints ResqueAdmin do
+    mount Resque::Server, at: '/queues'
+  end
+  #This line is only called if the user does not meet the above constraints. It loads a page which CanCan tries to authorize. Since it can't, it performs the default behavior of displaying a flash message.
+  resource :queues, controller: 'queues'
+  get '/queues/*other', to: redirect('/queues')
+
   mount Riiif::Engine => '/image-service'
   mount Hydra::Collections::Engine => '/'
   worthwhile_curation_concerns

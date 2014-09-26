@@ -17,6 +17,7 @@ class Ability
     can :create, curation_concerns
     can :create, Collection
     can [:destroy], ActiveFedora::Base
+    can :manage, Resque
   end
 
   private
