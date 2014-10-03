@@ -1,6 +1,7 @@
 #Absolute
 
 [![Build Status](https://travis-ci.org/curationexperts/absolute.png?branch=master)](https://travis-ci.org/curationexperts/absolute)
+[![Coverage Status](https://coveralls.io/repos/curationexperts/absolute/badge.png)](https://coveralls.io/r/curationexperts/absolute)
 
 ## Prerequisites
 * [ImageMagick](http://www.imagemagick.org/)
