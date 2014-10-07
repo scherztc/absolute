@@ -1,10 +1,8 @@
 require 'spec_helper'
 
 describe CurationConcern::CaseGenericWorkActor do
-  # it_behaves_like 'is_a_curation_concern_actor', CaseGenericWork
-  
+
   describe "attachments" do
-    #pending
     let(:curation_concern) { CaseGenericWork.new(pid: Worthwhile::CurationConcern.mint_a_pid )}
     let(:visibility) { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED }
     let(:user) { FactoryGirl.create(:user) }
@@ -22,7 +20,7 @@ describe CurationConcern::CaseGenericWorkActor do
         a[:MODS] = mods
       }
     }
-  
+
     it 'should save accepted attachment types to corresponding datastreams' do
       expect(subject.create).to be true
       expect(curation_concern).to be_persisted
@@ -31,5 +29,22 @@ describe CurationConcern::CaseGenericWorkActor do
       expect(curation_concern.datastreams["MODS"].read).to eq fixture_file('files/anoabo00-MODS.xml').read
     end
   end
-  
+
+  describe "handles" do
+    let(:curation_concern) { CaseGenericWork.new }
+    let(:visibility) { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED }
+    let(:user) { FactoryGirl.create(:user) }
+    subject {
+      Worthwhile::CurationConcern.actor(curation_concern, user, attributes)
+    }
+
+    let(:attributes) { FactoryGirl.attributes_for(:case_generic_work, visibility: visibility) }
+
+    it 'should add to the handle.net queue' do
+      expect_any_instance_of(Absolute::Queue::Handle::Create).to receive(:push)
+      subject.create
+      expect(curation_concern).to be_persisted
+    end
+  end
+
 end

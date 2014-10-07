@@ -1,5 +1,6 @@
 module CurationConcern
   class CaseGenericWorkActor < CurationConcern::GenericWorkActor
+    include RegistersHandles
 
     def create
       super && save_attachments
@@ -8,7 +9,7 @@ module CurationConcern
     def update
       super && save_attachments
     end
-    
+
     protected
 
     def save_attachments
@@ -20,11 +21,11 @@ module CurationConcern
         end
       end
       if dirty
-        return curation_concern.save 
+        curation_concern.save
       else
-        return true
+        true
       end
     end
-    
+
   end
 end

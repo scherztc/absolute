@@ -4,7 +4,7 @@ module CurationConcern::CaseWork
   include CurationConcern::WithDatastreamAttachments
   include CurationConcern::WithBasicMetadata
   include CurationConcern::WithLicense
-  include RegistersHandles
+  #include RegistersHandles
 
   # override sufia
   def to_param
