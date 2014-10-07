@@ -31,10 +31,9 @@ gem 'capistrano', '~> 3.1',           group: :development
 gem 'capistrano-rails', '~> 1.1',     group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
-gem 'coveralls', require: false
+gem 'coveralls', require: false, group: :test
+gem 'worthwhile', '0.0.3'
 
-gem 'worthwhile', '0.0.2'
-#
 gem 'hydra', '7.1.0'
 
 gem "bootstrap-sass"
