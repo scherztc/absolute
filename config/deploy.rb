@@ -1,5 +1,5 @@
 set :application, 'absolute'
-set :repo_url, 'git@github.com:curationexperts/absolute.git'
+set :repo_url, 'git@github.com:KelvinSmithLibrary/absolute.git'
 set :branch, 'master'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
