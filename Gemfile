@@ -32,7 +32,7 @@ gem 'capistrano-rails', '~> 1.1',     group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'coveralls', require: false, group: :test
-gem 'worthwhile', '0.1.0'
+gem 'worthwhile', '0.1.1'
 
 gem 'hydra', '7.1.0'
 
