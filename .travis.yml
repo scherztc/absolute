@@ -19,5 +19,13 @@ before_script:
   - cp config/devise.yml.sample config/devise.yml
   - cp config/initializers/secret_token.rb.sample config/initializers/secret_token.rb
 
+before_install:
+  - sudo mkdir -p /opt/install
+  - sudo wget -P /opt/install http://fits.googlecode.com/files/fits-0.6.2.zip
+  - sudo unzip /opt/install/fits-0.6.2.zip -d /opt/install
+  - sudo chmod +x /opt/install/fits-0.6.2/fits.sh
+  - sudo cp -r /opt/install/fits-0.6.2/* /usr/local/bin/
+  - sudo ln -s /usr/local/bin/fits.sh /usr/local/bin/fits
+
 services:
   - redis-server
