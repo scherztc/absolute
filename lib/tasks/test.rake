@@ -1,5 +1,7 @@
 task :ci => [:jetty, 'jetty:config'] do
-  Jettywrapper.wrap(Jettywrapper.load_config) do
+  jetty_params = Jettywrapper.load_config
+  jetty_params[:startup_wait] = 60
+  Jettywrapper.wrap(jetty_params) do
     Rake::Task['spec'].invoke
   end
 end
