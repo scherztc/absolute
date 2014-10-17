@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/KelvinSmithLibrary/absolute.png?branch=master)](https://travis-ci.org/KelvinSmithLibrary/absolute)
 [![Coverage Status](https://coveralls.io/repos/KelvinSmithLibrary/absolute/badge.png)](https://coveralls.io/r/KelvinSmithLibrary/absolute)
+[![Dependency Status](https://gemnasium.com/KelvinSmithLibrary/absolute.png)](https://gemnasium.com/KelvinSmithLibrary/absolute)
 
 ## Prerequisites
 * [ImageMagick](http://www.imagemagick.org/)
