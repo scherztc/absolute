@@ -17,6 +17,27 @@ module FacetHelper
     super
   end
 
+  # A helper method so that Blacklight will display a link to the source if
+  # if it is a valid url. Can be used as a substitued to Worthwile's
+  # curation_concern_attribute_to_html
+  def curation_concern_with_link_to_html(curation_concern, method_name, label = nil)
+    if curation_concern.respond_to?(method_name)
+      markup = ""
+      label ||= derived_label_for(curation_concern, method_name)
+      subject = curation_concern.send(method_name)
+      return markup if !subject.present?
+      markup <<  %(<tr><th>#{label}</th>\n<td><ul class='tabular'>)
+      [subject].flatten.compact.each do |value|
+        # If the field value is a url, we wrap it in an anchor tag
+        li_value = link_to_if(h(value) =~ URI::regexp, h(value), h(value))
+        markup << %(<li class="attribute #{method_name}"> #{li_value} </li>\n)
+      end
+    end
+    markup << %(</ul></td></tr>)
+    markup.html_safe
+  end
+
+
   ##
   # TODO remove with blacklight 5.5 (projectblacklight/blacklight#933)
   # Renders the list of values 
