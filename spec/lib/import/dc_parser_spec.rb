@@ -6,7 +6,7 @@ describe DcParser do
 
   describe '#to_attrs_hash - happy path' do
     let(:sample_dc) { fixture_file('files/weaedm186-DC.xml').read }
-    let(:attrs_hash) { subject.to_attrs_hash }
+    let(:attrs_hash) { subject.to_h }
 
     it 'returns a hash of attributes and values' do
       expect(attrs_hash[:title]).to eq ["A Qualitative Examination of the Antecedents and Consequences of Accreditation of Nonprofit Organizations"]
@@ -24,12 +24,25 @@ describe DcParser do
     end
   end
 
+  describe '#to_attrs_hash - combine duplicate titles and descriptions' do
+    let(:sample_dc) { fixture_file('files/duplicates-DC.xml').read }
+    let(:attrs_hash) { subject.to_h }
+
+    it 'combines multiple titles' do
+      expect(attrs_hash[:title]).to eq ["Test title 1 | Test title 2"]
+    end
+
+    it 'combines multiple descriptions' do
+      expect(attrs_hash[:description]).to eq ["First description goes here. Another description here."]
+    end
+  end
+
   describe '#to_attrs_hash - error with single-value fields' do
-    let(:sample_dc) { fixture_file('files/bundy-DC.xml').read }
+    let(:sample_dc) { fixture_file('files/unkphi00-DC.xml').read }
 
     it 'raises an error' do
-      message = "Multiple values were found for single-value field: description"
-      expect { subject.to_attrs_hash }.to raise_error(message)
+      message = "Multiple values were found for single-value field: rights"
+      expect { subject.to_h }.to raise_error(message)
     end
   end
 end

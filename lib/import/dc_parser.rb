@@ -44,14 +44,22 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
   end
 
   def to_h
-    single_value_fields = [:description, :rights]
-    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type, :title]
+    single_value_fields = [:description, :rights, :title]
+    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type]
     all_fields = single_value_fields + multi_value_fields
 
     new_lines = /\s*\n\s*/
     attrs_hash = {}
     all_fields.each do |field|
       value = Array(self.send(field))
+
+      if field == :title
+        value = [value.join(" | ")]
+      end
+
+      if field == :description
+        value = [value.join(" ")]
+      end
 
       if single_value_fields.include?(field) && value.count > 1
         raise MultipleValuesError.new(field)
