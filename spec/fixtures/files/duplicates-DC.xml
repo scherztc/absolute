@@ -1,5 +1,6 @@
 <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:title>African American Scholars without images</dc:title>
+  <dc:title>Test title 1</dc:title>
+  <dc:title>Test title 2</dc:title>
   <dc:creator>Johnson, Gwendolyn G.</dc:creator>
   <dc:creator>Adeyemon, Earnestine</dc:creator>
   <dc:contributor>University Archives, Case Western Reserve University</dc:contributor>
@@ -8,10 +9,8 @@
   <dc:publisher>Kelvin Smith Library, Case Western Reserve University, Cleveland, Ohio</dc:publisher>
   <dc:coverage>Cleveland, Ohio</dc:coverage>
   <dc:date>2006-10-06</dc:date>
-  <dc:description>Biographies of scholars without exhibit images </dc:description>
-  <dc:description>Dr. Joseph Carroll, Class of 1893. Educated in the Cleveland school system, Dr. Joseph Carroll graduated from the Western Reserve University Medical School in 1893. In 1900, he  volunteered for the armed services in the Philippines. After completing two years of service, he returned to Cleveland. </dc:description>
-  <dc:description>Dr. George H. Wilson, Class of 1893. Dr. Wilson maintained a barber business to help finance his education at Western Reserve University Medical School. He graduated in 1893 and set up residence in the Schofield Building. He remained there until his death in 1905. Dr. Wilson was an elocutionist and writer. He wrote &quot;Midnight on Baltimore,&quot; a dramatic naval sketch, which was presented in Cleveland.</dc:description>
-  <dc:description>Dr. Leroy Bundy, Class of 1903. Dr. Bundy graduated from the Western Reserve University Dental School but did not open an office. Instead, he worked for the Woodcliff Dentists, an advertising dental office. He later made several unsuccessful attempts to establish offices in Detroit and Chicago and finally settled in St. Louis. Eventually, Dr. Bundy returned to Cleveland and established a practice. In 1930, he entered politics and was elected to the City Council, a position he held for ten years.</dc:description>
+  <dc:description>First description goes here.</dc:description>
+  <dc:description>Another description here.</dc:description>
   <dc:subject>African Americans -- Case Western Reserve University</dc:subject>
   <dc:subject>Case Western Reserve University -- Alumni</dc:subject>
   <dc:subject>Cleveland (Ohio) -- History</dc:subject>
