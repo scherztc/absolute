@@ -2,7 +2,7 @@
 <% if generic_file.image? %>
   <%= openseadragon_picture_tag riiif.info_path(generic_file.id) %>
   <%= link_to "Download 640-pixel-wide jpg", riiif.image_path(generic_file.id, size: '640,'), { target:"_new", title:"Download 640-pixel-wide jpg"}%><br>
-  <%= link_to "Download the full-sized image", download_path(generic_file), { target:"_new", title:"Download the full-sized image"}%>
+  <%= link_to "Download the full-sized image", riiif.image_path(generic_file.id, size: 'full'), { target:"_new", title:"Download the full-sized image"} %>
 <% elsif generic_file.video? %>
   <video controls="controls" class="video-js vjs-default-skin" data-setup="{}" preload="auto">
     <source src="<%= download_path(generic_file, datastream_id: 'webm') %>" type="video/webm" />
