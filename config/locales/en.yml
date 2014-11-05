@@ -45,6 +45,8 @@ en:
       fields:
         facet:
           desc_metadata__creator_sim: People
+      facets:
+        title: "Advanced Filtering"
   worthwhile:
     catalog:
       index:
