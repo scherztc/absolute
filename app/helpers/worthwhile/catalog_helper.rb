@@ -11,13 +11,21 @@ module Worthwhile::CatalogHelper
   end
 
   def all_type_tab(label = t('worthwhile.catalog.index.type_tabs.all'))
-    if params[:f] && params[:f][type_field]
+    if (params[:f] && params[:f][type_field]) || request.original_fullpath != "/"
       # local_params = params.dup
       # local_params[:f] = local_params[:f].select{|k,_| k != type_field }
       # local_params.delete(:f) if local_params[:f].empty?
       content_tag(:li, link_to(label, '/'))
     else
       content_tag(:li, link_to(label, '/'), class: "active")
+    end
+  end
+
+  def specified_type_tab(label, type_field, key)
+    if params[:f] && params[:f][type_field] == [key] && request.original_fullpath.split("?")[0] == "/"
+      content_tag(:li, link_to(label, '#'), class: "active" )
+    else
+      content_tag(:li, link_to(label, "/?f[#{type_field}][]=#{key}"))
     end
   end
 

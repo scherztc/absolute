@@ -4,6 +4,7 @@
 %>
 <% provide :page_title, curation_concern_page_title(curation_concern) %>
 <% provide :page_header do %>
+  <%= render 'catalog/navbar' %>
   <h1><%= curation_concern %> <span class="human_readable_type">(<%= curation_concern.human_readable_type %>)</span></h1>
 <% end %>
 <%= render 'representative_media', work: curation_concern %>
