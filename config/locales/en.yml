@@ -52,3 +52,7 @@ en:
       index:
         type_tabs:
           all: Home
+  devise:
+    cas_sessions:
+      user:
+        already_signed_out: "You have been signed out"
