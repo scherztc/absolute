@@ -1,12 +1,13 @@
 <div class="row">
+  <%= button_to "Export RIS", {controller: "catalog", action: "export_ris", document: document} %>
   <%= render_document_partial document, 'thumbnail', document_counter: document_counter %>
   <% if current_user && current_user.admin? %>
   <dl class="document-metadata dl-invert dl-horizontal">
   <% else %>
   <dl class="document-metadata-full dl-invert dl-horizontal">
   <% end %>
-	<%= button_to "Export RIS", action: RISCreator.new(document).export %>
-    <% index_fields(document).each do |solr_fname, field| -%>
+	
+	<% index_fields(document).each do |solr_fname, field| -%>
       <% if should_render_index_field? document, field %>
         <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_label document, :field => solr_fname %></dt>
         <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_value document, :field => solr_fname %></dd>
@@ -14,11 +15,12 @@
     <% end -%>
 
   </dl>
-
   <% if current_user && current_user.admin? %>
   <div class="search-result-actions">
     <%= render_document_partial document, 'action_menu' %>
   </div>
   <% end %>
+   
 </div>
+
 

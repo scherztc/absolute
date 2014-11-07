@@ -287,6 +287,15 @@ module Worthwhile::CatalogController
     end
   end
 
+  private
+	def export_ris(document)
+		data = RISCreator.new(document).export
+		file = "ris_citation.txt"
+		send_data(data, filename: file)
+		#send_file '/absolute/app/controllers/ris_controller.rb'
+	end
+	helper_method :export_ris
+
   protected
 
     # Override Hydra::PolicyAwareAccessControlsEnforcement

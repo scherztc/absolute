@@ -21,5 +21,5 @@ Absolute::Application.routes.draw do
   worthwhile_embargo_management
 
   resource :admin_menu, only: :show, controller: 'admin_menu'
-  match 'catalog/export_ris/:document', to: 'catalog#export_ris', via: [:get, :post]
+  match 'catalog/printRec/:document', to: 'catalog#printRec', via: [:get, :post]
 end

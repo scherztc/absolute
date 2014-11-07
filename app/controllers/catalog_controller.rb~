@@ -11,7 +11,7 @@ class CatalogController < ApplicationController
 	def export_ris
 		doc = ActiveFedora::Base.find(params[:document])
 		data = RISCreator.new(doc).export
-		send_data data, filename: 'RIS_citation_' + params[:document] + ".ris"
+		send_data data, filename: 'riscitation_' + params[:document]
 	end	
 	
 

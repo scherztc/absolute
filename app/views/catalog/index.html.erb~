@@ -8,6 +8,7 @@
 <% end %>
 
 <div id="content">
-   <%= render 'search_results' %>
+  <% render printRec %>
+  <%= render 'search_results' %>
 </div>
 

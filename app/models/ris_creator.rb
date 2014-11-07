@@ -17,45 +17,54 @@
 # https://github.com/jrochkind/bento_search/blob/master/app/models/bento_search/ris_creator.rb
 # But it has been adapted to handle the Digital Case collection items rather than
 # the BentoSearch::ResultItem.
-class RISCreator
+class RISCreator 
 	def initialize(i)
+		# 'i' is the Text object that is returned by the rails console command ActiveFedora::Base.find('pid').
+		# The Text object has information relevant to creating the ris citation.
 		@item = i
-		@ris_format = translate_ris_format
+
+		#TODO The type method for @item is returning this error:
+		# 'Tried to fetch `type' from solr, but it isn't indexed.'
+		# @ris_format = translate_ris_format
 	end
 
 	def export
 		out = "".force_encoding("UTF-8")
-		out << tag_format("TY", @ris_format)
+		#out << tag_format("TY", @ris_format)
 
-		id = @item.id
-		id.slice! "ksl:"
+		id = @item.to_param
 		out << tag_format("ID", id)
 
-		out << tag_format("TI", @item.title)
-		# Creator is always the first author, 
-		#and if there are others then they are listed under contributors.		
-		out << tag_format("AU", @item.creator)
+		out << tag_format("TI", @item.title)		
+		@item.creator.each do |author|		
+			out << tag_format("AU", author)
+		end
 		@item.contributor.each do |author|
 			out << tag_format("AU", author)
 		end
 			#out << tag_format("PY", @item.year)
 			# We have the date rather than just the year
-		out << tag_format("DA", format_date(@item.date))
-		out << tag_format("LA", @item.language)
+		out << tag_format("DA", @item.date)
+		#out << tag_format("LA", @item.language)
 
 			# We do not have methods to find any of the following
 			#out << tag_format("VL", @item.volume)
 			#out << tag_format("IS", @item.issue)
 			#out << tag_format("SP", @item.start_page)
 			#out << tag_format("EP", @item.end_page)
-		@item.source.each do |source_title|		
-			out << tag_format("T2", source_title)
-		end
+		
+		#TODO The source method is also returning the index error:
+		# 'Tried to fetch `source' from solr, but it isn't indexed.'	
+		# @item.source.each do |source_title|		
+			# out << tag_format("T2", source_title)
+		# end
 			# ISSN and ISBN both share SN
 			# And we don't have methods to find either
 			#out << tag_format("SN", @item.issn)
 			#out << tag_format("SN", @item.isbn)
 			#out << tag_format("DO", @item.doi)
+		relation = @item.relation.to_s.split"\""		
+		out << tag_format("LB", relation[1])		
 		out << tag_format("PB", @item.publisher)
 		out << tag_format("AB", @item.description)
 		@item.subject.each do |kw|
@@ -63,9 +72,9 @@ class RISCreator
 		end
 		# include main link and any other links?
 		out << tag_format("UR", @item.identifier)
-		@item.other_links.each do |link|
-			out << tag_format("UR", link.url)
-		end
+		# @item.linked_resource_urls.each do |link|
+			# out << tag_format("UR", link.url)
+		# end
 		# end with blank lines, so multiple ones can be concatenated for
 		# a file.
 		out << "\r\nER - \r\n\r\n"
@@ -99,10 +108,10 @@ class RISCreator
 
 	# based on current @item.format, output
 	# appropriate RIS format string
-	def translate_ris_format
-		# default "GEN"=generic if unknown
-		@@format_map[@item.type] || "GEN"
-	end
+	 def translate_ris_format
+		 # default "GEN"=generic if unknown
+		 @@format_map[@item.type] || "GEN"
+	 end
 
 	# Formats refworks tag/value line and returns it.
 	#
@@ -162,4 +171,5 @@ class RISCreator
 			return nil
 		end
 	end
+
 end
