@@ -9,6 +9,13 @@
   )%>
 <% end %>
 <% if can?(:read, generic_file) %>
-  <%= link_to 'Download', download_path(generic_file),
-    class: 'btn btn-default', title: "Download #{generic_file.to_s.inspect}", target: "_blank" %>
+  <% if generic_file.mime_type == "image/jp2" || generic_file.mime_type == "image/tiff" %>
+    <%= link_to 'Download Fullsize JPEG', "/image-service/#{generic_file.id}/full/full/0/native.jpg",
+      class: 'btn btn-default', title: "Download the full sized image", target: "_blank" %>
+    <br/>
+    <%= link_to "Download #{generic_file.format_label[0]}", download_path(generic_file), title: "Download #{generic_file.to_s.inspect}" %>
+  <% else %>
+    <%= link_to 'Download', download_path(generic_file),
+      class: 'btn btn-default', title: "Download #{generic_file.to_s.inspect}", target: "_blank" %>
+  <% end %>
 <% end %>
