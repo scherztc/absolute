@@ -1,5 +1,5 @@
 <div class="row">
-  <%= button_to "Export RIS", {controller: "catalog", action: "printRec", document: document} %>
+  <%= button_to "Export RIS", {controller: "catalog", action: "export_ris", document: document} %>
   <%= render_document_partial document, 'thumbnail', document_counter: document_counter %>
   <% if current_user && current_user.admin? %>
   <dl class="document-metadata dl-invert dl-horizontal">

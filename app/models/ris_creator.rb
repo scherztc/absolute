@@ -62,14 +62,15 @@ class RISCreator
 			# And we don't have methods to find either
 			#out << tag_format("SN", @item.issn)
 			#out << tag_format("SN", @item.isbn)
-			#out << tag_format("DO", @item.doi)
-		relation = @item.relation.to_s.split"\""		
-		out << tag_format("LB", relation[1])		
+			#out << tag_format("DO", @item.doi)	
 		out << tag_format("PB", @item.publisher)
 		out << tag_format("AB", @item.description)
 		@item.subject.each do |kw|
 			out << tag_format("KW", kw)
 		end
+
+		relation = @item.relation.to_s.split"\""		
+		out << tag_format("LB", relation[1])	
 		# include main link and any other links?
 		out << tag_format("UR", @item.identifier)
 		# @item.linked_resource_urls.each do |link|

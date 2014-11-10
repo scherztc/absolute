@@ -28,7 +28,6 @@
   <tr>
 	<th>RIS Citation</th>
 	<td>
-		<%# The call to export_ris is making use of the :id in the url to identify the object %>
 		<%= button_to "Export RIS", {controller: "/catalog", action: "export_ris"} %>
 	</td>
   </tr>
