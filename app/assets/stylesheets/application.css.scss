@@ -11,7 +11,10 @@
  *= require_self
  *= require_directory ./fileupload
  *= require pretty-xml
- */
+ 
+ *= require 'blacklight_advanced_search'
+
+*/
 
 @import 'global-variables';
 @import 'bootstrap-sprockets';
