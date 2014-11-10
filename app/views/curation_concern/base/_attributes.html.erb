@@ -21,6 +21,13 @@
   <%= curation_concern_attribute_to_html(curation_concern, :content_format, "Format") %>
 
   <tr>
+    <th>Identifier</th>
+    <td>
+      <%= curation_concern[:identifier].join(", ") %>
+    </td>
+  </tr>
+
+  <tr>
     <th>Access Rights</th>
     <td>
       <%= permission_badge_for(curation_concern) %>
