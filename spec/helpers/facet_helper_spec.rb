@@ -40,6 +40,21 @@ describe FacetHelper do
     end
 
   end
+  
+  describe '#curation_concern_with_link_to_html' do
+    context 'when field not a valid url' do
+      let(:regular_source) { GenericWork.create!(pid: "me:123", title: ["Just a Test"], source: ["National Geographic"]) }
+      subject { helper.curation_concern_with_link_to_html(regular_source, :source, "Source") }
+      it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> National Geographic </li>\n</ul></td></tr>"}
+    end
+
+    context 'when field is a valid url' do
+      let(:regular_source) { GenericWork.create!(pid: "me:456", title: ["Just a Test"], source: ["http://library.case.edu"]) }
+      subject { helper.curation_concern_with_link_to_html(regular_source, :source, "Source") }
+      it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> <a href=\"http://library.case.edu\">http://library.case.edu</a> </li>\n</ul></td></tr>"}
+    end
+
+  end
 
   # TODO remove this with blacklight 5.5
   describe "render_facet_limit_list" do
