@@ -13,7 +13,7 @@
     <%= link_to 'Download Fullsize JPEG', "/image-service/#{generic_file.id}/full/full/0/native.jpg",
       class: 'btn btn-default', title: "Download the full sized image", target: "_blank" %>
     <br/>
-    <%= link_to "Download #{generic_file.format_label[0]}", download_path(generic_file), title: "Download #{generic_file.to_s.inspect}" %>
+    <%= link_to "Download Original (#{generic_file.mime_type})", download_path(generic_file), title: "Download Original (#{generic_file.mime_type})" %>
   <% else %>
     <%= link_to 'Download', download_path(generic_file),
       class: 'btn btn-default', title: "Download #{generic_file.to_s.inspect}", target: "_blank" %>
