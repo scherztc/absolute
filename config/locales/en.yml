@@ -45,6 +45,7 @@ en:
       fields:
         facet:
           desc_metadata__creator_sim: People
+          human_readable_type_sim: Type of Item
       facets:
         title: "Advanced Filtering"
   worthwhile:
