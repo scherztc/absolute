@@ -5,6 +5,11 @@ gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2'  # used on sandbox
+
+# two gems required for oracle database connection
+gem 'activerecord-oracle_enhanced-adapter'
+gem 'ruby-oci8'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
