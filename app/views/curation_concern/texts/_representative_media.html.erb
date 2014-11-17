@@ -7,6 +7,15 @@
 
   <tei-viewer ng-controller="TeiViewer">
   </tei-viewer>
+
+  <% if work.content_format.include?('application/pdf') %>
+    <% curation_concern.generic_files.each do |file| %>
+      <% if file.mime_type == 'application/pdf' %>
+        <%= link_to("Download PDF", download_path(file.id), class: "btn btn-default", target: "_blank") %>
+      <% end %>
+    <% end %>
+  <% end %>
+
 <% else %>
   <%= render partial: 'curation_concern/base/representative_media', locals: { work: work } %>
 <% end %>
