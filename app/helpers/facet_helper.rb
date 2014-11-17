@@ -29,7 +29,7 @@ module FacetHelper
       markup <<  %(<tr><th>#{label}</th>\n<td><ul class='tabular'>)
       [subject].flatten.compact.each do |value|
         # If the field value is a url, we wrap it in an anchor tag
-        li_value = link_to_if(h(value) =~ URI::regexp, h(value), h(value))
+        li_value = link_to_if(h(value) =~ URI::regexp, h(value), h(value), target: "_blank")
         markup << %(<li class="attribute #{method_name}"> #{li_value} </li>\n)
       end
     end
