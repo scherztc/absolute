@@ -51,7 +51,7 @@ describe FacetHelper do
     context 'when field is a valid url' do
       let(:regular_source) { GenericWork.create!(pid: "me:456", title: ["Just a Test"], source: ["http://library.case.edu"]) }
       subject { helper.curation_concern_with_link_to_html(regular_source, :source, "Source") }
-      it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> <a href=\"http://library.case.edu\">http://library.case.edu</a> </li>\n</ul></td></tr>"}
+      it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> <a href=\"http://library.case.edu\" target=\"_blank\">http://library.case.edu</a> </li>\n</ul></td></tr>"}
     end
 
   end
