@@ -57,6 +57,9 @@ group :development, :test do
   gem "jettywrapper"
   gem "rspec-rails", '~> 3.1'
   gem "rspec-its"
+end
+
+group :debug do
   gem "pry-rescue"
   gem "pry-stack_explorer"
 end

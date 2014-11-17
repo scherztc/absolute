@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - "2.0.0"
 
+bundler_args: --without development debug
+
 notifications:
   email:
     - pgf8@case.edu
@@ -20,12 +22,23 @@ before_script:
   - cp config/initializers/secret_token.rb.sample config/initializers/secret_token.rb
 
 before_install:
+  - sudo apt-get install libaio1
   - sudo mkdir -p /opt/install
   - sudo wget -P /opt/install http://fits.googlecode.com/files/fits-0.6.2.zip
   - sudo unzip /opt/install/fits-0.6.2.zip -d /opt/install
   - sudo chmod +x /opt/install/fits-0.6.2/fits.sh
   - sudo cp -r /opt/install/fits-0.6.2/* /usr/local/bin/
   - sudo ln -s /usr/local/bin/fits.sh /usr/local/bin/fits
+  - sudo mkdir -p /opt/oracle
+  - sudo wget -P /opt/oracle http://library.case.edu/instantclient-basic-linux.x64-12.1.0.2.0.zip
+  - sudo wget -P /opt/oracle http://library.case.edu/instantclient-sdk-linux.x64-12.1.0.2.0.zip
+  - sudo wget -P /opt/oracle http://library.case.edu/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip
+  - sudo unzip /opt/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /opt/oracle
+  - sudo unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /opt/oracle
+  - sudo unzip /opt/oracle/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip -d /opt/oracle
+  - LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1
+  - export LD_LIBRARY_PATH
+  - sudo ln -s /opt/oracle/instantclient_12_1/libclntsh.so.12.1 /opt/oracle/instantclient_12_1/libclntsh.so
 
 services:
   - redis-server
