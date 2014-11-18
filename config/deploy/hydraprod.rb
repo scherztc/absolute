@@ -1,6 +1,6 @@
 set :stage, :hydraprod
 set :rails_env, 'production'
-set :branch, 'oracle'
+set :branch, 'master'
 server 'casehydraprod', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
 
 # Simple Role Syntax
