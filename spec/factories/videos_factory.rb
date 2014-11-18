@@ -5,7 +5,7 @@
 
 FactoryGirl.define do
   factory :video, class: Video do
-    ignore do
+    transient do
       user { FactoryGirl.create(:user) }
     end
 
@@ -27,7 +27,7 @@ FactoryGirl.define do
     end
 
     factory :video_with_files do
-      ignore do
+      transient do
         file_count 3
       end
 

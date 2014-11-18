@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :text do
-    ignore do
+    transient do
       user { FactoryGirl.create(:user) }
     end
 

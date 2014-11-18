@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :case_generic_work, class: CaseGenericWork do
-    ignore do
+    transient do
       user { FactoryGirl.create(:user) }
     end
     sequence(:title) {|n| ["Title #{n}"] }
@@ -20,7 +20,7 @@ FactoryGirl.define do
       visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
     end
     factory :case_generic_work_with_files do
-      ignore do
+      transient do
         file_count 3
       end
 

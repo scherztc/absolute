@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :audio, class: Audio do
-    ignore do
+    transient do
       user { FactoryGirl.create(:user) }
     end
 
@@ -22,7 +22,7 @@ FactoryGirl.define do
     end
 
     factory :audio_with_files do
-      ignore do
+      transient do
         file_count 3
       end
 
