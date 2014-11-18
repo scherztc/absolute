@@ -1,6 +1,6 @@
 set :stage, :hydratest
 set :rails_env, 'production'
-set :branch, 'oracle-merge'
+set :branch, 'merge-oracle'
 server 'casehydratest', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
 
 # Simple Role Syntax
