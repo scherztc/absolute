@@ -8,6 +8,9 @@ module Absolute::GenericWorkRdfProperties
     property :title, predicate: RDF::DC.title do |index|
       index.as :stored_searchable, :facetable
     end
+    property :title_sort, predicate: RDF::DC.title do |index|
+      index.as :stored_sortable
+    end
     property :creator, predicate: RDF::DC.creator do |index|
       index.as :stored_searchable, :facetable
     end

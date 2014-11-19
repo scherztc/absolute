@@ -256,6 +256,7 @@ module Worthwhile::CatalogController
       # whether the sort is ascending or descending (it must be asc or desc
       # except in the relevancy case).
       # label is key, solr field is value
+      config.add_sort_field "#{title_sort} asc", label: "title A-Z"
       config.add_sort_field "score desc, #{uploaded_field} desc", label: "relevance \u25BC"
       config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
       config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
@@ -276,6 +277,10 @@ module Worthwhile::CatalogController
     def uploaded_field
       #  system_create_dtsi
       solr_name('desc_metadata__date_uploaded', :stored_sortable, type: :date)
+    end
+
+    def title_sort
+      solr_name('desc_metadata__title_sort', :stored_sortable)
     end
 
     def modified_field
