@@ -3,7 +3,6 @@ require 'ris_creator'
 
 describe RISCreator do
 		
-<<<<<<< HEAD
 	describe '#export' do
 		context 'when the Generic work is ordinary' do		
 			sample_dc = GenericWork.create!(pid: "ksl:test", title: ["Just a Test"], source: ["National Geographic"], 
@@ -68,17 +67,4 @@ describe RISCreator do
 		end
 	end
 end
-=======
-	describe '#export'
-		let(:sample_dc) { GenericWork.create!(pid: "ksl:test", title: ["Just a Test"], source: ["National Geographic"], 
-			creator: ["Thomas, Mark", "Anne, Caty", "Petrusinski, Adam"], type: ["Text"], date: ["May 15, 2007"],
-			description: ["On a long and arduous journey through the Andes mountains these test researchers discovered that
-			they had missed their real life's calling"], subject: ["Hiking", "Test", "Disappointment"], 
-			relation: ["National Geographic Test"], identifier: ["http://test.case.edu/ksl:test"] ) }
-
-		let(:creator) { RISCreator.new(sample_dc) }
-
-		export = creator.export
-		export = export.split"\r\n"
->>>>>>> c375d0c... Started on the spec file to test the RISCreator and also cleaned out some of the sections of the RISCreator that were commented out from the bentosearch.  In the spec, Im attempting to create a test GenericWork to then run the export on and test the output with line by line comparison.
 		

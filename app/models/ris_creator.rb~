@@ -21,80 +21,38 @@ class RISCreator
 	def initialize(i)
 		# 'i' is the Text object that is returned by ActiveFedora::Base.find('pid').
 		@item = i
-<<<<<<< HEAD
-
-		#TODO The type method for @item is returning this error:
-		# 'Tried to fetch `type' from solr, but it isn't indexed.'
-		# @ris_format = translate_ris_format
-=======
 		@ris_format = translate_ris_format
->>>>>>> 0457a3b... ris_creator_spec works and runs three different tests, though the conditions are very similar in most possible calls to the ris_creator. I also cleaned out ris_creator, removing some methods and comments that werent being used or giving important information.
 	end
 
 	def export
 		out = "".force_encoding("UTF-8")
-		#out << tag_format("TY", @ris_format)
+		out << tag_format("TY", @ris_format)
 
-<<<<<<< HEAD
-		id = @item.to_param
-		#id.slice! "ksl:"
-		out << tag_format("ID", id)
 
-		title = @item.title
-		out << tag_format("TI", title)		
-=======
 		# @item.to_param returns an id that always starts with "ksl:"
 		# For the RIS citation we want to remove that, though, and only return the pid.		
 		id = @item.id.to_s.split ":"
 		out << tag_format("ID", id[1])
+	
 
 		# @item.title returns something like  ["Title of this item"]
 		# So to remove the surrounding pairs of quotes and brackets using split
 		title = @item.title.to_s.split "\""
 		out << tag_format("TI", title[1])		
->>>>>>> 0457a3b... ris_creator_spec works and runs three different tests, though the conditions are very similar in most possible calls to the ris_creator. I also cleaned out ris_creator, removing some methods and comments that werent being used or giving important information.
+
 		@item.creator.each do |author|		
 			out << tag_format("AU", author)
 		end
-		@item.contributor.each do |author|
-			out << tag_format("AU", author)
-		end
-<<<<<<< HEAD
-			#out << tag_format("PY", @item.year)
-			# We have the date rather than just the year
-		out << tag_format("DA", @item.date)
-		#out << tag_format("LA", @item.language)
 
-			# We do not have methods to find any of the following
-			#out << tag_format("VL", @item.volume)
-			#out << tag_format("IS", @item.issue)
-			#out << tag_format("SP", @item.start_page)
-			#out << tag_format("EP", @item.end_page)
-=======
 		date = @item.date.to_s.split "\""
 		out << tag_format("DA", date[1])
->>>>>>> 0457a3b... ris_creator_spec works and runs three different tests, though the conditions are very similar in most possible calls to the ris_creator. I also cleaned out ris_creator, removing some methods and comments that werent being used or giving important information.
-		
-		#TODO The source method is also returning the index error:
-		# 'Tried to fetch `source' from solr, but it isn't indexed.'	
-		# @item.source.each do |source_title|		
-			# out << tag_format("T2", source_title)
-		# end
-<<<<<<< HEAD
-			# ISSN and ISBN both share SN
-			# And we don't have methods to find either
-			#out << tag_format("SN", @item.issn)
-			#out << tag_format("SN", @item.isbn)
-			#out << tag_format("DO", @item.doi)	
-		out << tag_format("PB", @item.publisher)
-		out << tag_format("AB", @item.description)
-=======
 	
 		pub = @item.publisher.to_s.split "\""
 		out << tag_format("PB", pub[1])
+
 		desc = @item.description.to_s.split "\""
 		out << tag_format("AB", desc[1])
->>>>>>> 0457a3b... ris_creator_spec works and runs three different tests, though the conditions are very similar in most possible calls to the ris_creator. I also cleaned out ris_creator, removing some methods and comments that werent being used or giving important information.
+
 		@item.subject.each do |kw|
 			out << tag_format("KW", kw)
 		end
@@ -102,17 +60,11 @@ class RISCreator
 		relation = @item.relation.to_s.split"\""		
 		out << tag_format("LB", relation[1])	
 		# include main link and any other links?
-<<<<<<< HEAD
-		out << tag_format("UR", @item.identifier)
-		# @item.linked_resource_urls.each do |link|
-			# out << tag_format("UR", link.url)
-		# end
-=======
+
 		url = @item.identifier.to_s.split "\""
 		out << tag_format("UR", url[1])
->>>>>>> 0457a3b... ris_creator_spec works and runs three different tests, though the conditions are very similar in most possible calls to the ris_creator. I also cleaned out ris_creator, removing some methods and comments that werent being used or giving important information.
-		# end with blank lines, so multiple ones can be concatenated for
-		# a file.
+
+		# end with blank lines, so multiple ones can be concatenated for a file.
 		out << "\r\nER - \r\n\r\n"
 	end
 
@@ -132,7 +84,8 @@ class RISCreator
 		# Worth noting that right now everything in the old Digital Case was returning
 		# 'text' as 'BOOK's.  We might want to fix this for the future.
 		"poster" => "SLIDE",
-		"text" => "BOOK", 
+		"text" => "BOOK",
+		"Text" => "BOOK", 
 		
 		:serial => "SER",
 		:dissertation => "THES",
@@ -146,12 +99,8 @@ class RISCreator
 	# appropriate RIS format string
 	 def translate_ris_format
 		 # default "GEN"=generic if unknown
-<<<<<<< HEAD
-		 @@format_map[@item.type] || "GEN"
-=======
 		 type = @item.type.to_s.split "\""
 		 @@format_map[type[1]] || "GEN"
->>>>>>> 4b64715... Added one of the other fields that was included in the old RIS spec.
 	 end
 
 	# Formats refworks tag/value line and returns it.
@@ -166,12 +115,6 @@ class RISCreator
 	#
 	# "Note, however, that the asterisk (character 42)
 	# is not allowed in the author, keywords or periodical name fields."
-	#
-	# The spec also seems to say ascii-only, but I don't think that's true
-	# for actually existing software, we do utf-8.
-	#
-	# Refworks MAY require unicode composed normalization if it accepts utf8
-	# at all. but not doing that yet. http://bibwild.wordpress.com/2010/04/28/refworks-problems-importing-diacritics/
 	def tag_format(tag, value)
 		return "" if value.blank?
 		raise ArgumentError.new("Illegal RIS tag") unless tag =~ /[A-Z][A-Z0-9]/
@@ -181,16 +124,9 @@ class RISCreator
 		if ["AU", "A2", "A3", "A4", "KW", "T2"].include? tag
 			value = value.gsub("*", " ")
 		end
+		if tag=="TY" #First line is always Type and should not be preceded by a newline.
+			return "#{tag} - #{value}"
+		end
 		return "\r\n#{tag} - #{value}"
 	end
-
-	# Take a ruby Date and translate to RIS date format
-	# "YYYY/MM/DD/other info"
-	#
-	# returns nil if input is nil.
-	def format_date(d)
-		return nil if d.nil?
-		return d.strftime("%Y/%m/%d")
-	end
-
 end
