@@ -21,8 +21,8 @@ module FacetHelper
   # if it is a valid url. Can be used as a substitued to Worthwile's
   # curation_concern_attribute_to_html
   def curation_concern_with_link_to_html(curation_concern, method_name, label = nil)
-    markup = String.new
     if curation_concern.respond_to?(method_name)
+      markup = String.new
       label ||= derived_label_for(curation_concern, method_name)
       subject = curation_concern.send(method_name)
       return markup if !subject.present?
