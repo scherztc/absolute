@@ -1,7 +1,0 @@
-class RISCreatorsController < ApplicationController
-  
-	def export_ris(document)
-		RISCreator.new(document).export
-	end
-
-end
