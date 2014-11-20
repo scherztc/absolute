@@ -54,6 +54,11 @@ describe FacetHelper do
       it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> <a href=\"http://library.case.edu\">http://library.case.edu</a> </li>\n</ul></td></tr>"}
     end
 
+    context 'when field is null' do
+      subject { helper.curation_concern_with_link_to_html(nil, :source, "Source") }
+      it { should eq nil}
+    end
+
   end
 
   # TODO remove this with blacklight 5.5

@@ -32,9 +32,9 @@ module FacetHelper
         li_value = link_to_if(h(value) =~ URI::regexp, h(value), h(value))
         markup << %(<li class="attribute #{method_name}"> #{li_value} </li>\n)
       end
+      markup << %(</ul></td></tr>)
+      markup.html_safe
     end
-    markup << %(</ul></td></tr>)
-    markup.html_safe
   end
 
 
