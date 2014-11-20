@@ -21,4 +21,5 @@ Absolute::Application.routes.draw do
   worthwhile_embargo_management
 
   resource :admin_menu, only: :show, controller: 'admin_menu'
+  match 'catalog/export_ris/:id', to: 'catalog#export_ris', via: [:get, :post]
 end

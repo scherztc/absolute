@@ -8,6 +8,13 @@ class CatalogController < ApplicationController
     config.facet_fields[solr_name("desc_metadata__language", :facetable)].helper_method = :display_language
   end
 
+	def export_ris
+		doc = ActiveFedora::Base.find(params[:id])
+		data = RISCreator.new(doc).export
+		send_data data, filename: 'RIS_citation_' + params[:id] + ".ris"
+	end	
+	
+
   protected
 
 
@@ -17,4 +24,5 @@ class CatalogController < ApplicationController
       solr_params[:fq] << [ActiveFedora::SolrService.construct_query_for_rel(has_model: Collection.to_class_uri)]
     end
   end
+
 end

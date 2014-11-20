@@ -19,7 +19,6 @@
   <%= curation_concern_attribute_to_html(curation_concern, :type, "Type") %>
   <%= curation_concern_attribute_to_html(curation_concern, :type, "Identifier") %>
   <%= curation_concern_attribute_to_html(curation_concern, :content_format, "Format") %>
-
   <tr>
     <th>Identifier</th>
     <td>
@@ -32,6 +31,13 @@
     <td>
       <%= permission_badge_for(curation_concern) %>
     </td>
+  </tr>
+  <tr>
+	<th>RIS Citation</th>
+	<td>
+		<%# The call to export_ris is making use of the :id in the url to identify the object %>
+		<%= button_to "Export RIS", {controller: "/catalog", action: "export_ris"} %>
+	</td>
   </tr>
   <%= curation_concern_attribute_to_html(curation_concern, :embargo_release_date, "Embargo Release Date") %>
   <%= curation_concern_attribute_to_html(curation_concern, :lease_expiration_date, "Lease Expiration Date") %>

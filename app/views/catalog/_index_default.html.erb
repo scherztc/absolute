@@ -5,7 +5,8 @@
   <% else %>
   <dl class="document-metadata-full dl-invert dl-horizontal">
   <% end %>
-    <% index_fields(document).each do |solr_fname, field| -%>
+	
+	<% index_fields(document).each do |solr_fname, field| -%>
       <% if should_render_index_field? document, field %>
         <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_label document, :field => solr_fname %></dt>
         <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_value document, :field => solr_fname %></dd>
@@ -13,11 +14,12 @@
     <% end -%>
 
   </dl>
-
   <% if current_user && current_user.admin? %>
   <div class="search-result-actions">
     <%= render_document_partial document, 'action_menu' %>
   </div>
   <% end %>
+   
 </div>
+
 

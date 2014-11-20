@@ -292,7 +292,6 @@ module Worthwhile::CatalogController
     end
   end
 
-
   protected
 
     # Override Hydra::PolicyAwareAccessControlsEnforcement
