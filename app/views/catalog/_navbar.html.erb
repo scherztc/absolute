@@ -1,14 +1,17 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="type-tabs">
+    <div class="navbar-collapse" id="type-tabs">
       <ul class="nav navbar-nav">
         <%= content_tag(:li, link_to('Home', "//library.case.edu/digitalcase") ) %>
         <%= all_type_tab 'Collections' %>
         <%= specified_type_tab 'Items', 'generic_type_sim', 'Work' %>
+        <%= content_tag(:li, link_to( image_tag('//library.case.edu/media/dc_survey.jpg'), "https://docs.google.com/a/case.edu/forms/d/1LDShcsiasW4DWu_FQYNWoQ09icRfCfRx8jrvy6WPwOU/viewform", style: "padding-top:0;padding-bottom:0;"), style: "text-align:center;" ) %>
+<%#        <li style="padding:0;">
+          <a id="survey-link" style="position:absolute;right:0;" href="https://docs.google.com/a/case.edu/forms/d/1LDShcsiasW4DWu_FQYNWoQ09icRfCfRx8jrvy6WPwOU/viewform">
+            <img alt="Tell us what you think" src="//library.case.edu/media/dc_survey.jpg"/>
+          </a>
+        </li> %>
       </ul>
-      <a style="position:absolute;right:0;" href="https://docs.google.com/a/case.edu/forms/d/1LDShcsiasW4DWu_FQYNWoQ09icRfCfRx8jrvy6WPwOU/viewform">
-        <img alt="Tell us what you think" src="//library.case.edu/media/dc_survey.jpg"/>
-      </a>
     </div>
   </div>
 </nav>
