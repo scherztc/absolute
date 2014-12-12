@@ -5,3 +5,13 @@
   min-height: 1px;
   padding: 0 15px;
 }
+
+#survey {
+  width: auto;
+}
+
+@media (max-width: 480px) {
+  #survey {
+    width: 100%;
+  }
+}
