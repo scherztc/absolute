@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - "2.0.0"
 
-bundler_args: --without development debug
+bundler_args: --without development debug --retry 5
 
 notifications:
   email:
