@@ -22,4 +22,7 @@ Absolute::Application.routes.draw do
 
   resource :admin_menu, only: :show, controller: 'admin_menu'
   match 'catalog/export_ris/:id', to: 'catalog#export_ris', via: [:get, :post]
+
+  post '/bulk_update', to: 'bulk_update#replace_subject'
+  get '/bulk_update', to: 'bulk_update#index'
 end
