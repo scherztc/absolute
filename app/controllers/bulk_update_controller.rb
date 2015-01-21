@@ -5,9 +5,18 @@ class BulkUpdateController < ApplicationController
   def update
   end
 
+  # Create a connection to the local solr server
+  def remote_solr
+    return @remote_solr if @remote_solr
+    solr_config_file = Rails.root.join('config', 'solr.yml')
+    config_erb = ERB.new(IO.read(solr_config_file)).result(binding)
+    location = Psych.load(config_erb){Rails.env}
+    @remote_solr = RSolr.connect( url: location['url'] )
+  end
+
+  # This replaces each instance of the :old value with the :new value
   def replace_subject
-    solr = RSolr.connect( url: "http://localhost:8983/solr/" )
-    response = solr.get( 'select', params: {q: "desc_metadata__subject_tesim:#{params[:old]}", fl: "id", } )
+    response = remote_solr.get( 'select', params: {q: "desc_metadata__subject_tesim:#{params[:old]}", fl: "id", } )
     pids = response['response']['docs']
 
     pids.each do |pid|
