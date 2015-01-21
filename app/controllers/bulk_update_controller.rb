@@ -21,10 +21,12 @@ class BulkUpdateController < ApplicationController
 
     pids.each do |pid|
       item = ActiveFedora::Base.find(pid['id'])
-      item['subject'] << "#{params[:new]}"
-      item['subject'] -= ["#{params[:old]}"]
-      item.save
-      item.update_index
+      if item['subject'].include?(params[:old])
+        item['subject'] << params[:new]
+        item['subject'] -= [params[:old]]
+        item.save
+        item.update_index
+      end
     end
 
     render action: "index"
