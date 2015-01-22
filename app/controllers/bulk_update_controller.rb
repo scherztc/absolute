@@ -14,12 +14,15 @@ class BulkUpdateController < ApplicationController
     @remote_solr = RSolr.connect( url: location['url'] )
   end
 
+  # Get the PIDs for a specified search
+  def get_pids(query)
+    response = remote_solr.get('select', params: { q: query, fl: "id", rows: 1000 } )
+    pids = response['response']['docs']
+  end
+
   # This replaces each instance of the :old value with the :new value
   def replace_subject
-    response = remote_solr.get( 'select', params: {q: "desc_metadata__subject_sim:\"#{params[:old]}\"", fl: "id", rows: 1000 } )
-    pids = response['response']['docs']
-
-    pids.each do |pid|
+    get_pids("desc_metadata__subject_sim:\"#{params[:old]}\"").each do |pid|
       item = ActiveFedora::Base.find(pid['id'])
       if item['subject'].include?(params[:old])
         item['subject'] << params[:new]
@@ -29,7 +32,25 @@ class BulkUpdateController < ApplicationController
       end
     end
 
-    render action: "index"
+    redirect_to '/bulk_update/'
+  end
+
+  # This method takes a string and splits it on a specified character
+  def split_subject
+    get_pids("desc_metadata__subject_sim:\"#{params[:string]}\"").each do |pid|
+      item = ActiveFedora::Base.find( pid['id'] )
+      if item['subject'].include?( params[:string] )
+        fields = params[:string].split(params[:character])
+        fields.each do |field|
+          item['subject'] << field.strip
+        end
+        item['subject'] -= [params[:string]]
+        item.save
+        item.update_index
+      end
+    end
+
+    redirect_to '/bulk_update/'
   end
 
 end

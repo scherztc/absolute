@@ -1,0 +1,21 @@
+<h3> Split a Field </h3>
+<p> This form splits a subject into several subjects on a specified character </p>
+<%= form_tag("/bulk_update/split_subject", action: "replace_subject", class: "form-horizontal") do %>
+  <div class="form-group">
+    <%= label_tag( :string, "String to split", class: "control-label col-sm-2") %>
+    <div class="col-sm-10">
+      <%= text_field_tag( :string, nil, class: "form-control" ) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= label_tag( :character, "Delimiter", class: "control-label col-sm-2" ) %>
+    <div class="col-sm-10">
+      <%= text_field_tag( :character, nil, class: "form-control" ) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <%= submit_tag("Split", class: "btn btn-default btn-primary" ) %>
+    </div>
+  </div>
+<% end %>
