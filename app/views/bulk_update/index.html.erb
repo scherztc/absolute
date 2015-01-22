@@ -1,24 +1,6 @@
 <h1> Bulk Metadata Updates </h1>
 
-<p>This page is used for making bulk changes to individual metadata fields for all works that contain that field.</p>
+<%= render "replace" %>
 
-<h3> Subject </h3>
-<%= form_tag("/bulk_update", action: "update_subject", class: "form-horizontal") do %>
-  <div class="form-group">
-    <%= label_tag( :old, "Old value:", class: "control-label col-sm-2" ) %>
-    <div class="col-sm-10" >
-      <%= text_field_tag( :old, nil, class: "form-control" ) %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= label_tag(:new, "New value:", class: "control-label col-sm-2" ) %>
-    <div class="col-sm-10">
-      <%= text_field_tag(:new, nil, class: "form-control" ) %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= submit_tag("Update", class: "btn btn-default btn-primary") %>
-    </div>
-  </div>
-<% end %>
+<%= render "split" %>
+
