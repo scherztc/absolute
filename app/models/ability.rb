@@ -18,6 +18,7 @@ class Ability
     can :create, Collection
     can [:destroy], ActiveFedora::Base
     can :manage, Resque
+    can :manage, :bulk_update
   end
 
   private

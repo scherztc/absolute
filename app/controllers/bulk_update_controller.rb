@@ -2,6 +2,8 @@ class BulkUpdateController < ApplicationController
   include Worthwhile::ThemedLayoutController
   with_themed_layout '1_column'
 
+  authorize_resource class: false
+
   def update
   end
 
