@@ -16,7 +16,7 @@ class BulkUpdateController < ApplicationController
 
   # This replaces each instance of the :old value with the :new value
   def replace_subject
-    response = remote_solr.get( 'select', params: {q: "desc_metadata__subject_sim:\"#{params[:old]}\"", fl: "id", } )
+    response = remote_solr.get( 'select', params: {q: "desc_metadata__subject_sim:\"#{params[:old]}\"", fl: "id", rows: 1000 } )
     pids = response['response']['docs']
 
     pids.each do |pid|
