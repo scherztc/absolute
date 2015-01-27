@@ -55,4 +55,34 @@ class BulkUpdateController < ApplicationController
     redirect_to '/bulk_update/'
   end
 
+  # This method updates each instance of the specified :old language with the :new language
+  def replace_language
+    get_pids("desc_metadata__language_sim:\"#{params[:old]}\"").each do |pid|
+      item = ActiveFedora::Base.find( pid['id'] )
+      if item['language'].include?( params[:old] )
+        item['language'] << params[:new]
+        item['language'] -= [params[:old]]
+        item.save
+        item.update_index
+      end
+    end
+
+    redirect_to '/bulk_update/'
+  end
+
+  # This replaces a value it the people facet
+  def replace_person
+    get_pids("desc_metadata__creator_sim:\"#{params[:old]}\"").each do |pid|
+      item = ActiveFedora::Base.find( pid['id'] )
+      if item['creator'].include?( params[:old] )
+        item['creator'] << params[:new]
+        item['creator'] -= [params[:old]]
+        item.save
+        item.update_index
+      end
+    end
+
+    redirect_to '/bulk_update/'
+  end
+
 end

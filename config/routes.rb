@@ -25,5 +25,7 @@ Absolute::Application.routes.draw do
 
   post '/bulk_update/replace_subject', to: 'bulk_update#replace_subject'
   post '/bulk_update/split_subject', to: 'bulk_update#split_subject'
+  post '/bulk_update/replace_language', to: 'bulk_update#replace_language'
+  post '/bulk_update/replace_person', to: 'bulk_update#replace_person'
   get '/bulk_update', to: 'bulk_update#index'
 end
