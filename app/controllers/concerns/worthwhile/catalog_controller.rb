@@ -53,19 +53,19 @@ module Worthwhile::CatalogController
       # solr fields to be displayed in the index (search results) view
       #   The ordering of the field names is the order of the display
       config.add_index_field solr_name("desc_metadata__description", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__tag", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__subject", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__tag", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__subject", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__creator", :stored_searchable), separator: '; '
-      config.add_index_field solr_name("desc_metadata__contributor", :stored_searchable), separator: '; '
-      config.add_index_field solr_name("desc_metadata__publisher", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__based_near", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__language", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__date_uploaded", :stored_sortable)
-      config.add_index_field solr_name("desc_metadata__date_modified", :stored_sortable)
-      config.add_index_field solr_name("desc_metadata__date_created", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__rights", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__contributor", :stored_searchable), separator: '; '
+      # config.add_index_field solr_name("desc_metadata__publisher", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__based_near", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__language", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__date_uploaded", :stored_sortable)
+      # config.add_index_field solr_name("desc_metadata__date_modified", :stored_sortable)
+      # config.add_index_field solr_name("desc_metadata__date_created", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__rights", :stored_searchable)
       config.add_index_field solr_name("human_readable_type", :stored_searchable)
-      config.add_index_field solr_name("desc_metadata__format", :stored_searchable)
+      # config.add_index_field solr_name("desc_metadata__format", :stored_searchable)
       config.add_index_field solr_name("desc_metadata__identifier", :stored_searchable)
 
       # solr fields to be displayed in the show (single result) view
