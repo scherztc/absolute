@@ -6,12 +6,15 @@
   <dl class="document-metadata-full dl-invert dl-horizontal">
   <% end %>
 	
-	<% index_fields(document).each do |solr_fname, field| -%>
+  <% index_fields(document).each do |solr_fname, field| -%>
+    <%# TODO: There is probably a much better way of doing this, should hide the type for collections %>
+    <% unless solr_fname.parameterize == "human_readable_type_tesim" && render_index_field_value(document, :field => solr_fname) == "Collection" %>
       <% if should_render_index_field? document, field %>
         <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_label document, :field => solr_fname %></dt>
         <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_value document, :field => solr_fname %></dd>
       <% end -%>
     <% end -%>
+  <% end -%>
 
   </dl>
   <% if current_user && current_user.admin? %>

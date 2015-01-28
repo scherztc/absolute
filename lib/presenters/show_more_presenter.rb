@@ -5,7 +5,7 @@ class ShowMorePresenter < Blacklight::DocumentPresenter
   # toggle to truncate and show/hide long descriptions.
 
   def max_length
-    150
+    300
   end
 
   def render_index_field_value(field, options = {})
