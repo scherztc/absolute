@@ -256,6 +256,6 @@ class ObjectImporter
   end
 
   def url_params
-    { host: 'library.case.edu/digitalcase', script_name: Rails.application.config.relative_url_root }
+    { host: 'digital.case.edu', script_name: Rails.application.config.relative_url_root }
   end
 end
