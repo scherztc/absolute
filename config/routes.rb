@@ -32,4 +32,6 @@ Absolute::Application.routes.draw do
   post '/submit/submit', to: 'submit#submit'
   get '/submit/thanks', to: 'submit#thanks'
   get '/submit', to: 'submit#index'
+
+  get 'content_manager', to: 'content_manager#index'
 end
