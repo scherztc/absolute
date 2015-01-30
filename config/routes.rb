@@ -28,4 +28,8 @@ Absolute::Application.routes.draw do
   post '/bulk_update/replace_language', to: 'bulk_update#replace_language'
   post '/bulk_update/replace_person', to: 'bulk_update#replace_person'
   get '/bulk_update', to: 'bulk_update#index'
+
+  post '/submit/submit', to: 'submit#submit'
+  get '/submit/thanks', to: 'submit#thanks'
+  get '/submit', to: 'submit#index'
 end

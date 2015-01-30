@@ -1,0 +1,11 @@
+<h1> Submit your content to DigitalCase </h1>
+
+<%= form_tag("/submit/submit", action: "submit", class: "form-horizontal") do %>
+  <%= render "submit_files" %>
+  <%= render "metadata" %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= submit_tag("Submit", class: "btn btn-default btn-primary") %>
+    </div>
+  </div>
+<% end %>
