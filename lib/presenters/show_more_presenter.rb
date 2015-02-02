@@ -16,8 +16,10 @@ class ShowMorePresenter < Blacklight::DocumentPresenter
     if field == 'desc_metadata__language_tesim'
       value.each do |val|
         lang = LanguageList::LanguageInfo.find(val)
-        value -= [val]
-        value << lang.name
+        if lang
+          value -= [val]
+          value << lang.name
+        end
       end
     end
 
