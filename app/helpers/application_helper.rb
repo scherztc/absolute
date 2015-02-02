@@ -32,4 +32,13 @@ module ApplicationHelper
     markup.html_safe
   end
 
+  # Create a connection to the local solr server
+  def remote_solr
+    return @remote_solr if @remote_solr
+    solr_config_file = Rails.root.join('config', 'solr.yml')
+    config_erb = ERB.new(IO.read(solr_config_file)).result(binding)
+    location = Psych.load(config_erb)[Rails.env]
+    @remote_solr = RSolr.connect( url: location['url'] )
+  end
+
 end

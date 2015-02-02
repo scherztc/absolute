@@ -17,6 +17,15 @@ module FacetHelper
     super
   end
 
+  # Helper method to display correct case of subject facets.
+  # Queries given an all lower case facet, queries solr for the correctly cased one and displays that.
+  def find_case(value)
+    query = remote_solr.get('select', params: {q: "subject_sort:\"#{value}\"", fl: 'desc_metadata__subject_tesim', rows: 1})
+    subjects =  query['response']['docs'][0]['desc_metadata__subject_tesim']
+    subject = subjects.select { |s| s.downcase.include? value}
+    value = subject[0]
+  end
+
   # A helper method so that Blacklight will display a link to the source if
   # if it is a valid url. Can be used as a substitued to Worthwile's
   # curation_concern_attribute_to_html

@@ -40,11 +40,25 @@ describe FacetHelper do
     end
 
   end
+
+  describe '#find_case' do
+    context 'when subject is uppercase' do
+      subject { helper.find_case('never') }
+      it { should eq "Never" }
+    end
+    context 'when subject is lowercase' do
+      subject {helper.find_case('gonna') }
+      it { should eq 'gonna' }
+    end
+    before do
+      GenericWork.create!(pid: "rick:123", title: ["Let's Roll"], subject: ["Never", "gonna", "give", "you", "Up"])
+    end
+  end
   
   describe '#curation_concern_with_link_to_html' do
     context 'when field not a valid url' do
       let(:regular_source) { GenericWork.create!(pid: "me:123", title: ["Just a Test"], source: ["National Geographic"]) }
-      subject { helper.curation_concern_with_link_to_html(regular_source, :source, "Source") }
+      subject {helper.curation_concern_with_link_to_html(regular_source, :source, "Source") }
       it { should eq "<tr><th>Source</th>\n<td><ul class='tabular'><li class=\"attribute source\"> National Geographic </li>\n</ul></td></tr>"}
     end
 
