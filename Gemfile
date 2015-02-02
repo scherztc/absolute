@@ -38,7 +38,7 @@ gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'coveralls', require: false, group: :test
 #gem 'worthwhile', '0.1.1'
-gem 'worthwhile', github: 'curationexperts/worthwhile'
+gem 'worthwhile', github: 'projecthydra-labs/worthwhile', ref: 'adbb1'
 
 gem 'hydra', '7.1.0'
 
