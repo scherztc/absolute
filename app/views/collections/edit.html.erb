@@ -1,0 +1,20 @@
+<%#
+  TODO: find what is causing this error and fix it
+  This view overrides the view from worthwhile due to a bug that causes a routing error that is raised at
+  line #12 of /blacklight-5.5.4/app/views/kaminari/blacklight/_paginator.html.erb
+  No route matches {:action=>"edit", :controller=>"collections", :id=>"ksl:johaas00", :page=>nil}
+
+  This removes the content that shows the items in the collection from the collection edit view and
+  leaves editing of content in a collection to the collection#show view for admin users
+-%>
+
+<% content_for :page_title, curation_concern_page_title(@collection) %>
+
+<h1>Edit <%= @collection %> <span class="human_readable_type">(<%= @collection.human_readable_type %>)</span></h1>
+
+
+<% unless has_collection_search_parameters? %>
+  <%= render partial: 'collections/edit_actions' %>
+  <%= render partial: 'collections/form', locals: { record: @collection } %>
+<% end %>
+
