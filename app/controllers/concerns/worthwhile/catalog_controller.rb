@@ -40,7 +40,7 @@ module Worthwhile::CatalogController
       config.add_facet_field solr_name("human_readable_type", :facetable)
       config.add_facet_field solr_name('desc_metadata__creator', :facetable), limit: 5, sort: 'index'
       config.add_facet_field solr_name("desc_metadata__tag", :facetable), limit: 5, sort: 'index'
-      config.add_facet_field solr_name("desc_metadata__subject", :facetable), limit: 5, sort: 'index'
+      config.add_facet_field "subject_sort", label:'Subject', limit: 5, sort: 'index', helper_method: :find_case
       config.add_facet_field solr_name("desc_metadata__language", :facetable), limit: 5, sort: 'index'
       config.add_facet_field solr_name("desc_metadata__based_near", :facetable), limit: 5, sort: 'index'
       config.add_facet_field solr_name("file_format", :facetable), limit: 5
