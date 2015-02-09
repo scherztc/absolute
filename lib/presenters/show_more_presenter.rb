@@ -13,15 +13,17 @@ class ShowMorePresenter < Blacklight::DocumentPresenter
     value = options[:value] || get_field_values(field, field_config, options)
 
     # Replace ISO 639 codes with the language name
-    if field == 'desc_metadata__language_tesim'
-      value.each do |val|
-        lang = LanguageList::LanguageInfo.find(val)
-        if lang
-          value -= [val]
-          value << lang.name
-        end
-      end
-    end
+    # Because these fields were hidden this is no longer needed
+    # If this is added back in tests need to be written for it
+    #if field == 'desc_metadata__language_tesim'
+    #  value.each do |val|
+    #    lang = LanguageList::LanguageInfo.find(val)
+    #    if lang
+    #      value -= [val]
+    #      value << lang.name
+    #    end
+    #  end
+    #end
 
     if truncate_field?(field, value)
       render_truncated_field_value(value, field_config)
