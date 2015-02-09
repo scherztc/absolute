@@ -82,6 +82,9 @@ GEM
     autoprefixer-rails (5.1.1)
       execjs
       json
+    bagit (0.3.2)
+      docopt (~> 0.5.0)
+      validatable (~> 1.6)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -164,6 +167,7 @@ GEM
       rubycas-client (>= 2.2.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    docopt (0.5.0)
     ebnf (0.3.6)
       haml (~> 4.0)
       rdf (~> 1.1)
@@ -570,6 +574,7 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    validatable (1.6.7)
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.2.3)
@@ -584,6 +589,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-oracle_enhanced-adapter
   angularjs-rails
+  bagit
   blacklight_advanced_search
   bootstrap-sass
   capistrano (~> 3.1)

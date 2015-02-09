@@ -49,6 +49,7 @@ gem 'riiif', '0.0.9'
 gem 'openseadragon', '0.0.8'
 gem 'angularjs-rails'
 gem 'blacklight_advanced_search'
+gem 'bagit'
 
 gem 'language_list'
 
