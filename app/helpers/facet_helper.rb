@@ -47,29 +47,6 @@ module FacetHelper
   end
 
 
-  ##
-  # TODO remove with blacklight 5.5 (projectblacklight/blacklight#933)
-  # Renders the list of values 
-  # removes any elements where render_facet_item returns a nil value. This enables an application
-  # to filter undesireable facet items so they don't appear in the UI
-  def render_facet_limit_list(paginator, solr_field, wrapping_element=:li)
-    safe_join(paginator.items.
-      map { |item| render_facet_item(solr_field, item) }.compact.
-      map { |item| content_tag(wrapping_element,item)}
-    )
-  end
-
-  ##
-  # TODO remove with blacklight 5.5 (projectblacklight/blacklight#933)
-  # Renders a single facet item
-  def render_facet_item(solr_field, item)
-    if facet_in_params?( solr_field, item.value )
-      render_selected_facet_value(solr_field, item)          
-    else
-      render_facet_value(solr_field, item)
-    end
-  end
-
   ## Override blacklight so we don't display the "Type of Work" when the only item is "Collections" which is hidden.
   def should_render_facet?(display_facet)
     return false if display_facet.name == 'human_readable_type_sim' && display_facet.items.reject { |item| item.value == 'Collection'}.empty?

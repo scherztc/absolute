@@ -32,7 +32,7 @@ describe ShowMorePresenter do
         html = Nokogiri::HTML::Document.parse(elements)
 
         short_desc = html.xpath("//div[@class='show-more']").first
-        beginning = long_desc.chars.slice(0, 50).join('')
+        beginning = long_desc.slice(0, 50)
         expect(short_desc.text).to match beginning
 
         desc = html.xpath("//div[@class='show-less']").first

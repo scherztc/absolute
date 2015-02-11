@@ -75,25 +75,6 @@ describe FacetHelper do
 
   end
 
-  # TODO remove this with blacklight 5.5
-  describe "render_facet_limit_list" do
-    let(:f1) { Blacklight::SolrResponse::Facets::FacetItem.new(hits: '792', value: 'Book') }
-    let(:f2) { Blacklight::SolrResponse::Facets::FacetItem.new(hits: '90', value: 'Collection') }
-    let(:f3) { Blacklight::SolrResponse::Facets::FacetItem.new(hits: '65', value: 'Musical Score') }
-    let(:paginator) { Blacklight::Solr::FacetPaginator.new([f1, f2, f3], limit: 10) }
-    subject { helper.render_facet_limit_list(paginator, 'human_readable_type_sim') }
-    before do
-      allow(helper).to receive(:search_action_path) do |*args|
-        catalog_index_path *args
-      end
-    end
-    it "should draw a list of elements" do
-      expect(subject).to have_selector 'li', count: 2
-      expect(subject).to have_selector 'li:first-child a.facet_select', text: 'Book' 
-      expect(subject).to have_selector 'li:nth-child(2) a.facet_select', text: 'Musical Score' 
-    end
-  end
-
   describe "should_render_facet?" do
 
     let(:facet) { Blacklight::SolrResponse::Facets::FacetField.new field, [item] }
