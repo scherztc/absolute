@@ -46,7 +46,7 @@ gem "bootstrap-sass"
 gem 'hydra-role-management', '0.1.0'
 gem 'hydra-remote_identifier'
 gem 'riiif', '0.0.9'
-gem 'openseadragon', '0.0.8'
+gem 'openseadragon'
 gem 'angularjs-rails'
 gem 'blacklight_advanced_search'
 
