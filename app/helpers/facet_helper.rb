@@ -21,9 +21,11 @@ module FacetHelper
   # Queries given an all lower case facet, queries solr for the correctly cased one and displays that.
   def find_case(value)
     query = remote_solr.get('select', params: {q: "subject_sort:\"#{value}\"", fl: 'desc_metadata__subject_tesim', rows: 1})
-    subjects =  query['response']['docs'][0]['desc_metadata__subject_tesim']
-    subject = subjects.select { |s| s.downcase.include? value}
-    value = subject[0]
+    if query['response']['docs'].any?
+      subjects =  query['response']['docs'][0]['desc_metadata__subject_tesim']
+      subject = subjects.select { |s| s.downcase.include? value}
+      value = subject[0]
+    end
   end
 
   # A helper method so that Blacklight will display a link to the source if
