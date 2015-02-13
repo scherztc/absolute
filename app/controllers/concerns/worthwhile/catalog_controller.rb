@@ -288,7 +288,7 @@ module Worthwhile::CatalogController
     end
 
     def search_config
-       {'qf' => ['desc_metadata__title_tesim','desc_metadata__name_tesim'], 'qt' => 'search', 'rows' => 10}
+       {'qf' => ['desc_metadata__title_tesim','desc_metadata__name_tesim', 'id', 'desc_metadata__creator_tesim', 'desc_metadata__description_tesim'], 'qt' => 'search', 'rows' => 10}
     end
   end
 
