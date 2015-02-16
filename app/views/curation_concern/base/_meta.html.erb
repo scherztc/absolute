@@ -1,0 +1,42 @@
+<% content_for :meta do -%>
+  <meta name="DC.title" content="<%= curation_concern.title %>" />
+  <% curation_concern.creator.each do |creator| %>
+    <meta name="DC.creator" content="<%= creator %>" />
+  <% end %>
+  <% curation_concern.subject.each do |subject| %>
+    <meta name="DC.subject" content="<%= subject %>" />
+  <% end %>
+    <meta name="DC.description" content="<%= curation_concern.description %>"/>
+  <% curation_concern.publisher.each do |publisher| %>
+    <meta name="DC.publisher" content="<%= publisher %>" />
+  <% end %>
+  <% curation_concern.contributor.each do |contributor| %>
+    <meta name="DC.contributor" content="<%= contributor %>" />
+  <% end %>
+  <% curation_concern.date.each do |date| %>
+    <meta name="DC.date" content="<%= date %>" />
+  <% end %>
+  <% curation_concern.type.each do |type| %>
+    <meta name="DC.type" content="<%= type %>" />
+  <% end %>
+  <% curation_concern.content_format.each do |format| %>
+    <meta name="DC.format" content="<%= format %>" />
+  <% end %>
+  <% curation_concern.identifier.each do |identifier| %>
+    <meta name="DC.identifier" content="<%= identifier %>" />
+  <% end %>
+  <% curation_concern.source.each do |source| %>
+    <meta name="DC.source" content="<%= source %>" />
+  <% end %>
+  <% curation_concern.language.each do |language| %>
+    <meta name="DC.language" content="<%= language %>" />
+  <% end %>
+  <% curation_concern.relation.each do |relation| %>
+    <meta name="DC.relation" content="<%= relation %>" />
+  <% end %>
+  <% curation_concern.coverage.each do |coverage| %>
+    <meta name="DC.coverage" content="<%= coverage %>" />
+  <% end %>
+    <meta name="DC.rights" content="<%= curation_concern.rights.first %>" />
+<% end -%>
+

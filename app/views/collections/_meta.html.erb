@@ -1,0 +1,42 @@
+<% content_for :meta do -%>
+  <meta name="DC.title" content="<%= @collection.title %>" />
+  <% @collection.creator.each do |creator| %>
+    <meta name="DC.creator" content="<%= creator %>" />
+  <% end %>
+  <% @collection.subject.each do |subject| %>
+    <meta name="DC.subject" content="<%= subject %>" />
+  <% end %>
+    <meta name="DC.description" content="<%= @collection.description %>"/>
+  <% @collection.publisher.each do |publisher| %>
+    <meta name="DC.publisher" content="<%= publisher %>" />
+  <% end %>
+  <% @collection.contributor.each do |contributor| %>
+    <meta name="DC.contributor" content="<%= contributor %>" />
+  <% end %>
+  <% @collection.date.each do |date| %>
+    <meta name="DC.date" content="<%= date %>" />
+  <% end %>
+  <% @collection.type.each do |type| %>
+    <meta name="DC.type" content="<%= type %>" />
+  <% end %>
+  <% @collection.content_format.each do |format| %>
+    <meta name="DC.format" content="<%= format %>" />
+  <% end %>
+  <% @collection.identifier.each do |identifier| %>
+    <meta name="DC.identifier" content="<%= identifier %>" />
+  <% end %>
+  <% @collection.source.each do |source| %>
+    <meta name="DC.source" content="<%= source %>" />
+  <% end %>
+  <% @collection.language.each do |language| %>
+    <meta name="DC.language" content="<%= language %>" />
+  <% end %>
+  <% @collection.relation.each do |relation| %>
+    <meta name="DC.relation" content="<%= relation %>" />
+  <% end %>
+  <% @collection.coverage.each do |coverage| %>
+    <meta name="DC.coverage" content="<%= coverage %>" />
+  <% end %>
+    <meta name="DC.rights" content="<%= @collection.rights.first %>" />
+<% end -%>
+

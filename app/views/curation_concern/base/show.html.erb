@@ -3,6 +3,7 @@
   # Copied this into the host application for clarity and easy reference.
 %>
 <% provide :page_title, curation_concern_page_title(curation_concern) %>
+<%= render 'meta' %>
 <% provide :page_header do %>
   <%= render 'catalog/navbar' %>
   <h1><%= curation_concern %> <span class="human_readable_type">(<%= curation_concern.human_readable_type %>)</span></h1>
