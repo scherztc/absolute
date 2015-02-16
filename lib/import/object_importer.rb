@@ -41,6 +41,7 @@ class ObjectImporter
     attributes[:rights] = set_rights(attributes[:rights], pid)
 
     new_object = if klass == Collection
+                    attributes[:description] = attributes[:description].first if attributes[:description].is_a? Array
                     import_collection(source_object, klass, attributes)
                   else
                     import_work(source_object, klass, attributes)
