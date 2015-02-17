@@ -9,7 +9,32 @@
 * [ffmpeg](http://www.ffmpeg.org/)
 * [fits](https://code.google.com/p/fits)
 * [ghostscript](http://ghostscript.com)
+* [Oracle instant client](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)
 
+ImageMagick, ffmpeg, and ghostscript can be installed using
+
+```bash
+sudo apt-get -y install imagemagick ffmpeg ghostscript
+```
+
+Fits can be installed using the following commands
+
+```bash
+sudo mkdir -p /opt/install
+sudo wget -P /opt/install http://fits.googlecode.com/files/fits-0.6.2.zip
+sudo unzip /opt/install/fits-0.6.2.zip -d /opt/install
+sudo chmod +x /opt/install/fits-0.6.2/fits.sh
+sudo cp -r /opt/install/fits-0.6.2/* /usr/local/bin/
+sudo ln -s /usr/local/bin/fits.sh /usr/local/bin/fits
+```
+
+Installing the Oracle instant clicent requites the basic client, the SDK, and sqlplus. Each of these will be downloaded as a zip file and should be unziped to `/opt/oracle/`. Once that is done you should set the `LD_LIBRARY_PATH` and create the required symlinks using:
+
+```bash
+LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1
+export LD_LIBRARY_PATH
+sudo ln -s /opt/oracle/instantclient_12_1/libclntsh.so.12.1 /opt/oracle/instantclient_12_1/libclntsh.so
+```
 
 ### Installing ImageMagick
 **Note:**
@@ -77,6 +102,12 @@ RAILS_ENV=development QUEUE=* VERBOSE=1 rake -s resque:work > /dev/null 2>1&
 
 # run the schedule workers
 RAILS_ENV=development bundle exec resque-scheduler
+```
+
+If the workers do not start after deploying the application they can be started with the command
+
+```bash
+cd /opt/absolute/current && bundle exec resque-pool -d -E production -c config/resque-pool.yml -p /opt/absolute/shared/tmp/pids/resque-pool.pid -e /opt/absolute/shared/log/resque-pool.stderr.log -o /opt/absolute/shared/log/resque-pool.stdout.log
 ```
 
 ## Developer notes
