@@ -23,9 +23,7 @@ Absolute::Application.routes.draw do
   resource :admin_menu, only: :show, controller: 'admin_menu'
   match 'catalog/export_ris/:id', to: 'catalog#export_ris', via: [:get, :post]
 
-  post '/bulk_update/replace_subject', to: 'bulk_update#replace_subject'
-  post '/bulk_update/split_subject', to: 'bulk_update#split_subject'
-  post '/bulk_update/replace_language', to: 'bulk_update#replace_language'
-  post '/bulk_update/replace_person', to: 'bulk_update#replace_person'
+  post '/bulk_update/split', to: 'bulk_update#split'
+  post '/bulk_update/replace', to: 'bulk_update#replace'
   get '/bulk_update', to: 'bulk_update#index'
 end

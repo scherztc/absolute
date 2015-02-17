@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe BulkUpdateController do
-  let(:item1) { FactoryGirl.create(:text, pid: ["ksl:test1"], title: ["Test 1"], type: ["Text"],
-      description: ["This is a test item"], subject: ["Rails", "Programming", "yeast"]) }
-  let(:item2) { FactoryGirl.create(:image) }
+  let(:source_text) { Text.new(pid: 'ksl:test') }
 
   describe 'an admin user' do
     let(:admin) { FactoryGirl.create(:admin) }
@@ -26,6 +24,89 @@ describe BulkUpdateController do
     end
   end
 
-  # TODO Add integration testing for each function after refacror to DRY up code
+  describe '#replace' do
+    let(:admin) { FactoryGirl.create(:admin) }
+
+    before :each do
+      sign_in admin
+      source_text.title = ["A test item"]
+      source_text.subject = ["Never", "gonna", "give", "you", "up"]
+      source_text.description = ['A test']
+      source_text.language = ['Eng']
+      source_text.creator = ['Rick Astley']
+      source_text.rights = [Sufia.config.cc_licenses.first]
+      source_text.save
+    end
+
+    it 'should replace a subject with a new value' do
+      post :replace, field: "subject", old: "give", new: "let"
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.subject).to eq ["Never", "gonna", "you", "up", "let"]
+      expect(response).to redirect_to bulk_update_path
+    end
+
+    it 'should replace a language with a new values' do
+      post :replace, field: "language", old: "Eng", new: "deu"
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.language).to eq ["deu"]
+      expect(response).to redirect_to bulk_update_path
+    end
+
+    it 'should replace a creator (person facet) with a new value' do
+      post :replace, field: "creator", old: "Rick Astley", new: "Astley, Rick"
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.creator).to eq ["Astley, Rick"]
+      expect(response).to redirect_to bulk_update_path
+    end
+  end
+
+  describe '#split' do
+    let(:admin) { FactoryGirl.create(:admin) }
+
+    before :each do
+      sign_in admin
+      source_text.title = ["A Test Title"]
+      source_text.subject = ["Never/gonna/give/you/up"]
+      source_text.description = ["A Test"]
+      source_text.language = ["eng, deu"]
+      source_text.creator = ["Astley, Rick; RCA Records"]
+      source_text.rights = [Sufia.config.cc_licenses.first]
+      source_text.save
+    end
+
+    it 'should split a subject on a character' do
+      post :split, field: "subject", string: "Never/gonna/give/you/up", char: "/"
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.subject).to eq ["Never", "gonna", "give", "you", "up"]
+      expect(response).to redirect_to bulk_update_path
+    end
+
+    it 'should split a language on a character' do
+      post :split, field: "language", string: "eng, deu", char: ","
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.language).to eq ["eng", "deu"]
+      expect(response).to redirect_to bulk_update_path
+    end
+
+    it 'should split a creator on a character' do
+      post :split, field: "creator", string: "Astley, Rick; RCA Records", char: ";"
+
+      item = ActiveFedora::Base.find(source_text.pid)
+      expect(item.creator).to eq ["Astley, Rick", "RCA Records"]
+      expect(response).to redirect_to bulk_update_path
+    end
+
+    it 'should prevent splitting without a character' do
+      post :split, field: "subject", string: "test", char: ""
+
+      expect(response).to redirect_to bulk_update_path
+      expect(flash[:alert]).to eq "No delimiter entered"
+    end
+  end
 
 end
