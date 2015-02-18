@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe BulkUpdateController do
-  let(:source_text) { Text.new(pid: 'ksl:test') }
+  let(:source_text) { Text.new(pid: 'ksl:test', title: ["A Test Title"], description: ["A test"], rights: [Sufia.config.cc_licenses.first]) }
+
+  before :all do
+    ActiveFedora::Base.delete_all
+  end
 
   describe 'an admin user' do
     let(:admin) { FactoryGirl.create(:admin) }
@@ -29,12 +33,9 @@ describe BulkUpdateController do
 
     before :each do
       sign_in admin
-      source_text.title = ["A test item"]
       source_text.subject = ["Never", "gonna", "give", "you", "up"]
-      source_text.description = ['A test']
       source_text.language = ['Eng']
       source_text.creator = ['Rick Astley']
-      source_text.rights = [Sufia.config.cc_licenses.first]
       source_text.save
     end
 
@@ -68,12 +69,9 @@ describe BulkUpdateController do
 
     before :each do
       sign_in admin
-      source_text.title = ["A Test Title"]
       source_text.subject = ["Never/gonna/give/you/up"]
-      source_text.description = ["A Test"]
       source_text.language = ["eng, deu"]
       source_text.creator = ["Astley, Rick; RCA Records"]
-      source_text.rights = [Sufia.config.cc_licenses.first]
       source_text.save
     end
 
@@ -107,6 +105,91 @@ describe BulkUpdateController do
       expect(response).to redirect_to bulk_update_path
       expect(flash[:alert]).to eq "No delimiter entered"
     end
+  end
+
+  describe '#update_identifiers' do
+    let(:admin) { FactoryGirl.create(:admin) }
+
+    context 'when the identifier field is a pid' do
+      before :each do
+        sign_in admin
+        source_text.identifier = ["ksl:test"]
+        source_text.save
+      end
+
+      it 'should replace the pid with the handle link' do
+        post :update_identifier
+
+        item = ActiveFedora::Base.find(source_text.pid)
+        expect(item.identifier).to eq ["http://hdl.handle.net/2186/ksl:test"]
+        expect(response).to redirect_to bulk_update_path
+      end
+    end
+
+    context 'when the identifier is already a handle link' do
+      before :each do
+        sign_in admin
+        source_text.identifier = ["http://hdl.handle.net/2186/ksl:test"]
+        source_text.save
+      end
+
+      it 'should not change the link' do
+        post :update_identifier
+
+        item = ActiveFedora::Base.find(source_text.pid)
+        expect(item.identifier).to eq ["http://hdl.handle.net/2186/ksl:test"]
+        expect(response).to redirect_to bulk_update_path
+      end
+    end
+
+    context 'when there is a doi and a pid' do
+      before :each do
+        sign_in admin
+        source_text.identifier = ["DOI: 10.1080/10408440802272158", "ksl:test"]
+        source_text.save
+      end
+
+      it 'should leave the doi and update the pid to a handle' do
+        post :update_identifier
+
+        item = ActiveFedora::Base.find(source_text.pid)
+        expect(item.identifier).to eq ["DOI: 10.1080/10408440802272158", "http://hdl.handle.net/2186/ksl:test"]
+        expect(response).to redirect_to bulk_update_path
+      end
+    end
+
+    context 'when there is a doi and a handle' do
+      before :each do
+        sign_in admin
+        source_text.identifier = ["DOI: 10.1080/10408440802272158", "http://hdl.handle.net/2186/ksl:test"]
+        source_text.save
+      end
+
+      it 'should leave the doi and the handle' do
+        post :update_identifier
+
+        item = ActiveFedora::Base.find(source_text.pid)
+        expect(item.identifier).to eq ["DOI: 10.1080/10408440802272158", "http://hdl.handle.net/2186/ksl:test"]
+        expect(response).to redirect_to bulk_update_path
+      end
+    end
+
+    context 'when there is a handle link and a pid' do
+      before :each do
+        sign_in admin
+        source_text.identifier = ["ksl:test", "http://hdl.handle.net/2186/ksl:test"]
+        source_text.save
+      end
+
+      it 'should only return the handle link' do
+        post :update_identifier
+
+        item = ActiveFedora::Base.find(source_text.pid)
+        expect(item.identifier).to eq ["http://hdl.handle.net/2186/ksl:test"]
+        expect(response).to redirect_to bulk_update_path
+      end
+    end
+
   end
 
 end
