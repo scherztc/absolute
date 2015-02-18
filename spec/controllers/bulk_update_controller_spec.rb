@@ -69,14 +69,14 @@ describe BulkUpdateController do
 
     before :each do
       sign_in admin
-      source_text.subject = ["Never/gonna/give/you/up"]
+      source_text.subject = ["Never/ gonna / give/you /up"]
       source_text.language = ["eng, deu"]
       source_text.creator = ["Astley, Rick; RCA Records"]
       source_text.save
     end
 
     it 'should split a subject on a character' do
-      post :split, field: "subject", string: "Never/gonna/give/you/up", char: "/"
+      post :split, field: "subject", string: "Never/ gonna / give/you /up", char: "/"
 
       item = ActiveFedora::Base.find(source_text.pid)
       expect(item.subject).to eq ["Never", "gonna", "give", "you", "up"]

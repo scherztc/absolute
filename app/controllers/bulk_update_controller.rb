@@ -50,10 +50,7 @@ class BulkUpdateController < ApplicationController
     get_pids("#{solr_field_name(params[:field])}:\"#{params[:string]}\"").each do |pid|
       item = ActiveFedora::Base.find(pid['id'])
       if item[params[:field]].include? params[:string]
-        fields = params[:string].split(params[:char])
-        fields.each do |field|
-          item[params[:field]] << field.strip
-        end
+        item[params[:field]] << params[:string].split(params[:char]).collect(&:strip)
         item[params[:field]] -= [params[:string]]
         item.save
         item.update_index
