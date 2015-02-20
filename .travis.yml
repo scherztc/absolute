@@ -42,3 +42,7 @@ before_install:
 
 services:
   - redis-server
+
+addons:
+  code_climate:
+    repo_token: d6f98db7f362aee3a5d01608c3a6619f8fd85ff0a3ab5e42b315224a06894f2d

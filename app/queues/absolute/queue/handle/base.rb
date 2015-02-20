@@ -6,9 +6,6 @@ module Absolute
           super(item.merge(verb: verb))
         end
 
-        def verb
-          raise NotImplementedError, "Implement on a subclass"
-        end
       end
     end
   end
