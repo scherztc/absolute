@@ -121,135 +121,29 @@ module Worthwhile::CatalogController
       # of Solr search fields.
       # creator, title, description, publisher, date_created,
       # subject, language, resource_type, format, identifier, based_near,
-      config.add_search_field('contributor') do |field|
-        # solr_parameters hash are sent to Solr as ordinary url query params.
 
-        # :solr_local_parameters will be sent using Solr LocalParams
-        # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-        # Solr parameter de-referencing like $title_qf.
-        # See: http://wiki.apache.org/solr/LocalParams
-        solr_name = solr_name("desc_metadata__contributor", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
+      # solr_parameters hash are sent to Solr as ordinary url query params.
 
-      config.add_search_field('creator') do |field|
-        solr_name = solr_name("desc_metadata__creator", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
+      # :solr_local_parameters will be sent using Solr LocalParams
+      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+      # Solr parameter de-referencing like $title_qf.
+      # See: http://wiki.apache.org/solr/LocalParams
 
-      config.add_search_field('title') do |field|
-        solr_name = solr_name("desc_metadata__title", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('description') do |field|
-        field.label = "Abstract or Summary"
-        solr_name = solr_name("desc_metadata__description", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('publisher') do |field|
-        solr_name = solr_name("desc_metadata__publisher", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('date_created') do |field|
-        solr_name = solr_name("desc_metadata__created", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('subject') do |field|
-        solr_name = solr_name("desc_metadata__subject", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('language') do |field|
-        solr_name = solr_name("desc_metadata__language", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('human_readable_type') do |field|
-        solr_name = solr_name("human_readable_type", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('format') do |field|
-        field.include_in_advanced_search = false
-        solr_name = solr_name("desc_metadata__format", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('identifier') do |field|
-        field.include_in_advanced_search = false
-        solr_name = solr_name("desc_metadata__id", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('based_near') do |field|
-        field.label = "Location"
-        solr_name = solr_name("desc_metadata__based_near", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('tag') do |field|
-        solr_name = solr_name("desc_metadata__tag", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('depositor') do |field|
-        solr_name = solr_name("desc_metadata__depositor", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
-
-      config.add_search_field('rights') do |field|
-        solr_name = solr_name("desc_metadata__rights", :stored_searchable, type: :string)
-        field.solr_local_parameters = {
-          :qf => solr_name,
-          :pf => solr_name
-        }
-      end
+      add_stored_string_search_field("desc_metadata__contributor", 'contributor')
+      add_stored_string_search_field("desc_metadata__creator", 'creator')
+      add_stored_string_search_field("desc_metadata__title", 'title')
+      add_stored_string_search_field("desc_metadata__description", 'description')
+      add_stored_string_search_field("desc_metadata__publisher", 'publisher')
+      add_stored_string_search_field("desc_metadata__created", 'date_created')
+      add_stored_string_search_field("desc_metadata__subject", 'subject')
+      add_stored_string_search_field("desc_metadata__language", 'language')
+      add_stored_string_search_field("human_readable_type", 'human_readable_type')
+      add_stored_string_search_field("desc_metadata__format", 'format')
+      add_stored_string_search_field("desc_metadata__id", 'identifier')
+      add_stored_string_search_field("desc_metadata__based_near", 'based_near')
+      add_stored_string_search_field("desc_metadata__tag", 'tag')
+      add_stored_string_search_field("desc_metadata__depositor", 'depositor')
+      add_stored_string_search_field("desc_metadata__rights", 'rights')
 
 
       # "sort results by" select (pulldown)
@@ -289,7 +183,21 @@ module Worthwhile::CatalogController
     end
 
     def search_config
-       {'qf' => ['desc_metadata__title_tesim','desc_metadata__name_tesim', 'id', 'desc_metadata__creator_tesim', 'desc_metadata__description_tesim'], 'qt' => 'search', 'rows' => 10}
+      {
+        'qf' => ['desc_metadata__title_tesim','desc_metadata__name_tesim', 'id', 'desc_metadata__creator_tesim', 'desc_metadata__description_tesim'],
+        'qt' => 'search',
+        'rows' => 10
+      }
+    end
+
+    def add_stored_string_search_field(solr_name_field, field_name)
+      config.add_search_field(field_name) do |field|
+        solr_name = solr_name(solr_name_field, :stored_searchable, type: :string)
+        field.solr_local_parameters = {
+          :qf => solr_name,
+          :pf => solr_name
+        }
+      end
     end
   end
 

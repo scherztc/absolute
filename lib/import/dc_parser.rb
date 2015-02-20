@@ -25,6 +25,18 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
     field :content_format, :string, path: 'format'
   end
 
+  def single_value_fields
+    single_value_fields = [:description, :rights, :title]
+  end
+
+  def multi_value_fields
+    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type]
+  end
+
+  def all_fields
+    all_fields = single_value_fields + multi_value_fields
+  end
+
   set_terminology do |t|
     t.root(:path => "dc", :xmlns => DC_URL)
   end
@@ -43,23 +55,22 @@ class DcParser < ActiveFedora::QualifiedDublinCoreDatastream
     end
   end
 
-  def to_h
-    single_value_fields = [:description, :rights, :title]
-    multi_value_fields = [:content_format, :contributor, :creator, :coverage, :date, :extent, :identifier, :language, :publisher, :relation, :requires, :source, :subject, :type]
-    all_fields = single_value_fields + multi_value_fields
+  def combine_values(field, value)
+    case field
+    when :title
+      return [value.join(" | ")]
+    when :description
+      return [value.join(" ")]
+    else
+      return value
+    end
+  end
 
+  def to_h
     new_lines = /\s*\n\s*/
     attrs_hash = {}
     all_fields.each do |field|
-      value = Array(self.send(field))
-
-      if field == :title
-        value = [value.join(" | ")]
-      end
-
-      if field == :description
-        value = [value.join(" ")]
-      end
+      value = combine_values(field, Array(self.send(field)))
 
       if single_value_fields.include?(field) && value.count > 1
         raise MultipleValuesError.new(field)

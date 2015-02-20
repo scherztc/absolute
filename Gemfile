@@ -37,6 +37,7 @@ gem 'capistrano-rails', '~> 1.1',     group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 gem 'coveralls', require: false, group: :test
+gem 'codeclimate-test-reporter', group: :test, require: nil
 #gem 'worthwhile', '0.1.1'
 gem 'worthwhile', github: 'projecthydra-labs/worthwhile', ref: 'adbb1'
 
