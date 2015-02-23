@@ -1,8 +1,0 @@
-<h3> Update Identifiers </h3>
-<p> This button will update all identifiers from pids to handle links, leaving DOI (in the format "DOI: xxxxx")
-references alone. It processes each item, so it will take a long time to complete.
-<%= form_tag '/bulk_update/update_identifier', class: "form-horizontal" do %>
-  <div class="form-group">
-    <%= submit_tag "Update Identifiers", data: {confirm: "This will take a long time. Are you sure?"}, class: "btn btn-default btn-primary" %>
-  </div>
-<% end %>
