@@ -59,29 +59,4 @@ class BulkUpdateController < ApplicationController
     redirect_to bulk_update_path
   end
 
-  # This function updates each identifier that is not a doi or a handle to be a handle.net link
-  def update_identifier
-    get_pids("desc_metadata__identifier_tesim:* -active_fedora_model_ssi:Worthwhile*").each do |pid|
-      item = ActiveFedora::Base.find(pid['id'])
-      ids = []
-      item.identifier.each do |identifier|
-        if identifier[0..20] == 'http://hdl.handle.net'
-          ids << identifier
-        end
-
-        if identifier[0..3] == 'ksl:'
-          ids << "http://hdl.handle.net/2186/#{identifier}"
-        end
-        
-        if identifier[0..2] == "DOI"
-          ids << identifier
-        end
-      end
-      item.identifier = ids unless ids.nil? or ids.empty?
-      item.save unless ids.nil? or ids.empty?
-      item.update_index unless ids.nil? or ids.empty?
-    end 
-    redirect_to bulk_update_path
-  end
-
 end
