@@ -18,7 +18,12 @@ module Handles
 
     def pid_to_handle(item, pid=nil)
       pid = item['id'] if pid.nil?
-      work = ActiveFedora::Base.find(item['id'])
+      begin
+        work = ActiveFedora::Base.find(item['id'])
+      rescue RuntimeError => e
+        puts e
+        return "ERROR"
+      end
       identifier = "http://hdl.handle.net/2186/#{pid}"
       work.identifier -= [pid]
       work.identifier << identifier
