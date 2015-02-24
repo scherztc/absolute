@@ -39,7 +39,7 @@ module Handles
         elsif identifier[0..3] == 'ksl:'
           handle = pid_to_handle(item, identifier)
           puts "    * Item #{item['id']}: #{identifier} updated to #{handle}"
-        elsif identifier[0..6] == "urn:doi" or idnetifier[0..2] == "DOI"
+        elsif identifier[0..6] == "urn:doi" or identifier[0..2] == "DOI"
           puts "    Item #{item['id']}: #{identifier} is DOI"
         else
           puts "    ERROR: unknown value \"#{identifier}\" for #{item['id']}"
