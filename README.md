@@ -1,7 +1,7 @@
 #Absolute
 
 [![Build Status](https://travis-ci.org/KelvinSmithLibrary/absolute.png?branch=master)](https://travis-ci.org/KelvinSmithLibrary/absolute)
-[![Coverage Status](https://coveralls.io/repos/KelvinSmithLibrary/absolute/badge.png)](https://coveralls.io/r/KelvinSmithLibrary/absolute)
+[![Coverage Status](https://coveralls.io/repos/KelvinSmithLibrary/absolute/badge.svg?branch=master)](https://coveralls.io/r/KelvinSmithLibrary/absolute?branch=master)
 [![Dependency Status](https://gemnasium.com/KelvinSmithLibrary/absolute.png)](https://gemnasium.com/KelvinSmithLibrary/absolute)
 [![Code Climate](https://codeclimate.com/github/KelvinSmithLibrary/absolute/badges/gpa.svg)](https://codeclimate.com/github/KelvinSmithLibrary/absolute)
 
@@ -69,6 +69,7 @@ cp config/solr.yml.sample config/solr.yml
 cp config/redis.yml.sample config/redis.yml
 cp config/fedora.yml.sample config/fedora.yml
 cp config/devise.yml.sample config/devise.yml
+cp config/handle.yml.sample config/handle.yml
 ```
 !!! Important. Open config/devise.yml and generate a new id
 !!! Edit config/initializers/secret_token.rb and config/devise.yml replace the sample keys with your own keys.  You can use rake to generate a new secret key:

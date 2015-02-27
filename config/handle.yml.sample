@@ -1,0 +1,8 @@
+development:
+  namespace: 12345
+
+test:
+  namespace: 12345
+
+production:
+  namespace: 12345
