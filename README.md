@@ -141,52 +141,30 @@ Exported 223 records to handles-2014-08-06T11:48:51.txt
 
 Then take this file and import them using the handle.net batch tool.
 
-## Deploying to the Sandbox
-
-During the May/June 2014 SOW:
-
-First, set up an ssh config entry:
-
-```
-Host casedeploy
-Hostname 54.204.33.124
-User deploy
-IdentityFile /path/to/my/private/key
-```
-
-Next, connect to casedeploy via ssh to test the config. (If this fails, your public keys are missing or outdated on the sandbox server - let the team know.)
-
-Finally, deploy code and update the server with the command 
-
-```
-bundle exec cap sandbox deploy
-```
-
 ## Deploying to the Case vm with Oracle
 
-During the May/June 2014 SOW:
-
 First, set up an ssh config entry:
 
 ```
-Host casehydradev
-  Hostname hydra-dev.case.edu
+Host casehydraprod
+  Hostname digital.case.edu
   User deploy
   IdentityFile /path/to/my/private/key
   ForwardAgent no
 ```
 
-Next, connect to casehydradev via ssh to test the config. (If this fails, your public keys are missing or outdated on the hydradev server - let the team know.)
+Next, connect to casehydradev via ssh to test the config. (If this fails, your public keys are missing or outdated on the digital.case.edu server - let the team know.)
 
-Next, check out the oracle branch with the command 
+Next, make sure that you are on the master branch with the command 
 
 ```
-git checkout oracle
+git checkout master
 ```
 
 Finally, deploy code and update the server with the command
 
 ```
-bundle exec cap casehydradev deploy
+bundle exec cap casehydraprod deploy
 ```
 
+The code is now on the server and the application should be running. If the resque workers are not running you can start them by connecting to the vm over SSH and running the command in the section about [starting the workers](https://github.com/KelvinSmithLibrary/absolute#starting-the-workers).
